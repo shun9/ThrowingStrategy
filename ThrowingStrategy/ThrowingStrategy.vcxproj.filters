@@ -5,16 +5,60 @@
       <UniqueIdentifier>65475608-2e3a-4733-b32d-87f4f55cd801</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="NewShunLib">
+      <UniqueIdentifier>{70155d1f-6dd5-40e3-8c01-487d0b83af64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{8e36c6c7-4785-40ae-ad7f-88de37a51076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{9f8fe074-f208-4de2-a7cb-835219178334}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="Classes\Main\SL_Graphics.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Main\SL_Window.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\SL_Application.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\SL_MyGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\PlayScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\SL_IScene.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Classes\Main\SL_Graphics.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Main\SL_Window.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Main\WinMain.cpp" />
+    <ClCompile Include="Classes\Game\SL_Application.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\SL_MyGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\Scene\PlayScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
