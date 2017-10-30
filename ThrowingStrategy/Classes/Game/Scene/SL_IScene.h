@@ -17,7 +17,7 @@ namespace ShunLib
 
 		//初期化　更新　描画　終了
 		virtual void Initialize() = 0;
-		virtual void Update    (DX::StepTimer& timer) = 0;
+		virtual void Update    () = 0;
 		virtual void Render    () = 0;
 		virtual void Finalize  () = 0;
 	};

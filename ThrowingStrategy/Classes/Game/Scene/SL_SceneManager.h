@@ -26,7 +26,7 @@ namespace ShunLib
 
 	public:
 		//現在のシーンの更新　描画
-		void Update(DX::StepTimer& timer);
+		void Update();
 		void Render();
 
 		//シーンの追加

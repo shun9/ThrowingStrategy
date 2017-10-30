@@ -14,6 +14,15 @@
     <Filter Include="Game\Scene">
       <UniqueIdentifier>{9f8fe074-f208-4de2-a7cb-835219178334}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets\Model">
+      <UniqueIdentifier>{68036d42-898d-4450-973f-5bdb25231ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{88705e66-604a-402d-92ec-42ef8e360e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Player">
+      <UniqueIdentifier>{97d9aec9-d61c-430d-9d9d-c6a04b8d701e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -23,20 +32,38 @@
     <ClInclude Include="Classes\Main\SL_Window.h">
       <Filter>NewShunLib</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Game\SL_Application.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Game\SL_MyGame.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Game\Scene\PlayScene.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h">
-      <Filter>Game\Scene</Filter>
+    <ClInclude Include="Classes\Game\SL_Application.h">
+      <Filter>NewShunLib</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Game\Scene\SL_IScene.h">
-      <Filter>Game\Scene</Filter>
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\MyGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\StateObject.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectBase.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Main\SL_MyStepTimer.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\Player.h">
+      <Filter>Game\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectFactory.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectConstantNumber.h">
+      <Filter>Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,18 +74,23 @@
       <Filter>NewShunLib</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Main\WinMain.cpp" />
-    <ClCompile Include="Classes\Game\SL_Application.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Game\SL_MyGame.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Game\Scene\PlayScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Game\SL_Application.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\MyGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Player\Player.cpp">
+      <Filter>Game\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\ObjectBase.cpp" />
+    <ClCompile Include="Classes\Object\ObjectFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -72,5 +104,10 @@
     <Manifest Include="settings.manifest">
       <Filter>Assets</Filter>
     </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="Resources\ModelData\Player.FBX">
+      <Filter>Assets\Model</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>

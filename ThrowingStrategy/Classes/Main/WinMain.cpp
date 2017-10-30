@@ -7,7 +7,7 @@
 #include <Windows.h>
 #include "SL_Window.h"
 #include "SL_Graphics.h"
-#include "../Game/SL_MyGame.h"
+#include "../Game/MyGame.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMag, WPARAM wParam, LPARAM lParam);
 
@@ -24,7 +24,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmpSh
 {
 	auto window = ShunLib::Window::GetInstance();
 
-	ShunLib::Application* game = new ShunLib::MyGame();
+	ShunLib::Application* game = new MyGame();
 
 	//ウィンドウ作成
 	if (SUCCEEDED(InitWindow(hInst)))

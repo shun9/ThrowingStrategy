@@ -11,12 +11,12 @@
 /// 現在のシーンを更新
 /// </summary>
 /// <param name="timer">タイマー</param>
-void ShunLib::SceneManager::Update(DX::StepTimer& timer)
+void ShunLib::SceneManager::Update()
 {
 	//シーンがある場合更新
 	if (IsExistsScene(m_currentScene))
 	{
-		m_sceneList[m_currentScene]->Update(timer);
+		m_sceneList[m_currentScene]->Update();
 	}
 }
 
@@ -54,7 +54,7 @@ void ShunLib::SceneManager::AddScene(int key, IScene * scene)
 void ShunLib::SceneManager::ChangeScene(int key)
 {
 	//現在のシーンを終了
-	if (IsExistsScene(key)){
+	if (IsExistsScene(m_currentScene)){
 		m_sceneList[m_currentScene]->Finalize();
 	}
 

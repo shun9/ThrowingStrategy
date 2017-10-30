@@ -52,6 +52,9 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\MeshContentTask.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\ShaderGraphContentTask.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -99,6 +102,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>d3dcompiler.lib;ShunLib.lib;ShunLibTK.lib;DirectXTK.lib;d3d11.lib;dxguid.lib;uuid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <MeshContentTask>
+      <ContentOutput>CModel\%(Filename).cmo</ContentOutput>
+    </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -161,19 +167,28 @@
     <ClInclude Include="Classes\Game\Scene\SL_IScene.h" />
     <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h" />
     <ClInclude Include="Classes\Game\SL_Application.h" />
-    <ClInclude Include="Classes\Game\SL_MyGame.h" />
+    <ClInclude Include="Classes\Game\MyGame.h" />
     <ClInclude Include="Classes\Main\SL_Graphics.h" />
+    <ClInclude Include="Classes\Main\SL_MyStepTimer.h" />
     <ClInclude Include="Classes\Main\SL_Window.h" />
+    <ClInclude Include="Classes\Object\ObjectBase.h" />
+    <ClInclude Include="Classes\Object\ObjectConstantNumber.h" />
+    <ClInclude Include="Classes\Object\ObjectFactory.h" />
+    <ClInclude Include="Classes\Object\Player\Player.h" />
+    <ClInclude Include="Classes\Object\StateObject.h" />
     <ClInclude Include="StepTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Game\Scene\PlayScene.cpp" />
     <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp" />
     <ClCompile Include="Classes\Game\SL_Application.cpp" />
-    <ClCompile Include="Classes\Game\SL_MyGame.cpp" />
+    <ClCompile Include="Classes\Game\MyGame.cpp" />
     <ClCompile Include="Classes\Main\SL_Graphics.cpp" />
     <ClCompile Include="Classes\Main\SL_Window.cpp" />
     <ClCompile Include="Classes\Main\WinMain.cpp" />
+    <ClCompile Include="Classes\Object\ObjectBase.cpp" />
+    <ClCompile Include="Classes\Object\ObjectFactory.cpp" />
+    <ClCompile Include="Classes\Object\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -184,7 +199,15 @@
   <ItemGroup>
     <Manifest Include="settings.manifest" />
   </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="Resources\ModelData\Player.FBX">
+      <FileType>Document</FileType>
+    </MeshContentTask>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\MeshContentTask.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\ShaderGraphContentTask.targets" />
   </ImportGroup>
 </Project>

@@ -1,0 +1,42 @@
+//************************************************/
+//* @file  :StateObject.h
+//* @brief :状態を持つオブジェクト
+//* @date  :2017/10/30
+//* @author:S.Katou
+//************************************************/
+#pragma once
+#include "ObjectBase.h"
+
+#include <memory>
+#include <SL_StateMachine.h>
+#include <SL_Math.h>
+
+template<class T>
+class StateObject : public ObjectBase
+{
+protected:
+	std::unique_ptr<ShunLib::StateMachine<T>> m_stateMachine;
+
+public:
+	//コンストラクタ　状態を使用するオブジェクトを渡す
+	StateObject(T* obj) {
+		m_stateMachine = std::make_unique<ShunLib::StateMachine<T>>(obj);
+	}
+	virtual ~StateObject() {}
+
+	//更新
+	void Update()override {
+		//ステートマシンがあれば更新
+		if (m_stateMachine){
+			m_stateMachine->Update();
+		}
+	}
+
+	//状態切替
+	void ChangeState(ShunLib::State<T>* state) { m_stateMachine->ChangeState(state); }
+
+	//初期化　更新　終了
+	virtual void Initialize() = 0;
+	virtual void Finalize()   = 0;
+};
+
