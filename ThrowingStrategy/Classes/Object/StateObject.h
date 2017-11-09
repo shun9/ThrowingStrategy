@@ -14,7 +14,7 @@
 template<class T>
 class StateObject : public ObjectBase
 {
-protected:
+private:
 	std::unique_ptr<ShunLib::StateMachine<T>> m_stateMachine;
 
 public:
@@ -22,6 +22,7 @@ public:
 	StateObject(T* obj) {
 		m_stateMachine = std::make_unique<ShunLib::StateMachine<T>>(obj);
 	}
+
 	virtual ~StateObject() {}
 
 	//更新
@@ -30,13 +31,20 @@ public:
 		if (m_stateMachine){
 			m_stateMachine->Update();
 		}
+		ObjectBase::Update();
 	}
 
 	//状態切替
 	void ChangeState(ShunLib::State<T>* state) { m_stateMachine->ChangeState(state); }
 
-	//初期化　更新　終了
-	virtual void Initialize() = 0;
-	virtual void Finalize()   = 0;
+	//初期化　終了
+	virtual void Initialize() {
+		ObjectBase::Initialize();
+	};
+	virtual void Finalize() {
+		ObjectBase::Finalize();
+	};
+
+	
 };
 

@@ -6,9 +6,15 @@
 //************************************************/
 #pragma once
 #include "../StateObject.h"
+#include "../../Physics/Collision/SL_Collider.h"
 
-class Player :public StateObject<Player>
+class SphereCollider;
+
+class Player : public StateObject<Player>
 {
+private:
+	ShunLib::SphereCollider* m_collider;
+
 public:
 	Player():StateObject(this) {}
 	~Player() {}
@@ -16,4 +22,6 @@ public:
 	////èâä˙âªÅ@èIóπ
 	void Initialize()override;
 	void Finalize()override;
+
+	void CollisionCallBack(ObjectBase* obj);
 };

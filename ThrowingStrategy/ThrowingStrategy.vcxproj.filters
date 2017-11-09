@@ -23,6 +23,33 @@
     <Filter Include="Game\Object\Player">
       <UniqueIdentifier>{97d9aec9-d61c-430d-9d9d-c6a04b8d701e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\Player\State">
+      <UniqueIdentifier>{269f41d4-93d7-45b0-a17f-9fd955ee7494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Unit">
+      <UniqueIdentifier>{8e381dc4-bd49-47f2-be5b-71906a1fefe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Unit\State">
+      <UniqueIdentifier>{a5850ac6-01a4-46c3-bb00-40b7a84e09ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Base">
+      <UniqueIdentifier>{b1d46b8d-552d-42fe-842c-9906d01005b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Util">
+      <UniqueIdentifier>{8fa54e67-96ac-47c0-af37-cb7dd210b3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Physics">
+      <UniqueIdentifier>{ccc93c24-be89-43e7-be0f-bc1c438ac412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Commander">
+      <UniqueIdentifier>{2ccab58f-e94c-48ff-8cdb-c1b14424d85c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Commander\State">
+      <UniqueIdentifier>{2100a1bd-2af9-4e83-8bc8-adc83b31f5a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Physics\Collision">
+      <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -47,23 +74,62 @@
     <ClInclude Include="Classes\Game\MyGame.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Object\StateObject.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Object\ObjectBase.h">
-      <Filter>Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Main\SL_MyStepTimer.h">
       <Filter>NewShunLib</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\Player\Player.h">
       <Filter>Game\Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Object\ObjectFactory.h">
-      <Filter>Game\Object</Filter>
+    <ClInclude Include="Classes\Object\Commander\Commander.h">
+      <Filter>Game\Object\Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Commander\CommanderMoveState.h">
+      <Filter>Game\Object\Commander\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\Unit.h">
+      <Filter>Game\Object\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitMoveState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\State\PlayerMoveState.h">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\StateObject.h">
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectBase.h">
+      <Filter>Game\Object\Base</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\ObjectConstantNumber.h">
-      <Filter>Game\Object</Filter>
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectFactory.h">
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Physics\PhysicsConstantNumber.h">
+      <Filter>Game\Object\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectParamHolder.h">
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectData.h">
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Physics\Collision\SL_CollisionManager.h">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Physics\Collision\SL_Collider.h">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\SL_Camera.h">
+      <Filter>Game\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\SL_Shape.h">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h">
+      <Filter>NewShunLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +155,42 @@
     <ClCompile Include="Classes\Object\Player\Player.cpp">
       <Filter>Game\Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\Object\ObjectBase.cpp" />
-    <ClCompile Include="Classes\Object\ObjectFactory.cpp" />
+    <ClCompile Include="Classes\Object\Commander\Commander.cpp">
+      <Filter>Game\Object\Commander</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Commander\CommanderMoveState.cpp">
+      <Filter>Game\Object\Commander\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\Unit.cpp">
+      <Filter>Game\Object\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\State\UnitMoveState.cpp">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Player\State\PlayerMoveState.cpp">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\ObjectBase.cpp">
+      <Filter>Game\Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\ObjectFactory.cpp">
+      <Filter>Game\Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\ObjectParamHolder.cpp">
+      <Filter>Game\Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Util\SL_Camera.cpp">
+      <Filter>Game\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\SL_Shape.cpp">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -107,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Resources\ModelData\Player.FBX">
+      <Filter>Assets\Model</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Resources\ModelData\Ghost.FBX">
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
   </ItemGroup>

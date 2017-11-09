@@ -1,5 +1,12 @@
+//************************************************/
+//* @file  :SL_Window.cpp
+//* @brief :ウィンドウクラス
+//* @date  :2017/10/26
+//* @author:S.Katou
+//************************************************/
 #include "SL_Window.h"
 #include "SL_Graphics.h"
+#include <SL_KeyManager.h>
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMag, WPARAM wParam, LPARAM lParam);
 
@@ -52,15 +59,24 @@ LRESULT CALLBACK ShunLib::Window::MsgProc(HWND hWnd, UINT iMag, WPARAM wParam, L
 {
 	switch (iMag)
 	{
-		//キーが押された
+	//キーが押された
 	case WM_KEYDOWN:
+		ShunLib::KeyManager::ProcessMessage(iMag, wParam, lParam);
 		switch ((char)wParam)
 		{
-			//Escキー
+		//Escキーは終了
 		case VK_ESCAPE:
 			PostQuitMessage(0);
 			break;
 		}
+		break;
+
+	//キー情報を渡す
+	case WM_ACTIVATEAPP:
+	case WM_SYSKEYDOWN:
+	case WM_KEYUP:
+	case WM_SYSKEYUP:
+		ShunLib::KeyManager::ProcessMessage(iMag, wParam, lParam);
 		break;
 
 		//ウィンドウが消された

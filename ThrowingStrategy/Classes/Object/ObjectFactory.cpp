@@ -1,11 +1,13 @@
 //************************************************/
 //* @file  :ObjectFactory.cpp
 //* @brief :オブジェクトを生成するクラス
-//* @date  :2017/10/30
+//* @date  :2017/11/01
 //* @author:S.Katou
 //************************************************/
 #include "ObjectFactory.h"
 #include "Player\Player.h"
+#include "Commander\Commander.h"
+#include "Unit\Unit.h"
 
 /// <summary>
 /// オブジェクトの生成
@@ -20,6 +22,14 @@ ObjectBase* ObjectFactory::Create(OBJECT_LIST num)
 	{
 	case PLAYER:
 		obj = m_playerFactory.Create();
+		break;
+
+	case COMMANDER:
+		obj = m_commanderFactory.Create();
+		break;
+
+	case UNIT:
+		obj = m_unitFactory.Create();
 		break;
 
 	default:

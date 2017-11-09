@@ -9,6 +9,8 @@
 #include "SL_Graphics.h"
 #include "../Game/MyGame.h"
 
+#include <Keyboard.h>
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMag, WPARAM wParam, LPARAM lParam);
 
 HRESULT InitWindow(HINSTANCE hInst);

@@ -19,16 +19,18 @@ namespace ShunLib
 	public:
 		//タイマー更新
 		template<typename TUpdate>
-		void Tick(const TUpdate& update) {};
+		void Tick(const TUpdate& update) {
+			m_timer.Tick(update);
+		};
 		
 		//タイマーリセット
 		void ResetElapsedTime() { m_timer.ResetElapsedTime(); }
 	
 		uint64_t GetElapsedTicks() const { return m_timer.GetElapsedTicks(); }
-		double GetElapsedSeconds() const { return m_timer.GetElapsedSeconds(); }
+		float GetElapsedSeconds() const { return (float)m_timer.GetElapsedSeconds(); }
 
 		uint64_t GetTotalTicks() const { return m_timer.GetTotalTicks(); }
-		double GetTotalSeconds() const { return m_timer.GetTotalSeconds(); }
+		float GetTotalSeconds() const { return (float)m_timer.GetTotalSeconds(); }
 
 		uint32_t GetFrameCount() const { return m_timer.GetFrameCount(); }
 

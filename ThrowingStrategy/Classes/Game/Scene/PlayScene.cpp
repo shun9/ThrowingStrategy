@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :PlayScene.cpp
 //* @brief :プレイシーン
-//* @date  :2017/10/26
+//* @date  :2017/11/02
 //* @author:S.Katou
 //************************************************/
 #include "PlayScene.h"
@@ -9,11 +9,34 @@
 #include <SL_Matrix.h>
 #include <SL_MacroConstants.h>
 #include "../../Main/SL_Window.h"
-#include "../../Object/Player/Player.h"
+#include "../../Util/SL_Camera.h"
+
+//オブジェクト関連
+#include "../../Object/ObjectBase.h"
+#include "../../Object/ObjectFactory.h"
+#include "../../Object/ObjectConstantNumber.h"
 
 PlayScene::PlayScene()
 {
-	m_objList.push_back(new Player);
+	auto factory = ObjectFactory::GetInstance();
+
+	auto p = factory->Create(PLAYER);
+	auto v = factory->Create(COMMANDER);
+	auto u = factory->Create(UNIT);
+	//p->AddChild(v);
+	//p->AddChild(u);
+	m_objList.push_back(p);
+	m_objList.push_back(v);
+	m_objList.push_back(u);
+
+	auto window = ShunLib::Window::GetInstance();
+	
+	//カメラ設定
+	auto camera = ShunLib::MainCamera::GetInstance();
+	camera->Pos(ShunLib::Vec3(0.0f, 10.0f, 15.0f));
+	camera->Target(ShunLib::Vec3::Zero);
+	camera->Aspect(static_cast<float>(window->Width() / window->Height()));
+
 }
 
 PlayScene::~PlayScene()
@@ -37,7 +60,13 @@ void PlayScene::Initialize()
 /// </summary>
 void PlayScene::Update()
 {
+	auto camera = ShunLib::MainCamera::GetInstance();
+	camera->Update();
 
+	for (auto v : m_objList)
+	{
+		v->Update();
+	}
 }
 
 /// <summary>
@@ -45,14 +74,11 @@ void PlayScene::Update()
 /// </summary>
 void PlayScene::Render()
 {
-	using namespace ShunLib;
-	auto window = Window::GetInstance();
-	Matrix view = Matrix::CreateLookAt(Vec3(0.0f, 10.0f, 15.0f), Vec3::Zero, Vec3::UnitY);
-	Matrix proj = Matrix::CreateProj(45.0f, static_cast<float>(window->Width() / window->Height()), 1.0f, 200.0f);
-
+	auto camera = ShunLib::MainCamera::GetInstance();
+	
 	for (auto v : m_objList)
 	{
-		v->Render(view,proj);
+		v->Render(camera->ViewMat(), camera->ProjMat());
 	}
 }
 

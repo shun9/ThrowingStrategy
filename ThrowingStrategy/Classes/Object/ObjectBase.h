@@ -1,49 +1,67 @@
 //************************************************/
 //* @file  :ObjectBase.h
-//* @brief :オブジェクト
-//* @date  :2017/10/30
+//* @brief :オブジェクトの基底クラス
+//* @date  :2017/11/02
 //* @author:S.Katou
 //************************************************/
 #pragma once
 #include <memory>
+#include <vector>
 #include <SL_Math.h>
 #include <SL_Model.h>
 #include "ObjectConstantNumber.h"
+#include "ObjectParamHolder.h"
+#include "ObjectData.h"
 
-class ObjectBase
+class ObjectBase : public ObjectData
 {
 private:
-	using Vec3 = ShunLib::Vec3;
 	using Matrix = ShunLib::Matrix;
 
-protected:
-	//位置
-	Vec3 m_pos;
+private:
+	//子オブジェクト
+	std::vector<ObjectBase*>m_children;
 
-	//回転角度
-	Vec3 m_rotation;
-
-	//拡大率
-	float m_scale;
-
-	//描画用モデル
-	std::unique_ptr<ShunLib::Model> m_model;
-
-	//チーム分け
-	TEAM m_team;
+	//親オブジェクト
+	ObjectBase* m_parent;
 
 public:
-	ObjectBase() :m_pos({ 0.0f,0.0f,0.0f }), m_rotation({ 0.0f,0.0f,0.0f }), m_scale(1.0f) {}
+	ObjectBase():
+		m_parent(nullptr)
+	{}
 	virtual ~ObjectBase() {}
 
-	//描画
+	//親を設定
+	void SetParent(ObjectBase* parent) {
+		m_parent = parent;
+	}
+
+	//子を追加
+	void AddChild(ObjectBase* child) { 
+		m_children.push_back(child); 
+		child->SetParent(this);
+	}
+
+	//子を削除
+	void RemoveChild(ObjectBase* child){
+		auto tmpChild = std::find(m_children.begin(), m_children.end(), child);
+		if (tmpChild != m_children.end()) {
+			m_children.erase(tmpChild);
+			child->SetParent(this);
+		}
+	}
+
+	//移動させる
+	void Move();
+
+	//描画 上:ルート用　下:子用
 	void Render(const Matrix& view, const Matrix& proj);
+	void Render(const Matrix& parentWorld, const Matrix& view, const Matrix& proj);
 
-	//モデルの読み込み
-	void LoadModel(const wchar_t* path) { m_model = std::make_unique<ShunLib::Model>(path); }
-
-	//初期化　更新　終了
-	virtual void Initialize() = 0;
-	virtual void Update()     = 0;
-	virtual void Finalize()   = 0;
+	//初期化 更新  派生クラスの最後に呼ぶ
+	virtual void Initialize() {	for (auto& v : m_children) { v->Initialize(); }}
+	virtual void Update() { for (auto& v : m_children) { v->Update(); } }
+	
+	//終了  派生クラスの最後に呼ぶ
+	virtual void Finalize() { for (auto& v : m_children) { v->Finalize(); } }
 };
