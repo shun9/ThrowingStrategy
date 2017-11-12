@@ -18,31 +18,67 @@ namespace ShunLib {
 
 	class IShape {
 	private:
+		using Matrix = ShunLib::Matrix;
+		
+	protected:
+		Vec3 m_size;
+		float m_scale;
+
+		Vec3 m_centerPoint;//中心点
 
 	public:
+		IShape() :m_size(Vec3::One),m_scale(1.0f), m_centerPoint(Vec3::Zero) {}
 		virtual ~IShape() {}
 		virtual SHAPE_TYPE Type() { return SHAPE_TYPE::SHAPE_TYPE_END; }
 	
-		void Render();
+		virtual void Render() {};
+
+		/*--Setter--*/
+		float Scale() { return m_scale; }
+		Vec3 Size() { return m_size; }
+		Vec3 CenterPoint() { return m_centerPoint; }
+
+		/*--Setter--*/
+		void Scale(float s) { m_scale = s; }
+		void Size(const Vec3& s) { m_size = s; }
+		void CenterPoint(const Vec3& point) { m_centerPoint = point; }
 	};
 
 	//球体
+	//Scale : 半径
+	//Size  : 使用しない
 	class Sphere : public IShape
 	{
-	protected:
-		Vec3 m_centerPoint;//中心点
-		float m_radius;    //半径
+	private:
+		using Matrix = ShunLib::Matrix;
 	
 	public:
-		Sphere() :m_centerPoint({0.0f,0.0f,0.0f}),m_radius(1.0f) {}
+		//コンストラクタ　直径を１にする
+		Sphere() { this->Scale(0.5f); }
 		virtual ~Sphere() {}
 
-		Vec3 CenterPoint() { return m_centerPoint; }
-		void CenterPoint(const Vec3& point) { m_centerPoint = point; }
+		void Render()override;
 
-		float Radius() { return m_radius; }
-		void Radius(float rad) { m_radius = rad; }
+
 		virtual SHAPE_TYPE Type() { return SHAPE_TYPE::SPHERE; }
+	};
+
+	//箱
+	//Scale : 拡大率
+	//Size  : それぞれの軸の長さ
+	class Box : public IShape
+	{
+	private:
+		using Matrix = ShunLib::Matrix;
+
+	public:
+		Box() { }
+		virtual ~Box() {}
+
+		void Render()override;
+
+
+		virtual SHAPE_TYPE Type() { return SHAPE_TYPE::BOX; }
 	};
 
 	// 線分
@@ -72,4 +108,7 @@ namespace ShunLib {
 	//当たり判定用
 	bool Collision(IShape* A, IShape* B);
 	bool operator*(Sphere& A, Sphere& B);
+	bool operator*(Sphere& A, Box& B);
+	bool operator*(Box& A, Sphere& B);
+	bool operator*(Box& A, Box& B);
 }

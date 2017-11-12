@@ -8,7 +8,7 @@
 #include "SL_Window.h"
 #include "SL_Graphics.h"
 #include "../Game/MyGame.h"
-
+#include "../Util/DestroySingleton.h"
 #include <Keyboard.h>
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMag, WPARAM wParam, LPARAM lParam);
@@ -40,8 +40,8 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmpSh
 
 	delete game;
 
-	ShunLib::Graphics::Destroy();
-	ShunLib::Window::Destroy();
+	//シングルトンの削除
+	DestroySingleton::Destroy();
 
 	//終了
 	return 0;

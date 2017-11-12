@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Commander.h
 //* @brief :ŽwŠöŠ¯
-//* @date  :2017/10/31
+//* @date  :2017/11/12
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -20,7 +20,7 @@ private:
 	//“Š‚°‚éŠp“x
 	float m_throwingAngle;
 
-	ShunLib::SphereCollider* m_collider;
+	ShunLib::BoxCollider* m_collider;
 
 public:
 	Commander();

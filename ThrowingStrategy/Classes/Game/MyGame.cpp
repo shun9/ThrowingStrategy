@@ -12,9 +12,10 @@
 
 #include "../Main/SL_Graphics.h"
 #include "../Main/SL_MyStepTimer.h"
+#include "../Physics/Collision/SL_CollisionManager.h"
+
 #include "Scene\SL_SceneManager.h"
 #include "Scene\PlayScene.h"
-#include "../Physics/Collision/SL_CollisionManager.h"
 
 /// <summary>
 /// ‰Šú‰»ˆ—
@@ -59,6 +60,7 @@ void MyGame::Render()
 {
 	auto scene = ShunLib::SceneManager::GetInstance();
 	scene->Render();
+	ShunLib::CollisionManager::GetInstance()->Render();
 }
 
 /// <summary>
@@ -66,6 +68,5 @@ void MyGame::Render()
 /// </summary>
 void MyGame::Finalize()
 {
-	ShunLib::CollisionManager::Destroy();
-	ShunLib::SceneManager::Destroy();
+
 }

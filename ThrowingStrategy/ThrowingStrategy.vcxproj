@@ -188,6 +188,7 @@
     <ClInclude Include="Classes\Physics\Collision\SL_CollisionManager.h" />
     <ClInclude Include="Classes\Physics\PhysicsConstantNumber.h" />
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h" />
+    <ClInclude Include="Classes\Util\DestroySingleton.h" />
     <ClInclude Include="Classes\Util\SL_Camera.h" />
     <ClInclude Include="StepTimer.h" />
   </ItemGroup>
@@ -211,6 +212,7 @@
     <ClCompile Include="Classes\Object\Unit\Unit.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp" />
+    <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp" />
     <ClCompile Include="Classes\Util\SL_Camera.cpp" />
   </ItemGroup>
   <ItemGroup>

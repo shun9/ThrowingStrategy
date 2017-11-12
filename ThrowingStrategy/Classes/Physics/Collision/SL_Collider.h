@@ -37,41 +37,53 @@ namespace ShunLib
 		ICollider();
 		virtual ~ICollider();
 	
-		virtual void Update() = 0;
+		void Update();
 		void DebugRender();
 
-		void Parent(ObjectBase* parent) { m_parent = parent; }
+		/*--Getter--*/
 		ObjectBase* Parent() { return m_parent; }
-
 		Vec3 Offset() { return m_offset; }
-		void Offset(const Vec3& offset) { m_offset = offset; }
-	
-		IShape* Shape() { return m_shape; }
 
+		/*--Setter--*/
+		void Offset(const Vec3& offset) { m_offset = offset; }
+		void Parent(ObjectBase* parent) { m_parent = parent; }
 		void SetCallBack(std::function<void(ObjectBase*)> func) { m_callBack = func; }
 	
-	protected:
-		void Shape(IShape* shape) { m_shape = shape; }
+	//純粋仮想関数
+	public:
+		//クラスごとに返す形状を変更
+		virtual IShape* Shape() = 0;
 
 	public:
+		//コールバックを呼ぶ
 		void operator()(ObjectBase* obj) { 
 			if(m_callBack!=NULL)m_callBack(obj); }
 	};
 
 
-	//球状の当たり判定
+	//球状の当たり判定用クラス
 	class SphereCollider : public ICollider
 	{
 	public:
 		SphereCollider() { m_shape  = new Sphere; }
 		~SphereCollider() { SAFE_DELETE(m_shape); }
-
-		void Update()override;
 	
-	private:
 		//キャストしたポインタを返す
-		Sphere* CastShape() {
+		Sphere* Shape() {
 			return dynamic_cast<Sphere*>(m_shape);
 		}
 	};
+
+	//球状の当たり判定用クラス
+	class BoxCollider : public ICollider
+	{
+	public:
+		BoxCollider() { m_shape = new Box; }
+		~BoxCollider() { SAFE_DELETE(m_shape); }
+
+		Box* Shape() {
+			return dynamic_cast<Box*>(m_shape);
+		}
+	};
+
 }

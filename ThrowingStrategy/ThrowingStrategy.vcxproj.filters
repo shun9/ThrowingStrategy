@@ -129,7 +129,10 @@
       <Filter>Game\Object\Physics\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h">
-      <Filter>NewShunLib</Filter>
+      <Filter>Game\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\DestroySingleton.h">
+      <Filter>Game\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp">
       <Filter>Game\Object\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp">
+      <Filter>Game\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

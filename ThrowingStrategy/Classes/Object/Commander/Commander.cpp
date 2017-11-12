@@ -15,8 +15,14 @@ Commander::Commander() :
 	m_throwingPower(1.0f),
 	m_throwingAngle(45.0f)
 {
-	m_collider = new ShunLib::SphereCollider();
+	//“–‚½‚è”»’è‚ÌÝ’è
+	m_collider = new ShunLib::BoxCollider();
 	m_collider->Parent(this);
+	m_collider->Offset(ShunLib::Vec3(0.0f, 1.5f, 0.0f));
+
+	//“–‚½‚è”»’è‚ÌŒ`ó‚ÌÝ’è
+	m_collider->Shape()->Scale(1.0f);
+	m_collider->Shape()->Size(ShunLib::Vec3(1.0f,3.0f,1.0f));
 }
 
 Commander::~Commander()

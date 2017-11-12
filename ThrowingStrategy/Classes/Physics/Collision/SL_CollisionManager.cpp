@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :CollisionManager.cpp
 //* @brief :“–‚½‚è”»’è‚ðŠÇ—‚·‚éƒNƒ‰ƒX
-//* @date  :2017/11/09
+//* @date  :2017/11/12
 //* @author:S.Katou
 //************************************************/
 #include "SL_CollisionManager.h"
@@ -25,5 +25,13 @@ void ShunLib::CollisionManager::Update()
 				(*m_colliderList[j])(m_colliderList[i]->Parent());
 			}
 		}
+	}
+}
+
+void ShunLib::CollisionManager::Render()
+{
+	for (auto& v : m_colliderList)
+	{
+		v->DebugRender();
 	}
 }

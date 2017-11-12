@@ -19,6 +19,7 @@ namespace ShunLib
 
 	public:
 		void Update();
+		void Render();
 
 		void AddCollider(ICollider* col) { m_colliderList.push_back(col); }
 		void RemoveCollider(ICollider* col) {
