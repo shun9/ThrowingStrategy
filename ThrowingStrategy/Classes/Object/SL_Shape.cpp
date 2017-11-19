@@ -1,103 +1,44 @@
 //************************************************/
-//* @file  :SL_Shape.h
+//* @file  :SL_Shape.cpp
 //* @brief :当たり判定用の形状クラスまとめ
-//* @date  :2017/11/12
+//* @date  :2017/11/17
 //* @author:S.Katou
 //************************************************/
 #include "SL_Shape.h"
+#include <SL_Math.h>
 #include "../Util/SL_Camera.h"
 #include "../Util/BasicShapeModelRenderer.h"
 
-//当たり判定
-bool ShunLib::Collision(IShape* A, IShape* B)
+float ShunLib::ShortestDistance(const Box & A, const Point & B)
 {
-	//同じもの同士
-	if (A->Type() == B->Type())
-	{
-		//球と球
-		if (A->Type() == SHAPE_TYPE::SPHERE)
-		{
-			Sphere* a = dynamic_cast<Sphere*>(A);
-			Sphere* b = dynamic_cast<Sphere*>(B);
-			return (*a) * (*b);
-		}
+	float sqLen = 0;   // 長さのべき乗の値を格納
+	Vec3 point = B.CenterPoint();
 
-		//箱と箱
-		if (A->Type() == SHAPE_TYPE::BOX)
-		{
-			Box* a = dynamic_cast<Box*>(A);
-			Box* b = dynamic_cast<Box*>(B);
-			return (*a) * (*b);
-		}
-	}
+	//箱の頂点の最小値と最大値
+	Vec3 min, max;
+	min.m_x = B.CenterPoint().m_x - (B.Size().m_x / 2.0f);
+	min.m_y = B.CenterPoint().m_y - (B.Size().m_y / 2.0f);
+	min.m_z = B.CenterPoint().m_z - (B.Size().m_z / 2.0f);
 
-	//片方が球
-	if (A->Type() == SHAPE_TYPE::SPHERE)
-	{
-		//球と箱
-		if (B->Type() == SHAPE_TYPE::BOX)
-		{
-			Sphere* a = dynamic_cast<Sphere*>(A);
-			Box* b = dynamic_cast<Box*>(B);
-			return (*a) * (*b);
-		}
-	}
+	max.m_x = B.CenterPoint().m_x + (B.Size().m_x / 2.0f);
+	max.m_y = B.CenterPoint().m_y + (B.Size().m_y / 2.0f);
+	max.m_z = B.CenterPoint().m_z + (B.Size().m_z / 2.0f);
 
-	//片方が箱
-	if (A->Type() == SHAPE_TYPE::BOX)
-	{
-		//箱と球
-		if (B->Type() == SHAPE_TYPE::SPHERE)
-		{
-			Box* a = dynamic_cast<Box*>(A);
-			Sphere* b = dynamic_cast<Sphere*>(B);
-			return (*a) * (*b);
-		}
-	}
+	//点が最小値～最大値の中にないとき差を考慮する
+	//X軸
+	if (!(point.m_x > min.m_x && point.m_x < max.m_x))
+		sqLen += ((point.m_x - min.m_x) * (point.m_x - min.m_x));
 
-	return false;
+	//Y軸
+	if (!(point.m_y > min.m_y && point.m_y < max.m_y))
+		sqLen += ((point.m_y - min.m_y) * (point.m_y - min.m_y));
+	
+	//Z軸
+	if (!(point.m_z > min.m_z && point.m_z < max.m_z))
+		sqLen += ((point.m_z - min.m_z) * (point.m_z - min.m_z));
+
+	return sqrt(sqLen);
 }
-
-/*--当たり判定用--*/
-//球と球
-bool ShunLib::operator*(Sphere & A, Sphere & B)
-{
-	// 中心座標間の距離を計算
-	Vec3 distV = B.CenterPoint() - A.CenterPoint();
-
-	float dist = distV.Length();
-
-	// 半径の和
-	float rad = A.Scale() + B.Scale();
-	rad *= rad;
-
-	// 距離が半径の和より大きければ、当たっていない
-	if (dist > rad)
-	{
-		return false;
-	}
-
-	return true;
-}
-
-//球と箱
-bool ShunLib::operator*(Sphere & A, Box & B)
-{
-	return false;
-}
-
-//箱と球
-bool ShunLib::operator*(Box & A, Sphere & B)
-{
-	return false;
-}
-
-//箱と箱
-bool ShunLib::operator*(Box & A, Box & B)
-{
-	return false;
-}
-
 
 //球の描画
 void ShunLib::Sphere::Render()
@@ -107,7 +48,7 @@ void ShunLib::Sphere::Render()
 
 	Matrix world = Matrix::CreateScale(Scale()*2.0f);
 	world *= Matrix::CreateTranslation(m_centerPoint);
-	shape->DrawSphere(world,camera->ViewMat(),camera->ProjMat());
+	shape->DrawSphere(world, camera->ViewMat(), camera->ProjMat());
 }
 
 //箱の描画

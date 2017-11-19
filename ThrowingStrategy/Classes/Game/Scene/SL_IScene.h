@@ -12,7 +12,8 @@ namespace ShunLib
 	class IScene
 	{
 	public:
-		IScene() {};
+		IScene() {
+		};
 		virtual ~IScene() {};
 
 		//初期化　更新　描画　終了
@@ -21,4 +22,4 @@ namespace ShunLib
 		virtual void Render    () = 0;
 		virtual void Finalize  () = 0;
 	};
-}
+}		

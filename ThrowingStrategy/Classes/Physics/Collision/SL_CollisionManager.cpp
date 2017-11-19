@@ -1,16 +1,19 @@
 //************************************************/
 //* @file  :CollisionManager.cpp
 //* @brief :当たり判定を管理するクラス
-//* @date  :2017/11/12
+//* @date  :2017/11/13
 //* @author:S.Katou
 //************************************************/
 #include "SL_CollisionManager.h"
+#include "../../Util/Debugger/DebugMacro.h"
 
+//更新
 void ShunLib::CollisionManager::Update()
 {
 	for (auto& v : m_colliderList)
 	{
 		v->Update();
+		v->ResetList();
 	}
 
 	//当たり判定
@@ -19,8 +22,13 @@ void ShunLib::CollisionManager::Update()
 	{
 		for (int j = i+1; j < size; j++)
 		{
-			if (Collision(m_colliderList[i]->Shape(), m_colliderList[j]->Shape()))
+			if (Collision(m_colliderList[i], m_colliderList[j]))
 			{
+				//ヒットリストに追加
+				m_colliderList[i]->AddHitList(m_colliderList[j]->Parent());
+				m_colliderList[j]->AddHitList(m_colliderList[i]->Parent());
+
+				//ヒット処理
 				(*m_colliderList[i])(m_colliderList[j]->Parent());
 				(*m_colliderList[j])(m_colliderList[i]->Parent());
 			}
@@ -28,10 +36,11 @@ void ShunLib::CollisionManager::Update()
 	}
 }
 
+//描画
 void ShunLib::CollisionManager::Render()
 {
 	for (auto& v : m_colliderList)
 	{
-		v->DebugRender();
+		Debug v->DebugRender();
 	}
 }

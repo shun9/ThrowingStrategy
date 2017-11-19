@@ -1,13 +1,15 @@
 //************************************************/
 //* @file  :ObjectFactory.cpp
 //* @brief :オブジェクトを生成するクラス
-//* @date  :2017/11/01
+//* @date  :2017/11/16
 //* @author:S.Katou
 //************************************************/
 #include "ObjectFactory.h"
 #include "Player\Player.h"
 #include "Commander\Commander.h"
 #include "Unit\Unit.h"
+#include "Stage\Stage.h"
+#include "Stage\StageObject.h"
 
 /// <summary>
 /// オブジェクトの生成
@@ -20,21 +22,23 @@ ObjectBase* ObjectFactory::Create(OBJECT_LIST num)
 
 	switch (num)
 	{
-	case PLAYER:
-		obj = m_playerFactory.Create();
-		break;
-
-	case COMMANDER:
-		obj = m_commanderFactory.Create();
-		break;
-
-	case UNIT:
-		obj = m_unitFactory.Create();
-		break;
-
-	default:
-		break;
+	case PLAYER:	obj = m_playerFactory.Create();break;
+	case COMMANDER:	obj = m_commanderFactory.Create();break;
+	case UNIT:		obj = m_unitFactory.Create();break;
+	case BLOCK:		obj = m_blockFactory.Create(); break;
+	case STAGE:		obj = m_stageFactory.Create(); break;
+	default:break;
 	}
 
 	return obj;
+}
+
+
+ObjectFactory::~ObjectFactory()
+{
+	m_playerFactory.AllDelete();
+	m_commanderFactory.AllDelete();
+	m_unitFactory.AllDelete();
+	m_blockFactory.AllDelete();
+	m_stageFactory.AllDelete();
 }

@@ -1,53 +1,103 @@
 //************************************************/
 //* @file  :SL_Camera.h
 //* @brief :描画用カメラ
-//* @date  :2017/11/09
+//* @date  :2017/11/16
 //* @author:S.Katou
 //************************************************/
 #pragma once
 
+#include <memory>
 #include <SL_Singleton.h>
 #include <SL_Math.h>
+#include <SL_StateMachine.h>
+
+//追いかける対象
+class ObjectBase;
+
+//カメラの状態一覧
+enum CAMERA_MODE
+{
+	NON_MOVE_CAMERA = 0,	  //固定
+	FOLLOW_CAMERA,            //追跡
+	CAMERA_MODE_END,
+};
+
+//ビュー行列に必要なデータ
+struct ViewData
+{
+	ShunLib::Vec3 pos;
+	ShunLib::Vec3 target;
+	ShunLib::Vec3 up;
+	ViewData() :
+		pos(ShunLib::Vec3(0.0f, 1.0f, 0.0f)),
+		target(ShunLib::Vec3(0.0f, 0.0f, 3.0f)),
+		up(ShunLib::Vec3::UnitY) {}
+};
+
+//プロジェクション行列に必要なデータ
+struct ProjData
+{
+	float fov;
+	float aspect;
+	float nearClip;
+	float farClip;
+	ProjData() :
+		fov(45.0f),
+		aspect((800.0f / 600.0f)),
+		nearClip(1.0f),
+		farClip(200.0f) {}
+};
 
 namespace ShunLib {
+
 	class MainCamera  : public Singleton<MainCamera>
 	{
 		friend Singleton<MainCamera>;
-
 	private:
 		using Vec3 = ShunLib::Vec3;
 		using Matrix = ShunLib::Matrix;
 
 	private:
+
+		std::unique_ptr<StateMachine<MainCamera>>m_stateMachine;
+
+		//追いかける対象
+		ObjectBase* m_followTarget;
+
+		//角度
+		float m_angle;
+
 		Matrix m_view;
 		Matrix m_proj;
 
-		Vec3 m_pos;
-		Vec3 m_target;
-		Vec3 m_up;
-
-		float m_fov;
-		float m_aspect;
-		float m_near;
-		float m_far;
+		ViewData m_viewData;
+		ProjData m_projData;
 
 	public:
 		void Update();
 
-		const Matrix& ViewMat() { return m_view; }
-		const Matrix& ProjMat() { return m_proj; }
+		const Matrix& ViewMat(){ return m_view; }
+		const Matrix& ProjMat(){ return m_proj; }
 
-		void Pos   (const Vec3& pos) { m_pos = pos; }
-		void Target(const Vec3& tar) { m_target = tar; }
-		void Up    (const Vec3& up)  { m_up = up; }
+		ViewData View() { return m_viewData; }
+		ProjData Proj() { return m_projData; }
+		ObjectBase* FollowTarget() { return m_followTarget; }
+		float Angle() { return m_angle; }
 
-		void Fov   (float fov ) { m_fov = fov; }
-		void Aspect(float asp ) { m_aspect = asp; }
-		void Near  (float nearClip) { m_near = nearClip; }
-		void Far   (float farClip ) { m_far = farClip; }
-
+		void View(const ViewData& data) { m_viewData = data; }
+		void Proj(const ProjData& data) { m_projData = data; }
+		void FollowTarget(ObjectBase* obj) { m_followTarget = obj; }
+		
+		void ChangeMode(CAMERA_MODE mode);
+	
 	private:
 		MainCamera();
 		~MainCamera();
+
+		//ビュー行列とプロジェクション行列を計算する
+		void CalcMat() {
+			m_view = Matrix::CreateLookAt(m_viewData.pos, m_viewData.target, m_viewData.up);
+			m_proj = Matrix::CreateProj(m_projData.fov, m_projData.aspect, m_projData.nearClip, m_projData.farClip);
+		}
 	};
 }

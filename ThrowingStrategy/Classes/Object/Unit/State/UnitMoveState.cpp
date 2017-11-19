@@ -6,6 +6,7 @@
 //************************************************/
 #include "UnitMoveState.h"
 #include "../../../Main/SL_MyStepTimer.h"
+#include "../../../Util/Debugger/DebuggerUI.h"
 
 void UnitMoveState::Enter(Unit * obj)
 {
@@ -14,11 +15,8 @@ void UnitMoveState::Enter(Unit * obj)
 
 void UnitMoveState::Execute(Unit * obj)
 {
-	auto timer = ShunLib::MyStepTimer::GetInstance();
-
-	auto pos = obj->Pos();
-	pos.m_x -= 0.1f * timer->GetElapsedSeconds();
-	obj->Pos(pos);
+	DebuggerUI::GetInstance()->DrawDebugText("Rotation unit: (%.2f,%.2f,%.2f)", obj->Rotation().m_x, obj->Rotation().m_y, obj->Rotation().m_z);
+	DebuggerUI::GetInstance()->DrawDebugText("Velocity unit: (%.2f,%.2f,%.2f)", obj->Velocity().m_x, obj->Velocity().m_y, obj->Velocity().m_z);
 }
 
 void UnitMoveState::Exit(Unit * obj)

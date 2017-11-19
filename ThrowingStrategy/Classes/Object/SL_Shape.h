@@ -13,13 +13,11 @@ namespace ShunLib {
 		SPHERE = 0,
 		BOX,
 		SEGMENT,
+		POINT,
 		SHAPE_TYPE_END,
 	};
 
 	class IShape {
-	private:
-		using Matrix = ShunLib::Matrix;
-		
 	protected:
 		Vec3 m_size;
 		float m_scale;
@@ -29,14 +27,14 @@ namespace ShunLib {
 	public:
 		IShape() :m_size(Vec3::One),m_scale(1.0f), m_centerPoint(Vec3::Zero) {}
 		virtual ~IShape() {}
-		virtual SHAPE_TYPE Type() { return SHAPE_TYPE::SHAPE_TYPE_END; }
 	
 		virtual void Render() {};
 
 		/*--Setter--*/
-		float Scale() { return m_scale; }
-		Vec3 Size() { return m_size; }
-		Vec3 CenterPoint() { return m_centerPoint; }
+		float Scale()const { return m_scale; }
+		Vec3 Size()const { return m_size; }
+		Vec3 CenterPoint()const { return m_centerPoint; }
+		virtual SHAPE_TYPE Type()const { return SHAPE_TYPE::SHAPE_TYPE_END; }
 
 		/*--Setter--*/
 		void Scale(float s) { m_scale = s; }
@@ -49,9 +47,6 @@ namespace ShunLib {
 	//Size  : 使用しない
 	class Sphere : public IShape
 	{
-	private:
-		using Matrix = ShunLib::Matrix;
-	
 	public:
 		//コンストラクタ　直径を１にする
 		Sphere() { this->Scale(0.5f); }
@@ -59,26 +54,21 @@ namespace ShunLib {
 
 		void Render()override;
 
-
-		virtual SHAPE_TYPE Type() { return SHAPE_TYPE::SPHERE; }
+		virtual SHAPE_TYPE Type()const override { return SHAPE_TYPE::SPHERE; }
 	};
 
 	//箱
-	//Scale : 拡大率
+	//Scale : 使用しない
 	//Size  : それぞれの軸の長さ
 	class Box : public IShape
 	{
-	private:
-		using Matrix = ShunLib::Matrix;
-
 	public:
 		Box() { }
 		virtual ~Box() {}
 
 		void Render()override;
 
-
-		virtual SHAPE_TYPE Type() { return SHAPE_TYPE::BOX; }
+		virtual SHAPE_TYPE Type()const override { return SHAPE_TYPE::BOX; }
 	};
 
 	// 線分
@@ -95,20 +85,27 @@ namespace ShunLib {
 		Segment() :m_startPoint({ 0.0f,0.0f,0.0f }), m_endPoint({ 0.0f,0.0f,0.0f }) {}
 		virtual ~Segment() {}
 
-		Vec3 StartPoint() { return m_startPoint; }
-		void StartPoint(const Vec3& point) { m_startPoint = point; }
+		/*--Getter--*/
+		Vec3 StartPoint()const { return m_startPoint; }		
+		Vec3 EndPoint()const { return m_endPoint; }
 		
-		Vec3 EndPoint() { return m_endPoint; }
+		/*--Setter--*/
 		void EndPoint(const Vec3& point) { m_endPoint = point; }
-		
-		virtual SHAPE_TYPE Type() { return SHAPE_TYPE::SEGMENT; }
+		void StartPoint(const Vec3& point) { m_startPoint = point; }
+
+		virtual SHAPE_TYPE Type() const override { return SHAPE_TYPE::SEGMENT; }
 	};
 
+	// 線分
+	class Point : public IShape
+	{
+	public:
+		Point(){}
+		virtual ~Point() {}
 
-	//当たり判定用
-	bool Collision(IShape* A, IShape* B);
-	bool operator*(Sphere& A, Sphere& B);
-	bool operator*(Sphere& A, Box& B);
-	bool operator*(Box& A, Sphere& B);
-	bool operator*(Box& A, Box& B);
+		virtual SHAPE_TYPE Type() const override { return SHAPE_TYPE::SEGMENT; }
+	};
+
+	//最短距離を求める
+	float ShortestDistance(const Box& A, const Point& B);
 }

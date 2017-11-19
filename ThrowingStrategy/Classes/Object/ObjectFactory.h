@@ -15,6 +15,8 @@ class ObjectBase;
 class Player;
 class Commander;
 class Unit;
+class Block;
+class Stage;
 
 class ObjectFactory : public ShunLib::Singleton<ObjectFactory>
 {
@@ -23,11 +25,13 @@ public:
 	ShunLib::Factory<Player> m_playerFactory;
 	ShunLib::Factory<Commander> m_commanderFactory;
 	ShunLib::Factory<Unit> m_unitFactory;
+	ShunLib::Factory<Block> m_blockFactory;
+	ShunLib::Factory<Stage> m_stageFactory;
 
 public:
 	ObjectBase* Create(OBJECT_LIST num);
-	
+
 private:
 	ObjectFactory() {}
-	~ObjectFactory() {}
+	~ObjectFactory();
 };

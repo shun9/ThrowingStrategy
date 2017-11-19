@@ -15,7 +15,7 @@ struct ObjectParam
 {
 public:
 	int maxHP;
-	int power;
+	float power;
 	float spd;
 	std::shared_ptr<ShunLib::Model> model;
 };
@@ -30,7 +30,7 @@ private:
 public:
 	//ƒf[ƒ^‚Ìæ“¾
 	const ObjectParam& GetParam(int dataNum) {
-		return m_dataList[dataNum];
+		return m_dataList.at(dataNum);
 	}
 
 private:

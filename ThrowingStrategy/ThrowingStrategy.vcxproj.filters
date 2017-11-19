@@ -50,6 +50,15 @@
     <Filter Include="Game\Object\Physics\Collision">
       <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Util\Debugger">
+      <UniqueIdentifier>{b6a10414-e7d5-4f33-ab7a-d275fd45d232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Util\Debugger\imgui">
+      <UniqueIdentifier>{27996c24-bb01-411e-976a-21eb05651bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Stage">
+      <UniqueIdentifier>{05f1fb05-49ad-450a-92ef-8b65949dea33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -134,6 +143,60 @@
     <ClInclude Include="Classes\Util\DestroySingleton.h">
       <Filter>Game\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitSteadyState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\State\PlayerCommand.h">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\SL_GamePadManager.h">
+      <Filter>Game\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\State\PlayerKeyCommand.h">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\DebuggerUI.h">
+      <Filter>Game\Util\Debugger</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\imgui\imconfig.h">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\imgui\imgui.h">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\imgui\imgui_impl_dx11.h">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\imgui\imgui_internal.h">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\imgui\stb_rect_pack.h">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\imgui\stb_textedit.h">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\imgui\stb_truetype.h">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitFlyState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectStruct.h">
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Stage\Stage.h">
+      <Filter>Game\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\Debugger\DebugMacro.h">
+      <Filter>Game\Util\Debugger</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Stage\StageObject.h">
+      <Filter>Game\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Util\SL_CameraState.h">
+      <Filter>Game\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\SL_Graphics.cpp">
@@ -197,6 +260,45 @@
     <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp">
       <Filter>Game\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\State\UnitSteadyState.cpp">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Player\State\PlayerCommand.cpp">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Player\State\PlayerKeyCommand.cpp">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui.cpp">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui_demo.cpp">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui_draw.cpp">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui_impl_dx11.cpp">
+      <Filter>Game\Util\Debugger\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\State\UnitFlyState.cpp">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Stage\Stage.cpp">
+      <Filter>Game\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Stage\StageObject.cpp">
+      <Filter>Game\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Util\SL_CameraState.cpp">
+      <Filter>Game\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp">
+      <Filter>Game\Object\Physics\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -213,6 +315,9 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Resources\ModelData\Player.FBX">
+      <Filter>Assets\Model</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Resources\ModelData\Box.FBX">
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Resources\ModelData\Ghost.FBX">

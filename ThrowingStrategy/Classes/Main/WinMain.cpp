@@ -10,6 +10,7 @@
 #include "../Game/MyGame.h"
 #include "../Util/DestroySingleton.h"
 #include <Keyboard.h>
+#include <memory>
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMag, WPARAM wParam, LPARAM lParam);
 
@@ -23,7 +24,7 @@ HRESULT InitGraphics();
 /// ・メッセージループの実装
 /// </summary>
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmpShow)
-{
+{	
 	auto window = ShunLib::Window::GetInstance();
 
 	ShunLib::Application* game = new MyGame();

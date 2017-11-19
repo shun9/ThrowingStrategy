@@ -8,7 +8,7 @@
 #include "../StateObject.h"
 #include "../../Physics/Collision/SL_Collider.h"
 
-class SphereCollider;
+class Unit;
 
 class Player : public StateObject<Player>
 {
@@ -23,5 +23,8 @@ public:
 	void Initialize()override;
 	void Finalize()override;
 
+	ShunLib::SphereCollider* Collider() { return m_collider; }
+
+	//当たり判定用コールバック
 	void CollisionCallBack(ObjectBase* obj);
 };

@@ -5,6 +5,7 @@
 //* @author:S.Katou
 //************************************************/
 #pragma once
+#include <SL_KeyManager.h>
 #include "SL_Camera.h"
 #include "../Physics/Collision/SL_CollisionManager.h"
 #include "../Main/SL_MyStepTimer.h"
@@ -14,6 +15,8 @@
 #include "../Main/SL_Window.h"
 #include "../Object/ObjectFactory.h"
 #include "../Object/ObjectParamHolder.h"
+#include "SL_GamePadManager.h"
+#include "Debugger\DebuggerUI.h"
 
 class DestroySingleton
 {
@@ -27,7 +30,9 @@ public:
 		CollisionManager::Destroy();
 		SceneManager::Destroy();
 		MyStepTimer::Destroy();
-
+		GamePadManager::Destroy();
+		KeyManager::Destroy();
+		DebuggerUI::Destroy();
 		Graphics::Destroy();
 		Window::Destroy();
 	}

@@ -18,30 +18,37 @@
 
 PlayScene::PlayScene()
 {
-	auto factory = ObjectFactory::GetInstance();
-
-	auto p = factory->Create(PLAYER);
-	auto v = factory->Create(COMMANDER);
-	auto u = factory->Create(UNIT);
-	//p->AddChild(v);
-	//p->AddChild(u);
-	m_objList.push_back(p);
-	m_objList.push_back(v);
-	m_objList.push_back(u);
 
 	auto window = ShunLib::Window::GetInstance();
-	
+
 	//カメラ設定
 	auto camera = ShunLib::MainCamera::GetInstance();
-	camera->Pos(ShunLib::Vec3(0.0f, 10.0f, 15.0f));
-	camera->Target(ShunLib::Vec3::Zero);
-	camera->Aspect(static_cast<float>(window->Width() / window->Height()));
 
+	ViewData vData;
+	vData.pos = ShunLib::Vec3(0.0f, 10.0f, 15.0f);
+	vData.target = ShunLib::Vec3::Zero;
+
+	ProjData pData;
+	pData.aspect = static_cast<float>(window->Width() / window->Height());
+	camera->View(vData);
+	camera->Proj(pData);
+
+	//オブジェクト生成
+	auto factory = ObjectFactory::GetInstance();
+
+	auto p=factory->Create(PLAYER);
+	camera->FollowTarget(p);
+	camera->ChangeMode(FOLLOW_CAMERA);
+
+	factory->Create(COMMANDER);
+	factory->Create(UNIT);
+	auto s = factory->Create(STAGE);
+	dynamic_cast<Stage*>(s)->SetStageType(GROUND);
 }
 
 PlayScene::~PlayScene()
 {
-	SAFE_DELETE_INSIDE(m_objList);
+
 }
 
 /// <summary>
@@ -49,10 +56,7 @@ PlayScene::~PlayScene()
 /// </summary>
 void PlayScene::Initialize()
 {
-	for (auto& v : m_objList)
-	{
-		v->Initialize();
-	}
+	ObjectBase::ROOT_OBJECT->Initialize();
 }
 
 /// <summary>
@@ -62,11 +66,7 @@ void PlayScene::Update()
 {
 	auto camera = ShunLib::MainCamera::GetInstance();
 	camera->Update();
-
-	for (auto v : m_objList)
-	{
-		v->Update();
-	}
+	ObjectBase::ROOT_OBJECT->Update();
 }
 
 /// <summary>
@@ -76,10 +76,7 @@ void PlayScene::Render()
 {
 	auto camera = ShunLib::MainCamera::GetInstance();
 	
-	for (auto v : m_objList)
-	{
-		v->Render(camera->ViewMat(), camera->ProjMat());
-	}
+	ObjectBase::ROOT_OBJECT->Render(camera->ViewMat(), camera->ProjMat());
 }
 
 /// <summary>
@@ -87,8 +84,5 @@ void PlayScene::Render()
 /// </summary>
 void PlayScene::Finalize()
 {
-	for (auto v : m_objList)
-	{
-		v->Finalize();
-	}
+	ObjectBase::ROOT_OBJECT->Finalize();
 }

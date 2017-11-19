@@ -178,18 +178,36 @@
     <ClInclude Include="Classes\Object\ObjectData.h" />
     <ClInclude Include="Classes\Object\ObjectParamHolder.h" />
     <ClInclude Include="Classes\Object\ObjectFactory.h" />
+    <ClInclude Include="Classes\Object\ObjectStruct.h" />
     <ClInclude Include="Classes\Object\Player\Player.h" />
+    <ClInclude Include="Classes\Object\Player\State\PlayerCommand.h" />
+    <ClInclude Include="Classes\Object\Player\State\PlayerKeyCommand.h" />
     <ClInclude Include="Classes\Object\Player\State\PlayerMoveState.h" />
     <ClInclude Include="Classes\Object\SL_Shape.h" />
+    <ClInclude Include="Classes\Object\Stage\Stage.h" />
+    <ClInclude Include="Classes\Object\Stage\StageObject.h" />
     <ClInclude Include="Classes\Object\StateObject.h" />
+    <ClInclude Include="Classes\Object\Unit\State\UnitFlyState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitMoveState.h" />
+    <ClInclude Include="Classes\Object\Unit\State\UnitSteadyState.h" />
     <ClInclude Include="Classes\Object\Unit\Unit.h" />
     <ClInclude Include="Classes\Physics\Collision\SL_Collider.h" />
     <ClInclude Include="Classes\Physics\Collision\SL_CollisionManager.h" />
     <ClInclude Include="Classes\Physics\PhysicsConstantNumber.h" />
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h" />
+    <ClInclude Include="Classes\Util\SL_CameraState.h" />
+    <ClInclude Include="Classes\Util\Debugger\DebuggerUI.h" />
+    <ClInclude Include="Classes\Util\Debugger\DebugMacro.h" />
+    <ClInclude Include="Classes\Util\Debugger\imgui\imconfig.h" />
+    <ClInclude Include="Classes\Util\Debugger\imgui\imgui.h" />
+    <ClInclude Include="Classes\Util\Debugger\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="Classes\Util\Debugger\imgui\imgui_internal.h" />
+    <ClInclude Include="Classes\Util\Debugger\imgui\stb_rect_pack.h" />
+    <ClInclude Include="Classes\Util\Debugger\imgui\stb_textedit.h" />
+    <ClInclude Include="Classes\Util\Debugger\imgui\stb_truetype.h" />
     <ClInclude Include="Classes\Util\DestroySingleton.h" />
     <ClInclude Include="Classes\Util\SL_Camera.h" />
+    <ClInclude Include="Classes\Util\SL_GamePadManager.h" />
     <ClInclude Include="StepTimer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -206,14 +224,27 @@
     <ClCompile Include="Classes\Object\ObjectParamHolder.cpp" />
     <ClCompile Include="Classes\Object\ObjectFactory.cpp" />
     <ClCompile Include="Classes\Object\Player\Player.cpp" />
+    <ClCompile Include="Classes\Object\Player\State\PlayerCommand.cpp" />
+    <ClCompile Include="Classes\Object\Player\State\PlayerKeyCommand.cpp" />
     <ClCompile Include="Classes\Object\Player\State\PlayerMoveState.cpp" />
     <ClCompile Include="Classes\Object\SL_Shape.cpp" />
+    <ClCompile Include="Classes\Object\Stage\Stage.cpp" />
+    <ClCompile Include="Classes\Object\Stage\StageObject.cpp" />
+    <ClCompile Include="Classes\Object\Unit\State\UnitFlyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitMoveState.cpp" />
+    <ClCompile Include="Classes\Object\Unit\State\UnitSteadyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\Unit.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp" />
+    <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp" />
+    <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp" />
     <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp" />
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui.cpp" />
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Classes\Util\Debugger\imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="Classes\Util\SL_Camera.cpp" />
+    <ClCompile Include="Classes\Util\SL_CameraState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -225,6 +256,7 @@
     <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Resources\ModelData\Box.FBX" />
     <MeshContentTask Include="Resources\ModelData\Ghost.FBX" />
     <MeshContentTask Include="Resources\ModelData\Player.FBX">
       <FileType>Document</FileType>

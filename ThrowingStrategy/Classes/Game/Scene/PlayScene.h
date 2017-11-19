@@ -8,6 +8,8 @@
 #include "SL_IScene.h"
 #include <vector>
 
+#include "../../Object/Stage/Stage.h"
+
 class ObjectBase;
 
 class PlayScene:public ShunLib::IScene
@@ -21,7 +23,4 @@ public:
 	virtual void Update();
 	virtual void Render();
 	virtual void Finalize();
-
-private:
-	std::vector<ObjectBase*>m_objList;
 };

@@ -13,24 +13,32 @@
 #include "../Main/SL_Graphics.h"
 #include "../Main/SL_MyStepTimer.h"
 #include "../Physics/Collision/SL_CollisionManager.h"
-
+#include "../Util/SL_GamePadManager.h"
 #include "Scene\SL_SceneManager.h"
 #include "Scene\PlayScene.h"
+#include "../Util/Debugger/DebuggerUI.h"
+#include "../Object/ObjectBase.h"
+
+using namespace ShunLib;
 
 /// <summary>
 /// 初期化処理
 /// </summary>
 void MyGame::Initialize()
 {
+	//ルートオブジェクトの設定
+	ObjectBase::InitializeRootObject();
+	
 	//グラフィック関連
-	auto graphics = ShunLib::Graphics::GetInstance();
-	ShunLib::Model::SetDevice(graphics->Device(), graphics->DeviceContext());
-	ShunLib::Texture::SetDevice(graphics->Device(), graphics->DeviceContext());
+	auto graphics = Graphics::GetInstance();
+	Model::SetDevice(graphics->Device(), graphics->DeviceContext());
+	Texture::SetDevice(graphics->Device(), graphics->DeviceContext());
 
 	//シーン関連
-	auto scene = ShunLib::SceneManager::GetInstance();
+	auto scene = SceneManager::GetInstance();
 	scene->AddScene(SCENE::PLAY, new PlayScene);
 	scene->ChangeScene(SCENE::PLAY);
+
 }
 
 /// <summary>
@@ -38,18 +46,20 @@ void MyGame::Initialize()
 /// </summary>
 void MyGame::Update()
 {
-	auto scene = ShunLib::SceneManager::GetInstance();
-	auto timer = ShunLib::MyStepTimer::GetInstance();
+	auto scene = SceneManager::GetInstance();
+	auto timer = MyStepTimer::GetInstance();
 	
 	//キー更新
-	auto key = ShunLib::KeyManager::GetInstance();
-	key->Update();
+	KeyManager::GetInstance()->Update();
+
+	//ゲームパッド更新
+	GamePadManager::GetInstance()->Update();
 
 	//シーン更新
 	timer->Tick([&]()
 	{
 		scene->Update();
-		ShunLib::CollisionManager::GetInstance()->Update();
+		CollisionManager::GetInstance()->Update();
 	});
 }
 
@@ -60,7 +70,9 @@ void MyGame::Render()
 {
 	auto scene = ShunLib::SceneManager::GetInstance();
 	scene->Render();
-	ShunLib::CollisionManager::GetInstance()->Render();
+	CollisionManager::GetInstance()->Render();
+
+	DebuggerUI::GetInstance()->Render();
 }
 
 /// <summary>
@@ -68,5 +80,7 @@ void MyGame::Render()
 /// </summary>
 void MyGame::Finalize()
 {
-
+	auto scene = SceneManager::GetInstance();
+	scene->DeleteAllScene();
+	ObjectBase::FinalizeRootObject();
 }

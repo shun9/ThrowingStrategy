@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :CollisionManager.h
 //* @brief :“–‚½‚è”»’è‚ğŠÇ—‚·‚éƒNƒ‰ƒX
-//* @date  :2017/11/09
+//* @date  :2017/11/13
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -14,6 +14,16 @@ namespace ShunLib
 	class CollisionManager :public Singleton<CollisionManager>
 	{
 		friend ShunLib::Singleton<CollisionManager>;
+	public:
+		//“–‚½‚è”»’è@”rËˆ—
+		static bool Collision(ICollider* A, ICollider* B, bool rejection = true);
+		static bool Collision(SphereCollider* A, SphereCollider* B, bool rejection);
+		static bool Collision(BoxCollider* A, BoxCollider* B, bool rejection);
+		static bool Collision(SphereCollider* A, BoxCollider* B, bool rejection);
+		static void Rejection(SphereCollider* A, SphereCollider* B);
+		static void Rejection(BoxCollider* A, BoxCollider* B);
+		static void Rejection(SphereCollider* A, BoxCollider* B);
+
 	private:
 		std::vector<ICollider*> m_colliderList;
 

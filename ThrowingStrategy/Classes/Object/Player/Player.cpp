@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Player.cpp
 //* @brief :ÉvÉåÉCÉÑÅ[
-//* @date  :2017/11/02
+//* @date  :2017/11/13
 //* @author:S.Katou
 //************************************************/
 #include "Player.h"
@@ -11,10 +11,12 @@
 #include <SL_Math.h>
 #include "State\PlayerMoveState.h"
 #include "../../Main/SL_MyStepTimer.h"
+#include "../Unit/Unit.h"
 
 void Player::Initialize()
 {
-	this->Type(PLAYER);
+	this->Type(OBJECT_LIST::PLAYER);
+	this->Team(TEAM::RED);
 	this->ChangeState(new PlayerMoveState);
 	StateObject::Initialize();
 
@@ -35,10 +37,5 @@ void Player::Finalize()
 	SAFE_DELETE(m_collider);
 }
 
-void Player::CollisionCallBack(ObjectBase* obj)
-{
-	auto timer = ShunLib::MyStepTimer::GetInstance();
-	auto pos = this->Pos();
-	pos.m_y += 0.1f * timer->GetElapsedSeconds();
-	this->Pos(pos);
+void Player::CollisionCallBack(ObjectBase* obj){
 }

@@ -20,7 +20,7 @@ private:
 	//“Š‚°‚éŠp“x
 	float m_throwingAngle;
 
-	ShunLib::BoxCollider* m_collider;
+	ShunLib::SphereCollider* m_collider;
 
 public:
 	Commander();

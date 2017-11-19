@@ -5,19 +5,15 @@
 //* @author:S.Katou
 //************************************************/
 #include "SL_Camera.h"
+#include "SL_CameraState.h"
 
-
-ShunLib::MainCamera::MainCamera():
-	m_pos   (Vec3(0.0f, 1.0f, 0.0f)),
-	m_target(Vec3(0.0f, 0.0f, 3.0f)),
-	m_up    (Vec3::UnitY),
-	m_fov   (45.0f),
-	m_aspect(800.0f / 600.0f),
-	m_near  (1.0f),
-	m_far   (200.0f)
+ShunLib::MainCamera::MainCamera() :
+	m_angle(0.0f)
 {
-	m_view = Matrix::CreateLookAt(m_pos, m_target, m_up);
-	m_proj = Matrix::CreateProj(m_fov, m_aspect, m_near, m_far);
+	m_stateMachine = std::make_unique<StateMachine<MainCamera>>(this);
+	m_stateMachine->ChangeState(new CameraNonMoveState);
+
+	CalcMat();
 }
 
 ShunLib::MainCamera::~MainCamera()
@@ -27,6 +23,21 @@ ShunLib::MainCamera::~MainCamera()
 
 void ShunLib::MainCamera::Update()
 {
-	m_view = Matrix::CreateLookAt(m_pos, m_target, m_up);
-	m_proj = Matrix::CreateProj(m_fov, m_aspect, m_near, m_far);
+	m_stateMachine->Update();
+	CalcMat();
 }
+
+/// <summary>
+/// ƒJƒƒ‰‚Ìó‘Ô‚ğ•ÏX
+/// </summary>
+void ShunLib::MainCamera::ChangeMode(CAMERA_MODE mode)
+{
+	switch (mode)
+	{
+	case NON_MOVE_CAMERA:m_stateMachine->ChangeState(new CameraNonMoveState);	break;
+	case FOLLOW_CAMERA:	m_stateMachine->ChangeState(new CameraFollowState); break;
+	default:
+		break;
+	}
+}
+

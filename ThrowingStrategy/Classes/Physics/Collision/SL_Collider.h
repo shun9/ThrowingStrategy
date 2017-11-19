@@ -1,25 +1,22 @@
 //************************************************/
-//* @file  :Collider.h
+//* @file  :SL_Collider.h
 //* @brief :当たり判定オブジェクトのクラス
-//* @date  :2017/11/09
+//* @date  :2017/11/16
 //* @author:S.Katou
 //************************************************/
 #pragma once
 #include <functional>
+#include <vector>
 #include <SL_MacroConstants.h>
 #include "../../Object/SL_Shape.h"
 
 class ObjectBase;
 
-namespace ShunLib 
+namespace ShunLib
 {
-	
 	//当たり判定用クラスの抽象クラス
 	class ICollider
 	{
-	private:
-		using Vec3 = ShunLib::Vec3;
-
 	protected:
 		//当たり判定を持つオブジェクト
 		ObjectBase* m_parent;
@@ -30,25 +27,45 @@ namespace ShunLib
 		//オブジェクトからの相対座標
 		Vec3 m_offset;
 
+		//存在するかどうか
+		//衝突応答をするかどうかに使用
+		bool m_isEntity;
+
 		//当たったときに実行する関数
 		std::function<void(ObjectBase*)> m_callBack;
+
+		//当たっているオブジェクトのリスト
+		std::vector<ObjectBase*>m_hitList;
 
 	public:
 		ICollider();
 		virtual ~ICollider();
 	
-		void Update();
+		virtual void Update() = 0;
 		void DebugRender();
+
+		//リストに追加
+		void AddHitList(ObjectBase* obj) { m_hitList.push_back(obj); }
+
+		//リストの初期化
+		void ResetList() { 
+			m_hitList.clear();
+			m_hitList.shrink_to_fit();
+		}
 
 		/*--Getter--*/
 		ObjectBase* Parent() { return m_parent; }
 		Vec3 Offset() { return m_offset; }
+		const std::vector<ObjectBase*>& HitList() { return m_hitList; }
+		bool IsEntity() { return m_isEntity; }
+		SHAPE_TYPE Type() { return m_shape->Type(); }
 
 		/*--Setter--*/
 		void Offset(const Vec3& offset) { m_offset = offset; }
 		void Parent(ObjectBase* parent) { m_parent = parent; }
 		void SetCallBack(std::function<void(ObjectBase*)> func) { m_callBack = func; }
-	
+		void IsEntity(bool entity) { m_isEntity = entity; }
+
 	//純粋仮想関数
 	public:
 		//クラスごとに返す形状を変更
@@ -60,7 +77,6 @@ namespace ShunLib
 			if(m_callBack!=NULL)m_callBack(obj); }
 	};
 
-
 	//球状の当たり判定用クラス
 	class SphereCollider : public ICollider
 	{
@@ -68,6 +84,8 @@ namespace ShunLib
 		SphereCollider() { m_shape  = new Sphere; }
 		~SphereCollider() { SAFE_DELETE(m_shape); }
 	
+		void Update()override;
+
 		//キャストしたポインタを返す
 		Sphere* Shape() {
 			return dynamic_cast<Sphere*>(m_shape);
@@ -81,6 +99,8 @@ namespace ShunLib
 		BoxCollider() { m_shape = new Box; }
 		~BoxCollider() { SAFE_DELETE(m_shape); }
 
+		void Update()override;
+		
 		Box* Shape() {
 			return dynamic_cast<Box*>(m_shape);
 		}
