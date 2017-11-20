@@ -5,16 +5,16 @@
 //* @author:S.Katou
 //************************************************/
 #include "Unit.h"
-#include "State\UnitMoveState.h"
-#include "State\UnitSteadyState.h"
 #include "State\UnitFlyState.h"
+#include "State\UnitSteadyState.h"
+#include "State\UnitRoamState.h"
 #include "../../Physics/PhysicsConstantNumber.h"
 #include "../../Main/SL_MyStepTimer.h"
 
 void Unit::Initialize()
 {
 	this->Team(TEAM::RED);
-	this->ChangeState(new UnitMoveState);
+	this->ChangeState(new UnitRoamState);
 	this->Type(OBJECT_LIST::UNIT);
 	StateObject::Initialize();
 

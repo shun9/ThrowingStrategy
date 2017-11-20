@@ -16,14 +16,17 @@ private:
 	ShunLib::SphereCollider* m_collider;
 
 public:
-	Player():StateObject(this) {}
+	Player():StateObject(this){}
 	~Player() {}
 
-	////初期化　終了
+	////初期化　更新　終了
 	void Initialize()override;
 	void Finalize()override;
 
 	ShunLib::SphereCollider* Collider() { return m_collider; }
+	
+	//持っているユニットの数
+	int HavingUnitNum();
 
 	//当たり判定用コールバック
 	void CollisionCallBack(ObjectBase* obj);

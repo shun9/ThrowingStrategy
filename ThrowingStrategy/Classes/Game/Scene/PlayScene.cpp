@@ -42,6 +42,7 @@ PlayScene::PlayScene()
 
 	factory->Create(COMMANDER);
 	factory->Create(UNIT);
+	factory->Create(DEFENSE_TARGET);
 	auto s = factory->Create(STAGE);
 	dynamic_cast<Stage*>(s)->SetStageType(GROUND);
 }

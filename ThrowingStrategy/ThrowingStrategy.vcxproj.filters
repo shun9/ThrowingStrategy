@@ -59,6 +59,9 @@
     <Filter Include="Game\Object\Stage">
       <UniqueIdentifier>{05f1fb05-49ad-450a-92ef-8b65949dea33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Object\DefenseTarget">
+      <UniqueIdentifier>{67e5a89d-e6dc-4d7d-bdb2-111829d70d78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -197,6 +200,12 @@
     <ClInclude Include="Classes\Util\SL_CameraState.h">
       <Filter>Game\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Object\DefenseTarget\DefenseTarget.h">
+      <Filter>Game\Object\DefenseTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitRoamState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\SL_Graphics.cpp">
@@ -299,6 +308,12 @@
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp">
       <Filter>Game\Object\Physics\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Object\DefenseTarget\DefenseTarget.cpp">
+      <Filter>Game\Object\DefenseTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\State\UnitRoamState.cpp">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -321,6 +336,9 @@
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Resources\ModelData\Ghost.FBX">
+      <Filter>Assets\Model</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Resources\ModelData\Octahedron.FBX">
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
   </ItemGroup>

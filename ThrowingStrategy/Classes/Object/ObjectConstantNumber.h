@@ -18,6 +18,7 @@ enum OBJECT_LIST
 	COMMANDER,      //指揮官
 	UNIT,           //召喚されるユニット
 	BLOCK,          //ブロック
+	DEFENSE_TARGET,	//防衛対象
 	STAGE,			//ステージ
 
 	OBJECT_LIST_END,//オブジェクトの種類数

@@ -26,7 +26,7 @@ public:
 	virtual ~StateObject() {}
 
 	//更新
-	void Update()override {
+	virtual void Update()override {
 		//ステートマシンがあれば更新
 		if (m_stateMachine){
 			m_stateMachine->Update();

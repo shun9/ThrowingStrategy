@@ -173,6 +173,7 @@
     <ClInclude Include="Classes\Main\SL_Window.h" />
     <ClInclude Include="Classes\Object\Commander\Commander.h" />
     <ClInclude Include="Classes\Object\Commander\CommanderMoveState.h" />
+    <ClInclude Include="Classes\Object\DefenseTarget\DefenseTarget.h" />
     <ClInclude Include="Classes\Object\ObjectBase.h" />
     <ClInclude Include="Classes\Object\ObjectConstantNumber.h" />
     <ClInclude Include="Classes\Object\ObjectData.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Classes\Object\StateObject.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitFlyState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitMoveState.h" />
+    <ClInclude Include="Classes\Object\Unit\State\UnitRoamState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitSteadyState.h" />
     <ClInclude Include="Classes\Object\Unit\Unit.h" />
     <ClInclude Include="Classes\Physics\Collision\SL_Collider.h" />
@@ -220,6 +222,7 @@
     <ClCompile Include="Classes\Main\WinMain.cpp" />
     <ClCompile Include="Classes\Object\Commander\Commander.cpp" />
     <ClCompile Include="Classes\Object\Commander\CommanderMoveState.cpp" />
+    <ClCompile Include="Classes\Object\DefenseTarget\DefenseTarget.cpp" />
     <ClCompile Include="Classes\Object\ObjectBase.cpp" />
     <ClCompile Include="Classes\Object\ObjectParamHolder.cpp" />
     <ClCompile Include="Classes\Object\ObjectFactory.cpp" />
@@ -232,6 +235,7 @@
     <ClCompile Include="Classes\Object\Stage\StageObject.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitFlyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitMoveState.cpp" />
+    <ClCompile Include="Classes\Object\Unit\State\UnitRoamState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitSteadyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\Unit.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp" />
@@ -258,6 +262,7 @@
   <ItemGroup>
     <MeshContentTask Include="Resources\ModelData\Box.FBX" />
     <MeshContentTask Include="Resources\ModelData\Ghost.FBX" />
+    <MeshContentTask Include="Resources\ModelData\Octahedron.FBX" />
     <MeshContentTask Include="Resources\ModelData\Player.FBX">
       <FileType>Document</FileType>
     </MeshContentTask>

@@ -17,6 +17,7 @@
 class ObjectBase : public ObjectData
 {
 private:
+	using Vec3 = ShunLib::Vec3;
 	using Matrix = ShunLib::Matrix;
 
 public:
@@ -94,7 +95,7 @@ public:
 
 	//描画 上:ルート用　下:子用
 	void Render(const Matrix& view, const Matrix& proj);
-	void Render(const Matrix& parentWorld, const Matrix& view, const Matrix& proj);
+	void RenderChild(const Matrix& view, const Matrix& proj);
 
 	//初期化 更新  派生クラスの最後に呼ぶ
 	virtual void Initialize() {	for (auto& v : m_children) { v->Initialize(); }}
@@ -110,16 +111,36 @@ public:
 	virtual void Finalize() { for (auto& v : m_children) { v->Finalize(); } }
 
 	//ローカル座標系
-	ShunLib::Vec3 LocalPos() { return this->Pos(); }
-	void LocalPos(const ShunLib::Vec3& pos) { this->Pos(pos); }
+	Vec3 LocalPos() { return this->Pos(); }
+	void LocalPos(const Vec3& pos) { this->Pos(pos); }
 	
 	//ワールド座標系
-	ShunLib::Vec3 WorldPos() {
-		ShunLib::Vec3 pos = this->Pos();
+	Vec3 WorldPos() {
+		Vec3 pos = this->Pos();
 		if (m_parent != nullptr) {
 			pos += m_parent->WorldPos();
 		}
 		return pos;
+	}
+
+	//ワールド拡大率
+	Vec3 WorldScale() {
+		Vec3 scale = this->Scale();
+		if (m_parent != nullptr) {
+			scale.m_x *= m_parent->WorldScale().m_x;
+			scale.m_y *= m_parent->WorldScale().m_y;
+			scale.m_z *= m_parent->WorldScale().m_z;
+		}
+		return scale;
+	}
+
+	//ワールド回転率
+	Vec3 WorldRotation() {
+		Vec3 rot = this->Rotation();
+		if (m_parent != nullptr) {
+			rot += m_parent->WorldRotation();
+		}
+		return rot;
 	}
 
 	ObjectBase* Parent() { return m_parent; }

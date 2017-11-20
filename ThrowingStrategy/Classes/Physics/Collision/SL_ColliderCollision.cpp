@@ -76,7 +76,7 @@ bool CollisionManager::Collision(SphereCollider* A, SphereCollider* B, bool reje
 
 	//”rËˆ—
 	if (rejection){
-		CollisionManager::Rejection(A, B);
+		//CollisionManager::Rejection(A, B);
 	}
 
 	return true;

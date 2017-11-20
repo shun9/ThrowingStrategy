@@ -16,6 +16,7 @@ class Player;
 class Commander;
 class Unit;
 class Block;
+class DefenseTarget;
 class Stage;
 
 class ObjectFactory : public ShunLib::Singleton<ObjectFactory>
@@ -26,6 +27,7 @@ public:
 	ShunLib::Factory<Commander> m_commanderFactory;
 	ShunLib::Factory<Unit> m_unitFactory;
 	ShunLib::Factory<Block> m_blockFactory;
+	ShunLib::Factory<DefenseTarget> m_defenseTargetFactory;
 	ShunLib::Factory<Stage> m_stageFactory;
 
 public:

@@ -10,8 +10,6 @@
 #include <SL_MacroConstants.h>
 #include <SL_Math.h>
 #include "State\PlayerMoveState.h"
-#include "../../Main/SL_MyStepTimer.h"
-#include "../Unit/Unit.h"
 
 void Player::Initialize()
 {
@@ -35,6 +33,20 @@ void Player::Finalize()
 	StateObject::Finalize();
 
 	SAFE_DELETE(m_collider);
+}
+
+/// <summary>
+/// ‚Á‚Ä‚¢‚éƒ†ƒjƒbƒg‚Ì”‚ğ•Ô‚·
+/// </summary>
+int Player::HavingUnitNum()
+{
+	auto children = this->Children();
+
+	return std::count_if(
+		children.begin(),
+		children.end(), 
+		[](ObjectBase* obj)	{return obj->Type() == UNIT; }
+	);
 }
 
 void Player::CollisionCallBack(ObjectBase* obj){

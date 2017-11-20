@@ -12,6 +12,7 @@ ObjectParamHolder::ObjectParamHolder()
 	m_dataList.resize(OBJECT_LIST_END);
 
 	ObjectParam data;
+
 	//ルートオブジェクト
 	data.maxHP = 99999;
 	data.power = 99999.0f;
@@ -36,7 +37,7 @@ ObjectParamHolder::ObjectParamHolder()
 	//召喚ユニット
 	data.maxHP = 10;
 	data.power = 3.0f;
-	data.spd = 1.0f;
+	data.spd = 3.0f;
 	data.model = std::make_shared<ShunLib::Model>(L"CModel\\Ghost.cmo");
 	m_dataList[UNIT] = data;
 
@@ -44,8 +45,15 @@ ObjectParamHolder::ObjectParamHolder()
 	data.maxHP = 99999;
 	data.power = 0.0f;
 	data.spd = 0.0f;
-	data.model = std::make_shared<ShunLib::Model>(L"CModel\\Box.cmo");;
+	data.model = std::make_shared<ShunLib::Model>(L"CModel\\Box.cmo");
 	m_dataList[BLOCK] = data;
+
+	//防衛対象
+	data.maxHP = 99999;
+	data.power = 0.0f;
+	data.spd = 0.0f;
+	data.model = std::make_shared<ShunLib::Model>(L"CModel\\Octahedron.cmo");
+	m_dataList[DEFENSE_TARGET] = data;
 
 	//ステージ
 	data.maxHP = 99999;

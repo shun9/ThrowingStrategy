@@ -82,7 +82,6 @@ void ObjectBase::Move()
 		m_rotation.m_y = rotY;
 	}
 
-
 	//–€ŽC‚ð‚©‚¯‚é
 	m_velocity *= FRICTION;
 }
@@ -95,29 +94,25 @@ void ObjectBase::Render(const Matrix & view, const Matrix & proj)
 	//e‚ª‚¢‚éê‡‚Í‚±‚±‚Å‚Í•`‰æ‚µ‚È‚¢
 	if (m_parent != nullptr)return;
 
-	this->Render(Matrix::Identity, view, proj);
+	this->RenderChild(view, proj);
 }
 
 /// <summary>
 /// •`‰æ Žq—p
 /// </summary>
-void ObjectBase::Render(const Matrix & parentWorld, const Matrix & view, const Matrix & proj)
+void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 {
 	auto data = OBJ_PARAM(this->m_type);
-
-	Matrix world = parentWorld;
-
-	world *= CalcMat();
 
 	//ƒ‚ƒfƒ‹‚ª‘¶Ý‚·‚é‚È‚ç‚Î•`‰æ
 	if (data.model) {
 		//ƒ‚ƒfƒ‹•`‰æ
-		data.model->Draw(world, view, proj);
+		data.model->Draw(CalcMat(), view, proj);
 	}
 
 	//Žq‚Ì•`‰æ
 	for (auto& v : m_children) {
-		v->Render(world, view, proj);
+		v->RenderChild(view, proj);
 	}
 }
 
@@ -129,15 +124,15 @@ ShunLib::Matrix ObjectBase::CalcMat()
 	Matrix m;
 
 	//Šg‘å@k¬
-	m *= Matrix::CreateScale(m_scale);
+	m *= Matrix::CreateScale(this->WorldScale());
 
 	//ƒ[ƒ‹ ƒsƒbƒ` ƒˆ[
-	m *= Matrix::CreateRotationZ(m_rotation.m_z);
-	m *= Matrix::CreateRotationX(m_rotation.m_x);
-	m *= Matrix::CreateRotationY(m_rotation.m_y);
+	m *= Matrix::CreateRotationZ(this->WorldRotation().m_z);
+	m *= Matrix::CreateRotationX(this->WorldRotation().m_x);
+	m *= Matrix::CreateRotationY(this->WorldRotation().m_y);
 
 	//ˆÚ“®
-	m *= Matrix::CreateTranslation(this->LocalPos());
+	m *= Matrix::CreateTranslation(this->WorldPos());
 
 	return m;
 }
