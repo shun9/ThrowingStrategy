@@ -7,7 +7,7 @@
 #pragma once
 
 //デバッグ用 コメントのon/offで切り替え
-#define DEBUG
+//#define DEBUG
 
 
 //デバッグ用の記述に使用

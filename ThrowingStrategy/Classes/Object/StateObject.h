@@ -44,7 +44,5 @@ public:
 	virtual void Finalize() {
 		ObjectBase::Finalize();
 	};
-
-	
 };
 

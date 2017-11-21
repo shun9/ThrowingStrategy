@@ -40,11 +40,9 @@ void Player::Finalize()
 /// </summary>
 int Player::HavingUnitNum()
 {
-	auto children = this->Children();
-
 	return std::count_if(
-		children.begin(),
-		children.end(), 
+		this->Children().begin(),
+		this->Children().end(),
 		[](ObjectBase* obj)	{return obj->Type() == UNIT; }
 	);
 }

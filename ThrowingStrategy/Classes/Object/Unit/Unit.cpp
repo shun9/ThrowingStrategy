@@ -22,9 +22,13 @@ void Unit::Initialize()
 	m_collider = new ShunLib::SphereCollider();
 	m_collider->Parent(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
-
-	//“–‚½‚è”»’è‚ÌŒ`ó‚ÌÝ’è
 	m_collider->Shape()->Scale(1.0f);
+
+	m_attackRange = new ShunLib::SphereCollider;
+	m_attackRange->Parent(this);
+	m_attackRange->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
+	m_attackRange->Shape()->Scale(2.0f);
+	m_attackRange->IsDebugDraw(false);
 }
 
 
@@ -33,6 +37,7 @@ void Unit::Finalize()
 	StateObject::Finalize();
 
 	SAFE_DELETE(m_collider);
+	SAFE_DELETE(m_attackRange);
 }
 
 /// <summary>

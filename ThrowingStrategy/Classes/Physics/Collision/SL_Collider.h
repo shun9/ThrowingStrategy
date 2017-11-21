@@ -37,6 +37,7 @@ namespace ShunLib
 		//当たっているオブジェクトのリスト
 		std::vector<ObjectBase*>m_hitList;
 
+		bool m_isDebugDraw;
 	public:
 		ICollider();
 		virtual ~ICollider();
@@ -65,7 +66,7 @@ namespace ShunLib
 		void Parent(ObjectBase* parent) { m_parent = parent; }
 		void SetCallBack(std::function<void(ObjectBase*)> func) { m_callBack = func; }
 		void IsEntity(bool entity) { m_isEntity = entity; }
-
+		void IsDebugDraw(bool draw) { m_isDebugDraw = draw; }
 	//純粋仮想関数
 	public:
 		//クラスごとに返す形状を変更

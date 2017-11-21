@@ -7,42 +7,49 @@
 #include "SL_Collider.h"
 #include "SL_CollisionManager.h"
 #include "../../Object/ObjectBase.h"
+#include "../../Util/Debugger/DebugMacro.h"
+
+using namespace ShunLib;
 
 //基底コンストラクタ
 //当たり判定を管理するクラスに登録
-ShunLib::ICollider::ICollider() :
+ICollider::ICollider() :
 	m_parent(nullptr),
 	m_shape(nullptr),
 	m_callBack(NULL),
-	m_isEntity(true)
+	m_isEntity(true),
+	m_isDebugDraw(true)
 {
 	CollisionManager::GetInstance()->AddCollider(this);
 }
 
 //基底コンストラクタ
 //当たり判定を管理するクラスから削除
-ShunLib::ICollider::~ICollider()
+ICollider::~ICollider()
 {
 	CollisionManager::GetInstance()->RemoveCollider(this);
 }
 
 //デバッグ用描画
-void ShunLib::ICollider::DebugRender()
+void ICollider::DebugRender()
 {
-	m_shape->Render();
+	if (m_isDebugDraw){
+		m_shape->Render();
+	}
 }
 
 //球状の当たり判定の更新
-void ShunLib::SphereCollider::Update()
+void SphereCollider::Update()
 {
-	if (m_parent != nullptr)
-	{
+	if (m_parent != nullptr){
+		Vec3 pos = m_parent->WorldPos();
+
 		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
 	}
 }
 
 //箱状の当たり判定の更新
-void ShunLib::BoxCollider::Update()
+void BoxCollider::Update()
 {
 	if (m_parent != nullptr)
 	{

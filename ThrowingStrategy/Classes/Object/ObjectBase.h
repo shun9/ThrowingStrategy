@@ -76,7 +76,7 @@ public:
 	}
 	
 	//指定された種類のオブジェクトが子にいるかどうか
-	//第二引数でそのオブジェクトを返す
+	//第二引数で最初のオブジェクトを返す
 	bool HasChild(OBJECT_LIST type,ObjectBase** buff = nullptr) {
 		auto c = std::find_if(m_children.begin(), m_children.end(),[=](ObjectBase* child) { return (child->Type() == type); });
 		if (c != m_children.end())

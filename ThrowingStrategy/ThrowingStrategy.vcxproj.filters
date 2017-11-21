@@ -26,12 +26,6 @@
     <Filter Include="Game\Object\Player\State">
       <UniqueIdentifier>{269f41d4-93d7-45b0-a17f-9fd955ee7494}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Unit">
-      <UniqueIdentifier>{8e381dc4-bd49-47f2-be5b-71906a1fefe6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Unit\State">
-      <UniqueIdentifier>{a5850ac6-01a4-46c3-bb00-40b7a84e09ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Base">
       <UniqueIdentifier>{b1d46b8d-552d-42fe-842c-9906d01005b6}</UniqueIdentifier>
     </Filter>
@@ -61,6 +55,12 @@
     </Filter>
     <Filter Include="Game\Object\DefenseTarget">
       <UniqueIdentifier>{67e5a89d-e6dc-4d7d-bdb2-111829d70d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Unit">
+      <UniqueIdentifier>{8e381dc4-bd49-47f2-be5b-71906a1fefe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Unit\State">
+      <UniqueIdentifier>{a5850ac6-01a4-46c3-bb00-40b7a84e09ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +206,9 @@
     <ClInclude Include="Classes\Object\Unit\State\UnitRoamState.h">
       <Filter>Game\Object\Unit\State</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitAttackState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\SL_Graphics.cpp">
@@ -312,6 +315,9 @@
       <Filter>Game\Object\DefenseTarget</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\Unit\State\UnitRoamState.cpp">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\State\UnitAttackState.cpp">
       <Filter>Game\Object\Unit\State</Filter>
     </ClCompile>
   </ItemGroup>

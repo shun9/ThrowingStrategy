@@ -188,6 +188,7 @@
     <ClInclude Include="Classes\Object\Stage\Stage.h" />
     <ClInclude Include="Classes\Object\Stage\StageObject.h" />
     <ClInclude Include="Classes\Object\StateObject.h" />
+    <ClInclude Include="Classes\Object\Unit\State\UnitAttackState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitFlyState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitMoveState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitRoamState.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="Classes\Object\SL_Shape.cpp" />
     <ClCompile Include="Classes\Object\Stage\Stage.cpp" />
     <ClCompile Include="Classes\Object\Stage\StageObject.cpp" />
+    <ClCompile Include="Classes\Object\Unit\State\UnitAttackState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitFlyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitMoveState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitRoamState.cpp" />

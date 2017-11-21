@@ -5,21 +5,23 @@
 //* @author:S.Katou
 //************************************************/
 #include "UnitRoamState.h"
+#include "UnitAttackState.h"
 
 #include <cmath>
 #include <SL_Conversion.h>
 #include <SL_RandomNumber.h>
 #include "../../../Main/SL_MyStepTimer.h"
+#include "../../../Util/Debugger/DebuggerUI.h"
 
 using namespace std;
 using namespace ShunLib;
 
-void UnitRoamState::Enter(Unit * obj)
+void UnitRoamState::Enter(Unit * unit)
 {
 	ChangeDirection();
 }
 
-void UnitRoamState::Execute(Unit * obj)
+void UnitRoamState::Execute(Unit * unit)
 {
 	auto timer = MyStepTimer::GetInstance();
 	m_timeCnt += timer->GetElapsedSeconds();
@@ -33,12 +35,18 @@ void UnitRoamState::Execute(Unit * obj)
 	}
 
 	//‘¬“xÝ’è
-	obj->Velocity(m_direction * obj->Spd());
+	unit->Velocity(m_direction * unit->Spd());
 
-	obj->Move();
+	unit->Move();
+	DebuggerUI::GetInstance()->DrawDebugText("Roam unit", 0.0f);
+
+	//UŒ‚”ÍˆÍ‚É“G‚ª‚¢‚½ê‡
+	if (!unit->AttackRange()->HitList().empty()){
+		unit->ChangeState(new UnitAttackState);
+	}
 }
 
-void UnitRoamState::Exit(Unit * obj)
+void UnitRoamState::Exit(Unit * unit)
 {
 
 }

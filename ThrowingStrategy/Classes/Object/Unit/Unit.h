@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Unit.h
 //* @brief :召喚されるユニット
-//* @date  :2017/11/13
+//* @date  :2017/11/21
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -12,8 +12,9 @@ struct FlyingData;
 class Unit :public StateObject<Unit>
 {
 private:
-	int m_type;
+	UNIT_LIST m_unitType;
 	ShunLib::SphereCollider* m_collider;
+	ShunLib::SphereCollider* m_attackRange;
 
 public:
 	Unit():StateObject(this) {}
@@ -28,4 +29,11 @@ public:
 
 	//他ユニットに投げられる
 	void ToBeThrow(const FlyingData& data);
+
+	/*--Getter--*/
+	UNIT_LIST UnitType() { return m_unitType; }
+	ShunLib::SphereCollider* AttackRange() { return m_attackRange; }
+
+	/*--Setter--*/
+	void UnitType(UNIT_LIST type) { m_unitType = type; }
 };

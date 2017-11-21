@@ -7,7 +7,7 @@
 #include "UnitFlyState.h"
 
 #include <SL_Lerp.h>
-#include "UnitMoveState.h"
+#include "UnitRoamState.h"
 #include "../../../Main/SL_MyStepTimer.h"
 
 void UnitFlyState::Enter(Unit * unit)
@@ -34,7 +34,7 @@ void UnitFlyState::Execute(Unit * unit)
 
 	//ˆÚ“®‚µ‚«‚Á‚½‚çó‘ÔØ‘Ö
 	if (m_timeCnt > m_timeLimit){
-		unit->ChangeState(new UnitMoveState);
+		unit->ChangeState(new UnitRoamState);
 	}
 }
 

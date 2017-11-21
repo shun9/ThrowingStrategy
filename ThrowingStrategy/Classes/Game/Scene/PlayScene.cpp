@@ -18,7 +18,6 @@
 
 PlayScene::PlayScene()
 {
-
 	auto window = ShunLib::Window::GetInstance();
 
 	//ƒJƒƒ‰Ý’è
@@ -40,7 +39,7 @@ PlayScene::PlayScene()
 	camera->FollowTarget(p);
 	camera->ChangeMode(FOLLOW_CAMERA);
 
-	factory->Create(COMMANDER);
+	//factory->Create(COMMANDER);
 	factory->Create(UNIT);
 	factory->Create(DEFENSE_TARGET);
 	auto s = factory->Create(STAGE);

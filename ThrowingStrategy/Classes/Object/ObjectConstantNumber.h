@@ -24,6 +24,12 @@ enum OBJECT_LIST
 	OBJECT_LIST_END,//オブジェクトの種類数
 };
 
+enum UNIT_LIST
+{
+	NORMAL = 0,
+
+	UNIT_LIST_END,
+};
 //ステージ一覧
 enum STAGE_LIST
 {

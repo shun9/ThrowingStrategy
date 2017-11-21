@@ -47,15 +47,19 @@ void ObjectBase::SetParent(ObjectBase * parent)
 /// </summary>
 void ObjectBase::RemoveChild(ObjectBase * child)
 {
+	//子がいなければ何もしない
 	if (m_children.empty())return;
 
 	auto tmpChild = std::find(m_children.begin(), m_children.end(), child);
 
 	if (tmpChild != m_children.end()) {
+		//親の情報を子に渡す
+		child->LocalPos(child->WorldPos());
+		child->Rotation(child->WorldRotation());
+		
+		//子を切り離す
 		m_children.erase(tmpChild);
 		m_children.shrink_to_fit();
-		//親の情報を子に渡す
-		child->LocalPos(child->LocalPos() + this->WorldPos());
 	}
 }
 
@@ -121,18 +125,28 @@ void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 /// </summary>
 ShunLib::Matrix ObjectBase::CalcMat()
 {
-	Matrix m;
+	Matrix w;
+	ObjectBase* parent = this->Parent();
 
 	//拡大　縮小
-	m *= Matrix::CreateScale(this->WorldScale());
+	w *= Matrix::CreateScale(this->WorldScale());
 
-	//ロール ピッチ ヨー
-	m *= Matrix::CreateRotationZ(this->WorldRotation().m_z);
-	m *= Matrix::CreateRotationX(this->WorldRotation().m_x);
-	m *= Matrix::CreateRotationY(this->WorldRotation().m_y);
+	//子の回転
+	w *= Matrix::CreateRotationZ(this->Rotation().m_z);
+	w *= Matrix::CreateRotationX(this->Rotation().m_x);
+	w *= Matrix::CreateRotationY(this->Rotation().m_y);
 
-	//移動
-	m *= Matrix::CreateTranslation(this->WorldPos());
+	//子の移動
+	w *= Matrix::CreateTranslation(this->LocalPos());
 
-	return m;
+	if (parent != nullptr){
+		//ロール ピッチ ヨー
+		w *= Matrix::CreateRotationZ(parent->WorldRotation().m_z);
+		w *= Matrix::CreateRotationX(parent->WorldRotation().m_x);
+		w *= Matrix::CreateRotationY(parent->WorldRotation().m_y);
+		//移動
+		w *= Matrix::CreateTranslation(parent->WorldPos());
+	}
+
+	return w;
 }

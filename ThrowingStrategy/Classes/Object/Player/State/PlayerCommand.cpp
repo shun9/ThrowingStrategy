@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :PlayerCommand.cpp
 //* @brief :プレイヤーのコマンドまとめ
-//* @date  :2017/11/13
+//* @date  :2017/11/20
 //* @author:S.Katou
 //************************************************/
 #include "PlayerCommand.h"
@@ -44,6 +44,7 @@ void PlayerPickUpCommand::Execute(Player * player)
 	}
 }
 
+
 /// <summary>
 /// 置く
 /// </summary>
@@ -52,13 +53,18 @@ void PlayerPutCommand::Execute(Player * player)
 	//ユニットを所持していたら置く
 	ObjectBase* child;
 	if (player->HasChild(UNIT,&child))
-	{
+	{		
+		//プレイヤーの向いている方向
+		float rad = ToRadian(player->Rotation().m_y);
+
+		Vec3 pos = player->Pos() + Vec3(-sin(rad), 0.0f, cos(rad))*player->Scale().Length();
+
 		player->RemoveChild(child);
+		child->LocalPos(pos);
 		ObjectBase::ROOT_OBJECT->AddChild(child);
-
-
 	}
 }
+
 
 /// <summary>
 /// 投げる
