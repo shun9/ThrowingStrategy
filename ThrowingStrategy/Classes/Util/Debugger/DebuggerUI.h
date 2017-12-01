@@ -53,7 +53,9 @@ private:
 
 	}
 
-	~DebuggerUI() {}
+	~DebuggerUI() {
+		ImGui_ImplDX11_Shutdown();
+	}
 
 	//ï`âÊñΩóﬂé¿çs
 	void RenderText() {

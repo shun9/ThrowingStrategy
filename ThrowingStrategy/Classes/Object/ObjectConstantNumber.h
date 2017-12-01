@@ -7,9 +7,6 @@
 #pragma once
 #include <SL_Lerp.h>
 
-//オブジェクトのパラメーターを取得する
-#define OBJ_PARAM(type) ObjectParamHolder::GetInstance()->GetParam(type)
-
 //オブジェクト一覧
 enum OBJECT_LIST
 {
@@ -19,17 +16,20 @@ enum OBJECT_LIST
 	UNIT,           //召喚されるユニット
 	BLOCK,          //ブロック
 	DEFENSE_TARGET,	//防衛対象
+	SUMMONER,		//ユニットを召喚するオブジェクト
 	STAGE,			//ステージ
 
 	OBJECT_LIST_END,//オブジェクトの種類数
 };
 
+//ユニットの種類
 enum UNIT_LIST
 {
 	NORMAL = 0,
 
 	UNIT_LIST_END,
 };
+
 //ステージ一覧
 enum STAGE_LIST
 {
@@ -55,3 +55,4 @@ enum THROW_TYPE
 
 	THROW_TYPE_END,
 };
+

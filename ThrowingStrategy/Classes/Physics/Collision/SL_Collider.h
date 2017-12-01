@@ -8,6 +8,7 @@
 #include <functional>
 #include <vector>
 #include <SL_MacroConstants.h>
+#include <SL_Visitor.h>
 #include "../../Object/SL_Shape.h"
 
 class ObjectBase;
@@ -15,7 +16,7 @@ class ObjectBase;
 namespace ShunLib
 {
 	//当たり判定用クラスの抽象クラス
-	class ICollider
+	class ICollider :public VisitorNode
 	{
 	protected:
 		//当たり判定を持つオブジェクト
@@ -46,13 +47,21 @@ namespace ShunLib
 		void DebugRender();
 
 		//リストに追加
-		void AddHitList(ObjectBase* obj) { m_hitList.push_back(obj); }
+		//持ち主が同じ場合は追加しない
+		void AddHitList(ObjectBase* obj) {
+			if (m_parent != obj) {
+				m_hitList.push_back(obj);
+			}
+		}
 
 		//リストの初期化
 		void ResetList() { 
 			m_hitList.clear();
 			m_hitList.shrink_to_fit();
 		}
+
+		//ビジター受け入れ
+		void Accept(ShunLib::Visitor* visitor);
 
 		/*--Getter--*/
 		ObjectBase* Parent() { return m_parent; }
@@ -67,7 +76,8 @@ namespace ShunLib
 		void SetCallBack(std::function<void(ObjectBase*)> func) { m_callBack = func; }
 		void IsEntity(bool entity) { m_isEntity = entity; }
 		void IsDebugDraw(bool draw) { m_isDebugDraw = draw; }
-	//純粋仮想関数
+	
+		//純粋仮想関数
 	public:
 		//クラスごとに返す形状を変更
 		virtual IShape* Shape() = 0;

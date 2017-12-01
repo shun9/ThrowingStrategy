@@ -18,6 +18,7 @@ class Unit;
 class Block;
 class DefenseTarget;
 class Stage;
+class UnitSummoner;
 
 class ObjectFactory : public ShunLib::Singleton<ObjectFactory>
 {
@@ -29,6 +30,7 @@ public:
 	ShunLib::Factory<Block> m_blockFactory;
 	ShunLib::Factory<DefenseTarget> m_defenseTargetFactory;
 	ShunLib::Factory<Stage> m_stageFactory;
+	ShunLib::Factory<UnitSummoner> m_summonerFactory;
 
 public:
 	ObjectBase* Create(OBJECT_LIST num);

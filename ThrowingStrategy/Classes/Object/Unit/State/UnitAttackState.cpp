@@ -9,16 +9,19 @@
 
 #include <cmath>
 #include <SL_Conversion.h>
+#include "../../../Util/Visitor/Visitor.h"
 
 using namespace ShunLib;
 
 void UnitAttackState::Enter(Unit* unit)
 {
-	auto hitList = unit->AttackRange()->HitList();
+	SearchStateObjectVisitor v;
+	unit->AttackRange()->Accept(&v);
 
-	//当たっているオブジェクトが無ければ何もしない
-	if (!hitList.empty()){
-		m_target = hitList[0];
+	//当たっているオブジェクトが存在するならば
+	//ターゲットに設定
+	if (v.Count() > 0) {
+		m_target = v.List()[0];
 	}
 }
 
@@ -27,14 +30,18 @@ void UnitAttackState::Execute(Unit* unit)
 	//ターゲットが無ければ何もしない
 	if (m_target == nullptr){
 		unit->ChangeState(new UnitRoamState);
+		return;
 	}
 
 	//ユニットからターゲットへ向かうベクトル
 	Vec3 dir = m_target->Pos() - unit->Pos();
 	
 	//攻撃範囲から外れたら戻る
-	if (dir.Length() > unit->AttackRange()->Shape()->Scale()){
+	SearchSpecificObjectVisitor v(m_target);
+	unit->AttackRange()->Accept(&v);
+	if (!v.IsFound()){
 		unit->ChangeState(new UnitRoamState);
+		return;
 	}
 
 	//X,Zの二次元で向き直す

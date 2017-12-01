@@ -38,6 +38,15 @@ void ICollider::DebugRender()
 	}
 }
 
+void ShunLib::ICollider::Accept(ShunLib::Visitor * visitor)
+{
+	visitor->Visit(this);
+	for (auto& v : m_hitList) {
+		visitor->Visit(v);
+	}
+}
+
+
 //‹…ó‚Ì“–‚½‚è”»’è‚ÌXV
 void SphereCollider::Update()
 {

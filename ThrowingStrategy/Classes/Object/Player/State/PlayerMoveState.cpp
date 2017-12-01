@@ -25,6 +25,7 @@ void PlayerMoveState::Enter(Player* player)
 	m_keyInput.SetCommand(KEY_LIST::RIGHT, new PlayerMoveRightKeyCommand);
 }
 
+
 void PlayerMoveState::Execute(Player* player)
 {
 	auto timer = ShunLib::MyStepTimer::GetInstance();
@@ -41,7 +42,7 @@ void PlayerMoveState::Execute(Player* player)
 
 	auto triggerList = m_keyTriggerInput.GetKeyList();
 	for (auto& v : triggerList) {
-		if (key->IsPushed(v)) {
+		if (key->IsTracker(v)) {
 			m_keyTriggerInput.HandleInput(v)->Execute(player);
 		}
 	}

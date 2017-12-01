@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :ObjectDataHolder.h
-//* @brief :ユニットデータの一覧を保持するクラス
-//* @date  :2017/11/01
+//* @brief :オブジェクトのゲームパラメータの一覧を保持するクラス
+//* @date  :2017/11/27
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -9,6 +9,10 @@
 #include <vector>
 #include <SL_Singleton.h>
 #include <SL_Model.h>
+
+//オブジェクトのパラメーターを取得する
+#define OBJ_PARAM(type) ObjectParamHolder::GetInstance()->GetParam(type)
+
 
 //ユニットのデータ
 struct ObjectParam

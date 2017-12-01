@@ -23,6 +23,11 @@ void ShunLib::CollisionManager::Update()
 	{
 		for (int j = i+1; j < size; j++)
 		{
+			//持ち主が同じならば飛ばす
+			if (m_colliderList[j]->Parent() == m_colliderList[i]->Parent()){
+				continue;
+			}
+
 			if (Collision(m_colliderList[i], m_colliderList[j]))
 			{
 				//ヒットリストに追加

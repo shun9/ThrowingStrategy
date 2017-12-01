@@ -49,11 +49,18 @@ ObjectParamHolder::ObjectParamHolder()
 	m_dataList[BLOCK] = data;
 
 	//防衛対象
-	data.maxHP = 99999;
+	data.maxHP = 20000;
 	data.power = 0.0f;
 	data.spd = 0.0f;
 	data.model = std::make_shared<ShunLib::Model>(L"CModel\\Octahedron.cmo");
 	m_dataList[DEFENSE_TARGET] = data;
+
+	//ユニットを召喚するオブジェクト
+	data.maxHP = 10000;
+	data.power = 0.0f;
+	data.spd = 0.0f;
+	data.model = std::make_shared<ShunLib::Model>(L"CModel\\Tube.cmo");
+	m_dataList[SUMMONER] = data;
 
 	//ステージ
 	data.maxHP = 99999;

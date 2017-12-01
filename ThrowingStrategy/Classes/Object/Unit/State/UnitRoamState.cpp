@@ -11,7 +11,7 @@
 #include <SL_Conversion.h>
 #include <SL_RandomNumber.h>
 #include "../../../Main/SL_MyStepTimer.h"
-#include "../../../Util/Debugger/DebuggerUI.h"
+#include "../../../Util/Visitor/Visitor.h"
 
 using namespace std;
 using namespace ShunLib;
@@ -38,10 +38,11 @@ void UnitRoamState::Execute(Unit * unit)
 	unit->Velocity(m_direction * unit->Spd());
 
 	unit->Move();
-	DebuggerUI::GetInstance()->DrawDebugText("Roam unit", 0.0f);
 
 	//UŒ‚”ÍˆÍ‚É“G‚ª‚¢‚½ê‡
-	if (!unit->AttackRange()->HitList().empty()){
+	SearchAnotherTeamVisitor v(unit->Team());
+	unit->AttackRange()->Accept(&v);
+	if (v.Count() > 0) {
 		unit->ChangeState(new UnitAttackState);
 	}
 }

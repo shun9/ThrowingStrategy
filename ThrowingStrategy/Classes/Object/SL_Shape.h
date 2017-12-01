@@ -96,7 +96,7 @@ namespace ShunLib {
 		virtual SHAPE_TYPE Type() const override { return SHAPE_TYPE::SEGMENT; }
 	};
 
-	// ü•ª
+	// “_
 	class Point : public IShape
 	{
 	public:

@@ -62,6 +62,15 @@
     <Filter Include="Game\Object\Unit\State">
       <UniqueIdentifier>{a5850ac6-01a4-46c3-bb00-40b7a84e09ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Util\Visitor">
+      <UniqueIdentifier>{24d60809-1f51-4b03-b638-2bb7439100da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\UnitSummoner">
+      <UniqueIdentifier>{0ffdb5bd-a903-487a-95dd-3d4221af6d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\UnitSummoner\SummonerState">
+      <UniqueIdentifier>{af86cee4-88b5-4a36-97bd-4648420f2b59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -209,6 +218,24 @@
     <ClInclude Include="Classes\Object\Unit\State\UnitAttackState.h">
       <Filter>Game\Object\Unit\State</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Util\Visitor\Visitor.h">
+      <Filter>Game\Util\Visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectTransform.h">
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\UnitSummoner\UnitSummoner.h">
+      <Filter>Game\Object\UnitSummoner</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\UnitSummoner\State\SummonerSummonState.h">
+      <Filter>Game\Object\UnitSummoner\SummonerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\UnitSummoner\State\SummonerSteadyState.h">
+      <Filter>Game\Object\UnitSummoner\SummonerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\ObjectMacro.h">
+      <Filter>Game\Object\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\SL_Graphics.cpp">
@@ -320,6 +347,18 @@
     <ClCompile Include="Classes\Object\Unit\State\UnitAttackState.cpp">
       <Filter>Game\Object\Unit\State</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Util\Visitor\Visitor.cpp">
+      <Filter>Game\Util\Visitor</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\UnitSummoner\UnitSummoner.cpp">
+      <Filter>Game\Object\UnitSummoner</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\UnitSummoner\State\SummonerSummonState.cpp">
+      <Filter>Game\Object\UnitSummoner\SummonerState</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\UnitSummoner\State\SummonerSteadyState.cpp">
+      <Filter>Game\Object\UnitSummoner\SummonerState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -345,6 +384,9 @@
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Resources\ModelData\Octahedron.FBX">
+      <Filter>Assets\Model</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Resources\ModelData\Tube.FBX">
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
   </ItemGroup>

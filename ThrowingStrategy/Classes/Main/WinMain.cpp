@@ -5,12 +5,20 @@
 //* @author:S.Katou
 //************************************************/
 #include <Windows.h>
+#include <memory>
+#include <crtdbg.h>
+#include <Keyboard.h>
 #include "SL_Window.h"
 #include "SL_Graphics.h"
 #include "../Game/MyGame.h"
 #include "../Util/DestroySingleton.h"
-#include <Keyboard.h>
-#include <memory>
+
+#ifdef _DEBUG
+	#ifndef DBG_NEW
+		#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+		#define new DBG_NEW
+	#endif
+#endif  // _DEBUG
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMag, WPARAM wParam, LPARAM lParam);
 
@@ -24,7 +32,9 @@ HRESULT InitGraphics();
 /// ・メッセージループの実装
 /// </summary>
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmpShow)
-{	
+{
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	auto window = ShunLib::Window::GetInstance();
 
 	ShunLib::Application* game = new MyGame();

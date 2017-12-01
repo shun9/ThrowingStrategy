@@ -11,6 +11,7 @@
 #include <SL_Conversion.h>
 #include "../../Unit/Unit.h"
 #include "../../ObjectStruct.h"
+#include "../../../Util/Visitor/Visitor.h"
 
 using namespace std;
 using namespace ShunLib;
@@ -20,7 +21,9 @@ using namespace ShunLib;
 /// </summary>
 void PlayerPickUpCommand::Execute(Player * player)
 {
-	auto hitList = player->Collider()->HitList();
+	SearchUnitVisitor visitor;
+	player->Collider()->Accept(&visitor);
+	auto hitList = visitor.List();
 
 	for (auto& v : hitList)
 	{
@@ -37,9 +40,10 @@ void PlayerPickUpCommand::Execute(Player * player)
 		//ユニット以外は持てない
 		if (v->Type() == OBJECT_LIST::UNIT){
 			player->AddChild(v);
-			v->LocalPos(Vec3(0.0f,2.0f*(player->HavingUnitNum()+1.0f),0.0f));
-			dynamic_cast<Unit*>(v)->ToBeLifted();
-			break;
+			//v->LocalPos(Vec3(0.0f,2.0f*(player->HavingUnitNum()+1.0f),0.0f));
+			player->AlignUnits();
+			v->ToBeLifted();
+			return;
 		}
 	}
 }
@@ -62,6 +66,7 @@ void PlayerPutCommand::Execute(Player * player)
 		player->RemoveChild(child);
 		child->LocalPos(pos);
 		ObjectBase::ROOT_OBJECT->AddChild(child);
+		player->AlignUnits();
 	}
 }
 
@@ -71,9 +76,14 @@ void PlayerPutCommand::Execute(Player * player)
 /// </summary>
 void PlayerThrowCommand::Execute(Player * player)
 {
-	ObjectBase* child;
-	if (player->HasChild(OBJECT_LIST::UNIT, &child))
+	Unit* child;
+	SearchUnitVisitor v;
+	player->Accept(&v);
+	
+	if (v.Count() > 0)
 	{
+		child = v.List()[0];
+
 		player->RemoveChild(child);
 		ObjectBase::ROOT_OBJECT->AddChild(child);
 
@@ -86,6 +96,8 @@ void PlayerThrowCommand::Execute(Player * player)
 		data.end = player->WorldPos() + (Vec3(-sin(rad), 0.0f, cos(rad)).Normalize() *player->Power());
 		data.power = player->Power();
 		data.type = THROW_TYPE::LINE;
-		dynamic_cast<Unit*>(child)->ToBeThrow(data);	
+		child->ToBeThrow(data);	
+	
+		player->AlignUnits();
 	}
 }

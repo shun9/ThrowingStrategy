@@ -23,10 +23,14 @@ public:
 	void Initialize()override;
 	void Finalize()override;
 
+	//ユニットを整列する
+	void AlignUnits();
+
 	ShunLib::SphereCollider* Collider() { return m_collider; }
 	
-	//持っているユニットの数
+	//持っているユニット
 	int HavingUnitNum();
+	std::vector<Unit*>& HavingUnitList();
 
 	//当たり判定用コールバック
 	void CollisionCallBack(ObjectBase* obj);

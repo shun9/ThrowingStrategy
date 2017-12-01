@@ -108,10 +108,13 @@ void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 {
 	auto data = OBJ_PARAM(this->m_type);
 
+	//行列更新
+	CalcMat();
+
 	//モデルが存在するならば描画
 	if (data.model) {
 		//モデル描画
-		data.model->Draw(CalcMat(), view, proj);
+		data.model->Draw(m_world, view, proj);
 	}
 
 	//子の描画
@@ -123,30 +126,24 @@ void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 /// <summary>
 /// 自身の行列を計算する
 /// </summary>
-ShunLib::Matrix ObjectBase::CalcMat()
+void ObjectBase::CalcMat()
 {
-	Matrix w;
-	ObjectBase* parent = this->Parent();
+	m_world = Matrix::Identity;
 
 	//拡大　縮小
-	w *= Matrix::CreateScale(this->WorldScale());
+	m_world *= Matrix::CreateScale(this->Scale());
 
 	//子の回転
-	w *= Matrix::CreateRotationZ(this->Rotation().m_z);
-	w *= Matrix::CreateRotationX(this->Rotation().m_x);
-	w *= Matrix::CreateRotationY(this->Rotation().m_y);
+	m_world *= Matrix::CreateRotationZ(this->Rotation().m_z);
+	m_world *= Matrix::CreateRotationX(this->Rotation().m_x);
+	m_world *= Matrix::CreateRotationY(this->Rotation().m_y);
 
 	//子の移動
-	w *= Matrix::CreateTranslation(this->LocalPos());
+	m_world *= Matrix::CreateTranslation(this->LocalPos());
 
+	//親の行列を影響させる
+	ObjectBase* parent = this->Parent();
 	if (parent != nullptr){
-		//ロール ピッチ ヨー
-		w *= Matrix::CreateRotationZ(parent->WorldRotation().m_z);
-		w *= Matrix::CreateRotationX(parent->WorldRotation().m_x);
-		w *= Matrix::CreateRotationY(parent->WorldRotation().m_y);
-		//移動
-		w *= Matrix::CreateTranslation(parent->WorldPos());
+		m_world *= m_parent->World();
 	}
-
-	return w;
 }

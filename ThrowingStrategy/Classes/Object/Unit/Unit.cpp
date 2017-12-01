@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Unit.cpp
 //* @brief :召喚されるユニット
-//* @date  :2017/11/01
+//* @date  :2017/11/27
 //* @author:S.Katou
 //************************************************/
 #include "Unit.h"
@@ -13,9 +13,15 @@
 
 void Unit::Initialize()
 {
+	//チーム設定(仮)　※いずれ消す
 	this->Team(TEAM::RED);
+
+	//基本情報設定
 	this->ChangeState(new UnitRoamState);
 	this->Type(OBJECT_LIST::UNIT);
+	this->HP(this->MaxHP());
+	
+	//基底クラスの初期化
 	StateObject::Initialize();
 
 	//当たり判定の設定
@@ -24,10 +30,11 @@ void Unit::Initialize()
 	m_collider->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
 	m_collider->Shape()->Scale(1.0f);
 
+	//攻撃範囲の設定
 	m_attackRange = new ShunLib::SphereCollider;
 	m_attackRange->Parent(this);
 	m_attackRange->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
-	m_attackRange->Shape()->Scale(2.0f);
+	m_attackRange->Shape()->Scale(4.0f);
 	m_attackRange->IsDebugDraw(false);
 }
 

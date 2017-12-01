@@ -11,6 +11,7 @@
 #include "DefenseTarget\DefenseTarget.h"
 #include "Stage\Stage.h"
 #include "Stage\StageObject.h"
+#include "UnitSummoner\UnitSummoner.h"
 
 /// <summary>
 /// オブジェクトの生成
@@ -29,6 +30,7 @@ ObjectBase* ObjectFactory::Create(OBJECT_LIST num)
 	case BLOCK:		     obj = m_blockFactory.Create(); break;
 	case DEFENSE_TARGET: obj = m_defenseTargetFactory.Create(); break;
 	case STAGE:		     obj = m_stageFactory.Create(); break;
+	case SUMMONER:		 obj = m_summonerFactory.Create(); break;
 	default:break;
 	}
 
@@ -44,4 +46,5 @@ ObjectFactory::~ObjectFactory()
 	m_blockFactory.AllDelete();
 	m_defenseTargetFactory.AllDelete();
 	m_stageFactory.AllDelete();
+	m_summonerFactory.AllDelete();
 }

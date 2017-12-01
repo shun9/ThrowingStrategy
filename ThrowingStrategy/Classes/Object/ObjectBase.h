@@ -10,11 +10,13 @@
 #include <algorithm>
 #include <SL_Math.h>
 #include <SL_Model.h>
+#include <SL_Visitor.h>
 #include "ObjectConstantNumber.h"
 #include "ObjectParamHolder.h"
 #include "ObjectData.h"
+#include "ObjectTransform.h"
 
-class ObjectBase : public ObjectData
+class ObjectBase : public ObjectData , public ShunLib::VisitorNode,public ObjectTransform
 {
 private:
 	using Vec3 = ShunLib::Vec3;
@@ -110,6 +112,14 @@ public:
 	//終了  派生クラスの最後に呼ぶ
 	virtual void Finalize() { for (auto& v : m_children) { v->Finalize(); } }
 
+	//ビジター受け入れ
+	void Accept(ShunLib::Visitor* visitor) {
+		visitor->Visit(this);
+		for (auto& v : m_children) {
+			visitor->Visit(v);
+		}
+	}
+
 	//ローカル座標系
 	Vec3 LocalPos() { return this->Pos(); }
 	void LocalPos(const Vec3& pos) { this->Pos(pos); }
@@ -143,10 +153,12 @@ public:
 		return rot;
 	}
 
+	//親子関係
 	ObjectBase* Parent() { return m_parent; }
 	const std::vector<ObjectBase*>& Children() { return m_children; }
 
+	
 protected:
 	//自身の行列を計算する
-	Matrix CalcMat();
+	void CalcMat();
 };

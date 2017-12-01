@@ -16,26 +16,29 @@ float ShunLib::ShortestDistance(const Box & A, const Point & B)
 
 	//箱の頂点の最小値と最大値
 	Vec3 min, max;
-	min.m_x = B.CenterPoint().m_x - (B.Size().m_x / 2.0f);
-	min.m_y = B.CenterPoint().m_y - (B.Size().m_y / 2.0f);
-	min.m_z = B.CenterPoint().m_z - (B.Size().m_z / 2.0f);
+	min.m_x = A.CenterPoint().m_x - (A.Size().m_x / 2.0f);
+	min.m_y = A.CenterPoint().m_y - (A.Size().m_y / 2.0f);
+	min.m_z = A.CenterPoint().m_z - (A.Size().m_z / 2.0f);
 
-	max.m_x = B.CenterPoint().m_x + (B.Size().m_x / 2.0f);
-	max.m_y = B.CenterPoint().m_y + (B.Size().m_y / 2.0f);
-	max.m_z = B.CenterPoint().m_z + (B.Size().m_z / 2.0f);
+	max.m_x = A.CenterPoint().m_x + (A.Size().m_x / 2.0f);
+	max.m_y = A.CenterPoint().m_y + (A.Size().m_y / 2.0f);
+	max.m_z = A.CenterPoint().m_z + (A.Size().m_z / 2.0f);
 
 	//点が最小値～最大値の中にないとき差を考慮する
 	//X軸
-	if (!(point.m_x > min.m_x && point.m_x < max.m_x))
+	if (!(point.m_x > min.m_x && point.m_x < max.m_x)){
 		sqLen += ((point.m_x - min.m_x) * (point.m_x - min.m_x));
+	}
 
 	//Y軸
-	if (!(point.m_y > min.m_y && point.m_y < max.m_y))
+	if (!(point.m_y > min.m_y && point.m_y < max.m_y)) {
 		sqLen += ((point.m_y - min.m_y) * (point.m_y - min.m_y));
+	}
 	
 	//Z軸
-	if (!(point.m_z > min.m_z && point.m_z < max.m_z))
+	if (!(point.m_z > min.m_z&&point.m_z < max.m_z)){
 		sqLen += ((point.m_z - min.m_z) * (point.m_z - min.m_z));
+	}
 
 	return sqrt(sqLen);
 }
@@ -59,7 +62,6 @@ void ShunLib::Box::Render()
 
 	Matrix world;
 	world = Matrix::CreateScale(this->Size());
-	world *= Matrix::CreateScale(Scale());
 	world *= Matrix::CreateTranslation(m_centerPoint);
 	shape->DrawCube(world, camera->ViewMat(), camera->ProjMat());
 }

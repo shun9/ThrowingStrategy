@@ -82,12 +82,13 @@ bool CollisionManager::Collision(SphereCollider* A, SphereCollider* B, bool reje
 	return true;
 }
 
+
 //‹…‚Æ” 
 bool CollisionManager::Collision(SphereCollider* A, BoxCollider* B, bool rejection)
 {
 	Point point;
 	point.CenterPoint(A->Shape()->CenterPoint());
-
+	
 	//‹…‚Ì’†S“_‚Æ” ‚ÌÅ’Z‹——£‚ðo‚·
 	float dist = ShortestDistance((*B->Shape()), point);
 
