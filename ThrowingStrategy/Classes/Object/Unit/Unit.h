@@ -15,6 +15,7 @@ private:
 	UNIT_LIST m_unitType;
 	ShunLib::SphereCollider* m_collider;
 	ShunLib::SphereCollider* m_attackRange;
+	ShunLib::SphereCollider* m_chaseRange;
 
 public:
 	Unit():StateObject(this) {}

@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :PlayerMoveState.cpp
 //* @brief :オブジェクトを生成するクラス
-//* @date  :2017/11/13
+//* @date  :2017/12/01
 //* @author:S.Katou
 //************************************************/
 #include "PlayerMoveState.h"
@@ -10,6 +10,7 @@
 #include "PlayerCommand.h"
 #include "PlayerKeyCommand.h"
 
+#include "../../../Util/Debugger/DebuggerUI.h"
 
 void PlayerMoveState::Enter(Player* player)
 {
@@ -47,8 +48,11 @@ void PlayerMoveState::Execute(Player* player)
 		}
 	}
 
+	DebuggerUI::GetInstance()->DrawDebugText("Player HP : %d",player->HP());
+
 	player->Move();
 }
+
 
 void PlayerMoveState::Exit(Player* player)
 {

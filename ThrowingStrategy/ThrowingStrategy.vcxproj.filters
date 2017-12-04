@@ -236,6 +236,9 @@
     <ClInclude Include="Classes\Object\ObjectMacro.h">
       <Filter>Game\Object\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitChaseState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\SL_Graphics.cpp">

@@ -10,23 +10,21 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 	SHAPE_TYPE aType = A->Type();
 	SHAPE_TYPE bType = B->Type();
 
+	bool hit = false;
+
 	//“¯‚¶‚à‚Ì“¯Žm
 	if (aType == bType)
 	{
 		//‹…‚Æ‹…
 		if (aType == SHAPE_TYPE::SPHERE)
 		{
-			SphereCollider* a = dynamic_cast<SphereCollider*>(A);
-			SphereCollider* b = dynamic_cast<SphereCollider*>(B);
-			return Collision(a, b, rejection);
+			hit = SphereCollision(A, B, rejection);
 		}
 
 		//” ‚Æ” 
 		if (aType == SHAPE_TYPE::BOX)
 		{
-			BoxCollider* a = dynamic_cast<BoxCollider*>(A);
-			BoxCollider* b = dynamic_cast<BoxCollider*>(B);
-			return Collision(a, b, rejection);
+			hit = BoxCollision(A, B, rejection);
 		}
 	}
 
@@ -36,9 +34,7 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 		//‹…‚Æ” 
 		if (bType == SHAPE_TYPE::BOX)
 		{
-			SphereCollider* a = dynamic_cast<SphereCollider*>(A);
-			BoxCollider* b = dynamic_cast<BoxCollider*>(B);
-			return Collision(a, b, rejection);
+			hit = SphereAndBoxCollision(A, B, rejection);
 		}
 	}
 
@@ -48,25 +44,41 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 		//” ‚Æ‹…
 		if (bType == SHAPE_TYPE::SPHERE)
 		{
-			BoxCollider* a = dynamic_cast<BoxCollider*>(A);
-			SphereCollider* b = dynamic_cast<SphereCollider*>(B);
-			return Collision(b, a, rejection);
+			hit = SphereAndBoxCollision(B, A, rejection);
 		}
 	}
 
-	return false;
+	//“–‚½‚Á‚Ä‚¢‚½‚çƒqƒbƒgƒŠƒXƒg‚É’Ç‰Á
+	if (hit){
+		A->AddHitList(B->Parent());
+		B->AddHitList(A->Parent());
+	}
+
+	//Žq‚Ì“–‚½‚è”»’è
+	for(auto& var : A->ChildrenCollider()){
+		Collision(var, B);
+	}
+
+	for (auto& var : B->ChildrenCollider()) {
+		Collision(A, var);
+	}
+
+	return hit;
 }
 
 /*--“–‚½‚è”»’è—p--*/
 //‹…‚Æ‹…
-bool CollisionManager::Collision(SphereCollider* A, SphereCollider* B, bool rejection)
+bool CollisionManager::SphereCollision(ICollider* A, ICollider* B, bool rejection)
 {
+	SphereCollider* a = dynamic_cast<SphereCollider*>(A);
+	SphereCollider* b = dynamic_cast<SphereCollider*>(B);
+
 	// ’†SÀ•WŠÔ‚Ì‹——£‚ðŒvŽZ
-	Vec3 distV = B->Shape()->CenterPoint() - A->Shape()->CenterPoint();
+	Vec3 distV = b->Shape()->CenterPoint() - a->Shape()->CenterPoint();
 	float dist = distV.Length();
 
 	// ”¼Œa‚Ì˜a
-	float rad = A->Shape()->Scale() + B->Shape()->Scale();
+	float rad = a->Shape()->Scale() + b->Shape()->Scale();
 
 	// ‹——£‚ª”¼Œa‚Ì˜a‚æ‚è‘å‚«‚¯‚ê‚ÎA“–‚½‚Á‚Ä‚¢‚È‚¢
 	if (dist > rad)
@@ -82,18 +94,20 @@ bool CollisionManager::Collision(SphereCollider* A, SphereCollider* B, bool reje
 	return true;
 }
 
-
 //‹…‚Æ” 
-bool CollisionManager::Collision(SphereCollider* A, BoxCollider* B, bool rejection)
+bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box, bool rejection)
 {
+	SphereCollider* s = dynamic_cast<SphereCollider*>(sphere);
+	BoxCollider* b = dynamic_cast<BoxCollider*>(box);
+	
 	Point point;
-	point.CenterPoint(A->Shape()->CenterPoint());
+	point.CenterPoint(s->Shape()->CenterPoint());
 	
 	//‹…‚Ì’†S“_‚Æ” ‚ÌÅ’Z‹——£‚ðo‚·
-	float dist = ShortestDistance((*B->Shape()), point);
+	float dist = ShortestDistance((*b->Shape()), point);
 
 	//Å’Z‹——£‚ª‹…‚Ì”¼Œa‚æ‚è‚à‘å‚«‚©‚Á‚½‚ç“–‚½‚Á‚Ä‚¢‚È‚¢
-	if (dist > A->Shape()->Scale()) {
+	if (dist > s->Shape()->Scale()) {
 		return false;
 	}
 
@@ -101,10 +115,10 @@ bool CollisionManager::Collision(SphereCollider* A, BoxCollider* B, bool rejecti
 }
 
 //” ‚Æ” 
-bool CollisionManager::Collision(BoxCollider* A, BoxCollider* B, bool rejection)
+bool CollisionManager::BoxCollision(ICollider* A, ICollider* B, bool rejection)
 {
-	Box* a = A->Shape();
-	Box* b = B->Shape();
+	Box* a = dynamic_cast<BoxCollider*>(A)->Shape();
+	Box* b = dynamic_cast<BoxCollider*>(B)->Shape();
 
 	/*--XŽ²‚Ì”»’è--*/
 	float aXRight = a->CenterPoint().m_x + (a->Size().m_x / 2.0f);//A‚ÌXŽ²‚Ì‰E‘¤(+•ûŒü)

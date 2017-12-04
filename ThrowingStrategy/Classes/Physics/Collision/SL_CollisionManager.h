@@ -17,9 +17,9 @@ namespace ShunLib
 	public:
 		//ìñÇΩÇËîªíËÅ@îrêÀèàóù
 		static bool Collision(ICollider* A, ICollider* B, bool rejection = true);
-		static bool Collision(SphereCollider* A, SphereCollider* B, bool rejection);
-		static bool Collision(BoxCollider* A, BoxCollider* B, bool rejection);
-		static bool Collision(SphereCollider* A, BoxCollider* B, bool rejection);
+		static bool SphereCollision(ICollider* A, ICollider* B, bool rejection);
+		static bool BoxCollision(ICollider* A, ICollider* B, bool rejection);
+		static bool SphereAndBoxCollision(ICollider* A, ICollider* B, bool rejection);
 		static void Rejection(SphereCollider* A, SphereCollider* B);
 		static void Rejection(BoxCollider* A, BoxCollider* B);
 		static void Rejection(SphereCollider* A, BoxCollider* B);

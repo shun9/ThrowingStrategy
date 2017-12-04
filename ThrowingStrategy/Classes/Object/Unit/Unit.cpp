@@ -24,18 +24,26 @@ void Unit::Initialize()
 	//Šî’êƒNƒ‰ƒX‚Ì‰Šú‰»
 	StateObject::Initialize();
 
-	//“–‚½‚è”»’è‚ÌÝ’è
+
+	//–{‘Ì‚Ì“–‚½‚è”»’è‚ÌÝ’è
 	m_collider = new ShunLib::SphereCollider();
 	m_collider->Parent(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
 	m_collider->Shape()->Scale(1.0f);
-
+	
 	//UŒ‚”ÍˆÍ‚ÌÝ’è
 	m_attackRange = new ShunLib::SphereCollider;
-	m_attackRange->Parent(this);
+	m_attackRange->AddChildCollider(m_collider);
 	m_attackRange->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
-	m_attackRange->Shape()->Scale(4.0f);
+	m_attackRange->Shape()->Scale(2.0f);
 	m_attackRange->IsDebugDraw(false);
+
+	//’ÇÕ”ÍˆÍ‚ÌÝ’è
+	m_chaseRange = new ShunLib::SphereCollider;
+	m_chaseRange->AddChildCollider(m_attackRange);
+	m_chaseRange->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
+	m_chaseRange->Shape()->Scale(4.0f);
+	m_chaseRange->IsDebugDraw(false);
 }
 
 
@@ -45,6 +53,7 @@ void Unit::Finalize()
 
 	SAFE_DELETE(m_collider);
 	SAFE_DELETE(m_attackRange);
+	SAFE_DELETE(m_chaseRange);
 }
 
 /// <summary>

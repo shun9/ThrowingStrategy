@@ -40,7 +40,6 @@ void PlayerPickUpCommand::Execute(Player * player)
 		//ユニット以外は持てない
 		if (v->Type() == OBJECT_LIST::UNIT){
 			player->AddChild(v);
-			//v->LocalPos(Vec3(0.0f,2.0f*(player->HavingUnitNum()+1.0f),0.0f));
 			player->AlignUnits();
 			v->ToBeLifted();
 			return;

@@ -22,6 +22,10 @@ namespace ShunLib
 		//当たり判定を持つオブジェクト
 		ObjectBase* m_parent;
 
+		//子の当たり判定
+		//親の当たり判定後に子の当たり判定を行う
+		std::vector<ICollider*> m_childrenCollider;
+
 		//当たり判定形状
 		IShape* m_shape;
 
@@ -49,7 +53,7 @@ namespace ShunLib
 		//リストに追加
 		//持ち主が同じ場合は追加しない
 		void AddHitList(ObjectBase* obj) {
-			if (m_parent != obj) {
+			if (m_parent != obj && obj != nullptr) {
 				m_hitList.push_back(obj);
 			}
 		}
@@ -63,8 +67,12 @@ namespace ShunLib
 		//ビジター受け入れ
 		void Accept(ShunLib::Visitor* visitor);
 
+		//子の当たり判定を追加
+		void AddChildCollider(ICollider* child);
+
 		/*--Getter--*/
 		ObjectBase* Parent() { return m_parent; }
+		std::vector<ICollider*>& ChildrenCollider() { return m_childrenCollider; }
 		Vec3 Offset() { return m_offset; }
 		const std::vector<ObjectBase*>& HitList() { return m_hitList; }
 		bool IsEntity() { return m_isEntity; }

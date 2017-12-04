@@ -46,6 +46,12 @@ void ShunLib::ICollider::Accept(ShunLib::Visitor * visitor)
 	}
 }
 
+void ShunLib::ICollider::AddChildCollider(ICollider * child)
+{
+	m_childrenCollider.push_back(child);
+	CollisionManager::GetInstance()->RemoveCollider(child);
+}
+
 
 //‹…ó‚Ì“–‚½‚è”»’è‚ÌXV
 void SphereCollider::Update()
