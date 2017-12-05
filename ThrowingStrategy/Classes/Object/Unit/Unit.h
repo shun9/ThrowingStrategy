@@ -11,11 +11,12 @@
 struct FlyingData;
 class Unit :public StateObject<Unit>
 {
+	using SphereCollider = ShunLib::SphereCollider;
 private:
 	UNIT_LIST m_unitType;
-	ShunLib::SphereCollider* m_collider;
-	ShunLib::SphereCollider* m_attackRange;
-	ShunLib::SphereCollider* m_chaseRange;
+	SphereCollider* m_collider;
+	SphereCollider* m_attackRange;
+	SphereCollider* m_chaseRange;
 
 public:
 	Unit():StateObject(this) {}
@@ -33,7 +34,8 @@ public:
 
 	/*--Getter--*/
 	UNIT_LIST UnitType() { return m_unitType; }
-	ShunLib::SphereCollider* AttackRange() { return m_attackRange; }
+	SphereCollider* AttackRange() { return m_attackRange; }
+	SphereCollider* ChaseRange() { return m_chaseRange; }
 
 	/*--Setter--*/
 	void UnitType(UNIT_LIST type) { m_unitType = type; }

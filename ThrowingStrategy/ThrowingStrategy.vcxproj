@@ -245,6 +245,7 @@
     <ClCompile Include="Classes\Object\UnitSummoner\State\SummonerSummonState.cpp" />
     <ClCompile Include="Classes\Object\UnitSummoner\UnitSummoner.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitAttackState.cpp" />
+    <ClCompile Include="Classes\Object\Unit\State\UnitChaseState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitFlyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitMoveState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitRoamState.cpp" />

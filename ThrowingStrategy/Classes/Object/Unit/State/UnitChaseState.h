@@ -23,5 +23,4 @@ public:
 
 	//I—¹ˆ—
 	void Exit(Unit* unit);
-
 };

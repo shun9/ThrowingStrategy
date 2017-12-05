@@ -362,6 +362,9 @@
     <ClCompile Include="Classes\Object\UnitSummoner\State\SummonerSteadyState.cpp">
       <Filter>Game\Object\UnitSummoner\SummonerState</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\State\UnitChaseState.cpp">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

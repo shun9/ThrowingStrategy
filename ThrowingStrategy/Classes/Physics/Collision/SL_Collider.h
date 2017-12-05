@@ -19,6 +19,9 @@ namespace ShunLib
 	class ICollider :public VisitorNode
 	{
 	protected:
+		//コライダーの位置を紐づけるオブジェクト
+		ObjectBase* m_posObj;
+
 		//当たり判定を持つオブジェクト
 		ObjectBase* m_parent;
 
@@ -62,6 +65,9 @@ namespace ShunLib
 		void ResetList() { 
 			m_hitList.clear();
 			m_hitList.shrink_to_fit();
+			for (auto& v:m_childrenCollider){
+				v->ResetList();
+			}
 		}
 
 		//ビジター受け入れ
@@ -72,6 +78,7 @@ namespace ShunLib
 
 		/*--Getter--*/
 		ObjectBase* Parent() { return m_parent; }
+		ObjectBase* PosObj() { return m_posObj; }
 		std::vector<ICollider*>& ChildrenCollider() { return m_childrenCollider; }
 		Vec3 Offset() { return m_offset; }
 		const std::vector<ObjectBase*>& HitList() { return m_hitList; }
@@ -81,6 +88,7 @@ namespace ShunLib
 		/*--Setter--*/
 		void Offset(const Vec3& offset) { m_offset = offset; }
 		void Parent(ObjectBase* parent) { m_parent = parent; }
+		void PosObj(ObjectBase* posObj) { m_posObj = posObj; }
 		void SetCallBack(std::function<void(ObjectBase*)> func) { m_callBack = func; }
 		void IsEntity(bool entity) { m_isEntity = entity; }
 		void IsDebugDraw(bool draw) { m_isDebugDraw = draw; }

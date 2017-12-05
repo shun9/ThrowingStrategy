@@ -50,8 +50,8 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 
 	//当たっていたらヒットリストに追加
 	if (hit){
-		A->AddHitList(B->Parent());
-		B->AddHitList(A->Parent());
+		if (B->Parent() != nullptr)A->AddHitList(B->Parent());
+		if (A->Parent() != nullptr)B->AddHitList(A->Parent());
 	}
 
 	//子の当たり判定

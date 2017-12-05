@@ -79,7 +79,6 @@ void SearchSpecificObjectVisitor::Visit(ShunLib::VisitorNode * node)
 	//“¯‚¶‚È‚çƒJƒEƒ“ƒg
 	if (node == m_target) {
 		ObjectBase* obj = dynamic_cast<ObjectBase*>(node);
-		m_objectCnt++;
-		m_objectList.push_back(obj);
+		m_object = obj;
 	}
 }

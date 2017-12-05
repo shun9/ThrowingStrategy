@@ -24,20 +24,12 @@ void ShunLib::CollisionManager::Update()
 		for (int j = i+1; j < size; j++)
 		{
 			//持ち主が同じならば飛ばす
-			if (m_colliderList[j]->Parent() == m_colliderList[i]->Parent()){
+			if (!(m_colliderList[j]->Parent() != m_colliderList[i]->Parent()
+			&&    m_colliderList[j]->PosObj() != m_colliderList[i]->PosObj())){
 				continue;
 			}
 
-			if (Collision(m_colliderList[i], m_colliderList[j]))
-			{
-				//ヒットリストに追加
-				m_colliderList[i]->AddHitList(m_colliderList[j]->Parent());
-				m_colliderList[j]->AddHitList(m_colliderList[i]->Parent());
-
-				//ヒット処理
-				(*m_colliderList[i])(m_colliderList[j]->Parent());
-				(*m_colliderList[j])(m_colliderList[i]->Parent());
-			}
+			Collision(m_colliderList[i], m_colliderList[j]);
 		}
 	}
 }

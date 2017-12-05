@@ -15,6 +15,7 @@ using namespace ShunLib;
 //“–‚½‚è”»’è‚ðŠÇ—‚·‚éƒNƒ‰ƒX‚É“o˜^
 ICollider::ICollider() :
 	m_parent(nullptr),
+	m_posObj(nullptr),
 	m_shape(nullptr),
 	m_callBack(NULL),
 	m_isEntity(true),
@@ -36,6 +37,10 @@ void ICollider::DebugRender()
 	if (m_isDebugDraw){
 		m_shape->Render();
 	}
+
+	for (auto& v:m_childrenCollider){
+		v->DebugRender();
+	}
 }
 
 void ShunLib::ICollider::Accept(ShunLib::Visitor * visitor)
@@ -56,10 +61,12 @@ void ShunLib::ICollider::AddChildCollider(ICollider * child)
 //‹…ó‚Ì“–‚½‚è”»’è‚ÌXV
 void SphereCollider::Update()
 {
-	if (m_parent != nullptr){
-		Vec3 pos = m_parent->WorldPos();
+	if (m_posObj != nullptr){
+		Shape()->CenterPoint(m_posObj->WorldPos() + this->Offset());
+	}
 
-		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
+	for (auto& v:m_childrenCollider){
+		v->Update();
 	}
 }
 

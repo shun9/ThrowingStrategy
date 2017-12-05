@@ -85,14 +85,13 @@ public:
 class SearchSpecificObjectVisitor : public ShunLib::Visitor
 {
 private:
-	ObjectBase* m_target;
-	int m_objectCnt;
-	std::vector<ObjectBase*> m_objectList;
+	ObjectBase* m_target; //探す対象
+	ObjectBase* m_object; //
 
 public:
 	SearchSpecificObjectVisitor(ObjectBase* obj):
 		m_target(obj),
-		m_objectCnt(0)
+		m_object(nullptr)
 	{}
 	~SearchSpecificObjectVisitor() {}
 
@@ -100,7 +99,31 @@ public:
 	void Visit(ShunLib::VisitorNode* node);
 
 	/*--Getter--*/
-	bool IsFound() { return !(m_objectList.empty()); }
-	int Count() { return m_objectCnt; }
-	std::vector<ObjectBase*>& List() { return m_objectList; }
+	bool IsFound() { return m_object != nullptr; }
+	ObjectBase* Object() { return m_object; }
+};
+
+
+/// <summary>
+/// 特定のオブジェクトを探すビジター
+/// </summary>
+class SearchSpecificObjectVisitor : public ShunLib::Visitor
+{
+private:
+	ObjectBase* m_target; //探す対象
+	ObjectBase* m_object; //
+
+public:
+	SearchSpecificObjectVisitor(ObjectBase* obj) :
+		m_target(obj),
+		m_object(nullptr)
+	{}
+	~SearchSpecificObjectVisitor() {}
+
+
+	void Visit(ShunLib::VisitorNode* node);
+
+	/*--Getter--*/
+	bool IsFound() { return m_object != nullptr; }
+	ObjectBase* Object() { return m_object; }
 };

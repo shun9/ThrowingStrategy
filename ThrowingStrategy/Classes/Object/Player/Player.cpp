@@ -29,6 +29,7 @@ void Player::Initialize()
 
 	//“–‚½‚è”»’è‚ÌÝ’è
 	m_collider = new ShunLib::SphereCollider();
+	m_collider->PosObj(this);
 	m_collider->Parent(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 1.0f, 0.0f));
 	m_collider->SetCallBack([&](ObjectBase* obj) { this->CollisionCallBack(obj); });

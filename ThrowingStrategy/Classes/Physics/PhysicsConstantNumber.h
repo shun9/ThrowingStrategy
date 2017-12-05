@@ -7,7 +7,7 @@
 #pragma once
 
 //–€CŒW”
-#define FRICTION 0.95f
+#define FRICTION 0.93f
 
 //‹ó‹C’ïR
 #define AIR_RESISTANCE 0.98f
