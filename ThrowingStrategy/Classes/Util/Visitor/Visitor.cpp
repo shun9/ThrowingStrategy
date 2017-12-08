@@ -10,6 +10,21 @@
 #include "../../Object/Unit/Unit.h"
 
 /// <summary>
+/// オブジェクトが状態を持っているかどうか
+/// </summary>
+/// <param name="obj"></param>
+/// <returns></returns>
+bool IsStateObject(ObjectBase* obj)
+{
+	for (auto& v : ObjectConstantNumber::STATE_OBJECT) {
+		if (obj->Type() == v) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/// <summary>
 /// ユニットを探すビジター
 /// </summary>
 void SearchUnitVisitor::Visit(ShunLib::VisitorNode * node)
@@ -17,8 +32,7 @@ void SearchUnitVisitor::Visit(ShunLib::VisitorNode * node)
 	Unit* unit = dynamic_cast<Unit*>(node);
 
 	//ユニットならカウント
-	if (unit != nullptr){
-		m_unitCnt++;
+	if (unit != nullptr) {
 		m_unitList.push_back(unit);
 	}
 }
@@ -26,26 +40,14 @@ void SearchUnitVisitor::Visit(ShunLib::VisitorNode * node)
 /// <summary>
 /// 状態を持つオブジェクトを探すビジター
 /// </summary>
-void SearchStateObjectVisitor::Visit(ShunLib::VisitorNode * node)
+void SearchStateObjectVisitor::Visit(ShunLib::VisitorNode* node)
 {
 	ObjectBase* obj = dynamic_cast<ObjectBase*>(node);
 
-	if (obj != nullptr){
+	if (obj != nullptr) {
 
-		//状態を持ったオブジェクト一覧
-		const std::vector<OBJECT_LIST> STATE_OBJECT{
-			PLAYER,
-			COMMANDER,
-			UNIT,
-			SUMMONER,
-		};
-
-		//オブジェクトの種類を探す
-		auto result = std::find(STATE_OBJECT.begin(), STATE_OBJECT.end(), obj->Type());
-	
 		//状態を持っているオブジェクトならカウント
-		if (result != STATE_OBJECT.end()){
-			m_objectCnt++;
+		if (IsStateObject(obj)) {
 			m_objectList.push_back(obj);
 		}
 	}
@@ -64,8 +66,7 @@ void SearchAnotherTeamVisitor::Visit(ShunLib::VisitorNode * node)
 
 		//チームに所属していて
 		//指定チームではないならカウントする
-		if (objTeam != NONE && objTeam != m_myTeam){
-			m_objectCnt++;
+		if (objTeam != ObjectConstantNumber::NONE && objTeam != m_myTeam) {
 			m_objectList.push_back(obj);
 		}
 	}
@@ -81,4 +82,40 @@ void SearchSpecificObjectVisitor::Visit(ShunLib::VisitorNode * node)
 		ObjectBase* obj = dynamic_cast<ObjectBase*>(node);
 		m_object = obj;
 	}
+}
+
+
+/// <summary>
+/// 最も近い位置にあるオブジェクトを探す
+/// </summary>
+void SearchNearestObjectVisitor::Visit(ShunLib::VisitorNode * node)
+{
+	ObjectBase* obj = dynamic_cast<ObjectBase*>(node);
+
+	if (obj != nullptr) {
+		//条件指定なし or 状態を持つオブジェクトの場合
+		//距離を確認する
+		if (!(m_isOnlyState && !IsStateObject(obj))) {
+			ShunLib::Vec3 dist = m_pos - obj->WorldPos();
+
+			if (m_minDist > dist.Length()) {
+				//最短距離の更新
+				m_minDist = dist.Length();
+				m_object = obj;
+			}
+		}
+	}
+}
+
+/// <summary>
+/// ターゲットの位置を返す
+/// </summary>
+ShunLib::Vec3 SearchNearestObjectVisitor::TargetPos()
+{
+	ShunLib::Vec3 pos = ShunLib::Vec3::Zero;
+	if (IsFound()) {
+		pos = m_object->WorldPos();
+	}
+
+	return pos;
 }

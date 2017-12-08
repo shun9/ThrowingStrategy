@@ -9,6 +9,7 @@
 #include <SL_Conversion.h>
 #include "../Main/SL_MyStepTimer.h"
 #include "../Physics/PhysicsConstantNumber.h"
+#include "ObjectModelHolder.h"
 
 //全てのオブジェクトの親
 //全てのオブジェクトをここに紐づける
@@ -17,7 +18,7 @@ ObjectBase* ObjectBase::ROOT_OBJECT;
 void ObjectBase::InitializeRootObject()
 {
 	ROOT_OBJECT = new ObjectBase(true);
-	ObjectBase::ROOT_OBJECT->Type(ROOT);
+	ObjectBase::ROOT_OBJECT->Type(ObjectConstantNumber::ROOT);
 	ObjectBase::ROOT_OBJECT->LocalPos(ShunLib::Vec3(0.0f, 0.0f, 0.0f));
 }
 
@@ -35,7 +36,7 @@ void ObjectBase::SetParent(ObjectBase * parent)
 	if (m_parent != nullptr)m_parent->RemoveChild(this);
 	m_parent = parent;
 	//親が存在し、ルートではないとき親データを影響させる
-	if (parent != nullptr && parent->Type() != ROOT) {
+	if (parent != nullptr && parent->Type() != ObjectConstantNumber::ROOT) {
 		//座標を相対的に決定
 		this->LocalPos(this->LocalPos() - m_parent->WorldPos());
 		this->Rotation(ShunLib::Vec3::Zero);
@@ -90,7 +91,8 @@ void ObjectBase::Move()
 	m_velocity *= FRICTION;
 }
 
-/// <summary>
+
+/// /// <summary>
 /// 描画 親用
 /// </summary>
 void ObjectBase::Render(const Matrix & view, const Matrix & proj)
@@ -101,20 +103,21 @@ void ObjectBase::Render(const Matrix & view, const Matrix & proj)
 	this->RenderChild(view, proj);
 }
 
+
 /// <summary>
 /// 描画 子用
 /// </summary>
 void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 {
-	auto data = OBJ_PARAM(this->m_type);
+	auto model = ObjectModelHolder::GetInstance()->GetModel(this);
 
 	//行列更新
 	CalcMat();
 
 	//モデルが存在するならば描画
-	if (data.model) {
+	if (model != nullptr) {
 		//モデル描画
-		data.model->Draw(m_world, view, proj);
+		model->Draw(m_world, view, proj);
 	}
 
 	//子の描画
@@ -122,6 +125,7 @@ void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 		v->RenderChild(view, proj);
 	}
 }
+
 
 /// <summary>
 /// 自身の行列を計算する
