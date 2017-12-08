@@ -9,10 +9,19 @@
 #include "../Util/SL_Camera.h"
 #include "../Util/BasicShapeModelRenderer.h"
 
-float ShunLib::ShortestDistance(const Box & A, const Point & B)
+/// <summary>
+/// Å’Z‹——£‚ğ‹‚ß‚é@” ‚Æ“_
+/// </summary>
+/// <param name="A">” </param>
+/// <param name="B">“_</param>
+/// <param name="buffer">” ‚ÌÅÚ‹ß“_‚ğŠi”[‚·‚é</param>
+/// <returns>Å’Z‹——£</returns>
+float ShunLib::ShortestDistance(const Box & A, const Point & B, Point* buffer)
 {
-	float sqLen = 0;   // ’·‚³‚Ì‚×‚«æ‚Ì’l‚ğŠi”[
 	Vec3 point = B.CenterPoint();
+	
+	// ’·‚³‚Ì‚×‚«æ‚Ì’l‚ğŠi”[
+	float sqLen = 0;  
 
 	//” ‚Ì’¸“_‚ÌÅ¬’l‚ÆÅ‘å’l
 	Vec3 min, max;
@@ -40,10 +49,21 @@ float ShunLib::ShortestDistance(const Box & A, const Point & B)
 		sqLen += ((point.m_z - min.m_z) * (point.m_z - min.m_z));
 	}
 
+	//ÅÚ‹ß“_‚ª•K—v‚È‚ç
+	if (buffer != nullptr){
+		Vec3 tmp;
+		tmp.m_x = ShunLib::Clamp(max.m_x, min.m_x, buffer->CenterPoint().m_x);
+		tmp.m_y = ShunLib::Clamp(max.m_y, min.m_y, buffer->CenterPoint().m_y);
+		tmp.m_z = ShunLib::Clamp(max.m_z, min.m_z, buffer->CenterPoint().m_z);
+		buffer->CenterPoint(tmp);
+	}
+
 	return sqrt(sqLen);
 }
 
-//‹…‚Ì•`‰æ
+/// <summary>
+/// ‹…‚Ì•`‰æ
+/// </summary>
 void ShunLib::Sphere::Render()
 {
 	auto camera = ShunLib::MainCamera::GetInstance();
@@ -54,7 +74,9 @@ void ShunLib::Sphere::Render()
 	shape->DrawSphere(world, camera->ViewMat(), camera->ProjMat());
 }
 
-//” ‚Ì•`‰æ
+/// <summary>
+/// ” ‚Ì•`‰æ
+/// </summary>
 void ShunLib::Box::Render()
 {
 	auto camera = ShunLib::MainCamera::GetInstance();

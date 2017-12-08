@@ -107,5 +107,5 @@ namespace ShunLib {
 	};
 
 	//Å’Z‹——£‚ğ‹‚ß‚é
-	float ShortestDistance(const Box& A, const Point& B);
+	float ShortestDistance(const Box& A, const Point& B, Point* buffer = nullptr);
 }
