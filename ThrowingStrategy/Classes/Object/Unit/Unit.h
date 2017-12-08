@@ -11,15 +11,20 @@
 struct FlyingData;
 class Unit :public StateObject<Unit>
 {
+public:
 	using SphereCollider = ShunLib::SphereCollider;
+	using UNIT_LIST = ObjectConstantNumber::UNIT_LIST;
+
 private:
 	UNIT_LIST m_unitType;
 	SphereCollider* m_collider;
 	SphereCollider* m_attackRange;
 	SphereCollider* m_chaseRange;
 
+	float m_attackInterval;
+
 public:
-	Unit():StateObject(this) {}
+	Unit():StateObject(this),m_attackInterval(2.0f) {}
 	~Unit() {}
 
 	//èâä˙âªÅ@èIóπ
@@ -36,7 +41,10 @@ public:
 	UNIT_LIST UnitType() { return m_unitType; }
 	SphereCollider* AttackRange() { return m_attackRange; }
 	SphereCollider* ChaseRange() { return m_chaseRange; }
+	float AttackInterval() { return m_attackInterval; }
 
 	/*--Setter--*/
 	void UnitType(UNIT_LIST type) { m_unitType = type; }
+	void AttackInterval(float interval) { m_attackInterval = interval; }
+
 };

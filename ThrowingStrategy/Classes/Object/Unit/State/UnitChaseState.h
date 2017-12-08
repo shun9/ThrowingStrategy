@@ -6,11 +6,15 @@
 //************************************************/
 #pragma once
 #include <SL_State.h>
+#include <SL_Math.h>
 
 class Unit;
 
 class UnitChaseState : public ShunLib::State<Unit>
 {
+public:
+	using Vec3 = ShunLib::Vec3;
+
 public:
 	UnitChaseState() {}
 	~UnitChaseState() {}

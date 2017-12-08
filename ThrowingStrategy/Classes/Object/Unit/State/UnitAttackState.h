@@ -6,12 +6,14 @@
 //************************************************/
 #pragma once
 #include <SL_State.h>
+#include <SL_Timer.h>
 #include "../Unit.h"
 
 class UnitAttackState : public ShunLib::State<Unit>
 {
 private:
 	ObjectBase* m_target;
+	ShunLib::Timer m_intervalTimer;
 
 public:
 	UnitAttackState():

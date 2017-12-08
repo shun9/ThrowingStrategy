@@ -5,7 +5,7 @@
 //* @author:S.Katou
 //************************************************/
 #include "UnitRoamState.h"
-#include "UnitAttackState.h"
+#include "UnitChaseState.h"
 
 #include <cmath>
 #include <SL_Conversion.h>
@@ -41,9 +41,9 @@ void UnitRoamState::Execute(Unit * unit)
 
 	//UŒ‚”ÍˆÍ‚É“G‚ª‚¢‚½ê‡
 	SearchAnotherTeamVisitor v(unit->Team());
-	unit->AttackRange()->Accept(&v);
+	unit->ChaseRange()->Accept(&v);
 	if (v.Count() > 0) {
-		unit->ChangeState(new UnitAttackState);
+		unit->ChangeState(new UnitChaseState);
 	}
 }
 
