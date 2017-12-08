@@ -21,7 +21,6 @@ public:
 	int maxHP;
 	float power;
 	float spd;
-	std::shared_ptr<ShunLib::Model> model;
 };
 
 class ObjectParamHolder : public ShunLib::Singleton<ObjectParamHolder>
