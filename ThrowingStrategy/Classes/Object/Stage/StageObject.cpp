@@ -2,8 +2,8 @@
 
 Block::Block()
 {
-	this->Type(BLOCK);
-	this->Team(TEAM::NONE);
+	this->Type(ObjectConstantNumber::BLOCK);
+	this->Team(ObjectConstantNumber::TEAM::NONE);
 
 	//“–‚½‚è”»’è‚Ìİ’è
 	m_collider = new ShunLib::BoxCollider();

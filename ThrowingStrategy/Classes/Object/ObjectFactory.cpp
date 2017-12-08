@@ -9,34 +9,71 @@
 #include "Commander\Commander.h"
 #include "Unit\Unit.h"
 #include "DefenseTarget\DefenseTarget.h"
-#include "Stage\Stage.h"
+#include "Stage\GroundStage.h"
 #include "Stage\StageObject.h"
 #include "UnitSummoner\UnitSummoner.h"
 
 /// <summary>
 /// オブジェクトの生成
 /// </summary>
-/// <param name="num">オブジェクトの番号</param>
+/// <param name="num">オブジェクトの種類</param>
 /// <returns>生成したオブジェクト</returns>
-ObjectBase* ObjectFactory::Create(OBJECT_LIST num)
+ObjectBase* ObjectFactory::CreateObject(ObjectConstantNumber::OBJECT_LIST type)
 {
 	ObjectBase* obj = nullptr;
 
-	switch (num)
+	switch (type)
 	{
-	case PLAYER:	     obj = m_playerFactory.Create();break;
-	case COMMANDER:	     obj = m_commanderFactory.Create();break;
-	case UNIT:		     obj = m_unitFactory.Create();break;
-	case BLOCK:		     obj = m_blockFactory.Create(); break;
-	case DEFENSE_TARGET: obj = m_defenseTargetFactory.Create(); break;
-	case STAGE:		     obj = m_stageFactory.Create(); break;
-	case SUMMONER:		 obj = m_summonerFactory.Create(); break;
+	case ObjectConstantNumber::PLAYER:			 obj = m_playerFactory.Create();break;
+	case ObjectConstantNumber::COMMANDER:	     obj = m_commanderFactory.Create();break;
+	case ObjectConstantNumber::UNIT:		     obj = m_unitFactory.Create();break;
+	case ObjectConstantNumber::BLOCK:		     obj = m_blockFactory.Create(); break;
+	case ObjectConstantNumber::DEFENSE_TARGET:	 obj = m_defenseTargetFactory.Create(); break;
+	case ObjectConstantNumber::SUMMONER:		 obj = m_summonerFactory.Create(); break;
 	default:break;
 	}
 
 	return obj;
 }
 
+/// <summary>
+/// ステージ作成
+/// </summary>
+/// <param name="type">ステージの種類</param>
+Stage* ObjectFactory::CreateStage(ObjectConstantNumber::STAGE_LIST type)
+{
+	Stage* stage = nullptr;
+
+	switch (type)
+	{
+	case ObjectConstantNumber::GROUND:
+		stage = m_groundStageFactory.Create();
+		break;
+	default:
+		break;
+	}
+	return stage;
+}
+
+
+/// <summary>
+/// ユニットの作成
+/// </summary>
+/// <param name="type">ユニットの種類</param>
+Unit* ObjectFactory::CreateUnit(ObjectConstantNumber::UNIT_LIST type)
+{
+	Unit* unit = nullptr;
+
+	switch (type)
+	{
+	case ObjectConstantNumber::NORMAL:
+		unit = m_unitFactory.Create();
+		break; 
+	default:
+		break;
+	}
+	return unit;
+}
 
 ObjectFactory::~ObjectFactory()
 {
@@ -45,6 +82,6 @@ ObjectFactory::~ObjectFactory()
 	m_unitFactory.AllDelete();
 	m_blockFactory.AllDelete();
 	m_defenseTargetFactory.AllDelete();
-	m_stageFactory.AllDelete();
+	m_groundStageFactory.AllDelete();
 	m_summonerFactory.AllDelete();
 }

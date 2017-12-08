@@ -13,6 +13,9 @@ class Unit;
 
 class UnitSummoner :public StateObject<UnitSummoner>
 {
+public:
+	using UNIT_LIST = ObjectConstantNumber::UNIT_LIST;
+
 private:
 	UNIT_LIST m_unitType;
 	ShunLib::BoxCollider* m_collider;

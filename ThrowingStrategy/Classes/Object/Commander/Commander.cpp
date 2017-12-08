@@ -23,6 +23,7 @@ Commander::Commander() :
 	//“–‚½‚è”»’è‚ÌÝ’è
 	m_collider = new ShunLib::SphereCollider();
 	m_collider->Parent(this);
+	m_collider->PosObj(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 1.0f, 0.0f));
 
 	//“–‚½‚è”»’è‚ÌŒ`ó‚ÌÝ’è
@@ -37,7 +38,7 @@ Commander::~Commander()
 void Commander::Initialize()
 {
 	this->ChangeState(new CommanderMoveState);
-	this->Type(COMMANDER);
+	this->Type(ObjectConstantNumber::COMMANDER);
 	StateObject::Initialize();
 }
 

@@ -14,8 +14,9 @@ UnitSummoner::UnitSummoner():
 	StateObject(this) ,
 	m_interval(120)
 {
-	this->Type(SUMMONER);
-	this->UnitType(NORMAL);
+	this->Team(ObjectConstantNumber::BLUE);
+	this->Type(ObjectConstantNumber::SUMMONER);
+	this->UnitType(ObjectConstantNumber::NORMAL);
 
 	m_collider = new ShunLib::BoxCollider;
 	m_collider->Parent(this);
@@ -35,18 +36,22 @@ UnitSummoner::~UnitSummoner()
 Unit* UnitSummoner::Summon()
 {
 	//ユニット作成
-	auto unit = ObjectFactory::GetInstance()->Create(UNIT);
+	auto unit = ObjectFactory::GetInstance()->CreateUnit(UNIT_LIST::NORMAL);
 
 	//種類を設定
-	dynamic_cast<Unit*>(unit)->UnitType(m_unitType);
+	unit->UnitType(m_unitType);
 	
-	//召喚位置
-	unit->Pos(this->Pos());
-
 	//ルートに紐づけ
 	ObjectBase::ROOT_OBJECT->AddChild(unit);
 
+	//初期化
 	unit->Initialize();
+	
+	//召喚位置設定
+	unit->Pos(this->Pos());
 
-	return dynamic_cast<Unit*>(unit);
+	//同じチーム所属にする
+	unit->Team(this->Team());
+
+	return unit;
 }

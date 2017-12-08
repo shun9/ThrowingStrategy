@@ -35,19 +35,7 @@ PlayScene::PlayScene()
 	//オブジェクト生成
 	auto factory = ObjectFactory::GetInstance();
 
-	auto p=factory->Create(PLAYER);
-	camera->FollowTarget(p);
-	camera->ChangeMode(FOLLOW_CAMERA);
-	p->Pos(ShunLib::Vec3(0.0f, 0.0f, 5.0f));
-	p->Team(BLUE);
-
-	//factory->Create(COMMANDER);
-	factory->Create(UNIT);
-	//factory->Create(UNIT);
-	//factory->Create(DEFENSE_TARGET);
-	factory->Create(SUMMONER)->Pos(ShunLib::Vec3(0.0f, 0.0f, 5.0f));
-	auto s = factory->Create(STAGE);
-	dynamic_cast<Stage*>(s)->SetStageType(GROUND);
+	auto s = factory->CreateStage(ObjectConstantNumber::STAGE_LIST::GROUND);
 }
 
 PlayScene::~PlayScene()

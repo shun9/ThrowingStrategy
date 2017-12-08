@@ -5,54 +5,62 @@
 //* @author:S.Katou
 //************************************************/
 #pragma once
-#include <SL_Lerp.h>
 
-//オブジェクト一覧
-enum OBJECT_LIST
+class ObjectConstantNumber
 {
-	ROOT = 0,		//ルートオブジェクト
-	PLAYER,			//プレイヤー
-	COMMANDER,      //指揮官
-	UNIT,           //召喚されるユニット
-	BLOCK,          //ブロック
-	DEFENSE_TARGET,	//防衛対象
-	SUMMONER,		//ユニットを召喚するオブジェクト
-	STAGE,			//ステージ
 
-	OBJECT_LIST_END,//オブジェクトの種類数
-};
+public:
+	//オブジェクト一覧
+	enum OBJECT_LIST
+	{
+		ROOT = 0,		//ルートオブジェクト
+		PLAYER,			//プレイヤー
+		COMMANDER,      //指揮官
+		UNIT,           //召喚されるユニット
+		BLOCK,          //ブロック
+		DEFENSE_TARGET,	//防衛対象
+		SUMMONER,		//ユニットを召喚するオブジェクト
+		STAGE,			//ステージ
 
-//ユニットの種類
-enum UNIT_LIST
-{
-	NORMAL = 0,
+		OBJECT_LIST_END,//オブジェクトの種類数
+	};
 
-	UNIT_LIST_END,
-};
+	//ユニットの種類
+	enum UNIT_LIST
+	{
+		NORMAL = 0,
 
-//ステージ一覧
-enum STAGE_LIST
-{
-	GROUND = 0,		//地面のみのステージ
+		UNIT_LIST_END,
+	};
 
-	STAGE_LIST_END,//ステージ種類数
-};
+	//ステージ一覧
+	enum STAGE_LIST
+	{
+		GROUND = 0,		//地面のみのステージ
 
-//チーム分け
-enum TEAM
-{
-	NONE = -1,    //チーム無し
-	RED  = 0,
-	BLUE,
+		STAGE_LIST_END,//ステージ種類数
+	};
 
-	TEAM_END,     //チーム数
-};
+	//チーム分け
+	enum TEAM
+	{
+		NONE = -1,    //チーム無し
+		RED = 0,
+		BLUE,
 
-//投げ方
-enum THROW_TYPE
-{
-	LINE = 0,
+		TEAM_END,     //チーム数
+	};
 
-	THROW_TYPE_END,
+	//投げ方
+	enum THROW_TYPE
+	{
+		LINE = 0,
+
+		THROW_TYPE_END,
+	};
+
+public:
+	//状態を持ったオブジェクト一覧
+	static const OBJECT_LIST STATE_OBJECT[4];
 };
 

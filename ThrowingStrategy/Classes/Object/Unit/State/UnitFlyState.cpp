@@ -17,7 +17,7 @@ void UnitFlyState::Enter(Unit * unit)
 	m_timeCnt = 0.0f;
 
 	//“Š‚°•û‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡
-	if (m_data.Lerp() == NULL) { m_data.type = THROW_TYPE::LINE; }
+	if (m_data.Lerp() == NULL) { m_data.type = ObjectConstantNumber::THROW_TYPE::LINE; }
 }
 
 void UnitFlyState::Execute(Unit * unit)

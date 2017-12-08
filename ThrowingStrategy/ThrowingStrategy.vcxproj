@@ -178,6 +178,7 @@
     <ClInclude Include="Classes\Object\ObjectConstantNumber.h" />
     <ClInclude Include="Classes\Object\ObjectData.h" />
     <ClInclude Include="Classes\Object\ObjectMacro.h" />
+    <ClInclude Include="Classes\Object\ObjectModelHolder.h" />
     <ClInclude Include="Classes\Object\ObjectParamHolder.h" />
     <ClInclude Include="Classes\Object\ObjectFactory.h" />
     <ClInclude Include="Classes\Object\ObjectStruct.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Classes\Object\Player\State\PlayerKeyCommand.h" />
     <ClInclude Include="Classes\Object\Player\State\PlayerMoveState.h" />
     <ClInclude Include="Classes\Object\SL_Shape.h" />
+    <ClInclude Include="Classes\Object\Stage\GroundStage.h" />
     <ClInclude Include="Classes\Object\Stage\Stage.h" />
     <ClInclude Include="Classes\Object\Stage\StageObject.h" />
     <ClInclude Include="Classes\Object\StateObject.h" />
@@ -232,6 +234,8 @@
     <ClCompile Include="Classes\Object\Commander\CommanderMoveState.cpp" />
     <ClCompile Include="Classes\Object\DefenseTarget\DefenseTarget.cpp" />
     <ClCompile Include="Classes\Object\ObjectBase.cpp" />
+    <ClCompile Include="Classes\Object\ObjectConstantNumber.cpp" />
+    <ClCompile Include="Classes\Object\ObjectModelHolder.cpp" />
     <ClCompile Include="Classes\Object\ObjectParamHolder.cpp" />
     <ClCompile Include="Classes\Object\ObjectFactory.cpp" />
     <ClCompile Include="Classes\Object\Player\Player.cpp" />
@@ -239,6 +243,7 @@
     <ClCompile Include="Classes\Object\Player\State\PlayerKeyCommand.cpp" />
     <ClCompile Include="Classes\Object\Player\State\PlayerMoveState.cpp" />
     <ClCompile Include="Classes\Object\SL_Shape.cpp" />
+    <ClCompile Include="Classes\Object\Stage\GroundStage.cpp" />
     <ClCompile Include="Classes\Object\Stage\Stage.cpp" />
     <ClCompile Include="Classes\Object\Stage\StageObject.cpp" />
     <ClCompile Include="Classes\Object\UnitSummoner\State\SummonerSteadyState.cpp" />
@@ -276,11 +281,15 @@
   <ItemGroup>
     <MeshContentTask Include="Resources\ModelData\Box.FBX" />
     <MeshContentTask Include="Resources\ModelData\Ghost.FBX" />
-    <MeshContentTask Include="Resources\ModelData\Octahedron.FBX" />
+    <MeshContentTask Include="Resources\ModelData\Ghost2.FBX" />
+    <MeshContentTask Include="Resources\ModelData\Hedora.FBX" />
+    <MeshContentTask Include="Resources\ModelData\Hedora2.FBX" />
     <MeshContentTask Include="Resources\ModelData\Player.FBX">
       <FileType>Document</FileType>
     </MeshContentTask>
+    <MeshContentTask Include="Resources\ModelData\PlayerB.FBX" />
     <MeshContentTask Include="Resources\ModelData\Tube.FBX" />
+    <MeshContentTask Include="Resources\ModelData\Tube2.FBX" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

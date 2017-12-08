@@ -18,22 +18,34 @@ class Unit;
 class Block;
 class DefenseTarget;
 class Stage;
+class GroundStage;
 class UnitSummoner;
 
 class ObjectFactory : public ShunLib::Singleton<ObjectFactory>
 {
 	friend ShunLib::Singleton<ObjectFactory>;
 public:
+	//１種類のオブジェクト
 	ShunLib::Factory<Player> m_playerFactory;
 	ShunLib::Factory<Commander> m_commanderFactory;
-	ShunLib::Factory<Unit> m_unitFactory;
 	ShunLib::Factory<Block> m_blockFactory;
 	ShunLib::Factory<DefenseTarget> m_defenseTargetFactory;
-	ShunLib::Factory<Stage> m_stageFactory;
 	ShunLib::Factory<UnitSummoner> m_summonerFactory;
 
+	//ユニット用
+	ShunLib::Factory<Unit> m_unitFactory;
+
+	//ステージ用
+	ShunLib::Factory<GroundStage> m_groundStageFactory;
+
 public:
-	ObjectBase* Create(OBJECT_LIST num);
+	ObjectBase* CreateObject(ObjectConstantNumber::OBJECT_LIST type);
+
+	//ステージの作成
+	Stage* CreateStage(ObjectConstantNumber::STAGE_LIST type);
+
+	//ユニットの作成
+	Unit* CreateUnit(ObjectConstantNumber::UNIT_LIST type);
 
 private:
 	ObjectFactory() {}

@@ -12,8 +12,8 @@
 class ObjectData
 {
 private:
-	using Vec3 = ShunLib::Vec3;
-	using Matrix = ShunLib::Matrix;
+	using TEAM = ObjectConstantNumber::TEAM;
+	using OBJECT_LIST = ObjectConstantNumber::OBJECT_LIST;
 
 protected:
 	int m_hp;		   //åªç›HP

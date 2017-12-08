@@ -17,7 +17,7 @@
 void Player::Initialize()
 {	
 	//チーム設定(仮)　※いずれ消す
-	this->Team(TEAM::RED);
+	this->Team(TEAM::BLUE);
 
 	//基本情報設定
 	this->Type(OBJECT_LIST::PLAYER);
