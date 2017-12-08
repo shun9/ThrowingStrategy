@@ -24,7 +24,7 @@ void PlayerPickUpCommand::Execute(Player * player)
 	SearchUnitVisitor visitor;
 	player->Collider()->Accept(&visitor);
 	auto hitList = visitor.List();
-
+	
 	for (auto& v : hitList)
 	{
 		//敵チームは持てない
@@ -33,12 +33,14 @@ void PlayerPickUpCommand::Execute(Player * player)
 		}
 
 		//既に持っているユニットは対象外
-		if (player->HasChild(v)){
+		SearchSpecificObjectVisitor sv(v);
+		player->Accept(&sv);
+		if (sv.IsFound()){
 			continue;
 		}
 
 		//ユニット以外は持てない
-		if (v->Type() == OBJECT_LIST::UNIT){
+		if (v->Type() == ObjectConstantNumber::OBJECT_LIST::UNIT){
 			player->AddChild(v);
 			player->AlignUnits();
 			v->ToBeLifted();
@@ -53,10 +55,15 @@ void PlayerPickUpCommand::Execute(Player * player)
 /// </summary>
 void PlayerPutCommand::Execute(Player * player)
 {
+	SearchUnitVisitor unitV;
+	player->Accept(&unitV);
+
 	//ユニットを所持していたら置く
-	ObjectBase* child;
-	if (player->HasChild(UNIT,&child))
+	if (unitV.Count() > 0)
 	{		
+		//先頭のユニットを対象とする
+		ObjectBase* child = unitV.List()[0];
+
 		//プレイヤーの向いている方向
 		float rad = ToRadian(player->Rotation().m_y);
 
@@ -94,7 +101,7 @@ void PlayerThrowCommand::Execute(Player * player)
 		data.start = child->WorldPos();
 		data.end = player->WorldPos() + (Vec3(-sin(rad), 0.0f, cos(rad)).Normalize() *player->Power());
 		data.power = player->Power();
-		data.type = THROW_TYPE::LINE;
+		data.type = ObjectConstantNumber::THROW_TYPE::LINE;
 		child->ToBeThrow(data);	
 	
 		player->AlignUnits();
