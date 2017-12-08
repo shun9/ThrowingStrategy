@@ -48,19 +48,19 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 		}
 	}
 
-	//当たっていたらヒットリストに追加
+	//当たっていたらヒットリストに追加 子の当たり判定を行う
 	if (hit){
 		if (B->Parent() != nullptr)A->AddHitList(B->Parent());
 		if (A->Parent() != nullptr)B->AddHitList(A->Parent());
-	}
 
-	//子の当たり判定
-	for(auto& var : A->ChildrenCollider()){
-		Collision(var, B);
-	}
+		//子の当たり判定
+		for (auto& var : A->ChildrenCollider()) {
+			Collision(var, B);
+		}
 
-	for (auto& var : B->ChildrenCollider()) {
-		Collision(A, var);
+		for (auto& var : B->ChildrenCollider()) {
+			Collision(A, var);
+		}
 	}
 
 	return hit;

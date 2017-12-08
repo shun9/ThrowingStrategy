@@ -13,6 +13,8 @@
 #include "../../../Main/SL_MyStepTimer.h"
 #include "../../../Util/Visitor/Visitor.h"
 
+#include "../../../Util/Debugger/DebuggerUI.h"
+
 using namespace std;
 using namespace ShunLib;
 
@@ -23,6 +25,7 @@ void UnitRoamState::Enter(Unit * unit)
 
 void UnitRoamState::Execute(Unit * unit)
 {
+	//ŽžŠÔ‚ðŒv‘ª
 	auto timer = MyStepTimer::GetInstance();
 	m_timeCnt += timer->GetElapsedSeconds();
 	
@@ -34,12 +37,11 @@ void UnitRoamState::Execute(Unit * unit)
 		m_timeCnt = 0.0f;
 	}
 
-	//‘¬“xÝ’è
+	//‘¬“xÝ’è ˆÚ“®
 	unit->Velocity(m_direction * unit->Spd());
-
 	unit->Move();
 
-	//UŒ‚”ÍˆÍ‚É“G‚ª‚¢‚½ê‡
+	//’ÇÕ”ÍˆÍ‚É“G‚ª‚¢‚½ê‡
 	SearchAnotherTeamVisitor v(unit->Team());
 	unit->ChaseRange()->Accept(&v);
 	if (v.Count() > 0) {

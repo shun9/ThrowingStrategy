@@ -62,11 +62,9 @@ void SearchAnotherTeamVisitor::Visit(ShunLib::VisitorNode * node)
 	ObjectBase* obj = dynamic_cast<ObjectBase*>(node);
 
 	if (obj != nullptr) {
-		TEAM objTeam = obj->Team();
-
 		//チームに所属していて
 		//指定チームではないならカウントする
-		if (objTeam != ObjectConstantNumber::NONE && objTeam != m_myTeam) {
+		if (obj->Team() != ObjectConstantNumber::NONE && obj->Team() != m_myTeam) {
 			m_objectList.push_back(obj);
 		}
 	}

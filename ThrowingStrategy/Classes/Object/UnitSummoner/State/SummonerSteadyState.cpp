@@ -7,6 +7,8 @@
 #include "SummonerSteadyState.h"
 #include "SummonerSummonState.h"
 
+#include "../../../Util/Debugger/DebuggerUI.h"
+
 void SummonerSteadyState::Enter(UnitSummoner * summoner)
 {
 	m_timer.SetTime(600);
@@ -14,6 +16,9 @@ void SummonerSteadyState::Enter(UnitSummoner * summoner)
 
 void SummonerSteadyState::Execute(UnitSummoner * summoner)
 {
+	
+	DebuggerUI::GetInstance()->DrawDebugText("HP : %d",summoner->HP());
+
 	m_timer.Update();
 
 	if (m_timer.IsEnded()){

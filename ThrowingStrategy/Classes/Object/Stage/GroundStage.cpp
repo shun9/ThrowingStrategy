@@ -55,10 +55,16 @@ void GroundStage::SettingObject()
 	auto p = factory->CreateObject(ObjectConstantNumber::PLAYER);
 	camera->FollowTarget(p);
 	camera->ChangeMode(FOLLOW_CAMERA);
-	p->Pos(ShunLib::Vec3(0.0f, 0.0f, 5.0f));
+	p->Pos(ShunLib::Vec3(-10.0f, 0.0f, 0.0f));
 	p->Team(ObjectConstantNumber::BLUE);
 
-	factory->CreateObject(ObjectConstantNumber::COMMANDER)->Team(ObjectConstantNumber::TEAM::RED);
-	factory->CreateObject(ObjectConstantNumber::UNIT);
-	factory->CreateObject(ObjectConstantNumber::SUMMONER)->Pos(ShunLib::Vec3(0.0f, 0.0f, 5.0f));
+	//青チーム召喚オブジェクト
+	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
+	summoner->Pos(ShunLib::Vec3(-9.0f, 0.0f, 0.0f));
+	summoner->Team(p->Team());
+
+	//赤チーム召喚オブジェクト
+	summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
+	summoner->Pos(ShunLib::Vec3(9.0f, 0.0f, 0.0f));
+	summoner->Team(ObjectConstantNumber::TEAM::RED);
 }

@@ -25,21 +25,25 @@ public:
 	SearchUnitVisitor(){}
 	~SearchUnitVisitor() {}
 
+	//訪問する
 	void Visit(ShunLib::VisitorNode* node)override;
 
+	//ビジターを受け入れる
 	void Accept(Visitor* visitor) override{
 		for (auto& v : m_unitList){
 			v->Accept(visitor);
 		}
 	};
 
-	void Reset()override { 
+	//探索結果をリセットする
+	void Reset()override {
 		m_unitList.clear();
 		m_unitList.shrink_to_fit();
 	}
 
 	/*--Getter--*/
 	int Count() { return m_unitList.size(); }
+	bool IsFound() { return Count() > 0; }
 	std::vector<Unit*>& List() { return m_unitList; }
 };
 
@@ -56,14 +60,17 @@ public:
 	SearchStateObjectVisitor() {}
 	~SearchStateObjectVisitor() {}
 
+	//訪問する
 	void Visit(ShunLib::VisitorNode* node)override;
 
+	//ビジターを受け入れる
 	void Accept(Visitor* visitor) override {
 		for (auto& v : m_objectList) {
 			v->Accept(visitor);
 		}
 	};
 
+	//探索結果をリセットする
 	void Reset() override {
 		m_objectList.clear();
 		m_objectList.shrink_to_fit();
@@ -71,6 +78,7 @@ public:
 
 	/*--Getter--*/
 	int Count() { return m_objectList.size(); }
+	bool IsFound() { return Count() > 0; }
 	std::vector<ObjectBase*>& List() { return m_objectList; }
 };
 
@@ -93,14 +101,17 @@ public:
 	{}
 	~SearchAnotherTeamVisitor() {}
 
+	//訪問する
 	void Visit(ShunLib::VisitorNode* node)override;
 
+	//ビジターを受け入れる
 	void Accept(Visitor* visitor)override {
 		for (auto& v : m_objectList) {
 			v->Accept(visitor);
 		}
 	};
 
+	//探索結果をリセットする
 	void Reset() override {
 		m_objectList.clear();
 		m_objectList.shrink_to_fit();
@@ -108,6 +119,7 @@ public:
 
 	/*--Getter--*/
 	int Count() { return m_objectList.size(); }
+	bool IsFound() { return Count() > 0; }
 	std::vector<ObjectBase*>& List() { return m_objectList; }
 };
 
@@ -129,14 +141,17 @@ public:
 	~SearchSpecificObjectVisitor() {}
 
 
+	//訪問する
 	void Visit(ShunLib::VisitorNode* node)override;
 
+	//ビジターを受け入れる
 	void Accept(Visitor* visitor)override {
 		if (IsFound()){
 			m_object->Accept(visitor);
 		}
 	};
 
+	//探索結果をリセットする
 	void Reset() override {
 		m_object = nullptr;
 	}
@@ -165,14 +180,17 @@ public:
 	~SearchNearestObjectVisitor() {}
 
 
+	//訪問する
 	void Visit(ShunLib::VisitorNode* node)override;
 
+	//ビジターを受け入れる
 	void Accept(Visitor* visitor) override {
 		if (IsFound()) {
 			m_object->Accept(visitor);
 		}
 	};
 
+	//探索結果をリセットする
 	void Reset() override {
 		m_object = nullptr;
 		m_minDist = 9999.9999f;

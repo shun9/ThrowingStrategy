@@ -13,9 +13,10 @@
 /// </summary>
 /// <param name="type">ステージの種類</param>
 Stage::Stage(STAGE_TYPE type):
-	m_stageType(type)
+	m_stageType(type),
+	ObjectBase(OBJECT_LIST::STAGE)
 {
-	this->Type(ObjectConstantNumber::STAGE);
+
 }
 
 Stage::~Stage()

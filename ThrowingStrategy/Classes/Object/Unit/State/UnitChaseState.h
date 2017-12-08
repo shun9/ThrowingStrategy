@@ -8,6 +8,7 @@
 #include <SL_State.h>
 #include <SL_Math.h>
 
+class ObjectBase;
 class Unit;
 
 class UnitChaseState : public ShunLib::State<Unit>
@@ -27,4 +28,8 @@ public:
 
 	//終了処理
 	void Exit(Unit* unit);
+
+private:
+	//ユニットから最も近い敵チームオブジェクトを探す
+	ObjectBase* SearchTarget(Unit* unit);
 };
