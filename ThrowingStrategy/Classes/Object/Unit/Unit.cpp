@@ -11,19 +11,18 @@
 #include "../../Physics/PhysicsConstantNumber.h"
 #include "../../Main/SL_MyStepTimer.h"
 
-void Unit::Initialize()
+Unit::Unit():
+	StateObject(this, OBJECT_LIST::UNIT),
+	m_attackInterval(2.0f)
 {
 	//チーム設定(仮)　※いずれ消す
 	this->Team(TEAM::BLUE);
 
 	//基本情報設定
 	this->ChangeState(new UnitRoamState);
-	this->Type(OBJECT_LIST::UNIT);
-	this->HP(this->MaxHP());
-	
+
 	//基底クラスの初期化
 	StateObject::Initialize();
-
 
 	//本体の当たり判定の設定
 	m_collider = new SphereCollider();
@@ -31,7 +30,7 @@ void Unit::Initialize()
 	m_collider->PosObj(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
 	m_collider->Shape()->Scale(1.0f);
-	
+
 	//攻撃範囲の設定
 	m_attackRange = new SphereCollider;
 	m_attackRange->PosObj(this);
@@ -47,6 +46,10 @@ void Unit::Initialize()
 	m_chaseRange->Offset(ShunLib::Vec3(0.0f, 0.6f, 0.0f));
 	m_chaseRange->Shape()->Scale(4.0f);
 	m_chaseRange->IsDebugDraw(false);
+}
+
+void Unit::Initialize()
+{
 }
 
 

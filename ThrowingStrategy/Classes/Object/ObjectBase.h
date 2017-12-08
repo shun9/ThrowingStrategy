@@ -18,10 +18,9 @@
 
 class ObjectBase : public ObjectData , public ShunLib::VisitorNode,public ObjectTransform
 {
-private:
+public:
 	using Vec3 = ShunLib::Vec3;
 	using Matrix = ShunLib::Matrix;
-	using OBJECT_LIST = ObjectConstantNumber::OBJECT_LIST;
 
 public:
 	//全てのオブジェクトの親
@@ -40,13 +39,16 @@ private:
 
 public:
 	//子用
-	ObjectBase() :m_parent(nullptr) {
+	ObjectBase(OBJECT_LIST type) :
+		ObjectData(type),
+		m_parent(nullptr) {
 		ROOT_OBJECT->AddChild(this);
 	}
 
 	//ルート用
-	//引数は何でもよい
-	ObjectBase(bool dummy):m_parent(nullptr) {
+	ObjectBase():
+		ObjectData(OBJECT_LIST::ROOT),
+		m_parent(nullptr) {
 	}
 
 	virtual ~ObjectBase() {}

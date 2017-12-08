@@ -16,7 +16,7 @@ private:
 	ShunLib::SphereCollider* m_collider;
 
 public:
-	Player():StateObject(this){}
+	Player();
 	~Player() {}
 
 	////初期化　更新　終了

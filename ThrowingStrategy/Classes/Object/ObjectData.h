@@ -11,7 +11,7 @@
 
 class ObjectData
 {
-private:
+public:
 	using TEAM = ObjectConstantNumber::TEAM;
 	using OBJECT_LIST = ObjectConstantNumber::OBJECT_LIST;
 
@@ -21,9 +21,10 @@ protected:
 	OBJECT_LIST m_type;//このオブジェクトの種類
 
 public:
-	ObjectData():
-		m_hp(10) //適当な値
-	{}
+	ObjectData(OBJECT_LIST type){
+		m_type = type;
+		m_hp = MaxHP();
+	}
 	virtual ~ObjectData() {}
 
 	//ダメージを受ける

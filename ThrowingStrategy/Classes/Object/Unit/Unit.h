@@ -24,7 +24,7 @@ private:
 	float m_attackInterval;
 
 public:
-	Unit():StateObject(this),m_attackInterval(2.0f) {}
+	Unit();
 	~Unit() {}
 
 	//‰Šú‰»@I—¹

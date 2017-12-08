@@ -6,9 +6,9 @@
 //************************************************/
 #include "DefenseTarget.h"
 
-DefenseTarget::DefenseTarget()
+DefenseTarget::DefenseTarget():
+	ObjectBase(ObjectConstantNumber::DEFENSE_TARGET)
 {
-	this->Type(ObjectConstantNumber::DEFENSE_TARGET);
 	this->Pos(ShunLib::Vec3(0.0f, 3.0f, 0.0f));
 	this->Scale(2.0f);
 }

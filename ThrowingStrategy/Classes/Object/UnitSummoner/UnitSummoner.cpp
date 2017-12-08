@@ -11,11 +11,9 @@
 #include "../Unit/Unit.h"
 
 UnitSummoner::UnitSummoner():
-	StateObject(this) ,
+	StateObject(this, ObjectConstantNumber::SUMMONER) ,
 	m_interval(120)
 {
-	this->Team(ObjectConstantNumber::BLUE);
-	this->Type(ObjectConstantNumber::SUMMONER);
 	this->UnitType(ObjectConstantNumber::NORMAL);
 
 	m_collider = new ShunLib::BoxCollider;

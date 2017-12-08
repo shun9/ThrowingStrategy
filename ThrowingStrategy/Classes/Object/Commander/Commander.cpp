@@ -10,15 +10,13 @@
 #include <SL_MacroConstants.h>
 
 Commander::Commander() :
-	StateObject(this),
+	StateObject(this, OBJECT_LIST::COMMANDER),
 	m_capacity(1),
 	m_throwingPower(1.0f),
 	m_throwingAngle(45.0f)
 {
 	//‰ŠúÝ’è
-	this->Team(TEAM::RED);
 	this->Pos(ShunLib::Vec3(-5.0f,0.0f,0.0f));
-	this->Type(OBJECT_LIST::COMMANDER);
 
 	//“–‚½‚è”»’è‚ÌÝ’è
 	m_collider = new ShunLib::SphereCollider();
@@ -37,9 +35,8 @@ Commander::~Commander()
 
 void Commander::Initialize()
 {
-	this->ChangeState(new CommanderMoveState);
-	this->Type(ObjectConstantNumber::COMMANDER);
 	StateObject::Initialize();
+	this->ChangeState(new CommanderMoveState);
 }
 
 void Commander::Finalize()

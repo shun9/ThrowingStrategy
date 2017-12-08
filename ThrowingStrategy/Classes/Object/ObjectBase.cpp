@@ -17,7 +17,7 @@ ObjectBase* ObjectBase::ROOT_OBJECT;
 
 void ObjectBase::InitializeRootObject()
 {
-	ROOT_OBJECT = new ObjectBase(true);
+	ROOT_OBJECT = new ObjectBase();
 	ObjectBase::ROOT_OBJECT->Type(ObjectConstantNumber::ROOT);
 	ObjectBase::ROOT_OBJECT->LocalPos(ShunLib::Vec3(0.0f, 0.0f, 0.0f));
 }

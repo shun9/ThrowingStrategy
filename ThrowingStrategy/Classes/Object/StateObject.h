@@ -19,7 +19,8 @@ private:
 
 public:
 	//コンストラクタ　状態を使用するオブジェクトを渡す
-	StateObject(T* obj) {
+	StateObject(T* obj,OBJECT_LIST type):
+		ObjectBase(type) {
 		m_stateMachine = std::make_unique<ShunLib::StateMachine<T>>(obj);
 	}
 

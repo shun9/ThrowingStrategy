@@ -14,18 +14,14 @@
 #include "../../Util/Visitor/Visitor.h"
 #include "../ObjectMacro.h"
 
-void Player::Initialize()
-{	
+Player::Player()
+	:StateObject(this,OBJECT_LIST::PLAYER)
+{
 	//チーム設定(仮)　※いずれ消す
 	this->Team(TEAM::BLUE);
 
 	//基本情報設定
-	this->Type(OBJECT_LIST::PLAYER);
 	this->ChangeState(new PlayerMoveState);
-	this->HP(this->MaxHP());
-
-	//基底クラスの初期化
-	StateObject::Initialize();
 
 	//当たり判定の設定
 	m_collider = new ShunLib::SphereCollider();
@@ -33,9 +29,19 @@ void Player::Initialize()
 	m_collider->Parent(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 1.0f, 0.0f));
 	m_collider->SetCallBack([&](ObjectBase* obj) { this->CollisionCallBack(obj); });
-	
+
 	//当たり判定の形状の設定
 	m_collider->Shape()->Scale(1.0f);
+
+}
+
+/// <summary>
+/// 初期化処理
+/// </summary>
+void Player::Initialize()
+{	
+	//基底クラスの初期化
+	StateObject::Initialize();
 }
 
 void Player::Finalize()
