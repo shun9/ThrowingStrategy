@@ -75,6 +75,27 @@ Unit* ObjectFactory::CreateUnit(ObjectConstantNumber::UNIT_LIST type)
 	return unit;
 }
 
+/// <summary>
+/// 指定されたオブジェクトを削除
+/// </summary>
+/// <param name="obj">削除するオブジェクト</param>
+void ObjectFactory::Delete(ObjectBase * obj)
+{
+	switch (obj->Type())
+	{
+	case ObjectConstantNumber::PLAYER:			 m_playerFactory.Delete(dynamic_cast<Player*>(obj)); break;
+	case ObjectConstantNumber::COMMANDER:	     m_commanderFactory.Delete(dynamic_cast<Commander*>(obj)); break;
+	case ObjectConstantNumber::UNIT:		     m_unitFactory.Delete(dynamic_cast<Unit*>(obj)); break;
+	case ObjectConstantNumber::BLOCK:		     m_blockFactory.Delete(dynamic_cast<Block*>(obj)); break;
+	case ObjectConstantNumber::DEFENSE_TARGET:	 m_defenseTargetFactory.Delete(dynamic_cast<DefenseTarget*>(obj)); break;
+	case ObjectConstantNumber::SUMMONER:		 m_summonerFactory.Delete(dynamic_cast<UnitSummoner*>(obj)); break;
+	default:break;
+	}
+}
+
+/// <summary>
+/// デストラクタ
+/// </summary>
 ObjectFactory::~ObjectFactory()
 {
 	m_playerFactory.AllDelete();

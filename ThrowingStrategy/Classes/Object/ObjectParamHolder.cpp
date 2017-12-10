@@ -20,7 +20,7 @@ ObjectParamHolder::ObjectParamHolder()
 	m_dataList[ObjectConstantNumber::ROOT] = data;
 
 	//ƒvƒŒƒCƒ„[
-	data.maxHP = 100;
+	data.maxHP = 1000;
 	data.power = 20.0f;
 	data.spd = 10.0f;
 	m_dataList[ObjectConstantNumber::PLAYER] = data;

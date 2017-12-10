@@ -54,6 +54,8 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 		if (A->Parent() != nullptr)B->AddHitList(A->Parent());
 
 		//Žq‚Ì“–‚½‚è”»’è
+		//¦Œ»óŽq“¯Žm‚Ì“–‚½‚è”»’è‚ð2‰ñŽæ‚Á‚Ä‚¢‚é
+		//¦C³•K—v‚ ‚è
 		for (auto& var : A->ChildrenCollider()) {
 			Collision(var, B);
 		}

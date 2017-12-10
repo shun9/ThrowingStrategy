@@ -47,6 +47,9 @@ public:
 	//ユニットの作成
 	Unit* CreateUnit(ObjectConstantNumber::UNIT_LIST type);
 
+	//指定されたオブジェクトを削除
+	void Delete(ObjectBase* obj);
+
 private:
 	ObjectFactory() {}
 	~ObjectFactory();

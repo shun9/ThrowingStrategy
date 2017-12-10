@@ -15,13 +15,15 @@ using namespace ShunLib;
 
 void UnitAttackState::Enter(Unit* unit)
 {
-	SearchStateObjectVisitor v;
-	unit->AttackRange()->Accept(&v);
+	SearchStateObjectVisitor sV;
+	SearchAnotherTeamVisitor aV(unit->Team());
+	unit->AttackRange()->Accept(&sV);
+	sV.Accept(&aV);
 
 	//当たっているオブジェクトが存在するならば
 	//ターゲットに設定
-	if (v.Count() > 0) {
-		m_target = v.List()[0];
+	if (aV.Count() > 0) {
+		m_target = aV.List()[0];
 	}
 
 	m_intervalTimer.SetTime(60);

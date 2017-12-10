@@ -30,6 +30,9 @@ public:
 	//ƒ_ƒ[ƒW‚ğó‚¯‚é
 	void TakeDamage(int damage) { m_hp -= damage; }
 
+	//€‚ñ‚Å‚¢‚é‚©‚Ç‚¤‚©
+	bool IsDead() { return m_hp <= 0; }
+
 	//Getter
 	float       Spd  () { return OBJ_PARAM(m_type).spd  ; }
 	float       Power() { return OBJ_PARAM(m_type).power; }

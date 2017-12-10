@@ -7,6 +7,7 @@
 #include "ObjectBase.h"
 
 #include <SL_Conversion.h>
+#include "ObjectFactory.h"
 #include "../Main/SL_MyStepTimer.h"
 #include "../Physics/PhysicsConstantNumber.h"
 #include "ObjectModelHolder.h"
@@ -123,6 +124,31 @@ void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 	//子の描画
 	for (auto& v : m_children) {
 		v->RenderChild(view, proj);
+	}
+}
+
+//更新
+void ObjectBase::Update()
+{
+	//更新中の変更によってアクセス違反が起こるため
+	//コンテナのサイズで回す
+	for (int i = 0; i < (int)m_children.size();i++) {
+		m_children.at(i)->Update();
+	}
+
+	//死んでいるオブジェクトを削除
+	for (int i = 0; i < (int)m_children.size();)
+	{
+		//死んでいたら削除
+		if (m_children.at(i)->IsDead()) {
+			m_children.at(i)->Finalize();
+			ObjectFactory::GetInstance()->Delete(m_children.at(i));
+			m_children.erase(m_children.begin() + i);
+		}
+		else {
+			i++;
+		}
+
 	}
 }
 

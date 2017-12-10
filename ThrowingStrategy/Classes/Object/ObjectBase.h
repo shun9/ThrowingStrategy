@@ -12,6 +12,7 @@
 #include <SL_Model.h>
 #include <SL_Visitor.h>
 #include "ObjectConstantNumber.h"
+#include "ObjectFactory.h"
 #include "ObjectParamHolder.h"
 #include "ObjectData.h"
 #include "ObjectTransform.h"
@@ -51,7 +52,12 @@ public:
 		m_parent(nullptr) {
 	}
 
-	virtual ~ObjectBase() {}
+	//デストラクタ
+	virtual ~ObjectBase() {
+		for (int i = 0; i < (int)(m_children.size()); i++) {
+			ObjectFactory::GetInstance()->Delete(m_children.at(i));
+		}
+	}
 
 	//親を設定
 	void SetParent(ObjectBase* parent);
@@ -72,20 +78,17 @@ public:
 	void Render(const Matrix& view, const Matrix& proj);
 	void RenderChild(const Matrix& view, const Matrix& proj);
 
-	//初期化 更新  派生クラスの最後に呼ぶ
+	//初期化 派生クラスの最後に呼ぶ
 	virtual void Initialize() {	
+		//初期化中の変更によってアクセス違反が起こるため
+		//コンテナのサイズで回す
 		for (int i = 0; i < (int)(m_children.size()); i++){
 			m_children.at(i)->Initialize();
 		}
 	}
 
-	virtual void Update() { 
-		//更新中の変更によってアクセス違反が起こるため
-		//コンテナのサイズで回す
-		for (int i = 0;i < (int)m_children.size();i++){
-			m_children.at(i)->Update(); 
-		} 
-	}
+	//更新
+	virtual void Update();
 	
 	//終了  派生クラスの最後に呼ぶ
 	virtual void Finalize() { for (auto& v : m_children) { v->Finalize(); } }
