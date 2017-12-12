@@ -19,7 +19,7 @@ void ShunLib::CollisionManager::Rejection(SphereCollider* A, SphereCollider* B)
 	Vec3 distV = b->CenterPoint() - a->CenterPoint();
 
 	//“–‚½‚Á‚Ä‚¢‚é‹——£
-	float hitDist = (a->Scale() + b->Scale()) - distV.Length();
+	float hitDist = (a->Scale().m_x + b->Scale().m_x) - distV.Length();
 
 	//“–‚½‚Á‚Ä‚¢‚é‹——£‚ð”¼•ª‚¸‚Â•ª‚¯‡‚¤
 	objA->Pos(objA->Pos() - (distV.Normalize()*(hitDist / 2.0f)));

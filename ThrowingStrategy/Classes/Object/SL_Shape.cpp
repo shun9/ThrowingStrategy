@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :SL_Shape.cpp
 //* @brief :当たり判定用の形状クラスまとめ
-//* @date  :2017/11/17
+//* @date  :2017/12/11
 //* @author:S.Katou
 //************************************************/
 #include "SL_Shape.h"
@@ -19,42 +19,32 @@
 float ShunLib::ShortestDistance(const Box & A, const Point & B, Point* buffer)
 {
 	Vec3 point = B.CenterPoint();
-	
+
 	// 長さのべき乗の値を格納
-	float sqLen = 0;  
-
-	//箱の頂点の最小値と最大値
-	Vec3 min, max;
-	min.m_x = A.CenterPoint().m_x - (A.Size().m_x / 2.0f);
-	min.m_y = A.CenterPoint().m_y - (A.Size().m_y / 2.0f);
-	min.m_z = A.CenterPoint().m_z - (A.Size().m_z / 2.0f);
-
-	max.m_x = A.CenterPoint().m_x + (A.Size().m_x / 2.0f);
-	max.m_y = A.CenterPoint().m_y + (A.Size().m_y / 2.0f);
-	max.m_z = A.CenterPoint().m_z + (A.Size().m_z / 2.0f);
+	float sqLen = 0;
 
 	//点が最小値～最大値の中にないとき差を考慮する
 	//X軸
-	if (!(point.m_x > min.m_x && point.m_x < max.m_x)){
-		sqLen += ((point.m_x - min.m_x) * (point.m_x - min.m_x));
+	if (!(point.m_x > A.MinX() && point.m_x < A.MaxX())){
+		sqLen += ((point.m_x - A.MinX()) * (point.m_x - A.MinX()));
 	}
 
 	//Y軸
-	if (!(point.m_y > min.m_y && point.m_y < max.m_y)) {
-		sqLen += ((point.m_y - min.m_y) * (point.m_y - min.m_y));
+	if (!(point.m_y > A.MinY() && point.m_y < A.MaxY())) {
+		sqLen += ((point.m_y - A.MinY()) * (point.m_y - A.MinY()));
 	}
-	
+
 	//Z軸
-	if (!(point.m_z > min.m_z&&point.m_z < max.m_z)){
-		sqLen += ((point.m_z - min.m_z) * (point.m_z - min.m_z));
+	if (!(point.m_z > A.MinZ() &&point.m_z < A.MaxZ())){
+		sqLen += ((point.m_z - A.MinZ()) * (point.m_z - A.MinZ()));
 	}
 
 	//最接近点が必要なら
 	if (buffer != nullptr){
 		Vec3 tmp;
-		tmp.m_x = ShunLib::Clamp(max.m_x, min.m_x, buffer->CenterPoint().m_x);
-		tmp.m_y = ShunLib::Clamp(max.m_y, min.m_y, buffer->CenterPoint().m_y);
-		tmp.m_z = ShunLib::Clamp(max.m_z, min.m_z, buffer->CenterPoint().m_z);
+		tmp.m_x = ShunLib::Clamp(A.MaxX(), A.MinX(), buffer->CenterPoint().m_x);
+		tmp.m_y = ShunLib::Clamp(A.MaxY(), A.MinY(), buffer->CenterPoint().m_y);
+		tmp.m_z = ShunLib::Clamp(A.MaxZ(), A.MinZ(), buffer->CenterPoint().m_z);
 		buffer->CenterPoint(tmp);
 	}
 
@@ -69,8 +59,8 @@ void ShunLib::Sphere::Render()
 	auto camera = ShunLib::MainCamera::GetInstance();
 	auto shape = BasicShapeRenderer::GetInstance();
 
-	Matrix world = Matrix::CreateScale(Scale()*2.0f);
-	world *= Matrix::CreateTranslation(m_centerPoint);
+	Matrix world = Matrix::CreateScale(Radius() * 2.0f);
+	world *= Matrix::CreateTranslation(CenterPoint());
 	shape->DrawSphere(world, camera->ViewMat(), camera->ProjMat());
 }
 
@@ -82,8 +72,9 @@ void ShunLib::Box::Render()
 	auto camera = ShunLib::MainCamera::GetInstance();
 	auto shape = BasicShapeRenderer::GetInstance();
 
-	Matrix world;
-	world = Matrix::CreateScale(this->Size());
-	world *= Matrix::CreateTranslation(m_centerPoint);
+	Matrix world = Matrix::Identity;
+	world *= Matrix::CreateScale(Size());
+	world *= Matrix::CreateScale(Scale());
+	world *= Matrix::CreateTranslation(CenterPoint());
 	shape->DrawCube(world, camera->ViewMat(), camera->ProjMat());
 }

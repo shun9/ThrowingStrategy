@@ -76,6 +76,6 @@ void BoxCollider::Update()
 	if (m_parent != nullptr)
 	{
 		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
-		Shape()->Size(m_parent->Scale());
+		Shape()->Scale(Parent()->Scale());
 	}
 }

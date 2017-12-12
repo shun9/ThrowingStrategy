@@ -80,7 +80,7 @@ bool CollisionManager::SphereCollision(ICollider* A, ICollider* B, bool rejectio
 	float dist = distV.Length();
 
 	// ”¼Œa‚Ì˜a
-	float rad = a->Shape()->Scale() + b->Shape()->Scale();
+	float rad = a->Shape()->Radius() + b->Shape()->Radius();
 
 	// ‹——£‚ª”¼Œa‚Ì˜a‚æ‚è‘å‚«‚¯‚ê‚ÎA“–‚½‚Á‚Ä‚¢‚È‚¢
 	if (dist > rad)
@@ -110,10 +110,10 @@ bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box, 
 	Point closestPoint;
 
 	//‹…‚Ì’†S“_‚Æ” ‚ÌÅ’Z‹——£‚ðo‚·
-	float dist = ShortestDistance((*b->Shape()), point,&closestPoint);
+	float dist = ShortestDistance(*b->Shape(), point,&closestPoint);
 
 	//Å’Z‹——£‚ª‹…‚Ì”¼Œa‚æ‚è‚à‘å‚«‚©‚Á‚½‚ç“–‚½‚Á‚Ä‚¢‚È‚¢
-	if (dist > s->Shape()->Scale()) {
+	if (dist > s->Shape()->Radius()) {
 		return false;
 	}
 
@@ -127,35 +127,17 @@ bool CollisionManager::BoxCollision(ICollider* A, ICollider* B, bool rejection)
 	Box* b = dynamic_cast<BoxCollider*>(B)->Shape();
 
 	/*--XŽ²‚Ì”»’è--*/
-	float aXRight = a->CenterPoint().m_x + (a->Size().m_x / 2.0f);//A‚ÌXŽ²‚Ì‰E‘¤(+•ûŒü)
-	float aXLeft  = a->CenterPoint().m_x - (a->Size().m_x / 2.0f);//A‚ÌXŽ²‚Ì¶‘¤(-•ûŒü)
-
-	float bXRight = b->CenterPoint().m_x + (b->Size().m_x / 2.0f);//B‚ÌXŽ²‚Ì‰E‘¤(+•ûŒü)
-	float bXLeft  = b->CenterPoint().m_x - (b->Size().m_x / 2.0f);//B‚ÌXŽ²‚Ì¶‘¤(-•ûŒü)
-
-	if (!(aXRight > bXLeft && aXLeft < bXRight)) {
+	if (!(a->MaxX() > b->MinX() && a->MinX() < b->MaxX())) {
 		return false;
 	}
 
 	/*--YŽ²‚Ì”»’è--*/
-	float aYTop    = a->CenterPoint().m_y + (a->Size().m_y / 2.0f);//A‚ÌYŽ²‚Ìã‘¤(+•ûŒü)
-	float aYBottom = a->CenterPoint().m_y - (a->Size().m_y / 2.0f);//A‚ÌYŽ²‚Ì‰º‘¤(-•ûŒü)
-
-	float bYTop    = b->CenterPoint().m_y + (b->Size().m_y / 2.0f);//B‚ÌYŽ²‚Ìã‘¤(+•ûŒü)
-	float bYBottom = b->CenterPoint().m_y - (b->Size().m_y / 2.0f);//B‚ÌYŽ²‚Ì‰º‘¤(-•ûŒü)
-
-	if (!(aYTop > bYBottom && aYBottom < bYTop)) {
+	if (!(a->MaxY() > b->MinY() && a->MinY() < b->MaxY())) {
 		return false;
 	}
 
 	/*--ZŽ²‚Ì”»’è--*/
-	float aZFront = a->CenterPoint().m_z + (a->Size().m_z / 2.0f);//A‚ÌZŽ²‚Ì‰œ‘¤@(+•ûŒü)
-	float aZBack  = a->CenterPoint().m_z - (a->Size().m_z / 2.0f);//A‚ÌZŽ²‚ÌŽè‘O‘¤(-•ûŒü)
-
-	float bZFront = b->CenterPoint().m_z + (b->Size().m_z / 2.0f);//B‚ÌZŽ²‚Ì‰œ‘¤@(+•ûŒü)
-	float bZBack  = b->CenterPoint().m_z - (b->Size().m_z / 2.0f);//B‚ÌZŽ²‚ÌŽè‘O‘¤(-•ûŒü)
-
-	if (!(aZFront > bZBack && aZBack < bZFront)) {
+	if (!(a->MaxZ() > b->MinZ() && a->MinZ() < b->MaxZ())) {
 		return false;
 	}
 
