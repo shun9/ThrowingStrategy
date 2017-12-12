@@ -17,6 +17,7 @@
 #include "../Object/ObjectParamHolder.h"
 #include "SL_GamePadManager.h"
 #include "Debugger\DebuggerUI.h"
+#include "../Object/ObjectModelHolder.h"
 
 class DestroySingleton
 {
@@ -25,6 +26,7 @@ public:
 		using namespace ShunLib;
 		ObjectParamHolder::Destroy();
 		ObjectFactory::Destroy();
+		ObjectModelHolder::Destroy();
 		BasicShapeRenderer::Destroy();
 		MainCamera::Destroy();
 		CollisionManager::Destroy();
