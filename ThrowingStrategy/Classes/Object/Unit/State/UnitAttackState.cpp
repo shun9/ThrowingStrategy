@@ -13,12 +13,13 @@
 
 using namespace ShunLib;
 
+/// <summary>
+/// 攻撃状態の初期化　状態が変化したときに一度だけ呼ばれる
+/// </summary>
 void UnitAttackState::Enter(Unit* unit)
 {
-	SearchStateObjectVisitor sV;
 	SearchAnotherTeamVisitor aV(unit->Team());
-	unit->AttackRange()->Accept(&sV);
-	sV.Accept(&aV);
+	unit->AttackRange()->Accept(&aV);
 
 	//当たっているオブジェクトが存在するならば
 	//ターゲットに設定
@@ -29,6 +30,9 @@ void UnitAttackState::Enter(Unit* unit)
 	m_intervalTimer.SetTime(60);
 }
 
+/// <summary>
+/// 攻撃状態の実行　毎フレーム呼ばれる
+/// </summary>
 void UnitAttackState::Execute(Unit* unit)
 {
 	//ターゲットが無ければ何もしない
@@ -42,7 +46,7 @@ void UnitAttackState::Execute(Unit* unit)
 
 	//ユニットからターゲットへ向かうベクトル
 	Vec3 dir = m_target->Pos() - unit->Pos();
-	
+
 	//攻撃範囲から外れたら戻る
 	SearchSpecificObjectVisitor v(m_target);
 	unit->AttackRange()->Accept(&v);
@@ -68,6 +72,10 @@ void UnitAttackState::Execute(Unit* unit)
 	}
 }
 
+/// <summary>
+/// 攻撃状態の終了処理　状態が変化したときに一度だけ呼ばれる
+/// </summary>
+/// <param name="unit"></param>
 void UnitAttackState::Exit(Unit* unit)
 {
 

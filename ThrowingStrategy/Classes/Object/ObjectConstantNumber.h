@@ -1,10 +1,11 @@
 //************************************************/
 //* @file  :ObjectConstantNumber.h
 //* @brief :オブジェクト関連の定数
-//* @date  :2017/11/16
+//* @date  :2017/12/11
 //* @author:S.Katou
 //************************************************/
 #pragma once
+#include <SL_Math.h>
 
 class ObjectConstantNumber
 {
@@ -61,6 +62,24 @@ public:
 
 public:
 	//状態を持ったオブジェクト一覧
-	static const OBJECT_LIST STATE_OBJECT[4];
+	static const OBJECT_LIST STATE_OBJECT[5];
+
+public:
+	//プレイヤー関連
+	class PLAYER_CONSTANT
+	{
+	public:
+		static const float COLLIDER_SIZE;
+		static const ShunLib::Vec3 COLLIDER_OFFSET;
+	};
+
+	//防衛対象関連
+	class DEFENSE_TARGET_CONSTANT
+	{
+	public:
+		static const float MODEL_SCALE;
+		static const ShunLib::Vec3 COLLIDER_OFFSET;
+		static const ShunLib::Vec3 COLLIDER_SIZE;
+	};
 };
 

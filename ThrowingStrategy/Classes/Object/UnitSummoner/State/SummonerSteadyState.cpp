@@ -7,20 +7,18 @@
 #include "SummonerSteadyState.h"
 #include "SummonerSummonState.h"
 
-#include "../../../Util/Debugger/DebuggerUI.h"
-
 void SummonerSteadyState::Enter(UnitSummoner * summoner)
 {
-	m_timer.SetTime(600);
+	//時間設定　現在は適当な値
+	m_timer.SetTime(300);
 }
 
 void SummonerSteadyState::Execute(UnitSummoner * summoner)
 {
-	
-	DebuggerUI::GetInstance()->DrawDebugText("HP : %d",summoner->HP());
-
+	//タイマーの更新
 	m_timer.Update();
 
+	//時間が来たら召喚する
 	if (m_timer.IsEnded()){
 		summoner->ChangeState(new SummonerSummonState);
 	}

@@ -28,7 +28,7 @@ void UnitChaseState::Execute(Unit* unit)
 		unit->ChangeState(new UnitRoamState);
 		return;
 	}
-	
+
 	//ユニットからターゲットへ向かうベクトル
 	Vec3 dir = target->WorldPos() - unit->WorldPos();
 	dir.Normalize();

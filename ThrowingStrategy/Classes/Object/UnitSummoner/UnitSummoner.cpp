@@ -18,8 +18,9 @@ UnitSummoner::UnitSummoner():
 
 	m_collider = new ShunLib::BoxCollider;
 	m_collider->Parent(this);
+	m_collider->PosObj(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 0.0f, 0.0f));
-	m_collider->Shape()->Size(ShunLib::Vec3(2.0f,0.2f,2.0f));
+	m_collider->Shape()->Size(ShunLib::Vec3(2.0f,2.0f,2.0f));
 	this->ChangeState(new SummonerSteadyState);
 }
 
@@ -38,13 +39,13 @@ Unit* UnitSummoner::Summon()
 
 	//Ží—Þ‚ðÝ’è
 	unit->UnitType(m_unitType);
-	
+
 	//ƒ‹[ƒg‚É•R‚Ã‚¯
 	ObjectBase::ROOT_OBJECT->AddChild(unit);
 
 	//‰Šú‰»
 	unit->Initialize();
-	
+
 	//¢Š«ˆÊ’uÝ’è
 	unit->Pos(this->Pos());
 

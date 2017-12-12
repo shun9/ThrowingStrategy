@@ -175,7 +175,7 @@ private:
 	float m_minDist;      //ç≈íZãóó£
 
 public:
-	SearchNearestObjectVisitor(const ShunLib::Vec3& pos, bool onlyState = true) :
+	SearchNearestObjectVisitor(const ShunLib::Vec3& pos, bool onlyState = false) :
 		m_pos(pos),	m_isOnlyState(onlyState),m_object(nullptr),m_minDist(9999.9999f){}
 	~SearchNearestObjectVisitor() {}
 

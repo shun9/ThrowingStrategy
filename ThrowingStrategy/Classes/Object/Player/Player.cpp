@@ -17,22 +17,20 @@
 Player::Player()
 	:StateObject(this,OBJECT_LIST::PLAYER)
 {
-	//チーム設定(仮)　※いずれ消す
-	this->Team(TEAM::BLUE);
-
-	//基本情報設定
-	this->ChangeState(new PlayerMoveState);
-
 	//当たり判定の設定
 	m_collider = new ShunLib::SphereCollider();
 	m_collider->PosObj(this);
 	m_collider->Parent(this);
-	m_collider->Offset(ShunLib::Vec3(0.0f, 1.0f, 0.0f));
-	m_collider->SetCallBack([&](ObjectBase* obj) { this->CollisionCallBack(obj); });
+	m_collider->Offset(PLAYER_CONSTANT::COLLIDER_OFFSET);
 
 	//当たり判定の形状の設定
-	m_collider->Shape()->Scale(1.0f);
+	m_collider->Shape()->Scale(PLAYER_CONSTANT::COLLIDER_SIZE);
 
+}
+
+Player::~Player()
+{
+	SAFE_DELETE(m_collider);
 }
 
 /// <summary>
@@ -40,6 +38,9 @@ Player::Player()
 /// </summary>
 void Player::Initialize()
 {	
+	//初期状態を設定
+	ChangeState(new PlayerMoveState);
+
 	//基底クラスの初期化
 	StateObject::Initialize();
 }
@@ -47,8 +48,6 @@ void Player::Initialize()
 void Player::Finalize()
 {
 	StateObject::Finalize();
-
-	SAFE_DELETE(m_collider);
 }
 
 
@@ -76,12 +75,12 @@ int Player::HavingUnitNum()
 }
 
 
+/// <summary>
+/// 持っているユニットの一覧を返す
+/// </summary>
 std::vector<Unit*>& Player::HavingUnitList()
 {
 	SearchUnitVisitor v;
 	this->Accept(&v);
 	return v.List();
-}
-
-void Player::CollisionCallBack(ObjectBase* obj){
 }
