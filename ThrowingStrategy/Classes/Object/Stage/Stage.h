@@ -27,6 +27,7 @@ protected:
 	virtual void SettingObstacle() = 0;
 
 	//オブジェクトの設置
-	virtual void SettingObject() = 0;
+	virtual void SettingBlueObject() = 0;
+	virtual void SettingRedObject() = 0;
 };
 

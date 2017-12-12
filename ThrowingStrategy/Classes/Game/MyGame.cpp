@@ -38,7 +38,6 @@ void MyGame::Initialize()
 	auto scene = SceneManager::GetInstance();
 	scene->AddScene(SCENE::PLAY, new PlayScene);
 	scene->ChangeScene(SCENE::PLAY);
-
 }
 
 /// <summary>

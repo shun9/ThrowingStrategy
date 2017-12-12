@@ -16,6 +16,9 @@
 //全てのオブジェクトをここに紐づける
 ObjectBase* ObjectBase::ROOT_OBJECT;
 
+/// <summary>
+/// ルートオブジェクトの初期化
+/// </summary>
 void ObjectBase::InitializeRootObject()
 {
 	ROOT_OBJECT = new ObjectBase();
@@ -23,6 +26,9 @@ void ObjectBase::InitializeRootObject()
 	ObjectBase::ROOT_OBJECT->LocalPos(ShunLib::Vec3(0.0f, 0.0f, 0.0f));
 }
 
+/// <summary>
+/// ルートオブジェクトの終了処理
+/// </summary>
 void ObjectBase::FinalizeRootObject()
 {
 	SAFE_DELETE(ROOT_OBJECT);

@@ -25,5 +25,6 @@ protected:
 	void SettingObstacle()override;
 
 	//オブジェクトの設置
-	void SettingObject()override;
+	void SettingBlueObject()override;
+	void SettingRedObject()override;
 };

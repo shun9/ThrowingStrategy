@@ -18,6 +18,9 @@ public:
 
 };
 
+/// <summary>
+/// ユニットを拾う
+/// </summary>
 class PlayerPickUpCommand :public ShunLib::Command<Player>
 {
 public:
@@ -28,6 +31,9 @@ public:
 
 };
 
+/// <summary>
+/// ユニットを置く
+/// </summary>
 class PlayerPutCommand :public ShunLib::Command<Player>
 {
 public:

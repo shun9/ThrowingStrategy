@@ -14,8 +14,11 @@ void GroundStage::Initialize()
 	//障害物の設置
 	SettingObstacle();
 
-	//オブジェクトの設置
-	SettingObject();
+	//青チームの設置
+	SettingBlueObject();
+
+	//赤チーム設置
+	SettingRedObject();
 
 	//基底の初期化
 	//子の更新
@@ -41,9 +44,9 @@ void GroundStage::SettingObstacle() {
 
 
 /// <summary>
-/// オブジェクトの設置
+/// 青チームオブジェクトの設置
 /// </summary>
-void GroundStage::SettingObject()
+void GroundStage::SettingBlueObject()
 {
 	//カメラ設定
 	auto camera = ShunLib::MainCamera::GetInstance();
@@ -51,20 +54,40 @@ void GroundStage::SettingObject()
 	//オブジェクト生成
 	auto factory = ObjectFactory::GetInstance();
 
+	//プレイヤー作成
 	//プレイヤーは青チーム
 	auto p = factory->CreateObject(ObjectConstantNumber::PLAYER);
 	camera->FollowTarget(p);
 	camera->ChangeMode(FOLLOW_CAMERA);
-	p->Pos(ShunLib::Vec3(-10.0f, 0.0f, 0.0f));
+	p->Pos(ShunLib::Vec3(-25.0f, 0.0f, 0.0f));
 	p->Team(ObjectConstantNumber::BLUE);
 
-	//青チーム召喚オブジェクト
+	//ユニット召喚オブジェクト
 	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
-	summoner->Pos(ShunLib::Vec3(-9.0f, 0.0f, 0.0f));
+	summoner->Pos(ShunLib::Vec3(-20.0f, 0.0f, 0.0f));
 	summoner->Team(p->Team());
 
-	//赤チーム召喚オブジェクト
-	summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
-	summoner->Pos(ShunLib::Vec3(9.0f, 0.0f, 0.0f));
+	//防衛対象
+	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);
+	target->Pos(ShunLib::Vec3(-30.0f, 0.0f, 0.0f));
+	target->Team(p->Team());
+}
+
+/// <summary>
+/// 赤チームオブジェクトの設置
+/// </summary>
+void GroundStage::SettingRedObject()
+{
+	//オブジェクト生成
+	auto factory = ObjectFactory::GetInstance();
+
+	//召喚オブジェクト
+	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
+	summoner->Pos(ShunLib::Vec3(20.0f, 0.0f, 0.0f));
 	summoner->Team(ObjectConstantNumber::TEAM::RED);
+
+	//防衛対象
+	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);
+	target->Pos(ShunLib::Vec3(30.0f, 0.0f, 0.0f));
+	target->Team(ObjectConstantNumber::TEAM::RED);
 }

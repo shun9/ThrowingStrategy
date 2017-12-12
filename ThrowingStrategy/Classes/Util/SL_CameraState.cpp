@@ -11,35 +11,22 @@
 
 using namespace ShunLib;
 
-/*--動かない状態--*/
-void CameraNonMoveState::Enter(MainCamera* camera)
-{
+/*--固定カメラ--*/
+void CameraNonMoveState::Enter(MainCamera* camera){}
 
-}
+void CameraNonMoveState::Execute(MainCamera* camera){}
 
-void CameraNonMoveState::Execute(MainCamera* camera)
-{
-
-}
-
-void CameraNonMoveState::Exit(MainCamera* camera)
-{
-
-}
+void CameraNonMoveState::Exit(MainCamera* camera){}
 
 
-/*--追いかける状態--*/
-void CameraFollowState::Enter(MainCamera * camera)
-{
-
-}
-
+/*--追跡カメラ--*/
 //追跡ターゲットとの距離と高さ
 const float CameraFollowState::FOLLOW_DISTANSE = 30.0f;
-const float CameraFollowState::FOLLOW_HEIGHT = 6.0f;
+const float CameraFollowState::FOLLOW_HEIGHT = 10.0f;
 
-void CameraFollowState::Execute(MainCamera * camera)
-{
+void CameraFollowState::Enter(MainCamera * camera){}
+
+void CameraFollowState::Execute(MainCamera * camera){
 	//追跡対象の上方
 	Vec3 refPos = camera->FollowTarget()->Pos() + Vec3(0.0f, FOLLOW_HEIGHT, 0.0f);
 
@@ -57,6 +44,4 @@ void CameraFollowState::Execute(MainCamera * camera)
 	camera->View(view);
 }
 
-void ShunLib::CameraFollowState::Exit(MainCamera * camera)
-{
-}
+void ShunLib::CameraFollowState::Exit(MainCamera * camera){}

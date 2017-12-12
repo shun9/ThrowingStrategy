@@ -13,8 +13,6 @@
 #include "../../../Main/SL_MyStepTimer.h"
 #include "../../../Util/Visitor/Visitor.h"
 
-#include "../../../Util/Debugger/DebuggerUI.h"
-
 using namespace std;
 using namespace ShunLib;
 
