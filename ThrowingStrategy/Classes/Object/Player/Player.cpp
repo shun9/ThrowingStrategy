@@ -14,6 +14,9 @@
 #include "../../Util/Visitor/Visitor.h"
 #include "../ObjectMacro.h"
 
+/// <summary>
+/// コンストラクタ
+/// </summary>
 Player::Player()
 	:StateObject(this,OBJECT_LIST::PLAYER)
 {
@@ -28,6 +31,9 @@ Player::Player()
 
 }
 
+/// <summary>
+/// デストラクタ
+/// </summary>
 Player::~Player()
 {
 	SAFE_DELETE(m_collider);
@@ -45,6 +51,9 @@ void Player::Initialize()
 	StateObject::Initialize();
 }
 
+/// <summary>
+/// 終了処理
+/// </summary>
 void Player::Finalize()
 {
 	StateObject::Finalize();

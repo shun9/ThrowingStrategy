@@ -13,7 +13,8 @@ class Unit :public StateObject<Unit>
 {
 public:
 	using SphereCollider = ShunLib::SphereCollider;
-	using UNIT_LIST = ObjectConstantNumber::UNIT_LIST;
+	using UNIT_CONSTANT = ObjectConstantNumber::UNIT_CONSTANT;
+	using UNIT_LIST = ObjectConstantNumber::UNIT_CONSTANT::TYPE_LIST;
 
 private:
 	UNIT_LIST m_unitType;

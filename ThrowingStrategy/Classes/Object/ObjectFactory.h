@@ -25,6 +25,11 @@ class ObjectFactory : public ShunLib::Singleton<ObjectFactory>
 {
 	friend ShunLib::Singleton<ObjectFactory>;
 public:
+	using UNIT_TYPE = ObjectConstantNumber::UNIT_CONSTANT::TYPE_LIST;
+	using STAGE_TYPE = ObjectConstantNumber::STAGE_LIST;
+	using OBJECT_TYPE = ObjectConstantNumber::OBJECT_LIST;
+
+public:
 	//１種類のオブジェクト
 	ShunLib::Factory<Player> m_playerFactory;
 	ShunLib::Factory<Commander> m_commanderFactory;
@@ -39,13 +44,13 @@ public:
 	ShunLib::Factory<GroundStage> m_groundStageFactory;
 
 public:
-	ObjectBase* CreateObject(ObjectConstantNumber::OBJECT_LIST type);
+	ObjectBase* CreateObject(OBJECT_TYPE type);
 
 	//ステージの作成
-	Stage* CreateStage(ObjectConstantNumber::STAGE_LIST type);
+	Stage* CreateStage(STAGE_TYPE type);
 
 	//ユニットの作成
-	Unit* CreateUnit(ObjectConstantNumber::UNIT_LIST type);
+	Unit* CreateUnit(UNIT_TYPE type);
 
 	//指定されたオブジェクトを削除
 	void Delete(ObjectBase* obj);

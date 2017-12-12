@@ -14,7 +14,7 @@ class Unit;
 class UnitSummoner :public StateObject<UnitSummoner>
 {
 public:
-	using UNIT_LIST = ObjectConstantNumber::UNIT_LIST;
+	using UNIT_LIST = ObjectConstantNumber::UNIT_CONSTANT::TYPE_LIST;
 
 private:
 	UNIT_LIST m_unitType;

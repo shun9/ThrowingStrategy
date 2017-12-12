@@ -14,7 +14,7 @@ UnitSummoner::UnitSummoner():
 	StateObject(this, ObjectConstantNumber::SUMMONER) ,
 	m_interval(120)
 {
-	this->UnitType(ObjectConstantNumber::NORMAL);
+	this->UnitType(UNIT_LIST::NORMAL);
 
 	m_collider = new ShunLib::BoxCollider;
 	m_collider->Parent(this);

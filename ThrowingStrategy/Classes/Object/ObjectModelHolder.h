@@ -17,7 +17,7 @@ class ObjectModelHolder : public ShunLib::Singleton<ObjectModelHolder>
 public:
 	using Model = ShunLib::Model;
 	using OBJ_TYPE = ObjectConstantNumber::OBJECT_LIST;
-	using UNIT_TYPE = ObjectConstantNumber::UNIT_LIST;
+	using UNIT_TYPE = ObjectConstantNumber::UNIT_CONSTANT::TYPE_LIST;
 	using TEAM = ObjectConstantNumber::TEAM;
 
 private:

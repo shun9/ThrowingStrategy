@@ -18,18 +18,18 @@
 /// </summary>
 /// <param name="num">オブジェクトの種類</param>
 /// <returns>生成したオブジェクト</returns>
-ObjectBase* ObjectFactory::CreateObject(ObjectConstantNumber::OBJECT_LIST type)
+ObjectBase* ObjectFactory::CreateObject(OBJECT_TYPE type)
 {
 	ObjectBase* obj = nullptr;
 
 	switch (type)
 	{
-	case ObjectConstantNumber::PLAYER:			 obj = m_playerFactory.Create();break;
-	case ObjectConstantNumber::COMMANDER:	     obj = m_commanderFactory.Create();break;
-	case ObjectConstantNumber::UNIT:		     obj = m_unitFactory.Create();break;
-	case ObjectConstantNumber::BLOCK:		     obj = m_blockFactory.Create(); break;
-	case ObjectConstantNumber::DEFENSE_TARGET:	 obj = m_defenseTargetFactory.Create(); break;
-	case ObjectConstantNumber::SUMMONER:		 obj = m_summonerFactory.Create(); break;
+	case OBJECT_TYPE::PLAYER:		  obj = m_playerFactory.Create();		 break;
+	case OBJECT_TYPE::COMMANDER:	  obj = m_commanderFactory.Create();	 break;
+	case OBJECT_TYPE::UNIT:		      obj = m_unitFactory.Create();			 break;
+	case OBJECT_TYPE::BLOCK:		  obj = m_blockFactory.Create();		 break;
+	case OBJECT_TYPE::DEFENSE_TARGET: obj = m_defenseTargetFactory.Create(); break;
+	case OBJECT_TYPE::SUMMONER:		  obj = m_summonerFactory.Create();		 break;
 	default:break;
 	}
 
@@ -40,13 +40,13 @@ ObjectBase* ObjectFactory::CreateObject(ObjectConstantNumber::OBJECT_LIST type)
 /// ステージ作成
 /// </summary>
 /// <param name="type">ステージの種類</param>
-Stage* ObjectFactory::CreateStage(ObjectConstantNumber::STAGE_LIST type)
+Stage* ObjectFactory::CreateStage(STAGE_TYPE type)
 {
 	Stage* stage = nullptr;
 
 	switch (type)
 	{
-	case ObjectConstantNumber::GROUND:
+	case STAGE_TYPE::GROUND:
 		stage = m_groundStageFactory.Create();
 		break;
 	default:
@@ -60,13 +60,13 @@ Stage* ObjectFactory::CreateStage(ObjectConstantNumber::STAGE_LIST type)
 /// ユニットの作成
 /// </summary>
 /// <param name="type">ユニットの種類</param>
-Unit* ObjectFactory::CreateUnit(ObjectConstantNumber::UNIT_LIST type)
+Unit* ObjectFactory::CreateUnit(UNIT_TYPE type)
 {
 	Unit* unit = nullptr;
 
 	switch (type)
 	{
-	case ObjectConstantNumber::NORMAL:
+	case UNIT_TYPE::NORMAL:
 		unit = m_unitFactory.Create();
 		break; 
 	default:
@@ -83,12 +83,12 @@ void ObjectFactory::Delete(ObjectBase * obj)
 {
 	switch (obj->Type())
 	{
-	case ObjectConstantNumber::PLAYER:			 m_playerFactory.Delete(dynamic_cast<Player*>(obj)); break;
-	case ObjectConstantNumber::COMMANDER:	     m_commanderFactory.Delete(dynamic_cast<Commander*>(obj)); break;
-	case ObjectConstantNumber::UNIT:		     m_unitFactory.Delete(dynamic_cast<Unit*>(obj)); break;
-	case ObjectConstantNumber::BLOCK:		     m_blockFactory.Delete(dynamic_cast<Block*>(obj)); break;
-	case ObjectConstantNumber::DEFENSE_TARGET:	 m_defenseTargetFactory.Delete(dynamic_cast<DefenseTarget*>(obj)); break;
-	case ObjectConstantNumber::SUMMONER:		 m_summonerFactory.Delete(dynamic_cast<UnitSummoner*>(obj)); break;
+	case OBJECT_TYPE::PLAYER:		  m_playerFactory.Delete(dynamic_cast<Player*>(obj));				break;
+	case OBJECT_TYPE::COMMANDER:	  m_commanderFactory.Delete(dynamic_cast<Commander*>(obj));			break;
+	case OBJECT_TYPE::UNIT:		      m_unitFactory.Delete(dynamic_cast<Unit*>(obj));					break;
+	case OBJECT_TYPE::BLOCK:		  m_blockFactory.Delete(dynamic_cast<Block*>(obj));					break;
+	case OBJECT_TYPE::DEFENSE_TARGET: m_defenseTargetFactory.Delete(dynamic_cast<DefenseTarget*>(obj)); break;
+	case OBJECT_TYPE::SUMMONER:		  m_summonerFactory.Delete(dynamic_cast<UnitSummoner*>(obj));		break;
 	default:break;
 	}
 }
