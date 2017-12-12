@@ -32,17 +32,11 @@
     <Filter Include="Game\Util">
       <UniqueIdentifier>{8fa54e67-96ac-47c0-af37-cb7dd210b3ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\Physics">
-      <UniqueIdentifier>{ccc93c24-be89-43e7-be0f-bc1c438ac412}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Object\Commander">
       <UniqueIdentifier>{2ccab58f-e94c-48ff-8cdb-c1b14424d85c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\Commander\State">
       <UniqueIdentifier>{2100a1bd-2af9-4e83-8bc8-adc83b31f5a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Physics\Collision">
-      <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Util\Debugger">
       <UniqueIdentifier>{b6a10414-e7d5-4f33-ab7a-d275fd45d232}</UniqueIdentifier>
@@ -70,6 +64,12 @@
     </Filter>
     <Filter Include="Game\Visitor">
       <UniqueIdentifier>{24d60809-1f51-4b03-b638-2bb7439100da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Physics">
+      <UniqueIdentifier>{ccc93c24-be89-43e7-be0f-bc1c438ac412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Physics\Collision">
+      <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +129,7 @@
       <Filter>Game\Object\Base</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Physics\PhysicsConstantNumber.h">
-      <Filter>Game\Object\Physics</Filter>
+      <Filter>Game\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\ObjectParamHolder.h">
       <Filter>Game\Object\Base</Filter>
@@ -138,16 +138,16 @@
       <Filter>Game\Object\Base</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Physics\Collision\SL_CollisionManager.h">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Physics\Collision\SL_Collider.h">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Util\SL_Camera.h">
       <Filter>Game\Util</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\SL_Shape.h">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h">
       <Filter>Game\Util</Filter>
@@ -297,13 +297,13 @@
       <Filter>Game\Util</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\SL_Shape.cpp">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp">
       <Filter>Game\Util</Filter>
@@ -342,10 +342,10 @@
       <Filter>Game\Util</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp">
-      <Filter>Game\Object\Physics\Collision</Filter>
+      <Filter>Game\Physics\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\DefenseTarget\DefenseTarget.cpp">
       <Filter>Game\Object\DefenseTarget</Filter>
@@ -422,5 +422,8 @@
     <MeshContentTask Include="Resources\ModelData\Hedora2.FBX">
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

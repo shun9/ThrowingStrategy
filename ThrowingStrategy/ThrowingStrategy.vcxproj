@@ -22,6 +22,7 @@
     <RootNamespace>ThrowingStrategy</RootNamespace>
     <ProjectGuid>{f655af34-9ca1-46cd-80a1-d16a57352721}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -290,6 +291,9 @@
     <MeshContentTask Include="Resources\ModelData\PlayerB.FBX" />
     <MeshContentTask Include="Resources\ModelData\Tube.FBX" />
     <MeshContentTask Include="Resources\ModelData\Tube2.FBX" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
