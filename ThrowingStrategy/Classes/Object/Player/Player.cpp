@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Player.cpp
 //* @brief :プレイヤー
-//* @date  :2017/12/01
+//* @date  :2017/12/13
 //* @author:S.Katou
 //************************************************/
 #include "Player.h"
@@ -12,7 +12,6 @@
 #include "State\PlayerMoveState.h"
 #include "../Unit/Unit.h"
 #include "../../Util/Visitor/Visitor.h"
-#include "../ObjectMacro.h"
 
 /// <summary>
 /// コンストラクタ
@@ -69,7 +68,7 @@ void Player::AlignUnits()
 	this->Accept(&v);
 	auto list = v.List();
 	for (int i = 0; i < (int)list.size(); i++){
-		list[i]->LocalPos(OFFSET_HAVING_UNIT(i));
+		list[i]->LocalPos(PLAYER_CONSTANT::HAVING_OFFSET(i));
 	}
 }
 

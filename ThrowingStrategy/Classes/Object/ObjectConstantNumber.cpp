@@ -25,7 +25,7 @@ const Vec3  ObjectConstantNumber::PLAYER_CONSTANT::COLLIDER_OFFSET = { 0.0f,1.0f
 const Vec3  ObjectConstantNumber::UNIT_CONSTANT::COLLIDER_OFFSET      = { 0.0f, 0.6f, 0.0f };
 const float ObjectConstantNumber::UNIT_CONSTANT::COLLIDER_BODY_SIZE   = 1.0f;		
 const float ObjectConstantNumber::UNIT_CONSTANT::COLLIDER_ATTACK_SIZE = 2.0f;	
-const float ObjectConstantNumber::UNIT_CONSTANT::COLLIDER_CHASE_SIZE = 10.0f;
+const float ObjectConstantNumber::UNIT_CONSTANT::COLLIDER_CHASE_SIZE  = 10.0f;
 
 //ñhâqëŒè€ä÷òA
 const float ObjectConstantNumber::DEFENSE_TARGET_CONSTANT::MODEL_SCALE     = 0.4f;

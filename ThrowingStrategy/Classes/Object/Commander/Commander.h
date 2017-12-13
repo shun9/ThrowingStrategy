@@ -14,12 +14,6 @@ private:
 	//‚Ä‚é”
 	int m_capacity;
 
-	//“Š±—Í
-	float m_throwingPower;
-
-	//“Š‚°‚éŠp“x
-	float m_throwingAngle;
-
 	ShunLib::SphereCollider* m_collider;
 
 public:
@@ -31,12 +25,8 @@ public:
 	void Finalize()override;
 
 	//Getter
-	float ThrowingPower() { return m_throwingPower; }
-	float ThrowingAngle() { return m_throwingAngle; }
-	int   Capacity     () { return m_capacity     ; }
+	int Capacity() { return m_capacity; }
 
 	//Setter
-	void ThrowingPower(float p) { m_throwingPower = p; }
-	void ThrowingAngle(float a) { m_throwingAngle = a; }
-	void Capacity     (int   c) { m_capacity      = c; }
+	void Capacity(int c) { m_capacity = c; }
 };

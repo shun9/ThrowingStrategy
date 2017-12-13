@@ -63,6 +63,14 @@ public:
 	public:
 		static const float COLLIDER_SIZE;			//本体の当たり判定のサイズ
 		static const ShunLib::Vec3 COLLIDER_OFFSET;	//当たり判定の中心位置
+		
+		/// <summary>
+		/// 持っているオブジェクトの中心位置
+		/// </summary>
+		/// <param name="num">何番目のアイテムか</param>
+		static ShunLib::Vec3 HAVING_OFFSET(int num) {
+			return ShunLib::Vec3(0.0f, 2.0f * (num + 1) + 2.0f, 0.0f);
+		}
 	};
 
 	//ユニット関連
