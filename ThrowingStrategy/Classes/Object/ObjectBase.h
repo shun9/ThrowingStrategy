@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :ObjectBase.h
 //* @brief :オブジェクトの基底クラス
-//* @date  :2017/11/16
+//* @date  :2017/12/13
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -39,14 +39,14 @@ private:
 	ObjectBase* m_parent;
 
 public:
-	//子用
+	//コンストラクタ　子用
 	ObjectBase(OBJECT_LIST type) :
 		ObjectData(type),
 		m_parent(nullptr) {
 		ROOT_OBJECT->AddChild(this);
 	}
 
-	//ルート用
+	//コンストラクタ　ルート用
 	ObjectBase():
 		ObjectData(OBJECT_LIST::ROOT),
 		m_parent(nullptr) {
@@ -63,10 +63,7 @@ public:
 	void SetParent(ObjectBase* parent);
 
 	//子を追加
-	void AddChild(ObjectBase* child) { 
-		m_children.push_back(child); 
-		child->SetParent(this);
-	}
+	void AddChild(ObjectBase* child);
 
 	//子を削除
 	void RemoveChild(ObjectBase* child);
@@ -94,12 +91,7 @@ public:
 	virtual void Finalize() { for (auto& v : m_children) { v->Finalize(); } }
 
 	//ビジター受け入れ
-	void Accept(ShunLib::Visitor* visitor) {
-		visitor->Visit(this);
-		for (auto& v : m_children) {
-			visitor->Visit(v);
-		}
-	}
+	void Accept(ShunLib::Visitor* visitor);
 
 	//ローカル座標系
 	Vec3 LocalPos() { return this->Pos(); }

@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :ObjectBase.cpp
 //* @brief :オブジェクト
-//* @date  :2017/11/15
+//* @date  :2017/12/13
 //* @author:S.Katou
 //************************************************/
 #include "ObjectBase.h"
@@ -48,6 +48,15 @@ void ObjectBase::SetParent(ObjectBase * parent)
 		this->LocalPos(this->LocalPos() - m_parent->WorldPos());
 		this->Rotation(ShunLib::Vec3::Zero);
 	}
+}
+
+/// <summary>
+/// 子を追加
+/// </summary>
+void ObjectBase::AddChild(ObjectBase * child)
+{
+	m_children.push_back(child);
+	child->SetParent(this);
 }
 
 /// <summary>
@@ -133,7 +142,9 @@ void ObjectBase::RenderChild(const Matrix & view, const Matrix & proj)
 	}
 }
 
-//更新
+/// <summary>
+/// 更新
+/// </summary>
 void ObjectBase::Update()
 {
 	//更新中の変更によってアクセス違反が起こるため
@@ -154,7 +165,18 @@ void ObjectBase::Update()
 		else {
 			i++;
 		}
+	}
+}
 
+/// <summary>
+/// ビジターを受け入れる
+/// </summary>
+/// <param name="visitor"></param>
+void ObjectBase::Accept(ShunLib::Visitor * visitor)
+{
+	visitor->Visit(this);
+	for (auto& v : m_children) {
+		visitor->Visit(v);
 	}
 }
 

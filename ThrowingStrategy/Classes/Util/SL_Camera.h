@@ -67,28 +67,33 @@ namespace ShunLib {
 		//角度
 		float m_angle;
 
+		//ビュー行列　プロジェクション行列
 		Matrix m_view;
 		Matrix m_proj;
 
+		//行列作成に使ったデータ
 		ViewData m_viewData;
 		ProjData m_projData;
 
 	public:
 		void Update();
 
+		//状態切替
+		void ChangeMode(CAMERA_MODE mode);
+
+		/*--Getter--*/
 		const Matrix& ViewMat(){ return m_view; }
 		const Matrix& ProjMat(){ return m_proj; }
-
 		ViewData View() { return m_viewData; }
 		ProjData Proj() { return m_projData; }
 		ObjectBase* FollowTarget() { return m_followTarget; }
 		float Angle() { return m_angle; }
 
+		/*--Setter--*/
 		void View(const ViewData& data) { m_viewData = data; }
 		void Proj(const ProjData& data) { m_projData = data; }
 		void FollowTarget(ObjectBase* obj) { m_followTarget = obj; }
 		
-		void ChangeMode(CAMERA_MODE mode);
 	
 	private:
 		MainCamera();
