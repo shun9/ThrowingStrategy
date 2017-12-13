@@ -71,6 +71,9 @@
     <Filter Include="Game\Physics\Collision">
       <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\UI">
+      <UniqueIdentifier>{b229a2ca-2760-45a3-b1e0-388237195f74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -233,9 +236,6 @@
     <ClInclude Include="Classes\Object\UnitSummoner\State\SummonerSteadyState.h">
       <Filter>Game\Object\UnitSummoner\SummonerState</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Object\ObjectMacro.h">
-      <Filter>Game\Object\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Object\Unit\State\UnitChaseState.h">
       <Filter>Game\Object\Unit\State</Filter>
     </ClInclude>
@@ -244,6 +244,15 @@
     </ClInclude>
     <ClInclude Include="Classes\Object\Stage\GroundStage.h">
       <Filter>Game\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\UIManager.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\UI.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\HPGauge\HPGauge.h">
+      <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -380,6 +389,7 @@
     <ClCompile Include="Classes\Object\Stage\GroundStage.cpp">
       <Filter>Game\Object\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

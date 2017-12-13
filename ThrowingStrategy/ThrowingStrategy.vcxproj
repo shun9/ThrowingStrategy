@@ -178,7 +178,6 @@
     <ClInclude Include="Classes\Object\ObjectBase.h" />
     <ClInclude Include="Classes\Object\ObjectConstantNumber.h" />
     <ClInclude Include="Classes\Object\ObjectData.h" />
-    <ClInclude Include="Classes\Object\ObjectMacro.h" />
     <ClInclude Include="Classes\Object\ObjectModelHolder.h" />
     <ClInclude Include="Classes\Object\ObjectParamHolder.h" />
     <ClInclude Include="Classes\Object\ObjectFactory.h" />
@@ -206,6 +205,9 @@
     <ClInclude Include="Classes\Physics\Collision\SL_Collider.h" />
     <ClInclude Include="Classes\Physics\Collision\SL_CollisionManager.h" />
     <ClInclude Include="Classes\Physics\PhysicsConstantNumber.h" />
+    <ClInclude Include="Classes\UI\HPGauge\HPGauge.h" />
+    <ClInclude Include="Classes\UI\UI.h" />
+    <ClInclude Include="Classes\UI\UIManager.h" />
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h" />
     <ClInclude Include="Classes\Util\SL_CameraState.h" />
     <ClInclude Include="Classes\Util\Debugger\DebuggerUI.h" />
@@ -261,6 +263,7 @@
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp" />
+    <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp" />
     <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp" />
     <ClCompile Include="Classes\Util\Debugger\imgui\imgui.cpp" />
     <ClCompile Include="Classes\Util\Debugger\imgui\imgui_demo.cpp" />

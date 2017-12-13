@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :DestroySingleton.h
 //* @brief :ƒVƒ“ƒOƒ‹ƒgƒ“‚ğ‚Ü‚Æ‚ß‚Äíœ‚·‚é
-//* @date  :2017/11/10
+//* @date  :2017/12/13
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -18,6 +18,7 @@
 #include "SL_GamePadManager.h"
 #include "Debugger\DebuggerUI.h"
 #include "../Object/ObjectModelHolder.h"
+#include "../UI/UIManager.h"
 
 class DestroySingleton
 {
@@ -30,6 +31,7 @@ public:
 		BasicShapeRenderer::Destroy();
 		MainCamera::Destroy();
 		CollisionManager::Destroy();
+		UIManager::Destroy();
 		SceneManager::Destroy();
 		MyStepTimer::Destroy();
 		GamePadManager::Destroy();

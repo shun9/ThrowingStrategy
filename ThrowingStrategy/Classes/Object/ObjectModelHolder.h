@@ -1,3 +1,9 @@
+//************************************************/
+//* @file  :ObjectModelHolder.h
+//* @brief :モデルをまとめて管理するクラス
+//* @date  :2017/12/13
+//* @author:S.Katou
+//************************************************/
 #pragma once
 #include <memory>
 #include <SL_Singleton.h>
@@ -21,6 +27,7 @@ public:
 	using TEAM = ObjectConstantNumber::TEAM;
 
 private:
+	//モデル
 	std::unique_ptr<Model> m_plarerRed;
 	std::unique_ptr<Model> m_plarerBlue;
 	std::unique_ptr<Model> m_ghostRed;
@@ -32,12 +39,14 @@ private:
 	std::unique_ptr<Model> m_tubeBlue;
 
 public:
+	//モデルの取得
 	Model* GetModel(ObjectBase* obj);
 
 private:
 	ObjectModelHolder();
 	~ObjectModelHolder() {}
 
+	//各種モデルの判別
 	Model* GetPlayerModel(Player* player);
 	Model* GetCommanderModel(Commander* commander);
 	Model* GetUnitModel(Unit* unit);

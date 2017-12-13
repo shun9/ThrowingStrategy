@@ -1,3 +1,9 @@
+//************************************************/
+//* @file  :ObjectModelHolder.cpp
+//* @brief :ƒ‚ƒfƒ‹‚ğ‚Ü‚Æ‚ß‚ÄŠÇ—‚·‚éƒNƒ‰ƒX
+//* @date  :2017/12/13
+//* @author:S.Katou
+//************************************************/
 #include "ObjectModelHolder.h"
 #include "Player\Player.h"
 #include "Commander\Commander.h"
