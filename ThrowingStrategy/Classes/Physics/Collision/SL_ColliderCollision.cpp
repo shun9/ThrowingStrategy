@@ -101,11 +101,11 @@ bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box, 
 {
 	SphereCollider* s = dynamic_cast<SphereCollider*>(sphere);
 	BoxCollider* b = dynamic_cast<BoxCollider*>(box);
-	
+
 	//‹…‚Ì’†S“_
 	Point point;
 	point.CenterPoint(s->Shape()->CenterPoint());
-	
+
 	//ÅÚ‹ß“_
 	Point closestPoint;
 

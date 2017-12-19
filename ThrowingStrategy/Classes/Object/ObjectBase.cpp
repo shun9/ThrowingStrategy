@@ -34,6 +34,24 @@ void ObjectBase::FinalizeRootObject()
 	SAFE_DELETE(ROOT_OBJECT);
 }
 
+/// <summary>
+/// デストラクタ
+/// </summary>
+ObjectBase::~ObjectBase()
+{
+	//this->Finalize();
+
+	//子も同時に削除
+	for (int i = 0; i < (int)(m_children.size()); i++) {
+		m_children.at(i)->Finalize();
+		ObjectFactory::GetInstance()->Delete(m_children.at(i));
+	}
+
+	//親がいるなら切り離す
+	if (Parent() != nullptr) {
+		Parent()->RemoveChild(this);
+	}
+}
 
 /// <summary>
 /// 親を設定する
@@ -70,13 +88,13 @@ void ObjectBase::RemoveChild(ObjectBase * child)
 	auto tmpChild = std::find(m_children.begin(), m_children.end(), child);
 
 	if (tmpChild != m_children.end()) {
+
 		//親の情報を子に渡す
 		child->LocalPos(child->WorldPos());
 		child->Rotation(child->WorldRotation());
-		
+
 		//子を切り離す
 		m_children.erase(tmpChild);
-		m_children.shrink_to_fit();
 	}
 }
 
@@ -154,18 +172,33 @@ void ObjectBase::Update()
 	}
 
 	//死んでいるオブジェクトを削除
-	for (int i = 0; i < (int)m_children.size();)
+	for (auto& itr = m_children.begin(); itr != m_children.end();)
 	{
 		//死んでいたら削除
-		if (m_children.at(i)->IsDead()) {
-			m_children.at(i)->Finalize();
-			ObjectFactory::GetInstance()->Delete(m_children.at(i));
-			m_children.erase(m_children.begin() + i);
+		if ((*itr)->IsDead()) {
+			(*itr)->Finalize();
+			ObjectFactory::GetInstance()->Delete((*itr));
+			//itr = m_children.erase(itr);
+			m_children.erase(itr);
 		}
 		else {
-			i++;
+			++itr;
 		}
 	}
+
+	////死んでいるオブジェクトを削除
+	//for (int i = 0; i < (int)m_children.size();)
+	//{
+	//	//死んでいたら削除
+	//	if (m_children.at(i)->IsDead()) {
+	//		m_children.at(i)->Finalize();
+	//		ObjectFactory::GetInstance()->Delete(m_children.at(i));
+	//		m_children.erase(m_children.begin() + i);
+	//	}
+	//	else {
+	//		i++;
+	//	}
+	//}
 }
 
 /// <summary>

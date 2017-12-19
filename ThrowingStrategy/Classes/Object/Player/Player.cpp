@@ -10,6 +10,7 @@
 #include <SL_MacroConstants.h>
 #include <SL_Math.h>
 #include "State\PlayerMoveState.h"
+#include "../../UI/HPGauge/HPGauge.h"
 #include "../Unit/Unit.h"
 #include "../../Util/Visitor/Visitor.h"
 
@@ -28,6 +29,10 @@ Player::Player()
 	//“–‚½‚è”»’è‚ÌŒ`ó‚ÌÝ’è
 	m_collider->Shape()->Scale(PLAYER_CONSTANT::COLLIDER_SIZE);
 
+	//HPƒQ[ƒW‚ÌÝ’è
+	m_hpGauge = new HPGauge;
+	m_hpGauge->Parent(this);
+	m_hpGauge->Offset(PLAYER_CONSTANT::HP_GAUGE_OFFSET);
 }
 
 /// <summary>
@@ -36,6 +41,7 @@ Player::Player()
 Player::~Player()
 {
 	SAFE_DELETE(m_collider);
+	SAFE_DELETE(m_hpGauge);
 }
 
 /// <summary>

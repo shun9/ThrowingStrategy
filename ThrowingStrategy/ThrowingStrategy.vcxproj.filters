@@ -68,11 +68,11 @@
     <Filter Include="Game\Physics">
       <UniqueIdentifier>{ccc93c24-be89-43e7-be0f-bc1c438ac412}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Physics\Collision">
-      <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\UI">
       <UniqueIdentifier>{b229a2ca-2760-45a3-b1e0-388237195f74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NewShunLib\Collision">
+      <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -141,16 +141,16 @@
       <Filter>Game\Object\Base</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Physics\Collision\SL_CollisionManager.h">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Physics\Collision\SL_Collider.h">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Util\SL_Camera.h">
       <Filter>Game\Util</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\SL_Shape.h">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h">
       <Filter>Game\Util</Filter>
@@ -254,6 +254,18 @@
     <ClInclude Include="Classes\UI\HPGauge\HPGauge.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\UI\UITextureHolder.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\NewShunLib\SL_Node.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\NewShunLib\SL_ObjectNode.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\NewShunLib\SL_ObjectTransform.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\SL_Graphics.cpp">
@@ -306,13 +318,13 @@
       <Filter>Game\Util</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\SL_Shape.cpp">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp">
       <Filter>Game\Util</Filter>
@@ -351,10 +363,10 @@
       <Filter>Game\Util</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp">
-      <Filter>Game\Physics\Collision</Filter>
+      <Filter>NewShunLib\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\DefenseTarget\DefenseTarget.cpp">
       <Filter>Game\Object\DefenseTarget</Filter>
@@ -389,7 +401,27 @@
     <ClCompile Include="Classes\Object\Stage\GroundStage.cpp">
       <Filter>Game\Object\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp" />
+    <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UITextureHolder.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UIManager.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UI.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\NewShunLib\SL_Node.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\NewShunLib\SL_ObjectTransform.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\NewShunLib\SL_ObjectNode.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

@@ -26,7 +26,7 @@ void UnitRoamState::Execute(Unit * unit)
 	//ŠÔ‚ğŒv‘ª
 	auto timer = MyStepTimer::GetInstance();
 	m_timeCnt += timer->GetElapsedSeconds();
-	
+
 	//ˆê’èŠÔ‚²‚Æ‚ÉˆÚ“®æ‚ğ•ÏX
 	if (m_timeCnt > m_limit){
 		//i‚Ş•ûŒü‚ğ•Ï‚¦‚é

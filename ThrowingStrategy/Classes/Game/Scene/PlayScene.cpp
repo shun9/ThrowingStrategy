@@ -67,7 +67,7 @@ void PlayScene::Update()
 void PlayScene::Render()
 {
 	auto camera = ShunLib::MainCamera::GetInstance();
-	
+
 	ObjectBase::ROOT_OBJECT->Render(camera->ViewMat(), camera->ProjMat());
 }
 

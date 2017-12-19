@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Unit.h
 //* @brief :召喚されるユニット
-//* @date  :2017/11/21
+//* @date  :2017/12/13
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -9,6 +9,8 @@
 #include "../../Physics/Collision/SL_Collider.h"
 
 struct FlyingData;
+class HPGauge;
+
 class Unit :public StateObject<Unit>
 {
 public:
@@ -17,16 +19,22 @@ public:
 	using UNIT_LIST = ObjectConstantNumber::UNIT_CONSTANT::TYPE_LIST;
 
 private:
+	//ユニットの種類
 	UNIT_LIST m_unitType;
+
+	//当たり判定
 	SphereCollider* m_collider;
 	SphereCollider* m_attackRange;
 	SphereCollider* m_chaseRange;
+
+	//HPゲージ
+	HPGauge* m_hpGauge;
 
 	float m_attackInterval;
 
 public:
 	Unit();
-	~Unit() {}
+	~Unit()override {}
 
 	//初期化　終了
 	void Initialize()override;

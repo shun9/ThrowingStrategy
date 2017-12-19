@@ -5,16 +5,34 @@
 //* @author:S.Katou
 //************************************************/
 #pragma once
+#include <vector>
 #include <SL_Singleton.h>
+#include "UI.h"
 
 class UIManager : public ShunLib::Singleton<UIManager>
 {
 	friend ShunLib::Singleton<UIManager>;
 
 private:
-	UIManager() {}
-	~UIManager() {}
+	std::vector<UI*>m_uiList;
+
+public:
+	//XV@•`‰æ
+	void Update();
+	void Render();
+
+	//UI‚ğ’Ç‰Á
+	void AddUI(UI* ui) { m_uiList.push_back(ui); };
+
+	//UI‚ğíœ
+	void RemoveUI(UI* ui) {
+		auto tmp = std::find(m_uiList.begin(), m_uiList.end(), ui);
+		if (tmp != m_uiList.end()) {
+			m_uiList.erase(tmp);
+		}
+	}
 
 private:
-
+	UIManager() {}
+	~UIManager() {}
 };

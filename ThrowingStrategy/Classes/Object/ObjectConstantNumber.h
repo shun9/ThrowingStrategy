@@ -63,7 +63,8 @@ public:
 	public:
 		static const float COLLIDER_SIZE;			//本体の当たり判定のサイズ
 		static const ShunLib::Vec3 COLLIDER_OFFSET;	//当たり判定の中心位置
-		
+		static const ShunLib::Vec3 HP_GAUGE_OFFSET;	//HPゲージの中心位置
+
 		/// <summary>
 		/// 持っているオブジェクトの中心位置
 		/// </summary>
@@ -86,6 +87,7 @@ public:
 		};
 	public:
 		static const ShunLib::Vec3 COLLIDER_OFFSET;	//当たり判定の中心位置
+		static const ShunLib::Vec3 HP_GAUGE_OFFSET;	//HPゲージの中心位置
 		static const float COLLIDER_BODY_SIZE;		//本体の当たり判定のサイズ
 		static const float COLLIDER_ATTACK_SIZE;	//攻撃範囲の当たり判定のサイズ
 		static const float COLLIDER_CHASE_SIZE;		//追跡範囲の当たり判定のサイズ
@@ -98,6 +100,17 @@ public:
 		static const float MODEL_SCALE;				//モデルの倍率
 		static const ShunLib::Vec3 COLLIDER_OFFSET;	//当たり判定の中心位置
 		static const ShunLib::Vec3 COLLIDER_SIZE;	//本体の当たり判定のサイズ
+		static const ShunLib::Vec3 HP_GAUGE_OFFSET;	//HPゲージの中心位置
 	};
+
+	//召喚師関連
+	class SUMMONER_CONSTANT
+	{
+	public:
+		static const ShunLib::Vec3 COLLIDER_OFFSET;	//当たり判定の中心位置
+		static const ShunLib::Vec3 COLLIDER_SIZE;	//本体の当たり判定のサイズ
+		static const ShunLib::Vec3 HP_GAUGE_OFFSET;	//HPゲージの中心位置
+	};
+
 };
 

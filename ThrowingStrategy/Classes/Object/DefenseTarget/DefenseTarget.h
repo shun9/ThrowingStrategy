@@ -8,6 +8,8 @@
 #include "../StateObject.h"
 #include "../../Physics/Collision/SL_Collider.h"
 
+class HPGauge;
+
 class DefenseTarget : public StateObject<DefenseTarget>
 {
 public:
@@ -16,6 +18,9 @@ public:
 private:
 	//–{‘Ì‚Ì“–‚½‚è”»’è
 	ShunLib::BoxCollider* m_collider;
+	
+	//HPƒQ[ƒW
+	HPGauge* m_hpGauge;
 
 public:
 	DefenseTarget();

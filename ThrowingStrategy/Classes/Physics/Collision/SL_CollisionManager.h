@@ -9,7 +9,7 @@
 #include <SL_Singleton.h>
 #include "SL_Collider.h"
 
-namespace ShunLib 
+namespace ShunLib
 {
 	class CollisionManager :public Singleton<CollisionManager>
 	{
@@ -25,13 +25,18 @@ namespace ShunLib
 		static void Rejection(SphereCollider* A, BoxCollider* B);
 
 	private:
+		//“–‚½‚è”»’è‚Ìˆê——
 		std::vector<ICollider*> m_colliderList;
 
 	public:
+		//XV •`‰æ
 		void Update();
 		void Render();
 
+		//“–‚½‚è”»’è‚Ì’Ç‰Á
 		void AddCollider(ICollider* col) { m_colliderList.push_back(col); }
+
+		//“–‚½‚è”»’è‚Ìíœ
 		void RemoveCollider(ICollider* col) {
 			auto tmpCol = std::find(m_colliderList.begin(), m_colliderList.end(), col);
 			if (tmpCol != m_colliderList.end()) {

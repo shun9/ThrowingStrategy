@@ -10,6 +10,7 @@
 #include "State\UnitRoamState.h"
 #include "../../Physics/PhysicsConstantNumber.h"
 #include "../../Main/SL_MyStepTimer.h"
+#include "../../UI/HPGauge/HPGauge.h"
 
 Unit::Unit():
 	StateObject(this, OBJECT_LIST::UNIT),
@@ -37,6 +38,10 @@ Unit::Unit():
 	m_chaseRange->Offset(UNIT_CONSTANT::COLLIDER_OFFSET);
 	m_chaseRange->Shape()->Scale(UNIT_CONSTANT::COLLIDER_CHASE_SIZE);
 	m_chaseRange->IsDebugDraw(false);
+
+	m_hpGauge = new HPGauge;
+	m_hpGauge->Parent(this);
+	m_hpGauge->Offset(UNIT_CONSTANT::HP_GAUGE_OFFSET);
 }
 
 void Unit::Initialize()
@@ -55,6 +60,7 @@ void Unit::Finalize()
 	SAFE_DELETE(m_collider);
 	SAFE_DELETE(m_attackRange);
 	SAFE_DELETE(m_chaseRange);
+	SAFE_DELETE(m_hpGauge);
 }
 
 /// <summary>

@@ -19,8 +19,8 @@ namespace ShunLib
 	class ICollider :public VisitorNode
 	{
 	protected:
-		//コライダーの位置を紐づけるオブジェクト
-		ObjectBase* m_posObj;
+		//このオブジェクトの位置を参照する
+		ObjectBase* m_chaseObj;
 
 		//当たり判定を持つオブジェクト
 		ObjectBase* m_parent;
@@ -35,12 +35,8 @@ namespace ShunLib
 		//オブジェクトからの相対座標
 		Vec3 m_offset;
 
-		//存在するかどうか
-		//衝突応答をするかどうかに使用
-		bool m_isEntity;
-
-		//当たったときに実行する関数
-		std::function<void(ObjectBase*)> m_callBack;
+		//当たり判定を行うかどうか
+		bool m_isEnable;
 
 		//当たっているオブジェクトのリスト
 		std::vector<ObjectBase*>m_hitList;
@@ -49,7 +45,7 @@ namespace ShunLib
 	public:
 		ICollider();
 		virtual ~ICollider();
-	
+
 		virtual void Update() = 0;
 		void DebugRender();
 
@@ -62,7 +58,7 @@ namespace ShunLib
 		}
 
 		//リストの初期化
-		void ResetList() { 
+		void ResetList() {
 			m_hitList.clear();
 			m_hitList.shrink_to_fit();
 			for (auto& v:m_childrenCollider){
@@ -77,31 +73,25 @@ namespace ShunLib
 		void AddChildCollider(ICollider* child);
 
 		/*--Getter--*/
-		ObjectBase* Parent() { return m_parent; }
-		ObjectBase* PosObj() { return m_posObj; }
+		ObjectBase* Parent                       () { return m_parent; }
+		ObjectBase* ChaseObj                     () { return m_chaseObj; }
 		std::vector<ICollider*>& ChildrenCollider() { return m_childrenCollider; }
-		Vec3 Offset() { return m_offset; }
-		const std::vector<ObjectBase*>& HitList() { return m_hitList; }
-		bool IsEntity() { return m_isEntity; }
-		SHAPE_TYPE Type() { return m_shape->Type(); }
+		Vec3 Offset                              () { return m_offset; }
+		const std::vector<ObjectBase*>& HitList  () { return m_hitList; }
+		bool IsEnable                            () { return m_isEnable; }
+		SHAPE_TYPE Type                          () { return m_shape->Type(); }
 
 		/*--Setter--*/
 		void Offset(const Vec3& offset) { m_offset = offset; }
 		void Parent(ObjectBase* parent) { m_parent = parent; }
-		void PosObj(ObjectBase* posObj) { m_posObj = posObj; }
-		void SetCallBack(std::function<void(ObjectBase*)> func) { m_callBack = func; }
-		void IsEntity(bool entity) { m_isEntity = entity; }
+		void ChaseObj(ObjectBase* posObj) { m_chaseObj = posObj; }
+		void IsEnable(bool enable) { m_isEnable = enable; }
 		void IsDebugDraw(bool draw) { m_isDebugDraw = draw; }
-	
+
 		//純粋仮想関数
 	public:
 		//クラスごとに返す形状を変更
 		virtual IShape* Shape() = 0;
-
-	public:
-		//コールバックを呼ぶ
-		void operator()(ObjectBase* obj) { 
-			if(m_callBack!=NULL)m_callBack(obj); }
 	};
 
 	//球状の当たり判定用クラス
@@ -110,7 +100,7 @@ namespace ShunLib
 	public:
 		SphereCollider() { m_shape  = new Sphere; }
 		~SphereCollider() { SAFE_DELETE(m_shape); }
-	
+
 		void Update()override;
 
 		//キャストしたポインタを返す
@@ -127,7 +117,7 @@ namespace ShunLib
 		~BoxCollider() { SAFE_DELETE(m_shape); }
 
 		void Update()override;
-		
+
 		Box* Shape() {
 			return dynamic_cast<Box*>(m_shape);
 		}

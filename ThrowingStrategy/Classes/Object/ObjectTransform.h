@@ -30,11 +30,11 @@ public:
 	~ObjectTransform() {}
 
 	//Getter
-	Vec3		  Pos     () { return m_pos; }
-	Vec3		  Rotation() { return m_rotation; }
-	Vec3		  Velocity() { return m_velocity; }
-	Vec3		  Scale   () { return m_scale; }
-	const Matrix& World   () { return m_world; }
+	Vec3		  Pos     ()const { return m_pos; }
+	Vec3		  Rotation()const { return m_rotation; }
+	Vec3		  Velocity()const { return m_velocity; }
+	Vec3		  Scale   ()const { return m_scale; }
+	const Matrix& World   ()const { return m_world; }
 
 	//Setter
 	void Pos     (const Vec3& pos  ) { m_pos = pos; }

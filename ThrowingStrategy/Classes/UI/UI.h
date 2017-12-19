@@ -24,23 +24,22 @@ private:
 
 public:
 	//コンストラクタ
-	UI():
-	m_pos(Vec3::Zero),
-	m_rot(Vec3::Zero),
-	m_scale(Vec3::One){}
+	UI();
 
 	//デストラクタ
-	~UI() {}
+	~UI();
 
 	//更新　描画
 	virtual void Update() = 0;
 	virtual void Render() = 0;
 
 	/*--Getter--*/
-	Vec3 Pos(){ return m_pos; }
-	Vec3 Rot(){ return m_rot; }
+	Vec3 Pos()    { return m_pos; }
+	Vec3 Rot()    { return m_rot; }
+	Vec3 Scale()  { return m_scale; }
 
 	/*--Setter--*/
-	void Pos(const Vec3& pos){ m_pos = pos; }
-	void Rot(const Vec3& rot){ m_rot = rot; }
+	void Pos  (const Vec3& pos)   { m_pos = pos; }
+	void Rot  (const Vec3& rot)   { m_rot = rot; }
+	void Scale(const Vec3& scale) { m_scale = scale; }
 };

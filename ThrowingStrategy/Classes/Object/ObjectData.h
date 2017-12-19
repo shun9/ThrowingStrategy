@@ -28,7 +28,7 @@ public:
 	virtual ~ObjectData() {}
 
 	//ƒ_ƒ[ƒW‚ğó‚¯‚é
-	void TakeDamage(int damage) { m_hp -= damage; }
+	void TakeDamage(int damage) { m_hp = ShunLib::Max(0, m_hp - damage); }
 
 	//€‚ñ‚Å‚¢‚é‚©‚Ç‚¤‚©
 	bool IsDead() { return m_hp <= 0; }

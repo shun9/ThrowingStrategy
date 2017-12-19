@@ -9,6 +9,7 @@
 #include "../../Physics/Collision/SL_Collider.h"
 
 class Unit;
+class HPGauge;
 
 class Player : public StateObject<Player>
 {
@@ -18,7 +19,9 @@ public:
 private:
 	//–{‘Ì‚Ì“–‚½‚è”»’è
 	ShunLib::SphereCollider* m_collider;
-
+	
+	//HPƒQ[ƒW
+	HPGauge* m_hpGauge;
 public:
 	Player();
 	~Player();

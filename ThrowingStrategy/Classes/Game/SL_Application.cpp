@@ -19,7 +19,7 @@ void ShunLib::Application::Run()
 	//メッセージ　0で初期化
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));
-	
+
 	//初期化処理
 	this->Initialize();
 

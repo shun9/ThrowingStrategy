@@ -43,6 +43,9 @@ void ICollider::DebugRender()
 	}
 }
 
+/// <summary>
+/// ビジターを受け入れる
+/// </summary>
 void ShunLib::ICollider::Accept(ShunLib::Visitor * visitor)
 {
 	visitor->Visit(this);
@@ -51,6 +54,9 @@ void ShunLib::ICollider::Accept(ShunLib::Visitor * visitor)
 	}
 }
 
+/// <summary>
+/// 子の当たり判定を追加
+/// </summary>
 void ShunLib::ICollider::AddChildCollider(ICollider * child)
 {
 	m_childrenCollider.push_back(child);

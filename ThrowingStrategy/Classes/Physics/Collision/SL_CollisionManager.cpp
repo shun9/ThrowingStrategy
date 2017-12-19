@@ -19,7 +19,7 @@ void ShunLib::CollisionManager::Update()
 		v->ResetList();
 	}
 
-	
+
 	//“–‚½‚è”»’è
 	int size = (int)m_colliderList.size();
 	for (int i = 0; i < size; i++)

@@ -25,9 +25,9 @@ enum CAMERA_MODE
 //ビュー行列に必要なデータ
 struct ViewData
 {
-	ShunLib::Vec3 pos;
-	ShunLib::Vec3 target;
-	ShunLib::Vec3 up;
+	ShunLib::Vec3 pos;		//カメラ位置
+	ShunLib::Vec3 target;	//注視点
+	ShunLib::Vec3 up;		//上方向
 	ViewData() :
 		pos(ShunLib::Vec3(0.0f, 1.0f, 0.0f)),
 		target(ShunLib::Vec3(0.0f, 0.0f, 3.0f)),
@@ -93,7 +93,7 @@ namespace ShunLib {
 		void View(const ViewData& data) { m_viewData = data; }
 		void Proj(const ProjData& data) { m_projData = data; }
 		void FollowTarget(ObjectBase* obj) { m_followTarget = obj; }
-		
+		void Angle(float a) { m_angle = a; }
 	
 	private:
 		MainCamera();

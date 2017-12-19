@@ -6,6 +6,7 @@
 //************************************************/
 #include "SL_CameraState.h"
 
+#include <SL_KeyManager.h>
 #include <SL_Math.h>
 #include "../Object/ObjectBase.h"
 

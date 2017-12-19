@@ -9,6 +9,7 @@
 
 #include "../ObjectFactory.h"
 #include "../Unit/Unit.h"
+#include "../../UI/HPGauge/HPGauge.h"
 
 UnitSummoner::UnitSummoner():
 	StateObject(this, ObjectConstantNumber::SUMMONER) ,
@@ -16,17 +17,34 @@ UnitSummoner::UnitSummoner():
 {
 	this->UnitType(UNIT_LIST::NORMAL);
 
+	//ìñÇΩÇËîªíËê›íË
 	m_collider = new ShunLib::BoxCollider;
 	m_collider->Parent(this);
 	m_collider->PosObj(this);
-	m_collider->Offset(ShunLib::Vec3(0.0f, 0.0f, 0.0f));
-	m_collider->Shape()->Size(ShunLib::Vec3(2.0f,2.0f,2.0f));
-	this->ChangeState(new SummonerSteadyState);
+	m_collider->Offset(SUMMONER_CONSTANT::COLLIDER_OFFSET);
+	m_collider->Shape()->Size(SUMMONER_CONSTANT::COLLIDER_SIZE);
+
+	//HPÉQÅ[ÉWê›íË
+	m_hpGauge = new HPGauge;
+	m_hpGauge->Parent(this);
+	m_hpGauge->Offset(SUMMONER_CONSTANT::HP_GAUGE_OFFSET);
 }
 
 UnitSummoner::~UnitSummoner()
 {
+	DELETE_POINTER(m_hpGauge);
 	DELETE_POINTER(m_collider);
+}
+
+/// <summary>
+/// èâä˙âª
+/// </summary>
+void UnitSummoner::Initialize()
+{
+	//èâä˙èÛë‘ê›íË
+	this->ChangeState(new SummonerSteadyState);
+
+	StateObject::Initialize();
 }
 
 /// <summary>

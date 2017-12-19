@@ -6,6 +6,7 @@
 //************************************************/
 #include "DefenseTarget.h"
 #include "../../Util/Debugger/DebuggerUI.h"
+#include "../../UI/HPGauge/HPGauge.h"
 
 /// <summary>
 /// コンストラクタ
@@ -21,6 +22,10 @@ DefenseTarget::DefenseTarget():
 	m_collider->PosObj(this);
 	m_collider->Offset(DEFENSE_TARGET_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Size(DEFENSE_TARGET_CONSTANT::COLLIDER_SIZE / DEFENSE_TARGET_CONSTANT::MODEL_SCALE);
+
+	m_hpGauge = new HPGauge;
+	m_hpGauge->Parent(this);
+	m_hpGauge->Offset(DEFENSE_TARGET_CONSTANT::HP_GAUGE_OFFSET);
 }
 
 /// <summary>
@@ -28,7 +33,8 @@ DefenseTarget::DefenseTarget():
 /// </summary>
 DefenseTarget::~DefenseTarget()
 {
-	SAFE_DELETE(m_collider)
+	SAFE_DELETE(m_collider);
+	SAFE_DELETE(m_hpGauge);
 }
 
 /// <summary>

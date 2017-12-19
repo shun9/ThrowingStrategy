@@ -22,7 +22,7 @@
     <RootNamespace>ThrowingStrategy</RootNamespace>
     <ProjectGuid>{f655af34-9ca1-46cd-80a1-d16a57352721}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\DirectXTK\Inc;C:\ShunLibTK\inc;C:\ShunLib\inc;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\s162044\Documents\ThrowingStrategy\ThrowingStrategy\Classes\NewShunLib;C:\DirectXTK\Inc;C:\ShunLibTK\inc;C:\ShunLib\inc;$(IncludePath)</IncludePath>
     <LibraryPath>C:\DirectXTK\Bin\Desktop_2015\Win32\Debug;C:\ShunLibTK\Debug;C:\ShunLib\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\DirectXTK\Inc;C:\ShunLibTK\inc;C:\ShunLib\inc;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\s162044\Documents\ThrowingStrategy\ThrowingStrategy\Classes\NewShunLib;C:\DirectXTK\Inc;C:\ShunLibTK\inc;C:\ShunLib\inc;$(IncludePath)</IncludePath>
     <LibraryPath>C:\DirectXTK\Bin\Desktop_2015\Win32\Release;C:\ShunLibTK\Release;C:\ShunLib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -172,6 +172,9 @@
     <ClInclude Include="Classes\Main\SL_Graphics.h" />
     <ClInclude Include="Classes\Main\SL_MyStepTimer.h" />
     <ClInclude Include="Classes\Main\SL_Window.h" />
+    <ClInclude Include="Classes\NewShunLib\SL_Node.h" />
+    <ClInclude Include="Classes\NewShunLib\SL_ObjectNode.h" />
+    <ClInclude Include="Classes\NewShunLib\SL_ObjectTransform.h" />
     <ClInclude Include="Classes\Object\Commander\Commander.h" />
     <ClInclude Include="Classes\Object\Commander\CommanderMoveState.h" />
     <ClInclude Include="Classes\Object\DefenseTarget\DefenseTarget.h" />
@@ -208,6 +211,7 @@
     <ClInclude Include="Classes\UI\HPGauge\HPGauge.h" />
     <ClInclude Include="Classes\UI\UI.h" />
     <ClInclude Include="Classes\UI\UIManager.h" />
+    <ClInclude Include="Classes\UI\UITextureHolder.h" />
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h" />
     <ClInclude Include="Classes\Util\SL_CameraState.h" />
     <ClInclude Include="Classes\Util\Debugger\DebuggerUI.h" />
@@ -233,6 +237,9 @@
     <ClCompile Include="Classes\Main\SL_Graphics.cpp" />
     <ClCompile Include="Classes\Main\SL_Window.cpp" />
     <ClCompile Include="Classes\Main\WinMain.cpp" />
+    <ClCompile Include="Classes\NewShunLib\SL_Node.cpp" />
+    <ClCompile Include="Classes\NewShunLib\SL_ObjectNode.cpp" />
+    <ClCompile Include="Classes\NewShunLib\SL_ObjectTransform.cpp" />
     <ClCompile Include="Classes\Object\Commander\Commander.cpp" />
     <ClCompile Include="Classes\Object\Commander\CommanderMoveState.cpp" />
     <ClCompile Include="Classes\Object\DefenseTarget\DefenseTarget.cpp" />
@@ -264,6 +271,9 @@
     <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp" />
     <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp" />
+    <ClCompile Include="Classes\UI\UI.cpp" />
+    <ClCompile Include="Classes\UI\UIManager.cpp" />
+    <ClCompile Include="Classes\UI\UITextureHolder.cpp" />
     <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp" />
     <ClCompile Include="Classes\Util\Debugger\imgui\imgui.cpp" />
     <ClCompile Include="Classes\Util\Debugger\imgui\imgui_demo.cpp" />

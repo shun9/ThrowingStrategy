@@ -7,10 +7,13 @@
 #include "SummonerSteadyState.h"
 #include "SummonerSummonState.h"
 
+#include "../../../Main/SL_MyStepTimer.h"
+
+
 void SummonerSteadyState::Enter(UnitSummoner * summoner)
 {
 	//ŽžŠÔÝ’è@Œ»Ý‚Í“K“–‚È’l
-	m_timer.SetTime(300);
+	m_timer.SetTime(summoner->Interval());
 }
 
 void SummonerSteadyState::Execute(UnitSummoner * summoner)

@@ -7,7 +7,7 @@
 #include "GroundStage.h"
 #include "../ObjectFactory.h"
 #include "../../Util/SL_Camera.h"
-#include "../ObjectFactory.h"
+#include "../UnitSummoner/UnitSummoner.h"
 
 void GroundStage::Initialize()
 {
@@ -66,6 +66,7 @@ void GroundStage::SettingBlueObject()
 	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
 	summoner->Pos(ShunLib::Vec3(-20.0f, 0.0f, 0.0f));
 	summoner->Team(p->Team());
+	dynamic_cast<UnitSummoner*>(summoner)->Interval(1000);
 
 	//–h‰q‘ÎÛ
 	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);
@@ -85,6 +86,7 @@ void GroundStage::SettingRedObject()
 	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
 	summoner->Pos(ShunLib::Vec3(20.0f, 0.0f, 0.0f));
 	summoner->Team(ObjectConstantNumber::TEAM::RED);
+	dynamic_cast<UnitSummoner*>(summoner)->Interval(2000);
 
 	//–h‰q‘ÎÛ
 	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);

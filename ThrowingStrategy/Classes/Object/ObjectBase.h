@@ -53,11 +53,7 @@ public:
 	}
 
 	//デストラクタ
-	virtual ~ObjectBase() {
-		for (int i = 0; i < (int)(m_children.size()); i++) {
-			ObjectFactory::GetInstance()->Delete(m_children.at(i));
-		}
-	}
+	virtual ~ObjectBase();
 
 	//親を設定
 	void SetParent(ObjectBase* parent);
@@ -76,7 +72,7 @@ public:
 	void RenderChild(const Matrix& view, const Matrix& proj);
 
 	//初期化 派生クラスの最後に呼ぶ
-	virtual void Initialize() {	
+	virtual void Initialize() {
 		//初期化中の変更によってアクセス違反が起こるため
 		//コンテナのサイズで回す
 		for (int i = 0; i < (int)(m_children.size()); i++){
@@ -86,7 +82,7 @@ public:
 
 	//更新
 	virtual void Update();
-	
+
 	//終了  派生クラスの最後に呼ぶ
 	virtual void Finalize() { for (auto& v : m_children) { v->Finalize(); } }
 
@@ -96,7 +92,7 @@ public:
 	//ローカル座標系
 	Vec3 LocalPos() { return this->Pos(); }
 	void LocalPos(const Vec3& pos) { this->Pos(pos); }
-	
+
 	//ワールド座標系
 	Vec3 WorldPos() {
 		Vec3 pos = this->Pos();
@@ -130,7 +126,7 @@ public:
 	ObjectBase* Parent() { return m_parent; }
 	const std::vector<ObjectBase*>& Children() { return m_children; }
 
-	
+
 protected:
 	//自身の行列を計算する
 	void CalcMat();

@@ -14,10 +14,10 @@
 #include "../Main/SL_MyStepTimer.h"
 #include "../Physics/Collision/SL_CollisionManager.h"
 #include "../Util/SL_GamePadManager.h"
+#include "../UI/UIManager.h"
 #include "Scene\SL_SceneManager.h"
 #include "Scene\PlayScene.h"
 #include "../Util/Debugger/DebuggerUI.h"
-#include "../Object/ObjectBase.h"
 
 using namespace ShunLib;
 
@@ -54,6 +54,9 @@ void MyGame::Update()
 	//ゲームパッド更新
 	GamePadManager::GetInstance()->Update();
 
+	//UI更新
+	UIManager::GetInstance()->Update();
+
 	//シーン更新
 	timer->Tick([&]()
 	{
@@ -78,6 +81,10 @@ void MyGame::Render()
 	scene->Render();
 	CollisionManager::GetInstance()->Render();
 
+	//UI描画
+	UIManager::GetInstance()->Render();
+
+	//デバッグ用UI描画
 	DebuggerUI::GetInstance()->Render();
 }
 

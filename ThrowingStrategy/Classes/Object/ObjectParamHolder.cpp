@@ -26,13 +26,13 @@ ObjectParamHolder::ObjectParamHolder()
 	m_dataList[ObjectConstantNumber::PLAYER] = data;
 
 	//指揮官
-	data.maxHP = 100;
+	data.maxHP = 1000;
 	data.power = 20.0f;
 	data.spd = 10.0f;
 	m_dataList[ObjectConstantNumber::COMMANDER] = data;
 
 	//召喚ユニット
-	data.maxHP = 10;
+	data.maxHP = 30;
 	data.power = 3.0f;
 	data.spd = 3.0f;
 	m_dataList[ObjectConstantNumber::UNIT] = data;
@@ -44,13 +44,13 @@ ObjectParamHolder::ObjectParamHolder()
 	m_dataList[ObjectConstantNumber::BLOCK] = data;
 
 	//防衛対象
-	data.maxHP = 20000;
+	data.maxHP = 2000;
 	data.power = 0.0f;
 	data.spd = 0.0f;
 	m_dataList[ObjectConstantNumber::DEFENSE_TARGET] = data;
 
 	//ユニットを召喚するオブジェクト
-	data.maxHP = 10000;
+	data.maxHP = 1000;
 	data.power = 0.0f;
 	data.spd = 0.0f;
 	m_dataList[ObjectConstantNumber::SUMMONER] = data;
