@@ -3,10 +3,10 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-Block::Block()
+Block::Block():
+	ObjectBase(ObjectConstantNumber::BLOCK)
 {
-	this->Type(ObjectConstantNumber::BLOCK);
-	this->Team(ObjectConstantNumber::TEAM::NONE);
+	m_data.Team(ObjectConstantNumber::TEAM::NONE);
 
 	//当たり判定の設定
 	m_collider = new ShunLib::BoxCollider();

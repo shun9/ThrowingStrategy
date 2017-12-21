@@ -14,13 +14,13 @@ public:
 		Stage(STAGE_TYPE::GROUND){};
 	~GroundStage() {};
 
-	//初期化
-	void Initialize()override;
-
-	//終了 
-	void Finalize()override;
 
 protected:
+	//初期化 更新 終了
+	void Initialize()override;
+	void Update    ()override {}
+	void Finalize  ()override;
+
 	//障害物の設置
 	void SettingObstacle()override;
 

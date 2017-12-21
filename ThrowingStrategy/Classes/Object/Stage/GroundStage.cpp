@@ -19,15 +19,11 @@ void GroundStage::Initialize()
 
 	//赤チーム設置
 	SettingRedObject();
-
-	//基底の初期化
-	//子の更新
-	ObjectBase::Initialize();
 }
 
 void GroundStage::Finalize()
 {
-	ObjectBase::Finalize();
+
 }
 
 /// <summary>
@@ -36,8 +32,8 @@ void GroundStage::Finalize()
 void GroundStage::SettingObstacle() {
 	auto factory = ObjectFactory::GetInstance();
 	ObjectBase* b = factory->CreateObject(OBJECT_LIST::BLOCK);
-	b->Pos(ShunLib::Vec3(0.0f, -1.0f, 0.0f));
-	b->Scale(ShunLib::Vec3(100.0f, 1.0f, 100.0f));
+	b->Transform().Pos(ShunLib::Vec3(0.0f, -1.0f, 0.0f));
+	b->Transform().Scale(ShunLib::Vec3(100.0f, 1.0f, 100.0f));
 
 	this->AddChild(b);
 }
@@ -59,19 +55,19 @@ void GroundStage::SettingBlueObject()
 	auto p = factory->CreateObject(ObjectConstantNumber::PLAYER);
 	camera->FollowTarget(p);
 	camera->ChangeMode(FOLLOW_CAMERA);
-	p->Pos(ShunLib::Vec3(-25.0f, 0.0f, 0.0f));
-	p->Team(ObjectConstantNumber::BLUE);
+	p->Transform().Pos(ShunLib::Vec3(-25.0f, 0.0f, 0.0f));
+	p->Data().Team(ObjectConstantNumber::BLUE);
 
 	//ユニット召喚オブジェクト
 	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
-	summoner->Pos(ShunLib::Vec3(-20.0f, 0.0f, 0.0f));
-	summoner->Team(p->Team());
+	summoner->Transform().Pos(ShunLib::Vec3(-20.0f, 0.0f, 0.0f));
+	summoner->Data().Team(p->Data().Team());
 	dynamic_cast<UnitSummoner*>(summoner)->Interval(1000);
 
 	//防衛対象
 	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);
-	target->Pos(ShunLib::Vec3(-30.0f, 0.0f, 0.0f));
-	target->Team(p->Team());
+	target->Transform().Pos(ShunLib::Vec3(-30.0f, 0.0f, 0.0f));
+	target->Data().Team(p->Data().Team());
 }
 
 /// <summary>
@@ -84,12 +80,12 @@ void GroundStage::SettingRedObject()
 
 	//召喚オブジェクト
 	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
-	summoner->Pos(ShunLib::Vec3(20.0f, 0.0f, 0.0f));
-	summoner->Team(ObjectConstantNumber::TEAM::RED);
+	summoner->Transform().Pos(ShunLib::Vec3(20.0f, 0.0f, 0.0f));
+	summoner->Data().Team(ObjectConstantNumber::TEAM::RED);
 	dynamic_cast<UnitSummoner*>(summoner)->Interval(2000);
 
 	//防衛対象
 	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);
-	target->Pos(ShunLib::Vec3(30.0f, 0.0f, 0.0f));
-	target->Team(ObjectConstantNumber::TEAM::RED);
+	target->Transform().Pos(ShunLib::Vec3(30.0f, 0.0f, 0.0f));
+	target->Data().Team(ObjectConstantNumber::TEAM::RED);
 }

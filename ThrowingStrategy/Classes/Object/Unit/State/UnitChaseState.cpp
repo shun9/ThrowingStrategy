@@ -34,11 +34,11 @@ void UnitChaseState::Execute(Unit* unit)
 	dir.Normalize();
 
 	//ユニットの速度を設定　移動
-	unit->Velocity(dir * unit->Spd());
+	unit->Transform().Velocity(dir * unit->Data().Spd());
 	unit->Move();
 
 	//攻撃範囲内にいる別チームのオブジェクトを探す
-	SearchAnotherTeamVisitor aV(unit->Team());
+	SearchAnotherTeamVisitor aV(unit->Data().Team());
 	aV.Reset();
 	unit->AttackRange()->Accept(&aV);
 
@@ -63,7 +63,7 @@ ObjectBase* UnitChaseState::SearchTarget(Unit * unit)
 {
 	//当たっているオブジェクトから
 	//別のチームのオブジェクトを探す
-	SearchAnotherTeamVisitor aV(unit->Team());
+	SearchAnotherTeamVisitor aV(unit->Data().Team());
 	unit->ChaseRange()->Accept(&aV);
 
 	//別チームのオブジェクトから

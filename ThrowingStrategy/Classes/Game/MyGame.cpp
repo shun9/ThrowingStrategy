@@ -10,6 +10,7 @@
 #include <SL_Texture.h>
 #include <SL_KeyManager.h>
 
+
 #include "../Main/SL_Graphics.h"
 #include "../Main/SL_MyStepTimer.h"
 #include "../Physics/Collision/SL_CollisionManager.h"
@@ -26,9 +27,6 @@ using namespace ShunLib;
 /// </summary>
 void MyGame::Initialize()
 {
-	//ルートオブジェクトの設定
-	ObjectBase::InitializeRootObject();
-	
 	//グラフィック関連
 	auto graphics = Graphics::GetInstance();
 	Model::SetDevice(graphics->Device(), graphics->DeviceContext());
@@ -47,7 +45,7 @@ void MyGame::Update()
 {
 	auto scene = SceneManager::GetInstance();
 	auto timer = MyStepTimer::GetInstance();
-	
+
 	//キー更新
 	KeyManager::GetInstance()->Update();
 
@@ -95,5 +93,4 @@ void MyGame::Finalize()
 {
 	auto scene = SceneManager::GetInstance();
 	scene->DeleteAllScene();
-	ObjectBase::FinalizeRootObject();
 }

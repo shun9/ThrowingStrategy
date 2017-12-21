@@ -17,7 +17,7 @@
 bool IsStateObject(ObjectBase* obj)
 {
 	for (auto& v : ObjectConstantNumber::STATE_OBJECT) {
-		if (obj->Type() == v) {
+		if (obj->Data().Type() == v) {
 			return true;
 		}
 	}
@@ -64,7 +64,7 @@ void SearchAnotherTeamVisitor::Visit(ShunLib::VisitorNode * node)
 	if (obj != nullptr) {
 		//チームに所属していて
 		//指定チームではないならカウントする
-		if (obj->Team() != ObjectConstantNumber::NONE && obj->Team() != m_myTeam) {
+		if (obj->Data().Team() != ObjectConstantNumber::NONE && obj->Data().Team() != m_myTeam) {
 			m_objectList.push_back(obj);
 		}
 	}

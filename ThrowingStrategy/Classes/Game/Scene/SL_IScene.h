@@ -5,11 +5,11 @@
 //* @author:S.Katou
 //************************************************/
 #pragma once
-#include "../../../StepTimer.h"
+#include <SL_Node.h>
 
 namespace ShunLib
 {
-	class IScene
+	class IScene : public Node
 	{
 	public:
 		IScene() {
@@ -22,4 +22,4 @@ namespace ShunLib
 		virtual void Render    () = 0;
 		virtual void Finalize  () = 0;
 	};
-}		
+}

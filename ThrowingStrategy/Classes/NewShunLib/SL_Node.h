@@ -1,16 +1,28 @@
 //************************************************/
 //* @file  :Node.h
 //* @brief :親子関係を持つノード
-//* @date  :2017/12/19
+//* @date  :2017/12/21
 //* @author:S.Katou
 //************************************************/
 #pragma once
 #include <vector>
+#include <SL_Visitor.h>
 
 namespace ShunLib
 {
-	class Node
+	class Node : public VisitorNode
 	{
+	public:
+		//ダーティーフラグ一覧
+		enum DIRTY_FLAG {
+			INITIALIZE_FLAG = 0 ,
+			UPDATE_FLAG,
+			RENDER_FLAG,
+			FINALIZE_FLAG,
+
+			DIRTY_FLAG_END,
+		};
+
 	protected:
 		//親
 		Node* m_parent;
@@ -18,9 +30,24 @@ namespace ShunLib
 		//子の一覧
 		std::vector<Node*> m_children;
 
+		//使用できるかどうか
+		bool m_isEnable;
+
+		//ダーティーフラグ
+		//処理後にtrue
+		bool m_isDirty[DIRTY_FLAG::DIRTY_FLAG_END];
+
 	public:
 		Node(int childrenSize = 100);
-		virtual ~Node() {}
+		virtual ~Node();
+
+		//初期化　更新　描画　終了
+		//ダーティーフラグの処理をしたあと
+		//派生クラスの処理を呼び出す
+		void BaseInitialize();
+		void BaseUpdate();
+		void BaseRender();
+		void BaseFinalize();
 
 		//親設定
 		virtual bool SetParent(Node* parent);
@@ -31,8 +58,20 @@ namespace ShunLib
 		//子の切り離し
 		virtual bool RemoveChild(Node* child);
 
+		//ビジターを受け入れる
+		virtual void Accept(Visitor* visitor);
+
 		/*--Getter--*/
 		Node* Parent() { return m_parent; }
 		std::vector<Node*>& Children() { return m_children; }
+		bool IsEnable() { return m_isEnable; }
+
+	protected:
+		//初期化　更新　描画　終了
+		//派生クラスで処理を実装する
+		virtual void Initialize() = 0;
+		virtual void Update    () = 0;
+		virtual void Render    () = 0;
+		virtual void Finalize  () = 0;
 	};
 }

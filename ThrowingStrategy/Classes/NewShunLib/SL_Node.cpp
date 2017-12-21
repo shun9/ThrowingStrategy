@@ -1,12 +1,12 @@
 //************************************************/
 //* @file  :Node.cpp
 //* @brief :親子関係を持つノード
-//* @date  :2017/12/19
+//* @date  :2017/12/21
 //* @author:S.Katou
 //************************************************/
 #include "SL_Node.h"
-
 #include <algorithm>
+#include <SL_MacroConstants.h>
 
 /// <summary>
 /// コンストラクタ
@@ -15,8 +15,115 @@
 ShunLib::Node::Node(int childrenSize):
 	m_parent(nullptr)
 {
-	//この領域をあらかじめ確保
+	//子の領域をあらかじめ確保
 	m_children.reserve(childrenSize);
+
+	//ダーティーフラグを下ろす
+	for (int i = 0; i < DIRTY_FLAG::DIRTY_FLAG_END; i++){
+		m_isDirty[i] = false;
+	}
+}
+
+/// <summary>
+/// デストラクタ
+/// </summary>
+ShunLib::Node::~Node()
+{
+	for (int i = 0; i < (int)m_children.size(); i++){
+		SAFE_DELETE(m_children[i]);
+	}
+}
+
+/// <summary>
+/// 基底の初期化
+/// ダーティーフラグの処理をしたあと
+/// 派生クラスの処理を呼び出す
+/// </summary>
+void ShunLib::Node::BaseInitialize()
+{
+	//処理前ならば派生クラスの処理を行う
+	if (!m_isDirty[DIRTY_FLAG::INITIALIZE_FLAG])
+	{
+		//初期化処理
+		Initialize();
+
+		//フラグを立てる
+		m_isDirty[DIRTY_FLAG::INITIALIZE_FLAG] = true;
+
+		//子の初期化を行う
+		for (auto& child:m_children){
+			child->BaseInitialize();
+		}
+	}
+}
+
+/// <summary>
+/// 基底の更新
+/// ダーティーフラグの処理をしたあと
+/// 派生クラスの処理を呼び出す
+/// </summary>
+void ShunLib::Node::BaseUpdate()
+{
+	//処理前ならば派生クラスの処理を行う
+	if (!m_isDirty[DIRTY_FLAG::UPDATE_FLAG])
+	{
+		//更新処理
+		Update();
+
+		//フラグを立てる
+		m_isDirty[DIRTY_FLAG::UPDATE_FLAG] = true;
+
+		//子の更新を行う
+		for (auto& child : m_children) {
+			child->BaseUpdate();
+		}
+	}
+}
+
+/// <summary>
+/// 基底の描画
+/// ダーティーフラグの処理をしたあと
+/// 派生クラスの処理を呼び出す
+/// </summary>
+void ShunLib::Node::BaseRender()
+{
+	//処理前ならば派生クラスの処理を行う
+	if (!m_isDirty[DIRTY_FLAG::RENDER_FLAG])
+	{
+		//描画処理
+		Render();
+
+		//フラグを立てる
+		m_isDirty[DIRTY_FLAG::RENDER_FLAG] = true;
+
+		//子の描画を行う
+		for (auto& child : m_children) {
+			child->BaseRender();
+		}
+	}
+}
+
+/// <summary>
+/// 基底の終了
+/// ダーティーフラグの処理をしたあと
+/// 派生クラスの処理を呼び出す
+/// </summary>
+void ShunLib::Node::BaseFinalize()
+{
+	//処理前ならば派生クラスの処理を行う
+	if (!m_isDirty[DIRTY_FLAG::FINALIZE_FLAG])
+	{
+		//終了処理
+		Finalize();
+
+		//フラグを立てる
+		m_isDirty[DIRTY_FLAG::FINALIZE_FLAG] = true;
+
+		//子の終了を行う
+		for (auto& child : m_children) {
+			child->BaseFinalize();
+		}
+	}
 }
 
 /// <summary>
@@ -81,4 +188,17 @@ bool ShunLib::Node::RemoveChild(Node* child)
 	}
 
 	return true;
+}
+
+/// <summary>
+/// ビジターを受け入れる
+/// </summary>
+void ShunLib::Node::Accept(Visitor* visitor){
+	//受け入れる
+	visitor->Visit(this);
+
+	//子にも訪問させる
+	for (Node* child:m_children){
+		child->Accept(visitor);
+	}
 }

@@ -14,12 +14,12 @@
 DefenseTarget::DefenseTarget():
 	StateObject(this,ObjectConstantNumber::DEFENSE_TARGET)
 {
-	this->Scale(DEFENSE_TARGET_CONSTANT::MODEL_SCALE);
+	m_transform.Scale(DEFENSE_TARGET_CONSTANT::MODEL_SCALE);
 
 	//“–‚½‚è”»’è‚ÌÝ’è
 	m_collider = new ShunLib::BoxCollider;
 	m_collider->Parent(this);
-	m_collider->PosObj(this);
+	m_collider->ChaseObj(this);
 	m_collider->Offset(DEFENSE_TARGET_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Size(DEFENSE_TARGET_CONSTANT::COLLIDER_SIZE / DEFENSE_TARGET_CONSTANT::MODEL_SCALE);
 
@@ -58,11 +58,11 @@ void DefenseTarget::Finalize()
 /// </summary>
 void DefenseTarget::Update()
 {
-	if (Team() == ObjectConstantNumber::BLUE){
-		DebuggerUI::GetInstance()->DrawDebugText("DefenseTarget BLUE : %d", HP());
+	if (m_data.Team() == ObjectConstantNumber::BLUE){
+		DebuggerUI::GetInstance()->DrawDebugText("DefenseTarget BLUE : %d", m_data.HP());
 	}
 	else {
-		DebuggerUI::GetInstance()->DrawDebugText("DefenseTarget RED  : %d", HP());
+		DebuggerUI::GetInstance()->DrawDebugText("DefenseTarget RED  : %d", m_data.HP());
 	}
 
 	StateObject::Update();

@@ -48,7 +48,7 @@ PlayScene::~PlayScene()
 /// </summary>
 void PlayScene::Initialize()
 {
-	ObjectBase::ROOT_OBJECT->Initialize();
+
 }
 
 /// <summary>
@@ -58,7 +58,6 @@ void PlayScene::Update()
 {
 	auto camera = ShunLib::MainCamera::GetInstance();
 	camera->Update();
-	ObjectBase::ROOT_OBJECT->Update();
 }
 
 /// <summary>
@@ -67,8 +66,6 @@ void PlayScene::Update()
 void PlayScene::Render()
 {
 	auto camera = ShunLib::MainCamera::GetInstance();
-
-	ObjectBase::ROOT_OBJECT->Render(camera->ViewMat(), camera->ProjMat());
 }
 
 /// <summary>
@@ -76,5 +73,4 @@ void PlayScene::Render()
 /// </summary>
 void PlayScene::Finalize()
 {
-	ObjectBase::ROOT_OBJECT->Finalize();
 }

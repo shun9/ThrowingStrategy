@@ -9,28 +9,28 @@
 
 void PlayerMoveUpKeyCommand::Execute(Player * obj)
 {
-	auto v = obj->Velocity();
-	v.m_z -= obj->Spd();
-	obj->Velocity(v);
+	auto v = obj->Transform().Velocity();
+	v.m_z -= obj->Data().Spd();
+	obj->Transform().Velocity(v);
 }
 
 void PlayerMoveDownKeyCommand::Execute(Player * obj)
 {
-	auto v = obj->Velocity();
-	v.m_z += obj->Spd();
-	obj->Velocity(v);
+	auto v = obj->Transform().Velocity();
+	v.m_z += obj->Data().Spd();
+	obj->Transform().Velocity(v);
 }
 
 void PlayerMoveRightKeyCommand::Execute(Player * obj)
 {
-	auto v = obj->Velocity();
-	v.m_x += obj->Spd();
-	obj->Velocity(v);
+	auto v = obj->Transform().Velocity();
+	v.m_x += obj->Data().Spd();
+	obj->Transform().Velocity(v);
 }
 
 void PlayerMoveLeftKeyCommand::Execute(Player * obj)
 {
-	auto v = obj->Velocity();
-	v.m_x -= obj->Spd();
-	obj->Velocity(v);
+	auto v = obj->Transform().Velocity();
+	v.m_x -= obj->Data().Spd();
+	obj->Transform().Velocity(v);
 }

@@ -18,7 +18,7 @@ using namespace ShunLib;
 /// </summary>
 void UnitAttackState::Enter(Unit* unit)
 {
-	SearchAnotherTeamVisitor aV(unit->Team());
+	SearchAnotherTeamVisitor aV(unit->Data().Team());
 	unit->AttackRange()->Accept(&aV);
 
 	//当たっているオブジェクトが存在するならば
@@ -45,7 +45,7 @@ void UnitAttackState::Execute(Unit* unit)
 	m_intervalTimer.Update();
 
 	//ユニットからターゲットへ向かうベクトル
-	Vec3 dir = m_target->Pos() - unit->Pos();
+	Vec3 dir = m_target->Transform().Pos() - unit->Transform().Pos();
 
 	//攻撃範囲から外れたら戻る
 	SearchSpecificObjectVisitor v(m_target);
@@ -61,14 +61,14 @@ void UnitAttackState::Execute(Unit* unit)
 	float rot = ToAngle(std::atan2(dir.m_z, dir.m_x)) - 90.0f;
 
 	//ユニットの向きを変える
-	Vec3 uRot = unit->Rotation();
+	Vec3 uRot = unit->Transform().Rotation();
 	uRot.m_y = rot;
-	unit->Rotation(uRot);
+	unit->Transform().Rotation(uRot);
 
 	//一定間隔でターゲットに攻撃
 	if (m_intervalTimer.IsEnded()){
 		m_intervalTimer.ResetCount();
-		m_target->TakeDamage((int)(unit->Power()));
+		m_target->Data().TakeDamage((int)(unit->Data().Power()));
 	}
 }
 

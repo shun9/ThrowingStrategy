@@ -5,7 +5,7 @@
 //* @author:S.Katou
 //************************************************/
 #pragma once
-#include <unordered_map> 
+#include <unordered_map>
 #include <SL_Singleton.h>
 #include "SL_IScene.h"
 #include "../../../StepTimer.h"
@@ -20,7 +20,7 @@ namespace ShunLib
 	private:
 		//シーン一覧
 		std::unordered_map<int, IScene*>m_sceneList;
-		
+
 		//現在のシーン
 		int m_currentScene;
 
@@ -41,6 +41,8 @@ namespace ShunLib
 		//全てのシーンを削除
 		void DeleteAllScene();
 
+		/*--Getter & Setter--*/
+		IScene* CurrentScene();
 	private:
 		SceneManager();
 		~SceneManager();

@@ -48,7 +48,7 @@ void PlayerMoveState::Execute(Player* player)
 		}
 	}
 
-	DebuggerUI::GetInstance()->DrawDebugText("Player HP : %d",player->HP());
+	DebuggerUI::GetInstance()->DrawDebugText("Player HP : %d",player->Data().HP());
 
 	player->Move();
 }

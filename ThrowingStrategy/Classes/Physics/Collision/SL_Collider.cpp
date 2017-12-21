@@ -15,10 +15,9 @@ using namespace ShunLib;
 //“–‚½‚è”»’è‚ðŠÇ—‚·‚éƒNƒ‰ƒX‚É“o˜^
 ICollider::ICollider() :
 	m_parent(nullptr),
-	m_posObj(nullptr),
+	m_chaseObj(nullptr),
 	m_shape(nullptr),
-	m_callBack(NULL),
-	m_isEntity(true),
+	m_isEnable(true),
 	m_isDebugDraw(true)
 {
 	CollisionManager::GetInstance()->AddCollider(this);
@@ -67,8 +66,8 @@ void ShunLib::ICollider::AddChildCollider(ICollider * child)
 //‹…ó‚Ì“–‚½‚è”»’è‚ÌXV
 void SphereCollider::Update()
 {
-	if (m_posObj != nullptr){
-		Shape()->CenterPoint(m_posObj->WorldPos() + this->Offset());
+	if (m_chaseObj != nullptr){
+		Shape()->CenterPoint(m_chaseObj->WorldPos() + this->Offset());
 	}
 
 	for (auto& v:m_childrenCollider){
@@ -82,6 +81,6 @@ void BoxCollider::Update()
 	if (m_parent != nullptr)
 	{
 		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
-		Shape()->Scale(Parent()->Scale());
+		Shape()->Scale(Parent()->Transform().Scale());
 	}
 }

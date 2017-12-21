@@ -20,7 +20,7 @@ UnitSummoner::UnitSummoner():
 	//当たり判定設定
 	m_collider = new ShunLib::BoxCollider;
 	m_collider->Parent(this);
-	m_collider->PosObj(this);
+	m_collider->ChaseObj(this);
 	m_collider->Offset(SUMMONER_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Size(SUMMONER_CONSTANT::COLLIDER_SIZE);
 
@@ -58,17 +58,14 @@ Unit* UnitSummoner::Summon()
 	//種類を設定
 	unit->UnitType(m_unitType);
 
-	//ルートに紐づけ
-	ObjectBase::ROOT_OBJECT->AddChild(unit);
-
 	//初期化
 	unit->Initialize();
 
 	//召喚位置設定
-	unit->Pos(this->Pos());
+	unit->Transform().Pos(m_transform.Pos());
 
 	//同じチーム所属にする
-	unit->Team(this->Team());
+	unit->Data().Team(m_data.Team());
 
 	return unit;
 }

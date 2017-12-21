@@ -15,9 +15,6 @@ public:
 		PLAY,
 	};
 
-private:
-	DX::StepTimer m_timer;
-
 public:
 	MyGame() {}
 	~MyGame() {}

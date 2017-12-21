@@ -19,13 +19,13 @@ Unit::Unit():
 	//–{‘Ì‚Ì“–‚½‚è”»’è‚ÌÝ’è
 	m_collider = new SphereCollider();
 	m_collider->Parent(this);
-	m_collider->PosObj(this);
+	m_collider->ChaseObj(this);
 	m_collider->Offset(UNIT_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Scale(UNIT_CONSTANT::COLLIDER_BODY_SIZE);
 
 	//UŒ‚”ÍˆÍ‚ÌÝ’è
 	m_attackRange = new SphereCollider;
-	m_attackRange->PosObj(this);
+	m_attackRange->ChaseObj(this);
 	m_attackRange->AddChildCollider(m_collider);
 	m_attackRange->Offset(UNIT_CONSTANT::COLLIDER_OFFSET);
 	m_attackRange->Shape()->Scale(UNIT_CONSTANT::COLLIDER_ATTACK_SIZE);
@@ -33,7 +33,7 @@ Unit::Unit():
 
 	//’ÇÕ”ÍˆÍ‚ÌÝ’è
 	m_chaseRange = new SphereCollider;
-	m_chaseRange->PosObj(this);
+	m_chaseRange->ChaseObj(this);
 	m_chaseRange->AddChildCollider(m_attackRange);
 	m_chaseRange->Offset(UNIT_CONSTANT::COLLIDER_OFFSET);
 	m_chaseRange->Shape()->Scale(UNIT_CONSTANT::COLLIDER_CHASE_SIZE);

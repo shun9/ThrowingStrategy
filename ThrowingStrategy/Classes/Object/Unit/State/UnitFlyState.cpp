@@ -26,7 +26,7 @@ void UnitFlyState::Execute(Unit * unit)
 
 	//補間によって位置を出す
 	Vec3 v = Vec3::Larp(m_data.start, m_data.end, m_timeCnt/m_timeLimit, m_data.Lerp());
-	unit->Pos(v);
+	unit->Transform().Pos(v);
 
 	//時間をカウント
 	//パワーの分だけ早く進める

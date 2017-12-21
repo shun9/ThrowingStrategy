@@ -36,11 +36,11 @@ void UnitRoamState::Execute(Unit * unit)
 	}
 
 	//‘¬“xÝ’è ˆÚ“®
-	unit->Velocity(m_direction * unit->Spd());
+	unit->Transform().Velocity(m_direction * unit->Data().Spd());
 	unit->Move();
 
 	//’ÇÕ”ÍˆÍ‚É“G‚ª‚¢‚½ê‡
-	SearchAnotherTeamVisitor v(unit->Team());
+	SearchAnotherTeamVisitor v(unit->Data().Team());
 	unit->ChaseRange()->Accept(&v);
 	if (v.Count() > 0) {
 		unit->ChangeState(new UnitChaseState);

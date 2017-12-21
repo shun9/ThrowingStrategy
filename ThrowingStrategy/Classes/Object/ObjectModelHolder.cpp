@@ -15,12 +15,12 @@ ShunLib::Model* ObjectModelHolder::GetModel(ObjectBase* obj)
 {
 	ShunLib::Model* model = nullptr;
 
-	switch (obj->Type())
+	switch (obj->Data().Type())
 	{
 	case OBJ_TYPE::PLAYER			: model = GetPlayerModel(dynamic_cast<Player*>(obj)); break;
 	case OBJ_TYPE::COMMANDER		: model = GetCommanderModel(dynamic_cast<Commander*>(obj)); break;
 	case OBJ_TYPE::UNIT				: model = GetUnitModel(dynamic_cast<Unit*>(obj)); break;
-	case OBJ_TYPE::BLOCK			: model = m_box.get(); break; 
+	case OBJ_TYPE::BLOCK			: model = m_box.get(); break;
 	case OBJ_TYPE::DEFENSE_TARGET	: model = GetDefenseTargetModel(dynamic_cast<DefenseTarget*>(obj)); break;
 	case OBJ_TYPE::SUMMONER			: model = GetSummonerModel(dynamic_cast<UnitSummoner*>(obj)); break;
 	default:break;
@@ -47,7 +47,7 @@ ObjectModelHolder::ObjectModelHolder()
 ShunLib::Model* ObjectModelHolder::GetPlayerModel(Player * player){
 
 	ShunLib::Model* model = nullptr;
-	switch (player->Team())
+	switch (player->Data().Team())
 	{
 	case TEAM::BLUE:
 		model = m_plarerBlue.get();
@@ -67,7 +67,7 @@ ShunLib::Model* ObjectModelHolder::GetPlayerModel(Player * player){
 ShunLib::Model * ObjectModelHolder::GetCommanderModel(Commander * commander)
 {
 	ShunLib::Model* model = nullptr;
-	switch (commander->Team())
+	switch (commander->Data().Team())
 	{
 	case TEAM::BLUE:
 		model = m_plarerBlue.get();
@@ -88,7 +88,7 @@ ShunLib::Model * ObjectModelHolder::GetCommanderModel(Commander * commander)
 ShunLib::Model * ObjectModelHolder::GetUnitModel(Unit * unit)
 {
 	ShunLib::Model* model = nullptr;
-	switch (unit->Team())
+	switch (unit->Data().Team())
 	{
 	case TEAM::BLUE:
 		model = m_ghostBlue.get();
@@ -109,7 +109,7 @@ ShunLib::Model * ObjectModelHolder::GetUnitModel(Unit * unit)
 ShunLib::Model * ObjectModelHolder::GetSummonerModel(UnitSummoner * summoner)
 {
 	ShunLib::Model* model = nullptr;
-	switch (summoner->Team())
+	switch (summoner->Data().Team())
 	{
 	case TEAM::BLUE:
 		model = m_tubeBlue.get();
@@ -130,7 +130,7 @@ ShunLib::Model * ObjectModelHolder::GetSummonerModel(UnitSummoner * summoner)
 ShunLib::Model * ObjectModelHolder::GetDefenseTargetModel(DefenseTarget * target)
 {
 	ShunLib::Model* model = nullptr;
-	switch (target->Team())
+	switch (target->Data().Team())
 	{
 	case TEAM::BLUE:
 		model = m_hedoraBlue.get();

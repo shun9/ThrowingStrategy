@@ -23,9 +23,6 @@ namespace ShunLib
 		virtual void Update    () = 0;
 		virtual void Render    () = 0;
 		virtual void Finalize  () = 0;
-
-	private:
-
 	};
 
 }

@@ -17,4 +17,11 @@ private:
 public:
 	Block();
 	~Block();
+
+protected:
+	//‰Šú‰» XV •`‰æ I—¹
+	void Initialize()override {};
+	void Update    ()override {};
+	void Finalize  ()override {};
+
 };

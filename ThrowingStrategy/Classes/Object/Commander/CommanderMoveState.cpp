@@ -17,13 +17,13 @@ void CommanderMoveState::Execute(Commander * obj)
 {
 	auto timer = ShunLib::MyStepTimer::GetInstance();
 
-	auto pos = obj->Pos();
+	auto pos = obj->Transform().Pos();
 
 	pos.m_x += 1.0f * timer->GetElapsedSeconds();
 
-	obj->Pos(pos);
+	obj->Transform().Pos(pos);
 
-	DebuggerUI::GetInstance()->DrawDebugText("Commander HP : %d", obj->HP());
+	DebuggerUI::GetInstance()->DrawDebugText("Commander HP : %d", obj->Data().HP());
 }
 
 void CommanderMoveState::Exit(Commander * obj)

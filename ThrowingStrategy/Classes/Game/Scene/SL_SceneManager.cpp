@@ -7,11 +7,13 @@
 #include "SL_SceneManager.h"
 #include <SL_MacroConstants.h>
 
+using namespace ShunLib;
+
 /// <summary>
 /// 現在のシーンを更新
 /// </summary>
 /// <param name="timer">タイマー</param>
-void ShunLib::SceneManager::Update()
+void SceneManager::Update()
 {
 	//シーンがある場合更新
 	if (IsExistsScene(m_currentScene))
@@ -23,7 +25,7 @@ void ShunLib::SceneManager::Update()
 /// <summary>
 /// 現在のシーンを描画
 /// </summary>
-void ShunLib::SceneManager::Render()
+void SceneManager::Render()
 {	//シーンがある場合更新
 	if (IsExistsScene(m_currentScene))
 	{
@@ -36,7 +38,7 @@ void ShunLib::SceneManager::Render()
 /// </summary>
 /// <param name="key">シーンの番号</param>
 /// <param name="scene">シーンのポインタ</param>
-void ShunLib::SceneManager::AddScene(int key, IScene * scene)
+void SceneManager::AddScene(int key, IScene* scene)
 {
 	//既にシーンがある場合消す
 	if (IsExistsScene(key))
@@ -51,7 +53,7 @@ void ShunLib::SceneManager::AddScene(int key, IScene * scene)
 /// シーンを切り替える
 /// </summary>
 /// <param name="key">切替後のシーン</param>
-void ShunLib::SceneManager::ChangeScene(int key)
+void SceneManager::ChangeScene(int key)
 {
 	//現在のシーンを終了
 	if (IsExistsScene(m_currentScene)){
@@ -72,7 +74,7 @@ void ShunLib::SceneManager::ChangeScene(int key)
 /// </summary>
 /// <param name="key">確認するキー</param>
 /// <returns>存在したらtrue</returns>
-bool ShunLib::SceneManager::IsExistsScene(int key)
+bool SceneManager::IsExistsScene(int key)
 {
 	//登録されているかどうか
 	if (m_sceneList.find(key) == m_sceneList.end())
@@ -92,7 +94,7 @@ bool ShunLib::SceneManager::IsExistsScene(int key)
 /// <summary>
 /// 全てのシーンを削除
 /// </summary>
-void ShunLib::SceneManager::DeleteAllScene()
+void SceneManager::DeleteAllScene()
 {
 	for (auto& v : m_sceneList)
 	{
@@ -106,6 +108,19 @@ void ShunLib::SceneManager::DeleteAllScene()
 		}
 	}
 	m_sceneList.clear();
+}
+
+/// <summary>
+/// 現在のシーンを返す
+/// </summary>
+/// <returns></returns>
+IScene* SceneManager::CurrentScene()
+{
+	if (IsExistsScene(m_currentScene))
+	{
+		return m_sceneList[m_currentScene];
+	}
+	return nullptr;
 }
 
 /// <summary>

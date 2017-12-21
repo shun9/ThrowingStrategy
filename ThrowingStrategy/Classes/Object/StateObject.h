@@ -32,18 +32,13 @@ public:
 		if (m_stateMachine){
 			m_stateMachine->Update();
 		}
-		ObjectBase::Update();
 	}
 
 	//ó‘ÔØ‘Ö
 	void ChangeState(ShunLib::State<T>* state) { m_stateMachine->ChangeState(state); }
 
 	//‰Šú‰»@I—¹
-	virtual void Initialize() {
-		ObjectBase::Initialize();
-	};
-	virtual void Finalize() {
-		ObjectBase::Finalize();
-	};
+	virtual void Initialize() {};
+	virtual void Finalize() {};
 };
 

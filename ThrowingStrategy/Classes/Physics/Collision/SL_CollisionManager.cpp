@@ -33,8 +33,8 @@ void ShunLib::CollisionManager::Update()
 			}
 
 			//ˆÊ’u“¯Šú‚ª“¯‚¶ê‡‚ÍA”»’è‚ðŽæ‚ç‚È‚¢
-			if (m_colliderList[i]->PosObj() != nullptr
-			&&  m_colliderList[i]->PosObj() == m_colliderList[j]->PosObj()) {
+			if (m_colliderList[i]->ChaseObj() != nullptr
+			&&  m_colliderList[i]->ChaseObj() == m_colliderList[j]->ChaseObj()) {
 				continue;
 			}
 

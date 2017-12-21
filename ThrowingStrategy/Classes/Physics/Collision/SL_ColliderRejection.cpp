@@ -22,8 +22,8 @@ void ShunLib::CollisionManager::Rejection(SphereCollider* A, SphereCollider* B)
 	float hitDist = (a->Scale().m_x + b->Scale().m_x) - distV.Length();
 
 	//“–‚½‚Á‚Ä‚¢‚é‹——£‚ð”¼•ª‚¸‚Â•ª‚¯‡‚¤
-	objA->Pos(objA->Pos() - (distV.Normalize()*(hitDist / 2.0f)));
-	objB->Pos(objB->Pos() + (distV.Normalize()*(hitDist / 2.0f)));
+	objA->Transform().Pos(objA->Transform().Pos() - (distV.Normalize()*(hitDist / 2.0f)));
+	objB->Transform().Pos(objB->Transform().Pos() + (distV.Normalize()*(hitDist / 2.0f)));
 }
 
 void ShunLib::CollisionManager::Rejection(BoxCollider * A, BoxCollider * B)

@@ -12,11 +12,13 @@ namespace ShunLib {
 	class ObjectNode : public Node
 	{
 	protected:
+		//オブジェクトの基本情報
 		ObjectTransform m_transform;
 
 	public:
 		ObjectNode() {}
-		~ObjectNode() {}
+		virtual ~ObjectNode() {}
+
 
 		//親設定
 		bool SetParent(Node* parent)override;
@@ -28,12 +30,21 @@ namespace ShunLib {
 		bool RemoveChild(Node* child)override;
 
 		/*--Getter--*/
-		const Vec3& WorldPos()const { return m_transform.Pos(); }
-		const Vec3& LocalPos()const { return m_transform.Pos(); }
-		const ObjectTransform& Transform()const { return m_transform; }
+		const Vec3 WorldPos()const;
+		const Vec3 LocalPos()const { return m_transform.Pos(); }
 
 		/*--Setter--*/
 		void LocalPos(const Vec3& pos) { m_transform.Pos(pos); }
 
+		/*--Getter & Setter--*/
+		ObjectTransform& Transform() { return m_transform; }
+
+	protected:
+		//初期化　更新　描画　終了
+		//派生クラスで処理を実装する
+		virtual void Initialize()override = 0;
+		virtual void Update    ()override = 0;
+		virtual void Render    ()override = 0;
+		virtual void Finalize  ()override = 0;
 	};
 }

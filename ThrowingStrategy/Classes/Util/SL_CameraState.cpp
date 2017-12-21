@@ -29,7 +29,7 @@ void CameraFollowState::Enter(MainCamera * camera){}
 
 void CameraFollowState::Execute(MainCamera * camera){
 	//�ǐՑΏۂ̏��
-	Vec3 refPos = camera->FollowTarget()->Pos() + Vec3(0.0f, FOLLOW_HEIGHT, 0.0f);
+	Vec3 refPos = camera->FollowTarget()->Transform().Pos() + Vec3(0.0f, FOLLOW_HEIGHT, 0.0f);
 
 	//�ǐՑΏۂ��王�_�ւ̍���
 	Vec3 cameraV(0.0f, 0.0f, FOLLOW_DISTANSE);

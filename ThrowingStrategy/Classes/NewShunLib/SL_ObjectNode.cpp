@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :ObjectNode.cpp
 //* @brief :親子関係を持った3Dオブジェクトのノード
-//* @date  :2017/12/19
+//* @date  :2017/12/21
 //* @author:S.Katou
 //************************************************/
 #include "SL_ObjectNode.h"
@@ -62,4 +62,23 @@ bool ObjectNode::RemoveChild(Node* child)
 	}
 
 	return true;
+}
+
+/// <summary>
+/// ワールド座標の取得
+/// </summary>
+const Vec3 ShunLib::ObjectNode::WorldPos() const
+{
+	//現在位置
+	Vec3 pos = m_transform.Pos();
+
+	//親が存在するかどうか
+	ObjectNode* parent = dynamic_cast<ObjectNode*>(m_parent);
+
+	//親が存在するなら位置を影響させる
+	if (parent != nullptr && parent->IsEnable()){
+		pos += parent->WorldPos();
+	}
+
+	return pos;
 }

@@ -15,10 +15,11 @@ namespace ShunLib {
 		using Matrix = ShunLib::Matrix;
 
 	private:
-		Vec3 m_pos;        //ˆÊ’u
-		Vec3 m_rotation;   //‰ñ“]Šp“x
-		Vec3 m_scale;      //Šg‘å—¦
-		Matrix m_world;    //•`‰æ—p
+		Vec3 m_pos;      //ˆÊ’u
+		Vec3 m_rotation; //‰ñ“]Šp“x
+		Vec3 m_scale;    //Šg‘å—¦
+		Vec3 m_velocity; //‘¬“x
+		Matrix m_world;  //•`‰æ—p
 
 	public:
 		ObjectTransform() :
@@ -35,12 +36,14 @@ namespace ShunLib {
 		Vec3		  Pos     ()const { return m_pos; }
 		Vec3		  Rotation()const { return m_rotation; }
 		Vec3		  Scale   ()const { return m_scale; }
+		Vec3		  Velocity()const { return m_velocity; }
 		const Matrix& WorldMat()const { return m_world; }
 
 		//Setter
 		void Pos     (const Vec3& pos  ) { m_pos      = pos; }
 		void Rotation(const Vec3& rot  ) { m_rotation = rot; }
 		void Scale   (const Vec3& scale) { m_scale    = scale; }
+		void Velocity(const Vec3& vel  ) { m_velocity = vel; }
 		void Scale   (float scale      ) { m_scale    = Vec3(scale); }
 	};
 }

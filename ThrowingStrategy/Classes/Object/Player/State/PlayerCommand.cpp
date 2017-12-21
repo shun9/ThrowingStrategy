@@ -21,17 +21,18 @@ using namespace ShunLib;
 /// </summary>
 void PlayerPickUpCommand::Execute(Player * player)
 {
+	//違うチームを探す
+	SearchAnotherTeamVisitor aV(player->Data().Team());
+	player->Collider()->Accept(&aV);
+
+	//違うチームの中からユニットを探す
 	SearchUnitVisitor visitor;
-	player->Collider()->Accept(&visitor);
+	aV.Accept(&visitor);
 	auto hitList = visitor.List();
-	
+
+	//持てるかどうか
 	for (auto& v : hitList)
 	{
-		//敵チームは持てない
-		if (v->Team() != player->Team()){
-			continue;
-		}
-
 		//既に持っているユニットは対象外
 		SearchSpecificObjectVisitor sv(v);
 		player->Accept(&sv);
@@ -39,13 +40,10 @@ void PlayerPickUpCommand::Execute(Player * player)
 			continue;
 		}
 
-		//ユニット以外は持てない
-		if (v->Type() == ObjectConstantNumber::OBJECT_LIST::UNIT){
-			player->AddChild(v);
-			player->AlignUnits();
-			v->ToBeLifted();
-			return;
-		}
+		player->AddChild(v);
+		player->AlignUnits();
+		v->ToBeLifted();
+		return;
 	}
 }
 
@@ -60,18 +58,17 @@ void PlayerPutCommand::Execute(Player * player)
 
 	//ユニットを所持していたら置く
 	if (unitV.Count() > 0)
-	{		
+	{
 		//先頭のユニットを対象とする
 		ObjectBase* child = unitV.List()[0];
 
 		//プレイヤーの向いている方向
-		float rad = ToRadian(player->Rotation().m_y);
+		float rad = ToRadian(player->Transform().Rotation().m_y);
 
-		Vec3 pos = player->Pos() + Vec3(-sin(rad), 0.0f, cos(rad))*player->Scale().Length();
+		Vec3 pos = player->Transform().Pos() + Vec3(-sin(rad), 0.0f, cos(rad))*player->Transform().Scale().Length();
 
 		player->RemoveChild(child);
 		child->LocalPos(pos);
-		ObjectBase::ROOT_OBJECT->AddChild(child);
 		player->AlignUnits();
 	}
 }
@@ -85,25 +82,24 @@ void PlayerThrowCommand::Execute(Player * player)
 	Unit* child;
 	SearchUnitVisitor v;
 	player->Accept(&v);
-	
+
 	if (v.Count() > 0)
 	{
 		child = v.List()[0];
 
 		player->RemoveChild(child);
-		ObjectBase::ROOT_OBJECT->AddChild(child);
 
 		//プレイヤーの向いている方向に力を加える
-		float rad = ToRadian(player->Rotation().m_y);
-			
+		float rad = ToRadian(player->Transform().Rotation().m_y);
+
 		//投げる
 		FlyingData data;
 		data.start = child->WorldPos();
-		data.end = player->WorldPos() + (Vec3(-sin(rad), 0.0f, cos(rad)).Normalize() *player->Power());
-		data.power = player->Power();
+		data.end = player->WorldPos() + (Vec3(-sin(rad), 0.0f, cos(rad)).Normalize() *player->Data().Power());
+		data.power = player->Data().Power();
 		data.type = ObjectConstantNumber::THROW_TYPE::LINE;
-		child->ToBeThrow(data);	
-	
+		child->ToBeThrow(data);
+
 		player->AlignUnits();
 	}
 }

@@ -22,7 +22,7 @@ Player::Player()
 {
 	//“–‚½‚è”»’è‚Ìİ’è
 	m_collider = new ShunLib::SphereCollider();
-	m_collider->PosObj(this);
+	m_collider->ChaseObj(this);
 	m_collider->Parent(this);
 	m_collider->Offset(PLAYER_CONSTANT::COLLIDER_OFFSET);
 
@@ -48,7 +48,7 @@ Player::~Player()
 /// ‰Šú‰»ˆ—
 /// </summary>
 void Player::Initialize()
-{	
+{
 	//‰Šúó‘Ô‚ğİ’è
 	ChangeState(new PlayerMoveState);
 

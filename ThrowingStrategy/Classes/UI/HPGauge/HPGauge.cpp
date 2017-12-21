@@ -89,7 +89,7 @@ ShunLib::Matrix HPGauge::CalcGreenMat()
 	Matrix w;
 
 	//Žc‚èHP‚ÌŠ„‡
-	float ratio = (float)Parent()->HP() / Parent()->MaxHP();
+	float ratio = (float)Parent()->Data().HP() / Parent()->Data().MaxHP();
 
 	//Žc‚èHP‚ÌŠ„‡‚É‚æ‚Á‚ÄŠg‘å—¦‚ð•ÏX
 	Vec3 scale = Scale();

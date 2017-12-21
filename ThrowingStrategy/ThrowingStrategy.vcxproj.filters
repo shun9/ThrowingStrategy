@@ -74,32 +74,14 @@
     <Filter Include="NewShunLib\Collision">
       <UniqueIdentifier>{328fa975-e4f0-4645-bd31-dfe6018d7a88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Main">
+      <UniqueIdentifier>{f29e0cc4-10f8-401a-9480-49ffc0b5e741}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
-    <ClInclude Include="Classes\Main\SL_Graphics.h">
-      <Filter>NewShunLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Main\SL_Window.h">
-      <Filter>NewShunLib</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Game\Scene\PlayScene.h">
       <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Game\SL_Application.h">
-      <Filter>NewShunLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Game\Scene\SL_IScene.h">
-      <Filter>NewShunLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h">
-      <Filter>NewShunLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Game\MyGame.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Main\SL_MyStepTimer.h">
-      <Filter>NewShunLib</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\Player\Player.h">
       <Filter>Game\Object\Player</Filter>
@@ -266,26 +248,32 @@
     <ClInclude Include="Classes\NewShunLib\SL_ObjectTransform.h">
       <Filter>NewShunLib</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Main\SL_MyStepTimer.h">
+      <Filter>Game\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Main\SL_Graphics.h">
+      <Filter>Game\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Main\SL_Window.h">
+      <Filter>Game\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\MyGame.h">
+      <Filter>Game\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\SL_Application.h">
+      <Filter>Game\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\SL_IScene.h">
+      <Filter>Game\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h">
+      <Filter>Game\Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Classes\Main\SL_Graphics.cpp">
-      <Filter>NewShunLib</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Main\SL_Window.cpp">
-      <Filter>NewShunLib</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\Main\WinMain.cpp" />
     <ClCompile Include="Classes\Game\Scene\PlayScene.cpp">
       <Filter>Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Game\SL_Application.cpp">
-      <Filter>NewShunLib</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp">
-      <Filter>NewShunLib</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Game\MyGame.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\Player\Player.cpp">
       <Filter>Game\Object\Player</Filter>
@@ -421,6 +409,21 @@
     </ClCompile>
     <ClCompile Include="Classes\NewShunLib\SL_ObjectNode.cpp">
       <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Main\SL_Graphics.cpp">
+      <Filter>Game\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Main\SL_Window.cpp">
+      <Filter>Game\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\MyGame.cpp">
+      <Filter>Game\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\SL_Application.cpp">
+      <Filter>Game\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp">
+      <Filter>Game\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

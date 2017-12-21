@@ -68,7 +68,7 @@ Unit* ObjectFactory::CreateUnit(UNIT_TYPE type)
 	{
 	case UNIT_TYPE::NORMAL:
 		unit = m_unitFactory.Create();
-		break; 
+		break;
 	default:
 		break;
 	}
@@ -81,7 +81,7 @@ Unit* ObjectFactory::CreateUnit(UNIT_TYPE type)
 /// <param name="obj">削除するオブジェクト</param>
 void ObjectFactory::Delete(ObjectBase * obj)
 {
-	switch (obj->Type())
+	switch (obj->Data().Type())
 	{
 	case OBJECT_TYPE::PLAYER:		  m_playerFactory.Delete(dynamic_cast<Player*>(obj));				break;
 	case OBJECT_TYPE::COMMANDER:	  m_commanderFactory.Delete(dynamic_cast<Commander*>(obj));			break;
