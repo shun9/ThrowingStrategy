@@ -32,13 +32,17 @@ void ShunLib::CollisionManager::Update()
 				continue;
 			}
 
-			//位置同期が同じ場合は、判定を取らない
-			if (m_colliderList[i]->ChaseObj() != nullptr
-			&&  m_colliderList[i]->ChaseObj() == m_colliderList[j]->ChaseObj()) {
+			//どちらかが使用されていない状態なら、判定を取らない
+			if (!(m_colliderList[i]->IsEnable()
+			&&    m_colliderList[j]->IsEnable())) {
 				continue;
 			}
 
-			Collision(m_colliderList[i], m_colliderList[j]);
+			//当たり判定
+			Collision(
+				m_colliderList[i],
+				m_colliderList[j],
+				(m_colliderList[i]->ShouldRejection()&&m_colliderList[j]->ShouldRejection()));
 		}
 	}
 }

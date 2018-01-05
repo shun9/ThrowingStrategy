@@ -50,18 +50,18 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 
 	//“–‚½‚Á‚Ä‚¢‚½‚çƒqƒbƒgƒŠƒXƒg‚É’Ç‰Á q‚Ì“–‚½‚è”»’è‚ğs‚¤
 	if (hit){
-		if (B->Parent() != nullptr)A->AddHitList(B->Parent());
-		if (A->Parent() != nullptr)B->AddHitList(A->Parent());
+		if (B->HitParent() != nullptr)A->AddHitList(B->HitParent());
+		if (A->HitParent() != nullptr)B->AddHitList(A->HitParent());
 
 		//q‚Ì“–‚½‚è”»’è
 		//¦Œ»óq“¯m‚Ì“–‚½‚è”»’è‚ğ2‰ñæ‚Á‚Ä‚¢‚é
 		//¦C³•K—v‚ ‚è
 		for (auto& var : A->ChildrenCollider()) {
-			Collision(var, B);
+			Collision(var, B, (var->ShouldRejection() && B->ShouldRejection()));
 		}
 
 		for (auto& var : B->ChildrenCollider()) {
-			Collision(A, var);
+			Collision(A, var, (var->ShouldRejection() && A->ShouldRejection()));
 		}
 	}
 
@@ -90,7 +90,7 @@ bool CollisionManager::SphereCollision(ICollider* A, ICollider* B, bool rejectio
 
 	//”rËˆ—
 	if (rejection){
-		//CollisionManager::Rejection(A, B);
+		CollisionManager::Rejection(a,b);
 	}
 
 	return true;
@@ -117,6 +117,11 @@ bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box, 
 		return false;
 	}
 
+	//”rËˆ—
+	if (rejection) {
+		CollisionManager::Rejection(s,b, closestPoint.CenterPoint());
+	}
+
 	return true;
 }
 
@@ -126,20 +131,31 @@ bool CollisionManager::BoxCollision(ICollider* A, ICollider* B, bool rejection)
 	Box* a = dynamic_cast<BoxCollider*>(A)->Shape();
 	Box* b = dynamic_cast<BoxCollider*>(B)->Shape();
 
+	bool isHit = true;
+	Vec3 offset = Vec3::Zero;
+
 	/*--X²‚Ì”»’è--*/
 	if (!(a->MaxX() > b->MinX() && a->MinX() < b->MaxX())) {
-		return false;
+		offset.m_x = (a->LengthX() + b->LengthX()) / 2;
+		isHit = false;
 	}
 
 	/*--Y²‚Ì”»’è--*/
 	if (!(a->MaxY() > b->MinY() && a->MinY() < b->MaxY())) {
-		return false;
+		offset.m_y = (a->LengthX() + b->LengthX()) / 2;
+		isHit = false;
 	}
 
 	/*--Z²‚Ì”»’è--*/
 	if (!(a->MaxZ() > b->MinZ() && a->MinZ() < b->MaxZ())) {
-		return false;
+		offset.m_z = (a->LengthX() + b->LengthX()) / 2;
+		isHit = false;
 	}
 
-	return true;
+	//”rËˆ—
+	if (rejection) {
+		//CollisionManager::Rejection(dynamic_cast<BoxCollider*>(A), dynamic_cast<BoxCollider*>(B), offset);
+	}
+
+	return isHit;
 }

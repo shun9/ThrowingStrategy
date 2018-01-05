@@ -18,16 +18,16 @@ namespace ShunLib
 	//当たり判定用クラスの抽象クラス
 	class ICollider :public VisitorNode
 	{
+	public:
+		using ChildList = std::vector<ICollider*>;
+		using HitObjectList = std::vector<ObjectBase*>;
 	protected:
-		//このオブジェクトの位置を参照する
-		ObjectBase* m_chaseObj;
-
 		//当たり判定を持つオブジェクト
 		ObjectBase* m_parent;
 
 		//子の当たり判定
 		//親の当たり判定後に子の当たり判定を行う
-		std::vector<ICollider*> m_childrenCollider;
+		ChildList m_childrenCollider;
 
 		//当たり判定形状
 		IShape* m_shape;
@@ -35,18 +35,29 @@ namespace ShunLib
 		//オブジェクトからの相対座標
 		Vec3 m_offset;
 
+		//当たっているオブジェクトのリスト
+		HitObjectList m_hitList;
+
+		//親の情報を渡すかどうか
+		bool m_shouldPassParentInfo;
+
 		//当たり判定を行うかどうか
 		bool m_isEnable;
 
-		//当たっているオブジェクトのリスト
-		std::vector<ObjectBase*>m_hitList;
+		//排斥処理を行うかどうか
+		bool m_shouldRejection;
 
+		//動くかどうか
+		bool m_isStatic;
+
+		//デバッグ描画するかどうか
 		bool m_isDebugDraw;
 	public:
 		ICollider();
 		virtual ~ICollider();
 
-		virtual void Update() = 0;
+		virtual void Update();
+
 		void DebugRender();
 
 		//リストに追加
@@ -73,22 +84,26 @@ namespace ShunLib
 		void AddChildCollider(ICollider* child);
 
 		/*--Getter--*/
-		ObjectBase* Parent                       () { return m_parent; }
-		ObjectBase* ChaseObj                     () { return m_chaseObj; }
-		std::vector<ICollider*>& ChildrenCollider() { return m_childrenCollider; }
-		Vec3 Offset                              () { return m_offset; }
-		const std::vector<ObjectBase*>& HitList  () { return m_hitList; }
-		bool IsEnable                            () { return m_isEnable; }
-		SHAPE_TYPE Type                          () { return m_shape->Type(); }
+		ObjectBase* Parent          () { return m_parent; }
+		ObjectBase* HitParent       ();
+		ChildList& ChildrenCollider () { return m_childrenCollider; }
+		Vec3 Offset                 () { return m_offset; }
+		const HitObjectList& HitList() { return m_hitList; }
+		bool IsEnable               () { return m_isEnable; }
+		bool IsStatic               () { return m_isStatic; }
+		bool ShouldRejection        () { return m_shouldRejection; }
+		SHAPE_TYPE Type             () { return m_shape->Type(); }
 
 		/*--Setter--*/
-		void Offset(const Vec3& offset) { m_offset = offset; }
-		void Parent(ObjectBase* parent) { m_parent = parent; }
-		void ChaseObj(ObjectBase* posObj) { m_chaseObj = posObj; }
-		void IsEnable(bool enable) { m_isEnable = enable; }
-		void IsDebugDraw(bool draw) { m_isDebugDraw = draw; }
+		void Offset         (const Vec3& offset) { m_offset = offset; }
+		void Parent         (ObjectBase* parent) { m_parent = parent; }
+		void IsEnable       (bool enable       ) { m_isEnable = enable; }
+		void IsStatic       (bool isStatic     ) { m_isStatic = isStatic; }
+		void IsDebugDraw    (bool draw         ) { m_isDebugDraw = draw; }
+		void ShouldPassInfo (bool shouldPass   ) { m_shouldPassParentInfo = shouldPass; }
+		void ShouldRejection(bool rejection    ) { m_shouldRejection = rejection; }
 
-		//純粋仮想関数
+	//純粋仮想関数
 	public:
 		//クラスごとに返す形状を変更
 		virtual IShape* Shape() = 0;

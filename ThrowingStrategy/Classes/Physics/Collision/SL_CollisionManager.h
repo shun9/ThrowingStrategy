@@ -21,8 +21,8 @@ namespace ShunLib
 		static bool BoxCollision(ICollider* A, ICollider* B, bool rejection);
 		static bool SphereAndBoxCollision(ICollider* A, ICollider* B, bool rejection);
 		static void Rejection(SphereCollider* A, SphereCollider* B);
-		static void Rejection(BoxCollider* A, BoxCollider* B);
-		static void Rejection(SphereCollider* A, BoxCollider* B);
+		static void Rejection(BoxCollider* A, BoxCollider* B, const Vec3& offset);
+		static void Rejection(SphereCollider* A, BoxCollider* B, const Vec3& closestPoint);
 
 	private:
 		//“–‚½‚è”»’è‚Ìˆê——

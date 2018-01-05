@@ -29,7 +29,7 @@ namespace ShunLib {
 	public:
 		IShape() :m_size(Vec3::One),m_scale(1.0f), m_centerPoint(Vec3::Zero) {}
 		virtual ~IShape() {}
-	
+
 		virtual void Render() {};
 
 		/*--Setter--*/
@@ -58,7 +58,7 @@ namespace ShunLib {
 		void Render()override;
 
 		virtual SHAPE_TYPE Type()const override { return SHAPE_TYPE::SPHERE; }
-	
+
 		/*--Getter--*/
 		float Radius() { return Scale().m_x; }
 
@@ -74,7 +74,7 @@ namespace ShunLib {
 	{
 	public:
 		//コンストラクタ　とりあえず１
-		Box() { 
+		Box() {
 			Scale(Vec3(1.0f, 1.0f, 1.0f));
 			Size(Vec3(1.0f, 1.0f, 1.0f));
 		}
@@ -83,7 +83,7 @@ namespace ShunLib {
 		void Render()override;
 
 		virtual SHAPE_TYPE Type()const override { return SHAPE_TYPE::BOX; }
-	
+
 		//それぞれの軸の長さ
 		float LengthX()const { return Size().m_x * Scale().m_x; }
 		float LengthY()const { return Size().m_y * Scale().m_y; }
@@ -93,7 +93,7 @@ namespace ShunLib {
 		float MaxX()const { return CenterPoint().m_x + (LengthX() / 2.0f); }
 		float MaxY()const { return CenterPoint().m_y + (LengthY() / 2.0f); }
 		float MaxZ()const { return CenterPoint().m_z + (LengthZ() / 2.0f); }
-	
+
 		//それぞれの軸の最小座標
 		float MinX()const { return CenterPoint().m_x - (LengthX() / 2.0f); }
 		float MinY()const { return CenterPoint().m_y - (LengthY() / 2.0f); }
@@ -116,9 +116,9 @@ namespace ShunLib {
 		virtual ~Segment() {}
 
 		/*--Getter--*/
-		Vec3 StartPoint()const { return m_startPoint; }		
+		Vec3 StartPoint()const { return m_startPoint; }
 		Vec3 EndPoint()const { return m_endPoint; }
-		
+
 		/*--Setter--*/
 		void EndPoint(const Vec3& point) { m_endPoint = point; }
 		void StartPoint(const Vec3& point) { m_startPoint = point; }

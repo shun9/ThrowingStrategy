@@ -11,9 +11,6 @@
     <Filter Include="Game">
       <UniqueIdentifier>{8e36c6c7-4785-40ae-ad7f-88de37a51076}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Scene">
-      <UniqueIdentifier>{9f8fe074-f208-4de2-a7cb-835219178334}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Assets\Model">
       <UniqueIdentifier>{68036d42-898d-4450-973f-5bdb25231ca1}</UniqueIdentifier>
     </Filter>
@@ -77,11 +74,17 @@
     <Filter Include="Game\Main">
       <UniqueIdentifier>{f29e0cc4-10f8-401a-9480-49ffc0b5e741}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Main\Scene">
+      <UniqueIdentifier>{9f8fe074-f208-4de2-a7cb-835219178334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Player\Command">
+      <UniqueIdentifier>{02ce1ba8-23de-48cf-b65f-efb91faaeace}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
     <ClInclude Include="Classes\Game\Scene\PlayScene.h">
-      <Filter>Game\Scene</Filter>
+      <Filter>Game\Main\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\Player\Player.h">
       <Filter>Game\Object\Player</Filter>
@@ -143,14 +146,8 @@
     <ClInclude Include="Classes\Object\Unit\State\UnitSteadyState.h">
       <Filter>Game\Object\Unit\State</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Object\Player\State\PlayerCommand.h">
-      <Filter>Game\Object\Player\State</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Util\SL_GamePadManager.h">
       <Filter>Game\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Object\Player\State\PlayerKeyCommand.h">
-      <Filter>Game\Object\Player\State</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Util\Debugger\DebuggerUI.h">
       <Filter>Game\Util\Debugger</Filter>
@@ -269,11 +266,20 @@
     <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h">
       <Filter>Game\Main</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\NewShunLib\SL_ObjectHolder.h">
+      <Filter>NewShunLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\State\PlayerCommand.h">
+      <Filter>Game\Object\Player\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\State\PlayerKeyCommand.h">
+      <Filter>Game\Object\Player\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\WinMain.cpp" />
     <ClCompile Include="Classes\Game\Scene\PlayScene.cpp">
-      <Filter>Game\Scene</Filter>
+      <Filter>Game\Main\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\Player\Player.cpp">
       <Filter>Game\Object\Player</Filter>
@@ -319,12 +325,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Object\Unit\State\UnitSteadyState.cpp">
       <Filter>Game\Object\Unit\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Object\Player\State\PlayerCommand.cpp">
-      <Filter>Game\Object\Player\State</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Object\Player\State\PlayerKeyCommand.cpp">
-      <Filter>Game\Object\Player\State</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Util\Debugger\imgui\imgui.cpp">
       <Filter>Game\Util\Debugger\imgui</Filter>
@@ -424,6 +424,15 @@
     </ClCompile>
     <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp">
       <Filter>Game\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\NewShunLib\SL_ObjectHolder.cpp">
+      <Filter>NewShunLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Player\State\PlayerCommand.cpp">
+      <Filter>Game\Object\Player\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Player\State\PlayerKeyCommand.cpp">
+      <Filter>Game\Object\Player\Command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

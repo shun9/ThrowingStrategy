@@ -11,3 +11,6 @@
 
 //‹ó‹C’ïR
 #define AIR_RESISTANCE 0.98f
+
+//d—Í
+#define GRAVITY (9.8f / 60.0f)

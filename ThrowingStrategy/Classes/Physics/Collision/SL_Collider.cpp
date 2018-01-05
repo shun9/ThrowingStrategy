@@ -15,9 +15,11 @@ using namespace ShunLib;
 //当たり判定を管理するクラスに登録
 ICollider::ICollider() :
 	m_parent(nullptr),
-	m_chaseObj(nullptr),
 	m_shape(nullptr),
+	m_shouldPassParentInfo(true),
+	m_isStatic(false),
 	m_isEnable(true),
+	m_shouldRejection(true),
 	m_isDebugDraw(true)
 {
 	CollisionManager::GetInstance()->AddCollider(this);
@@ -30,22 +32,37 @@ ICollider::~ICollider()
 	CollisionManager::GetInstance()->RemoveCollider(this);
 }
 
+/// <summary>
+/// 基底の更新
+/// </summary>
+void ICollider::Update()
+{
+	//アクティブかどうかを親に合わせる
+	if (m_parent != nullptr){
+		m_isEnable = m_parent->IsEnable();
+	}
+}
+
 //デバッグ用描画
 void ICollider::DebugRender()
 {
-	if (m_isDebugDraw){
-		m_shape->Render();
-	}
+	//使用しているなら描画
+	if (IsEnable()){
 
-	for (auto& v:m_childrenCollider){
-		v->DebugRender();
+		if (m_isDebugDraw) {
+			m_shape->Render();
+		}
+
+		for (auto& v : m_childrenCollider) {
+			v->DebugRender();
+		}
 	}
 }
 
 /// <summary>
 /// ビジターを受け入れる
 /// </summary>
-void ShunLib::ICollider::Accept(ShunLib::Visitor * visitor)
+void ICollider::Accept(Visitor * visitor)
 {
 	visitor->Visit(this);
 	for (auto& v : m_hitList) {
@@ -56,20 +73,37 @@ void ShunLib::ICollider::Accept(ShunLib::Visitor * visitor)
 /// <summary>
 /// 子の当たり判定を追加
 /// </summary>
-void ShunLib::ICollider::AddChildCollider(ICollider * child)
+void ICollider::AddChildCollider(ICollider * child)
 {
 	m_childrenCollider.push_back(child);
 	CollisionManager::GetInstance()->RemoveCollider(child);
+}
+
+/// <summary>
+/// 当たったオブジェクトを返す
+/// 当たり判定同士の情報の受け渡しに使用
+/// </summary>
+ObjectBase * ShunLib::ICollider::HitParent()
+{
+	if (m_shouldPassParentInfo) {
+		return m_parent;
+	}
+	return nullptr;
 }
 
 
 //球状の当たり判定の更新
 void SphereCollider::Update()
 {
-	if (m_chaseObj != nullptr){
-		Shape()->CenterPoint(m_chaseObj->WorldPos() + this->Offset());
+	//基底クラスの更新
+	ICollider::Update();
+
+	//位置同期
+	if (m_parent != nullptr){
+		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
 	}
 
+	//子の更新
 	for (auto& v:m_childrenCollider){
 		v->Update();
 	}
@@ -78,9 +112,17 @@ void SphereCollider::Update()
 //箱状の当たり判定の更新
 void BoxCollider::Update()
 {
-	if (m_parent != nullptr)
-	{
+	//基底クラスの更新
+	ICollider::Update();
+
+	//位置同期
+	if (m_parent != nullptr) {
 		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
-		Shape()->Scale(Parent()->Transform().Scale());
+		Shape()->Scale(m_parent->Transform().Scale());
+	}
+
+	//子の更新
+	for (auto& v : m_childrenCollider) {
+		v->Update();
 	}
 }
