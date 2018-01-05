@@ -6,13 +6,12 @@
 //************************************************/
 #include "Player.h"
 
-#include <functional>
 #include <SL_MacroConstants.h>
-#include <SL_Math.h>
 #include "State\PlayerMoveState.h"
 #include "../../UI/HPGauge/HPGauge.h"
-#include "../Unit/Unit.h"
 #include "../../Util/Visitor/Visitor.h"
+
+#include "../../Game/Scene/SL_SceneManager.h"
 
 /// <summary>
 /// コンストラクタ
@@ -22,7 +21,6 @@ Player::Player()
 {
 	//当たり判定の設定
 	m_collider = new ShunLib::SphereCollider();
-	m_collider->ChaseObj(this);
 	m_collider->Parent(this);
 	m_collider->Offset(PLAYER_CONSTANT::COLLIDER_OFFSET);
 

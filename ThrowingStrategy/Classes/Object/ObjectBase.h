@@ -35,8 +35,8 @@ public:
 protected:
 	//‰Šú‰» XV •`‰æ I—¹
 	//•`‰æ‚Ì‚İ‹¤’Êˆ—
-	virtual void Initialize()override = 0;
-	virtual void Update    ()override = 0;
+	virtual void Initialize()override;
+	virtual void Update    ()override;
 	virtual void Render    ()override;
 	virtual void Finalize  ()override = 0;
 };

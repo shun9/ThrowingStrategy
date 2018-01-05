@@ -6,7 +6,7 @@
 //************************************************/
 #include "Stage.h"
 #include "StageObject.h"
-#include "../ObjectFactory.h"
+#include "../../Game/Scene/SL_SceneManager.h"
 
 /// <summary>
 /// コンストラクタ

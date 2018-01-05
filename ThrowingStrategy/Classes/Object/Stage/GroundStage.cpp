@@ -57,17 +57,20 @@ void GroundStage::SettingBlueObject()
 	camera->ChangeMode(FOLLOW_CAMERA);
 	p->Transform().Pos(ShunLib::Vec3(-25.0f, 0.0f, 0.0f));
 	p->Data().Team(ObjectConstantNumber::BLUE);
+	p->SetParent(this);
 
 	//ユニット召喚オブジェクト
 	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
 	summoner->Transform().Pos(ShunLib::Vec3(-20.0f, 0.0f, 0.0f));
 	summoner->Data().Team(p->Data().Team());
 	dynamic_cast<UnitSummoner*>(summoner)->Interval(1000);
+	summoner->SetParent(this);
 
 	//防衛対象
 	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);
 	target->Transform().Pos(ShunLib::Vec3(-30.0f, 0.0f, 0.0f));
 	target->Data().Team(p->Data().Team());
+	target->SetParent(this);
 }
 
 /// <summary>
@@ -82,10 +85,12 @@ void GroundStage::SettingRedObject()
 	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
 	summoner->Transform().Pos(ShunLib::Vec3(20.0f, 0.0f, 0.0f));
 	summoner->Data().Team(ObjectConstantNumber::TEAM::RED);
+	summoner->SetParent(this);
 	dynamic_cast<UnitSummoner*>(summoner)->Interval(2000);
 
 	//防衛対象
 	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);
 	target->Transform().Pos(ShunLib::Vec3(30.0f, 0.0f, 0.0f));
 	target->Data().Team(ObjectConstantNumber::TEAM::RED);
+	target->SetParent(this);
 }

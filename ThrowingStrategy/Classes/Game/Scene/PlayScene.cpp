@@ -35,7 +35,8 @@ PlayScene::PlayScene()
 	//オブジェクト生成
 	auto factory = ObjectFactory::GetInstance();
 
-	auto s = factory->CreateStage(ObjectConstantNumber::STAGE_LIST::GROUND);
+	auto stage = factory->CreateStage(ObjectConstantNumber::STAGE_LIST::GROUND);
+	this->AddChild(stage);
 }
 
 PlayScene::~PlayScene()
@@ -48,7 +49,6 @@ PlayScene::~PlayScene()
 /// </summary>
 void PlayScene::Initialize()
 {
-
 }
 
 /// <summary>

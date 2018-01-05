@@ -30,7 +30,7 @@ namespace ShunLib
 		//子の一覧
 		std::vector<Node*> m_children;
 
-		//使用できるかどうか
+		//使用しているかどうか
 		bool m_isEnable;
 
 		//ダーティーフラグ
@@ -61,6 +61,14 @@ namespace ShunLib
 		//ビジターを受け入れる
 		virtual void Accept(Visitor* visitor);
 
+		//ダーティーフラグを初期状態に戻す
+		//初期化　更新　描画　終了を可能な状態にする
+		void ClearDirty();
+
+		//更新　描画を可能な状態にする
+		void EnableUpdate() { m_isDirty[DIRTY_FLAG::UPDATE_FLAG] = false; }
+		void EnableRender() { m_isDirty[DIRTY_FLAG::RENDER_FLAG] = false; }
+
 		/*--Getter--*/
 		Node* Parent() { return m_parent; }
 		std::vector<Node*>& Children() { return m_children; }
@@ -69,7 +77,7 @@ namespace ShunLib
 	protected:
 		//初期化　更新　描画　終了
 		//派生クラスで処理を実装する
-		virtual void Initialize() = 0;
+		virtual void Initialize() { m_isEnable = true; };
 		virtual void Update    () = 0;
 		virtual void Render    () = 0;
 		virtual void Finalize  () = 0;

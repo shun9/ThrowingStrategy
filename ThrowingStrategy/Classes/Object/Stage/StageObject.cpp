@@ -12,6 +12,7 @@ Block::Block():
 	m_collider = new ShunLib::BoxCollider();
 	m_collider->Parent(this);
 	m_collider->Offset(ShunLib::Vec3(0.0f, 0.51f, 0.0f));
+	m_collider->IsStatic(true);
 }
 
 Block::~Block()

@@ -1,11 +1,14 @@
 //************************************************/
-//* @file  :SL_MyGame.h
+//* @file  :MyGame.h
 //* @brief :ÉQÅ[ÉÄÉNÉâÉX
-//* @date  :2017/10/26
+//* @date  :2018/01/01
 //* @author:S.Katou
 //************************************************/
 #pragma once
 #include "SL_Application.h"
+
+#include <SL_ObjectHolder.h>
+#include "../Object/ObjectConstantNumber.h"
 #include "../../StepTimer.h"
 
 class MyGame :public ShunLib::Application
@@ -16,7 +19,12 @@ public:
 	};
 
 public:
-	MyGame() {}
+	MyGame() {
+		ShunLib::ObjectHolder::GetInstance()->ResizeList(
+			ObjectConstantNumber::OBJECT_LIST_END,
+			100
+		);
+	}
 	~MyGame() {}
 
 protected:

@@ -1,10 +1,12 @@
 //************************************************/
 //* @file  :ObjectFactory.cpp
 //* @brief :オブジェクトを生成するクラス
-//* @date  :2017/11/16
+//* @date  :2018/01/05
 //* @author:S.Katou
 //************************************************/
 #include "ObjectFactory.h"
+
+#include <SL_ObjectHolder.h>
 #include "Player\Player.h"
 #include "Commander\Commander.h"
 #include "Unit\Unit.h"
@@ -20,18 +22,25 @@
 /// <returns>生成したオブジェクト</returns>
 ObjectBase* ObjectFactory::CreateObject(OBJECT_TYPE type)
 {
-	ObjectBase* obj = nullptr;
+	ObjectBase* obj =
+		dynamic_cast<ObjectBase*>(ShunLib::ObjectHolder::GetInstance()->SearchNotEnableObject(type));
 
-	switch (type)
-	{
-	case OBJECT_TYPE::PLAYER:		  obj = m_playerFactory.Create();		 break;
-	case OBJECT_TYPE::COMMANDER:	  obj = m_commanderFactory.Create();	 break;
-	case OBJECT_TYPE::UNIT:		      obj = m_unitFactory.Create();			 break;
-	case OBJECT_TYPE::BLOCK:		  obj = m_blockFactory.Create();		 break;
-	case OBJECT_TYPE::DEFENSE_TARGET: obj = m_defenseTargetFactory.Create(); break;
-	case OBJECT_TYPE::SUMMONER:		  obj = m_summonerFactory.Create();		 break;
-	default:break;
+	//使用されていないオブジェクトが存在したら再生成しない
+	if (obj == nullptr){
+		switch (type)
+		{
+		case OBJECT_TYPE::PLAYER:		  obj = m_playerFactory.Create();		 break;
+		case OBJECT_TYPE::COMMANDER:	  obj = m_commanderFactory.Create();	 break;
+		case OBJECT_TYPE::UNIT:		      obj = m_unitFactory.Create();			 break;
+		case OBJECT_TYPE::BLOCK:		  obj = m_blockFactory.Create();		 break;
+		case OBJECT_TYPE::DEFENSE_TARGET: obj = m_defenseTargetFactory.Create(); break;
+		case OBJECT_TYPE::SUMMONER:		  obj = m_summonerFactory.Create();		 break;
+		default:break;
+		}
 	}
+
+	//ダーティーフラグを下す
+	obj->ClearDirty();
 
 	return obj;
 }
@@ -62,16 +71,24 @@ Stage* ObjectFactory::CreateStage(STAGE_TYPE type)
 /// <param name="type">ユニットの種類</param>
 Unit* ObjectFactory::CreateUnit(UNIT_TYPE type)
 {
-	Unit* unit = nullptr;
+	Unit* unit =
+		dynamic_cast<Unit*>(ShunLib::ObjectHolder::GetInstance()->SearchNotEnableObject(ObjectConstantNumber::UNIT));;
 
-	switch (type)
-	{
-	case UNIT_TYPE::NORMAL:
-		unit = m_unitFactory.Create();
-		break;
-	default:
-		break;
+	//使用されていないオブジェクトが存在したら再生成しない
+	if (unit == nullptr) {
+		switch (type)
+		{
+		case UNIT_TYPE::NORMAL:
+			unit = m_unitFactory.Create();
+			break;
+		default:
+			break;
+		}
 	}
+
+	//ダーティーフラグを下す
+	unit->ClearDirty();
+
 	return unit;
 }
 
@@ -98,11 +115,11 @@ void ObjectFactory::Delete(ObjectBase * obj)
 /// </summary>
 ObjectFactory::~ObjectFactory()
 {
-	m_playerFactory.AllDelete();
-	m_commanderFactory.AllDelete();
-	m_unitFactory.AllDelete();
-	m_blockFactory.AllDelete();
-	m_defenseTargetFactory.AllDelete();
-	m_groundStageFactory.AllDelete();
-	m_summonerFactory.AllDelete();
+	//m_playerFactory.AllDelete();
+	//m_commanderFactory.AllDelete();
+	//m_unitFactory.AllDelete();
+	//m_blockFactory.AllDelete();
+	//m_defenseTargetFactory.AllDelete();
+	//m_groundStageFactory.AllDelete();
+	//m_summonerFactory.AllDelete();
 }

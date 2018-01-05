@@ -35,6 +35,9 @@ void HPGauge::Update()
 {
 	if (m_parent != nullptr)
 	{
+		//Žg—p‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+		m_isEnable = m_parent->IsEnable();
+
 		//ˆÊ’u‚ð‡‚í‚¹‚é
 		Pos(m_parent->WorldPos());
 
@@ -48,14 +51,18 @@ void HPGauge::Update()
 /// </summary>
 void HPGauge::Render()
 {
-	auto camera = ShunLib::MainCamera::GetInstance();
-	auto texHolder = UITextureHolder::GetInstance();
+	//Žg—p‚µ‚Ä‚¢‚½‚ç•`‰æ
+	if (m_isEnable)
+	{
+		auto camera = ShunLib::MainCamera::GetInstance();
+		auto texHolder = UITextureHolder::GetInstance();
 
-	//Ô‚ÌƒQ[ƒW‚ð•`‰æ
-	texHolder->RedGauge()->Draw(CalcRedMat(), camera->ViewMat(), camera->ProjMat());
+		//Ô‚ÌƒQ[ƒW‚ð•`‰æ
+		texHolder->RedGauge()->Draw(CalcRedMat(), camera->ViewMat(), camera->ProjMat());
 
-	//—Î‚ÌƒQ[ƒW‚ð•`‰æ
-	texHolder->GreenGauge()->Draw(CalcGreenMat(), camera->ViewMat(), camera->ProjMat());
+		//—Î‚ÌƒQ[ƒW‚ð•`‰æ
+		texHolder->GreenGauge()->Draw(CalcGreenMat(), camera->ViewMat(), camera->ProjMat());
+	}
 }
 
 /// <summary>

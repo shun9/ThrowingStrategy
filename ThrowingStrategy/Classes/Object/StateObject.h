@@ -28,6 +28,9 @@ public:
 
 	//更新
 	virtual void Update()override {
+		//基底クラスの更新
+		ObjectBase::Update();
+
 		//ステートマシンがあれば更新
 		if (m_stateMachine){
 			m_stateMachine->Update();
@@ -38,7 +41,7 @@ public:
 	void ChangeState(ShunLib::State<T>* state) { m_stateMachine->ChangeState(state); }
 
 	//初期化　終了
-	virtual void Initialize() {};
+	virtual void Initialize() { ObjectBase::Initialize(); };
 	virtual void Finalize() {};
 };
 

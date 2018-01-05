@@ -5,6 +5,7 @@
 //* @author:S.Katou
 //************************************************/
 #pragma once
+#include <vector>
 #include <SL_Singleton.h>
 #include <SL_Factory.h>
 
@@ -25,11 +26,14 @@ class ObjectFactory : public ShunLib::Singleton<ObjectFactory>
 {
 	friend ShunLib::Singleton<ObjectFactory>;
 public:
+	using ObjectList = std::vector<ObjectBase*>;
 	using UNIT_TYPE = ObjectConstantNumber::UNIT_CONSTANT::TYPE_LIST;
 	using STAGE_TYPE = ObjectConstantNumber::STAGE_LIST;
 	using OBJECT_TYPE = ObjectConstantNumber::OBJECT_LIST;
 
-public:
+private:
+	std::vector<ObjectList> m_objectList;
+
 	//１種類のオブジェクト
 	ShunLib::Factory<Player> m_playerFactory;
 	ShunLib::Factory<Commander> m_commanderFactory;

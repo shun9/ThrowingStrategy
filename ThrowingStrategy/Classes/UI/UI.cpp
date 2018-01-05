@@ -13,7 +13,8 @@
 UI::UI():
 	m_pos(Vec3::Zero),
 	m_rot(Vec3(90.0f,0.0f,0.0f)),
-	m_scale(Vec3::One)
+	m_scale(Vec3::One),
+	m_isEnable(true)
 {
 	//UI‚ÌŠÇ—‚É’Ç‰Á
 	UIManager::GetInstance()->AddUI(this);

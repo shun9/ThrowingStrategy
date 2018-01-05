@@ -1,22 +1,27 @@
 //************************************************/
 //* @file  :ObjectBase.cpp
 //* @brief :オブジェクト
-//* @date  :2017/12/21
+//* @date  :2018/01/05
 //* @author:S.Katou
 //************************************************/
 #include "ObjectBase.h"
 
 #include <SL_Conversion.h>
+#include "ObjectModelHolder.h"
 #include "../Main/SL_MyStepTimer.h"
 #include "../Physics/PhysicsConstantNumber.h"
+#include "../Util/SL_Camera.h"
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
 /// <param name="type"></param>
 ObjectBase::ObjectBase(OBJECT_LIST type):
+	ObjectNode(type),
 	m_data(type)
-{}
+{
+	m_data.Init();
+}
 
 /// <summary>
 /// デストラクタ
@@ -39,7 +44,9 @@ void ObjectBase::Move()
 	}
 
 	//移動
-	m_transform.Pos(m_transform.Pos() + m_transform.Velocity() * timer->GetElapsedSeconds());
+	auto pos = m_transform.Pos() + m_transform.Velocity() * timer->GetElapsedSeconds();
+	pos.m_y -= GRAVITY;
+	m_transform.Pos(pos);
 
 	//向いている方向を計算する
 	//移動中のみ計算
@@ -54,6 +61,26 @@ void ObjectBase::Move()
 
 	//摩擦をかける
 	m_transform.Velocity(m_transform.Velocity() * FRICTION);
+
+}
+
+/// <summary>
+/// 初期化
+/// </summary>
+void ObjectBase::Initialize()
+{
+	ObjectNode::Initialize();
+	m_data.Init();
+}
+
+/// <summary>
+/// 更新
+/// </summary>
+void ObjectBase::Update()
+{
+	if (m_data.IsDead()) {
+		m_isEnable = false;
+	}
 }
 
 /// <summary>
@@ -61,4 +88,22 @@ void ObjectBase::Move()
 /// </summary>
 void ObjectBase::Render()
 {
+	auto model = ObjectModelHolder::GetInstance()->GetModel(this);
+	auto camera = ShunLib::MainCamera::GetInstance();
+
+	//行列の計算
+	m_transform.CalcMat();
+
+	//モデルの描画
+	if (model != nullptr)
+	{
+		//親が存在するなら座標を影響させる
+		auto parent = dynamic_cast<ObjectBase*>(m_parent);
+		if (parent != nullptr){
+			model->Draw(parent->Transform().WorldMat() * m_transform.WorldMat(), camera->ViewMat(), camera->ProjMat());
+		}
+		else {
+			model->Draw(m_transform.WorldMat(), camera->ViewMat(), camera->ProjMat());
+		}
+	}
 }

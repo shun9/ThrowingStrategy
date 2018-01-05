@@ -7,9 +7,13 @@
 #include "UnitSummoner.h"
 #include "State\SummonerSteadyState.h"
 
+#include <assert.h>
+#include <SL_ObjectHolder.h>
 #include "../ObjectFactory.h"
 #include "../Unit/Unit.h"
 #include "../../UI/HPGauge/HPGauge.h"
+
+using namespace ShunLib;
 
 UnitSummoner::UnitSummoner():
 	StateObject(this, ObjectConstantNumber::SUMMONER) ,
@@ -18,11 +22,11 @@ UnitSummoner::UnitSummoner():
 	this->UnitType(UNIT_LIST::NORMAL);
 
 	//当たり判定設定
-	m_collider = new ShunLib::BoxCollider;
+	m_collider = new BoxCollider;
 	m_collider->Parent(this);
-	m_collider->ChaseObj(this);
 	m_collider->Offset(SUMMONER_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Size(SUMMONER_CONSTANT::COLLIDER_SIZE);
+	m_collider->IsStatic(true);
 
 	//HPゲージ設定
 	m_hpGauge = new HPGauge;
@@ -62,10 +66,21 @@ Unit* UnitSummoner::Summon()
 	unit->Initialize();
 
 	//召喚位置設定
-	unit->Transform().Pos(m_transform.Pos());
+	Vec3 pos = m_transform.Pos();
+	pos.m_y += m_collider->Shape()->LengthY();
+	unit->Transform().Pos(m_transform.Pos()+m_collider->Shape()->MaxY());
 
 	//同じチーム所属にする
 	unit->Data().Team(m_data.Team());
+
+	//親を設定
+	//ステージに紐づける
+	auto list = ObjectHolder::GetInstance()->List(ObjectConstantNumber::OBJECT_LIST::STAGE);
+
+	//ステージは必ず１つ存在
+	assert(!list.empty() && list.size() == 1);
+
+	unit->SetParent(list[0]);
 
 	return unit;
 }

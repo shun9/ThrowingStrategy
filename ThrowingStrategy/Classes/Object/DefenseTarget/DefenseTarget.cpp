@@ -19,10 +19,11 @@ DefenseTarget::DefenseTarget():
 	//“–‚½‚è”»’è‚ÌÝ’è
 	m_collider = new ShunLib::BoxCollider;
 	m_collider->Parent(this);
-	m_collider->ChaseObj(this);
 	m_collider->Offset(DEFENSE_TARGET_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Size(DEFENSE_TARGET_CONSTANT::COLLIDER_SIZE / DEFENSE_TARGET_CONSTANT::MODEL_SCALE);
+	m_collider->IsStatic(true);
 
+	//HPƒQ[ƒW
 	m_hpGauge = new HPGauge;
 	m_hpGauge->Parent(this);
 	m_hpGauge->Offset(DEFENSE_TARGET_CONSTANT::HP_GAUGE_OFFSET);

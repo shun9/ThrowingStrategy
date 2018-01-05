@@ -12,6 +12,7 @@
 #include "SL_Graphics.h"
 #include "../Game/MyGame.h"
 #include "../Util/DestroySingleton.h"
+#include <SL_SingletonDestroyer.h>
 
 #ifdef _DEBUG
 	#ifndef DBG_NEW
@@ -52,7 +53,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR szStr, INT iCmpSh
 	delete game;
 
 	//シングルトンの削除
-	DestroySingleton::Destroy();
+	ShunLib::SingletonDestroyer::DestoroySingleton();
 
 	//終了
 	return 0;

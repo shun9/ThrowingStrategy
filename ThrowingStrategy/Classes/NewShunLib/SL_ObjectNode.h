@@ -15,9 +15,11 @@ namespace ShunLib {
 		//オブジェクトの基本情報
 		ObjectTransform m_transform;
 
+		int m_layerNumber;
+
 	public:
-		ObjectNode() {}
-		virtual ~ObjectNode() {}
+		ObjectNode(int layerNumber);
+		virtual ~ObjectNode();
 
 
 		//親設定
@@ -42,7 +44,7 @@ namespace ShunLib {
 	protected:
 		//初期化　更新　描画　終了
 		//派生クラスで処理を実装する
-		virtual void Initialize()override = 0;
+		virtual void Initialize()override { Node::Initialize(); };
 		virtual void Update    ()override = 0;
 		virtual void Render    ()override = 0;
 		virtual void Finalize  ()override = 0;

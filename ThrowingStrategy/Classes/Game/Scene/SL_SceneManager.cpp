@@ -18,7 +18,7 @@ void SceneManager::Update()
 	//シーンがある場合更新
 	if (IsExistsScene(m_currentScene))
 	{
-		m_sceneList[m_currentScene]->Update();
+		m_sceneList[m_currentScene]->BaseUpdate();
 	}
 }
 
@@ -29,7 +29,7 @@ void SceneManager::Render()
 {	//シーンがある場合更新
 	if (IsExistsScene(m_currentScene))
 	{
-		m_sceneList[m_currentScene]->Render();
+		m_sceneList[m_currentScene]->BaseRender();
 	}
 }
 
@@ -57,7 +57,7 @@ void SceneManager::ChangeScene(int key)
 {
 	//現在のシーンを終了
 	if (IsExistsScene(m_currentScene)){
-		m_sceneList[m_currentScene]->Finalize();
+		m_sceneList[m_currentScene]->BaseFinalize();
 	}
 
 	//現在のシーンを変更
@@ -65,7 +65,7 @@ void SceneManager::ChangeScene(int key)
 
 	//新規のシーンを初期化
 	if (IsExistsScene(key)) {
-		m_sceneList[m_currentScene]->Initialize();
+		m_sceneList[m_currentScene]->BaseInitialize();
 	}
 }
 
@@ -102,7 +102,7 @@ void SceneManager::DeleteAllScene()
 		if (IsExistsScene(v.first))
 		{
 			//終了処理
-			v.second->Finalize();
+			v.second->BaseFinalize();
 			//削除
 			SAFE_DELETE(v.second);
 		}

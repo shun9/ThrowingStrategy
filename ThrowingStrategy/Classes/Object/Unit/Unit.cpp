@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Unit.cpp
 //* @brief :召喚されるユニット
-//* @date  :2017/12/04
+//* @date  :2018/01/05
 //* @author:S.Katou
 //************************************************/
 #include "Unit.h"
@@ -19,26 +19,30 @@ Unit::Unit():
 	//本体の当たり判定の設定
 	m_collider = new SphereCollider();
 	m_collider->Parent(this);
-	m_collider->ChaseObj(this);
 	m_collider->Offset(UNIT_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Scale(UNIT_CONSTANT::COLLIDER_BODY_SIZE);
 
 	//攻撃範囲の設定
 	m_attackRange = new SphereCollider;
-	m_attackRange->ChaseObj(this);
+	m_attackRange->Parent(this);
 	m_attackRange->AddChildCollider(m_collider);
 	m_attackRange->Offset(UNIT_CONSTANT::COLLIDER_OFFSET);
 	m_attackRange->Shape()->Scale(UNIT_CONSTANT::COLLIDER_ATTACK_SIZE);
+	m_attackRange->ShouldPassInfo(false);
+	m_attackRange->ShouldRejection(false);
 	m_attackRange->IsDebugDraw(false);
 
 	//追跡範囲の設定
 	m_chaseRange = new SphereCollider;
-	m_chaseRange->ChaseObj(this);
+	m_chaseRange->Parent(this);
 	m_chaseRange->AddChildCollider(m_attackRange);
 	m_chaseRange->Offset(UNIT_CONSTANT::COLLIDER_OFFSET);
 	m_chaseRange->Shape()->Scale(UNIT_CONSTANT::COLLIDER_CHASE_SIZE);
+	m_chaseRange->ShouldPassInfo(false);
+	m_chaseRange->ShouldRejection(false);
 	m_chaseRange->IsDebugDraw(false);
 
+	//HPゲージ
 	m_hpGauge = new HPGauge;
 	m_hpGauge->Parent(this);
 	m_hpGauge->Offset(UNIT_CONSTANT::HP_GAUGE_OFFSET);

@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :ObjectData.h
 //* @brief :オブジェクトが使用するデータをまとめたクラス
-//* @date  :2017/11/02
+//* @date  :2018/01/05
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -23,9 +23,12 @@ protected:
 public:
 	ObjectData(OBJECT_LIST type){
 		m_type = type;
-		m_hp = MaxHP();
+		Init();
 	}
 	virtual ~ObjectData() {}
+
+	//初期化
+	void Init() { m_hp = MaxHP(); };
 
 	//ダメージを受ける
 	void TakeDamage(int damage) { m_hp = ShunLib::Max(0, m_hp - damage); }
@@ -37,12 +40,12 @@ public:
 	float       Spd  () { return OBJ_PARAM(m_type).spd  ; }
 	float       Power() { return OBJ_PARAM(m_type).power; }
 	int	        MaxHP() { return OBJ_PARAM(m_type).maxHP; }
-	int	        HP   () { return m_hp; }
+	int	        HP   () { return m_hp                   ; }
 	TEAM		Team () { return m_team                 ; }
 	OBJECT_LIST	Type () { return m_type                 ; }
 
 	//Setter
-	void HP   (int hp           ) { m_hp = hp; }
+	void HP   (int hp           ) { m_hp = hp    ; }
 	void Team (TEAM t           ) { m_team = t   ; }
 	void Type (OBJECT_LIST type ) { m_type = type; }
 };

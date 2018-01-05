@@ -5,8 +5,28 @@
 //* @author:S.Katou
 //************************************************/
 #include "SL_ObjectNode.h"
+#include <SL_ObjectHolder.h>
 
 using namespace ShunLib;
+
+/// <summary>
+/// コンストラクタ
+/// </summary>
+ObjectNode::ObjectNode(int layerNumber):
+	m_layerNumber(layerNumber)
+{
+	//オブジェクト管理クラスに追加
+	ObjectHolder::GetInstance()->AddObject(m_layerNumber, this);
+}
+
+/// <summary>
+/// デストラクタ
+/// </summary>
+ObjectNode::~ObjectNode()
+{
+	//オブジェクト管理クラスから除外
+	ObjectHolder::GetInstance()->RemoveObject(m_layerNumber, this);
+}
 
 /// <summary>
 /// 親の設定

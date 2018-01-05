@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include <SL_Conversion.h>
+#include <SL_ObjectHolder.h>
 #include "../../Unit/Unit.h"
 #include "../../ObjectStruct.h"
 #include "../../../Util/Visitor/Visitor.h"
@@ -22,17 +23,17 @@ using namespace ShunLib;
 void PlayerPickUpCommand::Execute(Player * player)
 {
 	//違うチームを探す
-	SearchAnotherTeamVisitor aV(player->Data().Team());
-	player->Collider()->Accept(&aV);
+	//SearchAnotherTeamVisitor aV(player->Data().Team());
+	//player->Collider()->Accept(&aV);
 
-	//違うチームの中からユニットを探す
+	//ユニットを探す
 	SearchUnitVisitor visitor;
-	aV.Accept(&visitor);
+	player->Collider()->Accept(&visitor);
+	//aV.Accept(&visitor);
 	auto hitList = visitor.List();
 
 	//持てるかどうか
-	for (auto& v : hitList)
-	{
+	for (auto& v : hitList){
 		//既に持っているユニットは対象外
 		SearchSpecificObjectVisitor sv(v);
 		player->Accept(&sv);
@@ -87,7 +88,14 @@ void PlayerThrowCommand::Execute(Player * player)
 	{
 		child = v.List()[0];
 
-		player->RemoveChild(child);
+		//親子関係を解除
+		//ステージに付け直す
+		auto list = ObjectHolder::GetInstance()->List(ObjectConstantNumber::STAGE);
+
+		//ステージは必ず１つ存在
+		assert(!list.empty() && list.size() == 1);
+
+		child->SetParent(list[0]);
 
 		//プレイヤーの向いている方向に力を加える
 		float rad = ToRadian(player->Transform().Rotation().m_y);
