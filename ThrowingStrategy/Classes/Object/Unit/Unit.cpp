@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Unit.cpp
 //* @brief :召喚されるユニット
-//* @date  :2018/01/05
+//* @date  :2018/01/09
 //* @author:S.Katou
 //************************************************/
 #include "Unit.h"
@@ -72,7 +72,16 @@ void Unit::Finalize()
 /// </summary>
 void Unit::ToBeLifted()
 {
+	//何もしない状態
 	this->ChangeState(new UnitSteadyState);
+
+	//すべての速度を0にする
+	m_data.UseGravity(false);
+	m_transform.Velocity(ShunLib::Vec3::Zero);
+
+	//一番下のユニットと投げられたユニットが衝突し
+	//位置がずれるため持たれている間は当たり判定を使用しない
+	DisableCollider();
 }
 
 /// <summary>
@@ -80,7 +89,34 @@ void Unit::ToBeLifted()
 /// </summary>
 void Unit::ToBeThrow(const FlyingData& data)
 {
+	//投げられた時の情報を設定
 	auto tmp = new UnitFlyState;
 	tmp->SetData(data);
 	this->ChangeState(tmp);
+
+	//重力を使用
+	m_data.UseGravity(true);
+
+	//当たり判定を使用
+	EnableCollider();
+}
+
+/// <summary>
+/// 当たり判定を使用する
+/// </summary>
+void Unit::EnableCollider()
+{
+	m_collider->IsEnable(true);
+	m_attackRange->IsEnable(true);
+	m_chaseRange->IsEnable(true);
+}
+
+/// <summary>
+/// 当たり判定を使用しない
+/// </summary>
+void Unit::DisableCollider()
+{
+	m_collider->IsEnable(false);
+	m_attackRange->IsEnable(false);
+	m_chaseRange->IsEnable(false);
 }

@@ -40,7 +40,8 @@ void UnitRoamState::Execute(Unit * unit)
 	unit->Move();
 
 	//’ÇÕ”ÍˆÍ‚É“G‚ª‚¢‚½ê‡
-	SearchAnotherTeamVisitor v(unit->Data().Team());
+	SearchTeamVisitor v(unit->Data().Team());
+	v.VisitAnotherTeam();
 	unit->ChaseRange()->Accept(&v);
 	if (v.Count() > 0) {
 		unit->ChangeState(new UnitChaseState);

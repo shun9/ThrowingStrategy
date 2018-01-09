@@ -46,6 +46,12 @@ public:
 	//他ユニットに投げられる
 	void ToBeThrow(const FlyingData& data);
 
+	//当たり判定を使用する
+	void EnableCollider();
+
+	//当たり判定を使用しない
+	void DisableCollider();
+
 	/*--Getter--*/
 	UNIT_LIST UnitType() { return m_unitType; }
 	SphereCollider* AttackRange() { return m_attackRange; }

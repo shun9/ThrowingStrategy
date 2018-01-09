@@ -53,12 +53,6 @@
     <Filter Include="Game\Object\Unit\State">
       <UniqueIdentifier>{a5850ac6-01a4-46c3-bb00-40b7a84e09ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object\UnitSummoner">
-      <UniqueIdentifier>{0ffdb5bd-a903-487a-95dd-3d4221af6d7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\UnitSummoner\SummonerState">
-      <UniqueIdentifier>{af86cee4-88b5-4a36-97bd-4648420f2b59}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Visitor">
       <UniqueIdentifier>{24d60809-1f51-4b03-b638-2bb7439100da}</UniqueIdentifier>
     </Filter>
@@ -79,6 +73,12 @@
     </Filter>
     <Filter Include="Game\Object\Player\Command">
       <UniqueIdentifier>{02ce1ba8-23de-48cf-b65f-efb91faaeace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\UnitSummoner">
+      <UniqueIdentifier>{0ffdb5bd-a903-487a-95dd-3d4221af6d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\UnitSummoner\SummonerState">
+      <UniqueIdentifier>{af86cee4-88b5-4a36-97bd-4648420f2b59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +138,6 @@
       <Filter>NewShunLib\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h">
-      <Filter>Game\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\Util\DestroySingleton.h">
       <Filter>Game\Util</Filter>
     </ClInclude>
     <ClInclude Include="Classes\Object\Unit\State\UnitSteadyState.h">

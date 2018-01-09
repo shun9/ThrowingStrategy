@@ -11,6 +11,8 @@
 #include "PlayerKeyCommand.h"
 
 #include "../../../Util/Debugger/DebuggerUI.h"
+#include "../../../Util/Visitor/Visitor.h"
+#include <SL_ObjectHolder.h>
 
 void PlayerMoveState::Enter(Player* player)
 {
@@ -35,12 +37,14 @@ void PlayerMoveState::Execute(Player* player)
 	auto key = ShunLib::KeyManager::GetInstance();
 	auto keyList = m_keyInput.GetKeyList();
 
+	//‰Ÿ‚µ‚Ä‚éŠÔ
 	for (auto& v : keyList){
 		if (key->IsPushed(v)){
 			m_keyInput.HandleInput(v)->Execute(player);
 		}
 	}
 
+	//‰Ÿ‚µ‚½ƒtƒŒ[ƒ€‚Ì‚Ý
 	auto triggerList = m_keyTriggerInput.GetKeyList();
 	for (auto& v : triggerList) {
 		if (key->IsTracker(v)) {
@@ -48,7 +52,11 @@ void PlayerMoveState::Execute(Player* player)
 		}
 	}
 
-	DebuggerUI::GetInstance()->DrawDebugText("Player HP : %d",player->Data().HP());
+	auto unit = ShunLib::ObjectHolder::GetInstance()->List(ObjectConstantNumber::UNIT);
+
+	for (int i = 0; i < (int)unit.size(); i++){
+		DebuggerUI::GetInstance()->DrawDebugText("Unit Pos(%f,%f,%f)",unit[i]->Transform().Pos().m_x, unit[i]->Transform().Pos().m_y, unit[i]->Transform().Pos().m_z);
+	}
 
 	player->Move();
 }

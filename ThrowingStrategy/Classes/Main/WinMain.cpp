@@ -8,11 +8,10 @@
 #include <memory>
 #include <crtdbg.h>
 #include <Keyboard.h>
+#include <SL_SingletonDestroyer.h>
 #include "SL_Window.h"
 #include "SL_Graphics.h"
 #include "../Game/MyGame.h"
-#include "../Util/DestroySingleton.h"
-#include <SL_SingletonDestroyer.h>
 
 #ifdef _DEBUG
 	#ifndef DBG_NEW

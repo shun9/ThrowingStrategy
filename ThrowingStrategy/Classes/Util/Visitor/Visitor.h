@@ -84,9 +84,9 @@ public:
 
 
 /// <summary>
-/// 別のチームを探すビジター
+/// チームを探すビジター
 /// </summary>
-class SearchAnotherTeamVisitor : public ShunLib::Visitor
+class SearchTeamVisitor : public ShunLib::Visitor
 {
 public:
 	using TEAM = ObjectConstantNumber::TEAM;
@@ -94,15 +94,20 @@ public:
 private:
 	TEAM m_myTeam;
 	std::vector<ObjectBase*> m_objectList;
+	bool m_searchSameTeam;
 
 public:
-	SearchAnotherTeamVisitor(TEAM team) :
-		m_myTeam(team)
-	{}
-	~SearchAnotherTeamVisitor() {}
+	SearchTeamVisitor(TEAM team) :
+		m_myTeam(team),
+		m_searchSameTeam(true){}
+	~SearchTeamVisitor() {}
 
 	//訪問する
 	void Visit(ShunLib::VisitorNode* node)override;
+
+	//同じor違うチームを探す
+	void VisitSameTeam(){ m_searchSameTeam = true; }
+	void VisitAnotherTeam() { m_searchSameTeam = false; }
 
 	//ビジターを受け入れる
 	void Accept(Visitor* visitor)override {
@@ -170,7 +175,7 @@ class SearchNearestObjectVisitor :public ShunLib::Visitor
 private:
 	ShunLib::Vec3 m_pos;  //基準の位置
 	bool m_isOnlyState;	  //状態を持ったオブジェクトに限定するかどうか
-	
+
 	ObjectBase* m_object; //最も近いオブジェクト
 	float m_minDist;      //最短距離
 

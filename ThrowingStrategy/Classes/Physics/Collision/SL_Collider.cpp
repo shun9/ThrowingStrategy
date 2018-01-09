@@ -37,10 +37,10 @@ ICollider::~ICollider()
 /// </summary>
 void ICollider::Update()
 {
-	//アクティブかどうかを親に合わせる
-	if (m_parent != nullptr){
-		m_isEnable = m_parent->IsEnable();
-	}
+	////アクティブかどうかを親に合わせる
+	//if (m_parent != nullptr){
+	//	m_isEnable = m_parent->IsEnable();
+	//}
 }
 
 //デバッグ用描画
@@ -89,6 +89,18 @@ ObjectBase * ShunLib::ICollider::HitParent()
 		return m_parent;
 	}
 	return nullptr;
+}
+
+/// <summary>
+/// 使用している状態かどうか
+/// </summary>
+bool ICollider::IsEnable()
+{
+	bool isEnable = m_isEnable;
+	if (m_parent != nullptr){
+		isEnable = (isEnable && m_parent->IsEnable());
+	}
+	return isEnable;
 }
 
 

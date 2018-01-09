@@ -57,14 +57,25 @@ void SearchStateObjectVisitor::Visit(ShunLib::VisitorNode* node)
 /// <summary>
 /// 違うチームのオブジェクトを探すビジター
 /// </summary>
-void SearchAnotherTeamVisitor::Visit(ShunLib::VisitorNode * node)
+void SearchTeamVisitor::Visit(ShunLib::VisitorNode * node)
 {
 	ObjectBase* obj = dynamic_cast<ObjectBase*>(node);
 
 	if (obj != nullptr) {
-		//チームに所属していて
-		//指定チームではないならカウントする
-		if (obj->Data().Team() != ObjectConstantNumber::NONE && obj->Data().Team() != m_myTeam) {
+		bool shouldAdd = false;
+		TEAM team = obj->Data().Team();
+		//条件に合致しているか
+		if (m_searchSameTeam){
+			//同じチーム
+			shouldAdd = (team == m_myTeam);
+		}
+		else{
+			//違うチーム
+			shouldAdd = (team != TEAM::NONE && team != m_myTeam);
+		}
+
+		//条件にあっていたらカウントする
+		if (shouldAdd) {
 			m_objectList.push_back(obj);
 		}
 	}

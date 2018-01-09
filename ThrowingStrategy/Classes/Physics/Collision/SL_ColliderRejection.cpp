@@ -132,6 +132,19 @@ void CollisionManager::Rejection(SphereCollider * A, BoxCollider * B, const Vec3
 	Vec3 bPos = objB->Transform().Pos();
 	Vec3 vec = closestPoint - A->Shape()->CenterPoint();
 	float dist = A->Shape()->Radius() - vec.Length();
+
+	//ÅÚ‹ß“_‚Æ‹…‚Ì’†S‚ªˆê’v‚µ‚½ê‡
+	//” ‚Ì’†S‚Æ‹…‚Ì’†S‚Å”rË‚·‚é
+	if (closestPoint.m_x == A->Shape()->CenterPoint().m_x
+	&&  closestPoint.m_y == A->Shape()->CenterPoint().m_y
+	&&  closestPoint.m_z == A->Shape()->CenterPoint().m_z){
+		Vec3 tmp = B->Shape()->CenterPoint();
+		tmp.m_y = A->Shape()->CenterPoint().m_y;
+		vec = tmp - A->Shape()->CenterPoint();
+
+		dist = A->Shape()->Radius();
+	}
+
 	vec.Normalize();
 	vec *= dist;
 

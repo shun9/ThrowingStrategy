@@ -15,6 +15,8 @@
 #include "../../Object/ObjectBase.h"
 #include "../../Object/ObjectFactory.h"
 #include "../../Object/ObjectConstantNumber.h"
+#include <SL_ObjectHolder.h>
+#include "../../Util/Debugger/DebuggerUI.h"
 
 PlayScene::PlayScene()
 {
@@ -65,7 +67,6 @@ void PlayScene::Update()
 /// </summary>
 void PlayScene::Render()
 {
-	auto camera = ShunLib::MainCamera::GetInstance();
 }
 
 /// <summary>

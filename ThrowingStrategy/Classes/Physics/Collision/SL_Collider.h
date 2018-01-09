@@ -89,7 +89,7 @@ namespace ShunLib
 		ChildList& ChildrenCollider () { return m_childrenCollider; }
 		Vec3 Offset                 () { return m_offset; }
 		const HitObjectList& HitList() { return m_hitList; }
-		bool IsEnable               () { return m_isEnable; }
+		bool IsEnable();
 		bool IsStatic               () { return m_isStatic; }
 		bool ShouldRejection        () { return m_shouldRejection; }
 		SHAPE_TYPE Type             () { return m_shape->Type(); }

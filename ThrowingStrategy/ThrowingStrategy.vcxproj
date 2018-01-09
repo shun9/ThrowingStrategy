@@ -224,7 +224,6 @@
     <ClInclude Include="Classes\Util\Debugger\imgui\stb_rect_pack.h" />
     <ClInclude Include="Classes\Util\Debugger\imgui\stb_textedit.h" />
     <ClInclude Include="Classes\Util\Debugger\imgui\stb_truetype.h" />
-    <ClInclude Include="Classes\Util\DestroySingleton.h" />
     <ClInclude Include="Classes\Util\SL_Camera.h" />
     <ClInclude Include="Classes\Util\SL_GamePadManager.h" />
     <ClInclude Include="Classes\Util\Visitor\Visitor.h" />

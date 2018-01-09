@@ -13,9 +13,13 @@
 class UnitFlyState : public ShunLib::State<Unit>
 {
 private:
+	//飛行用データ
 	FlyingData m_data;
+
+	//時間
 	float m_timeLimit;
 	float m_timeCnt;
+
 public:
 	UnitFlyState():
 		m_timeLimit(1.0f),

@@ -45,7 +45,7 @@ void ObjectBase::Move()
 
 	//ˆÚ“®
 	auto pos = m_transform.Pos() + m_transform.Velocity() * timer->GetElapsedSeconds();
-	pos.m_y -= GRAVITY;
+	if(m_data.UseGravity())pos.m_y -= GRAVITY;
 	m_transform.Pos(pos);
 
 	//Œü‚¢‚Ä‚¢‚é•ûŒü‚ğŒvZ‚·‚é
@@ -100,7 +100,7 @@ void ObjectBase::Render()
 		//e‚ª‘¶İ‚·‚é‚È‚çÀ•W‚ğ‰e‹¿‚³‚¹‚é
 		auto parent = dynamic_cast<ObjectBase*>(m_parent);
 		if (parent != nullptr){
-			model->Draw(parent->Transform().WorldMat() * m_transform.WorldMat(), camera->ViewMat(), camera->ProjMat());
+			model->Draw(parent->Transform().TransMat() * m_transform.WorldMat(), camera->ViewMat(), camera->ProjMat());
 		}
 		else {
 			model->Draw(m_transform.WorldMat(), camera->ViewMat(), camera->ProjMat());

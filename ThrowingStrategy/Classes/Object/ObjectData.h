@@ -17,6 +17,7 @@ public:
 
 protected:
 	int m_hp;		   //現在HP
+	bool m_useGravity; //重力の影響を受けるかどうか
 	TEAM m_team;       //チーム分け
 	OBJECT_LIST m_type;//このオブジェクトの種類
 
@@ -28,7 +29,10 @@ public:
 	virtual ~ObjectData() {}
 
 	//初期化
-	void Init() { m_hp = MaxHP(); };
+	void Init() {
+		m_hp = MaxHP();
+		m_useGravity = true;
+	};
 
 	//ダメージを受ける
 	void TakeDamage(int damage) { m_hp = ShunLib::Max(0, m_hp - damage); }
@@ -43,9 +47,11 @@ public:
 	int	        HP   () { return m_hp                   ; }
 	TEAM		Team () { return m_team                 ; }
 	OBJECT_LIST	Type () { return m_type                 ; }
+	bool UseGravity  () { return m_useGravity; }
 
 	//Setter
 	void HP   (int hp           ) { m_hp = hp    ; }
 	void Team (TEAM t           ) { m_team = t   ; }
 	void Type (OBJECT_LIST type ) { m_type = type; }
+	void UseGravity(bool useGra ) { m_useGravity = useGra; }
 };

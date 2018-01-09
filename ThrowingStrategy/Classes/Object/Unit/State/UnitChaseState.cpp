@@ -38,12 +38,12 @@ void UnitChaseState::Execute(Unit* unit)
 	unit->Move();
 
 	//攻撃範囲内にいる別チームのオブジェクトを探す
-	SearchAnotherTeamVisitor aV(unit->Data().Team());
-	aV.Reset();
-	unit->AttackRange()->Accept(&aV);
+	SearchTeamVisitor tV(unit->Data().Team());
+	tV.VisitAnotherTeam();
+	unit->AttackRange()->Accept(&tV);
 
 	//攻撃範囲に別チームのオブジェクトがいたら攻撃状態に移行
-	if (aV.Count() > 0){
+	if (tV.Count() > 0){
 		unit->ChangeState(new UnitAttackState);
 		return;
 	}
@@ -63,14 +63,15 @@ ObjectBase* UnitChaseState::SearchTarget(Unit * unit)
 {
 	//当たっているオブジェクトから
 	//別のチームのオブジェクトを探す
-	SearchAnotherTeamVisitor aV(unit->Data().Team());
-	unit->ChaseRange()->Accept(&aV);
+	SearchTeamVisitor tV(unit->Data().Team());
+	tV.VisitAnotherTeam();
+	unit->ChaseRange()->Accept(&tV);
 
 	//別チームのオブジェクトから
 	//最も近くにいるオブジェクトを探す
 	Vec3 unitPos = unit->WorldPos();
 	SearchNearestObjectVisitor nV(unitPos);
-	aV.Accept(&nV);
+	tV.Accept(&nV);
 
 	return nV.Object();
 }

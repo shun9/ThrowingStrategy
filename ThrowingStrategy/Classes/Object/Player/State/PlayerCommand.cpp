@@ -22,14 +22,14 @@ using namespace ShunLib;
 /// </summary>
 void PlayerPickUpCommand::Execute(Player * player)
 {
-	//違うチームを探す
-	//SearchAnotherTeamVisitor aV(player->Data().Team());
-	//player->Collider()->Accept(&aV);
+	//同じチームを探す
+	SearchTeamVisitor tV(player->Data().Team());
+	tV.VisitSameTeam();
+	player->Collider()->Accept(&tV);
 
 	//ユニットを探す
 	SearchUnitVisitor visitor;
-	player->Collider()->Accept(&visitor);
-	//aV.Accept(&visitor);
+	tV.Accept(&visitor);
 	auto hitList = visitor.List();
 
 	//持てるかどうか
@@ -42,8 +42,8 @@ void PlayerPickUpCommand::Execute(Player * player)
 		}
 
 		player->AddChild(v);
-		player->AlignUnits();
 		v->ToBeLifted();
+		player->AlignUnits();
 		return;
 	}
 }
@@ -61,7 +61,7 @@ void PlayerPutCommand::Execute(Player * player)
 	if (unitV.Count() > 0)
 	{
 		//先頭のユニットを対象とする
-		ObjectBase* child = unitV.List()[0];
+		Unit* child = unitV.List()[0];
 
 		//プレイヤーの向いている方向
 		float rad = ToRadian(player->Transform().Rotation().m_y);
@@ -69,6 +69,7 @@ void PlayerPutCommand::Execute(Player * player)
 		Vec3 pos = player->Transform().Pos() + Vec3(-sin(rad), 0.0f, cos(rad))*player->Transform().Scale().Length();
 
 		player->RemoveChild(child);
+		child->SetParent(ShunLib::ObjectHolder::GetInstance()->List(ObjectConstantNumber::STAGE)[0]);
 		child->LocalPos(pos);
 		player->AlignUnits();
 	}
@@ -78,7 +79,7 @@ void PlayerPutCommand::Execute(Player * player)
 /// <summary>
 /// 投げる
 /// </summary>
-void PlayerThrowCommand::Execute(Player * player)
+void PlayerThrowCommand::Execute(Player* player)
 {
 	Unit* child;
 	SearchUnitVisitor v;
@@ -93,7 +94,7 @@ void PlayerThrowCommand::Execute(Player * player)
 		auto list = ObjectHolder::GetInstance()->List(ObjectConstantNumber::STAGE);
 
 		//ステージは必ず１つ存在
-		assert(!list.empty() && list.size() == 1);
+		assert(list.size() == 1);
 
 		child->SetParent(list[0]);
 

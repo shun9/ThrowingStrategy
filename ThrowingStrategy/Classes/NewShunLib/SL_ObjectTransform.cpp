@@ -22,7 +22,8 @@ const Matrix & ObjectTransform::CalcMat()
 	m_world *= Matrix::CreateRotationX(m_rotation.m_x);
 	m_world *= Matrix::CreateRotationY(m_rotation.m_y);
 
-	m_world *= Matrix::CreateTranslation(m_pos);
+	m_transMat = Matrix::CreateTranslation(m_pos);
+	m_world *= m_transMat;
 
 	return m_world;
 }

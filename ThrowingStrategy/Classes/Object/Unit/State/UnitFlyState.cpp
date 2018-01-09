@@ -10,6 +10,8 @@
 #include "UnitRoamState.h"
 #include "../../../Main/SL_MyStepTimer.h"
 
+using namespace ShunLib;
+
 void UnitFlyState::Enter(Unit * unit)
 {
 	//1秒あたり1進む設定
@@ -22,10 +24,8 @@ void UnitFlyState::Enter(Unit * unit)
 
 void UnitFlyState::Execute(Unit * unit)
 {
-	using namespace ShunLib;
-
 	//補間によって位置を出す
-	Vec3 v = Vec3::Larp(m_data.start, m_data.end, m_timeCnt/m_timeLimit, m_data.Lerp());
+	Vec3 v = Vec3::Larp(m_data.start, m_data.end, m_timeCnt / m_timeLimit, m_data.Lerp());
 	unit->Transform().Pos(v);
 
 	//時間をカウント
