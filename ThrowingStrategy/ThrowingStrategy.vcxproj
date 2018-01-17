@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Classes\AI\RRT.h" />
     <ClInclude Include="Classes\Game\Scene\PlayScene.h" />
     <ClInclude Include="Classes\Game\Scene\SL_IScene.h" />
     <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Classes\Object\Unit\State\UnitFlyState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitMoveState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitRoamState.h" />
+    <ClInclude Include="Classes\Object\Unit\State\UnitRRTState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitSteadyState.h" />
     <ClInclude Include="Classes\Object\Unit\Unit.h" />
     <ClInclude Include="Classes\Physics\Collision\SL_Collider.h" />
@@ -230,6 +232,7 @@
     <ClInclude Include="StepTimer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Classes\AI\RRT.cpp" />
     <ClCompile Include="Classes\Game\Scene\PlayScene.cpp" />
     <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp" />
     <ClCompile Include="Classes\Game\SL_Application.cpp" />
@@ -265,6 +268,7 @@
     <ClCompile Include="Classes\Object\Unit\State\UnitFlyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitMoveState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitRoamState.cpp" />
+    <ClCompile Include="Classes\Object\Unit\State\UnitRRTState.cpp" />
     <ClCompile Include="Classes\Object\Unit\State\UnitSteadyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\Unit.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp" />
@@ -305,9 +309,6 @@
     <MeshContentTask Include="Resources\ModelData\PlayerB.FBX" />
     <MeshContentTask Include="Resources\ModelData\Tube.FBX" />
     <MeshContentTask Include="Resources\ModelData\Tube2.FBX" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

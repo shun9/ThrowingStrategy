@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Unit.h
 //* @brief :召喚されるユニット
-//* @date  :2017/12/13
+//* @date  :2017/01/11
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -42,6 +42,9 @@ public:
 
 	//他ユニットに持ち上げられる
 	void ToBeLifted();
+
+	//他ユニットに置かれる
+	void ToBePlaced();
 
 	//他ユニットに投げられる
 	void ToBeThrow(const FlyingData& data);

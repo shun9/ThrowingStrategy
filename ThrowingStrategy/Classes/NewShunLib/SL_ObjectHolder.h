@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :ObjectHolder.h
 //* @brief :オブジェクト情報を保管しておくクラス
-//* @date  :2018/01/01
+//* @date  :2018/01/12
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -32,8 +32,12 @@ namespace ShunLib {
 		//使用されていないオブジェクトを探す
 		ObjectNode* SearchNotEnableObject(int layerNum);
 
+		// ビジターを迎え入れる
+		void Accept(int layerNum,Visitor* visitor);
+
 		/*--Getter--*/
 		ObjectList& List(int layerNum) { return m_objectList[layerNum]; }
+
 	private:
 		ObjectHolder() {}
 		~ObjectHolder();

@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Collider.cpp
 //* @brief :当たり判定オブジェクトのクラス
-//* @date  :2017/11/12
+//* @date  :2018/01/09
 //* @author:S.Katou
 //************************************************/
 #include "SL_Collider.h"
@@ -37,10 +37,7 @@ ICollider::~ICollider()
 /// </summary>
 void ICollider::Update()
 {
-	////アクティブかどうかを親に合わせる
-	//if (m_parent != nullptr){
-	//	m_isEnable = m_parent->IsEnable();
-	//}
+
 }
 
 //デバッグ用描画

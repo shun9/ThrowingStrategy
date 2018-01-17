@@ -80,6 +80,9 @@
     <Filter Include="Game\Object\UnitSummoner\SummonerState">
       <UniqueIdentifier>{af86cee4-88b5-4a36-97bd-4648420f2b59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\AI">
+      <UniqueIdentifier>{3d7a585b-a015-4846-8724-7015167e5836}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -272,6 +275,12 @@
     <ClInclude Include="Classes\Object\Player\State\PlayerKeyCommand.h">
       <Filter>Game\Object\Player\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\AI\RRT.h">
+      <Filter>Game\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitRRTState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\WinMain.cpp" />
@@ -431,6 +440,12 @@
     <ClCompile Include="Classes\Object\Player\State\PlayerKeyCommand.cpp">
       <Filter>Game\Object\Player\Command</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Object\Unit\State\UnitRRTState.cpp">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\AI\RRT.cpp">
+      <Filter>Game\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -473,8 +488,5 @@
     <MeshContentTask Include="Resources\ModelData\Hedora2.FBX">
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

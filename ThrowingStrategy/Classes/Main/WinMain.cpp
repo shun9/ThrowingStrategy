@@ -80,7 +80,7 @@ HRESULT InitWindow(HINSTANCE hInst)
 	//ウィンドウ情報設定
 	window->Width(800.0f);
 	window->Height(600.0f);
-	window->Name(L"投げる");
+	window->Name(L"ThrowingWars");
 
 	//ウィンドウ作成
 	if (SUCCEEDED(window->Create(hInst)))

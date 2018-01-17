@@ -1,13 +1,14 @@
 //************************************************/
 //* @file  :Unit.cpp
 //* @brief :召喚されるユニット
-//* @date  :2018/01/09
+//* @date  :2018/01/11
 //* @author:S.Katou
 //************************************************/
 #include "Unit.h"
 #include "State\UnitFlyState.h"
 #include "State\UnitSteadyState.h"
 #include "State\UnitRoamState.h"
+#include "State\UnitRRTState.h"
 #include "../../Physics/PhysicsConstantNumber.h"
 #include "../../Main/SL_MyStepTimer.h"
 #include "../../UI/HPGauge/HPGauge.h"
@@ -82,6 +83,21 @@ void Unit::ToBeLifted()
 	//一番下のユニットと投げられたユニットが衝突し
 	//位置がずれるため持たれている間は当たり判定を使用しない
 	DisableCollider();
+}
+
+/// <summary>
+/// 置かれる
+/// </summary>
+void Unit::ToBePlaced()
+{
+	//何もしない状態
+	this->ChangeState(new UnitRoamState);
+
+	//重力を使用
+	m_data.UseGravity(true);
+
+	//当たり判定を使用
+	EnableCollider();
 }
 
 /// <summary>

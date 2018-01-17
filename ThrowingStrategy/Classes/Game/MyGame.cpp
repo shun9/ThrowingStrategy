@@ -61,13 +61,6 @@ void MyGame::Update()
 		scene->Update();
 		CollisionManager::GetInstance()->Update();
 	});
-
-	/*--‰¼‚ÌƒŠƒZƒbƒgˆ—--*/
-	if (KeyManager::GetInstance()->IsTracker(KeyManager::KEY_CODE::ENTER)){
-		CollisionManager::Destroy();
-		this->Finalize();
-		this->Initialize();
-	}
 }
 
 /// <summary>

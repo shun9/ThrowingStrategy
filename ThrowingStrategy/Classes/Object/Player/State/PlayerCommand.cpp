@@ -71,6 +71,7 @@ void PlayerPutCommand::Execute(Player * player)
 		player->RemoveChild(child);
 		child->SetParent(ShunLib::ObjectHolder::GetInstance()->List(ObjectConstantNumber::STAGE)[0]);
 		child->LocalPos(pos);
+		child->ToBePlaced();
 		player->AlignUnits();
 	}
 }

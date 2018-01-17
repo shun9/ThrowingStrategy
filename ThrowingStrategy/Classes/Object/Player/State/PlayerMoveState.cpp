@@ -52,12 +52,6 @@ void PlayerMoveState::Execute(Player* player)
 		}
 	}
 
-	auto unit = ShunLib::ObjectHolder::GetInstance()->List(ObjectConstantNumber::UNIT);
-
-	for (int i = 0; i < (int)unit.size(); i++){
-		DebuggerUI::GetInstance()->DrawDebugText("Unit Pos(%f,%f,%f)",unit[i]->Transform().Pos().m_x, unit[i]->Transform().Pos().m_y, unit[i]->Transform().Pos().m_z);
-	}
-
 	player->Move();
 }
 

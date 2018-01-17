@@ -74,6 +74,24 @@ ObjectNode* ShunLib::ObjectHolder::SearchNotEnableObject(int layerNum)
 }
 
 /// <summary>
+/// ビジターを迎え入れる
+/// </summary>
+/// <param name="layerNum">レイヤー番号</param>
+/// <param name="visitor">ビジター</param>
+void ObjectHolder::Accept(int layerNum, Visitor* visitor)
+{
+	//レイヤーの番号が存在しなければ探さない
+	if (layerNum >= (int)m_objectList.size()) {
+		return;
+	}
+
+	//訪問
+	for (int i = 0; i < (int)m_objectList[layerNum].size(); i++) {
+		m_objectList[layerNum][i]->Accept(visitor);
+	}
+}
+
+/// <summary>
 /// デストラクタ
 /// </summary>
 ObjectHolder::~ObjectHolder()
