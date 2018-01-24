@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :SL_MyGame.cpp
 //* @brief :ゲームクラス
-//* @date  :2017/11/09
+//* @date  :2018/01/23
 //* @author:S.Katou
 //************************************************/
 #include "MyGame.h"
@@ -21,6 +21,20 @@
 #include "../Util/Debugger/DebuggerUI.h"
 
 using namespace ShunLib;
+
+/// <summary>
+/// コンストラクタ
+/// </summary>
+MyGame::MyGame(){
+	auto holder = ObjectHolder::GetInstance();
+
+	//オブジェクトリストの全体のサイズを調整
+	holder->ResizeList(ObjectConstantNumber::OBJECT_LIST_END, 2);
+
+	//必要数の多いオブジェクトのサイズを個別に調整
+	holder->ResizeLayer(ObjectConstantNumber::UNIT, 1000);
+	holder->ResizeLayer(ObjectConstantNumber::BLOCK, 100);
+}
 
 /// <summary>
 /// 初期化処理

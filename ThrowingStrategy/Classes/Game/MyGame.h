@@ -19,12 +19,7 @@ public:
 	};
 
 public:
-	MyGame() {
-		ShunLib::ObjectHolder::GetInstance()->ResizeList(
-			ObjectConstantNumber::OBJECT_LIST_END,
-			100
-		);
-	}
+	MyGame();
 	~MyGame() {}
 
 protected:

@@ -15,13 +15,22 @@ using namespace ShunLib;
 /// </summary>
 /// <param name="layerNum">レイヤーの数</param>
 /// <param name="layerSize">レイヤーの大きさ</param>
-void ObjectHolder::ResizeList(int layerNum, int layerSize)
-{
-	m_objectList.resize(layerNum);
+void ObjectHolder::ResizeList(int layerMax, int layerSize){
+	m_objectList.resize(layerMax);
 	for (auto& layer:m_objectList)
 	{
 		layer.reserve(layerSize);
 	}
+}
+
+/// <summary>
+/// レイヤーのサイズを個別に設定
+/// </summary>
+/// <param name="layerNum">レイヤー番号</param>
+/// <param name="layerSize">サイズ</param>
+void ShunLib::ObjectHolder::ResizeLayer(int layerNum, int layerSize)
+{
+	m_objectList[layerNum].reserve(layerSize);
 }
 
 /// <summary>
@@ -54,7 +63,7 @@ void ObjectHolder::RemoveObject(int layerNum, ObjectNode * obj)
 /// 使用されていないオブジェクトを探す
 /// </summary>
 /// <param name="layerNum">レイヤー番号</param>
-ObjectNode* ShunLib::ObjectHolder::SearchNotEnableObject(int layerNum)
+ObjectNode* ObjectHolder::SearchNotEnableObject(int layerNum)
 {
 	//レイヤーの番号が存在しなければ探さない
 	if (layerNum >= (int)m_objectList.size()){

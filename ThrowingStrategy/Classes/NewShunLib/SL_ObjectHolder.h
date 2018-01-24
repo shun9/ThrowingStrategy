@@ -21,7 +21,8 @@ namespace ShunLib {
 
 	public:
 		// オブジェクトリストのサイズを設定する
-		void ResizeList(int layerNum, int layerSize);
+		void ResizeList(int layerMax, int layerSize);
+		void ResizeLayer(int layerNum, int layerSize);
 
 		//オブジェクトを追加
 		void AddObject(int layerNum,ObjectNode* obj);
