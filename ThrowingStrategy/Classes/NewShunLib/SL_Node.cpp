@@ -22,6 +22,9 @@ Node::Node(int childrenSize):
 
 	//ダーティーフラグを下ろす
 	ClearDirty();
+
+	//使用している状態にしておく
+	m_isEnable = true;
 }
 
 /// <summary>
@@ -29,6 +32,7 @@ Node::Node(int childrenSize):
 /// </summary>
 Node::~Node()
 {
+	//子も同時に消す
 	for (int i = 0; i < (int)m_children.size(); i++){
 		SAFE_DELETE(m_children[i]);
 	}
@@ -63,6 +67,11 @@ void Node::BaseInitialize()
 /// </summary>
 void Node::BaseUpdate()
 {
+	//使用していない状態なら何もしない
+	if (!IsEnable()) {
+		return;
+	}
+
 	//処理前ならば派生クラスの処理を行う
 	if (!m_isDirty[DIRTY_FLAG::UPDATE_FLAG]){
 		//更新処理
@@ -88,6 +97,7 @@ void Node::BaseUpdate()
 /// </summary>
 void Node::BaseRender()
 {
+	//使用していない状態なら何もしない
 	if (!IsEnable()){
 		return;
 	}
