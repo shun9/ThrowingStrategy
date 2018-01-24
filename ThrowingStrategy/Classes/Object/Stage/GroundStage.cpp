@@ -81,12 +81,12 @@ void GroundStage::SettingRedObject()
 	//オブジェクト生成
 	auto factory = ObjectFactory::GetInstance();
 
-	////召喚オブジェクト
-	//auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
-	//summoner->Transform().Pos(ShunLib::Vec3(20.0f, 0.0f, 0.0f));
-	//summoner->Data().Team(ObjectConstantNumber::TEAM::RED);
-	//summoner->SetParent(this);
-	//dynamic_cast<UnitSummoner*>(summoner)->Interval(2000);
+	//召喚オブジェクト
+	auto summoner = factory->CreateObject(ObjectConstantNumber::SUMMONER);
+	summoner->Transform().Pos(ShunLib::Vec3(20.0f, 0.0f, 0.0f));
+	summoner->Data().Team(ObjectConstantNumber::TEAM::RED);
+	summoner->SetParent(this);
+	dynamic_cast<UnitSummoner*>(summoner)->Interval(2000);
 
 	//防衛対象
 	auto target = factory->CreateObject(ObjectConstantNumber::DEFENSE_TARGET);

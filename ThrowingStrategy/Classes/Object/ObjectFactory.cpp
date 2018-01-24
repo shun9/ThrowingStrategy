@@ -12,6 +12,7 @@
 #include "Unit\Unit.h"
 #include "DefenseTarget\DefenseTarget.h"
 #include "Stage\GroundStage.h"
+#include "Stage\StandardStage.h"
 #include "Stage\StageObject.h"
 #include "UnitSummoner\UnitSummoner.h"
 
@@ -58,6 +59,9 @@ Stage* ObjectFactory::CreateStage(STAGE_TYPE type)
 	case STAGE_TYPE::GROUND:
 		stage = m_groundStageFactory.Create();
 		break;
+	case STAGE_TYPE::STANDARD:
+		stage = m_standardStageFactory.Create();
+		break;
 	default:
 		break;
 	}
@@ -81,6 +85,7 @@ Unit* ObjectFactory::CreateUnit(UNIT_TYPE type)
 		case UNIT_TYPE::NORMAL:
 			unit = m_unitFactory.Create();
 			break;
+
 		default:
 			break;
 		}
@@ -115,11 +120,5 @@ void ObjectFactory::Delete(ObjectBase * obj)
 /// </summary>
 ObjectFactory::~ObjectFactory()
 {
-	//m_playerFactory.AllDelete();
-	//m_commanderFactory.AllDelete();
-	//m_unitFactory.AllDelete();
-	//m_blockFactory.AllDelete();
-	//m_defenseTargetFactory.AllDelete();
-	//m_groundStageFactory.AllDelete();
-	//m_summonerFactory.AllDelete();
+
 }

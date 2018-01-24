@@ -20,6 +20,7 @@ class Block;
 class DefenseTarget;
 class Stage;
 class GroundStage;
+class StandardStage;
 class UnitSummoner;
 
 class ObjectFactory : public ShunLib::Singleton<ObjectFactory>
@@ -46,8 +47,10 @@ private:
 
 	//ステージ用
 	ShunLib::Factory<GroundStage> m_groundStageFactory;
+	ShunLib::Factory<StandardStage> m_standardStageFactory;
 
 public:
+	//オブジェクトの作成
 	ObjectBase* CreateObject(OBJECT_TYPE type);
 
 	//ステージの作成

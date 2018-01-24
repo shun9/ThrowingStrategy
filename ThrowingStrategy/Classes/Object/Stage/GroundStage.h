@@ -11,8 +11,8 @@ class GroundStage : public Stage
 {
 public:
 	GroundStage():
-		Stage(STAGE_TYPE::GROUND){};
-	~GroundStage() {};
+		Stage(STAGE_TYPE::GROUND){}
+	~GroundStage() {}
 
 
 protected:
