@@ -39,13 +39,13 @@ void ObjectBase::Move()
 	auto timer = MyStepTimer::GetInstance();
 
 	//移動速度を制限
-	if (m_transform.Velocity().Length() > m_data.Spd()) {
+	if (m_transform.Velocity().Length() > m_data.Spd() && m_data.ShouldLimitVel()) {
 		m_transform.Velocity(m_transform.Velocity().Normalize()*m_data.Spd());
 	}
 
 	//移動
 	auto pos = m_transform.Pos() + m_transform.Velocity() * timer->GetElapsedSeconds();
-	if(m_data.UseGravity())pos.m_y -= GRAVITY;
+	if (m_data.UseGravity())pos.m_y -= GRAVITY;
 	m_transform.Pos(pos);
 
 	//向いている方向を計算する
@@ -61,7 +61,6 @@ void ObjectBase::Move()
 
 	//摩擦をかける
 	m_transform.Velocity(m_transform.Velocity() * FRICTION);
-
 }
 
 /// <summary>
@@ -79,7 +78,14 @@ void ObjectBase::Initialize()
 void ObjectBase::Update()
 {
 	if (m_data.IsDead()) {
+		//死んでいたら使用していない状態に戻す
 		m_isEnable = false;
+	}
+	else{
+		//ステージ外に出たら死亡扱いにする
+		if (m_transform.Pos().m_y < -10.0f) {
+			m_data.HP(0);
+		}
 	}
 }
 

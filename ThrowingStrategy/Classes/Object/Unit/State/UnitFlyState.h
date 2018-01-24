@@ -16,6 +16,9 @@ private:
 	//飛行用データ
 	FlyingData m_data;
 
+	//進行方向
+	ShunLib::Vec3 m_dir;
+
 	//時間
 	float m_timeLimit;
 	float m_timeCnt;

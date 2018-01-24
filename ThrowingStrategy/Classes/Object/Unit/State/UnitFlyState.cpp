@@ -18,15 +18,28 @@ void UnitFlyState::Enter(Unit * unit)
 	m_timeLimit = (m_data.start - m_data.end).Length();
 	m_timeCnt = 0.0f;
 
+	//速度を制限しない
+	unit->Data().ShouldLimitVel(false);
+	unit->Data().UseGravity(false);
+
+	//方向を設定
+	m_dir = m_data.end - m_data.start;
+	m_dir.Normalize();
+
 	//投げ方が設定されていない場合
 	if (m_data.Lerp() == NULL) { m_data.type = ObjectConstantNumber::THROW_TYPE::LINE; }
+
 }
 
 void UnitFlyState::Execute(Unit * unit)
 {
+
 	//補間によって位置を出す
 	Vec3 v = Vec3::Larp(m_data.start, m_data.end, m_timeCnt / m_timeLimit, m_data.Lerp());
-	unit->Transform().Pos(v);
+	unit->Transform().Velocity(m_dir * m_data.power);
+
+	//移動
+	unit->Move();
 
 	//時間をカウント
 	//パワーの分だけ早く進める
@@ -40,4 +53,7 @@ void UnitFlyState::Execute(Unit * unit)
 
 void UnitFlyState::Exit(Unit * unit)
 {
+	//速度を制限しない
+	unit->Data().ShouldLimitVel(true);
+	unit->Data().UseGravity(true);
 }
