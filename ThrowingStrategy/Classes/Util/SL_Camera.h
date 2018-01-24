@@ -94,7 +94,7 @@ namespace ShunLib {
 		void Proj(const ProjData& data) { m_projData = data; }
 		void FollowTarget(ObjectBase* obj) { m_followTarget = obj; }
 		void Angle(float a) { m_angle = a; }
-	
+
 	private:
 		MainCamera();
 		~MainCamera();
