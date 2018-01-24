@@ -14,44 +14,14 @@
     <Filter Include="Assets\Model">
       <UniqueIdentifier>{68036d42-898d-4450-973f-5bdb25231ca1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\Object">
-      <UniqueIdentifier>{88705e66-604a-402d-92ec-42ef8e360e19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Player">
-      <UniqueIdentifier>{97d9aec9-d61c-430d-9d9d-c6a04b8d701e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Player\State">
-      <UniqueIdentifier>{269f41d4-93d7-45b0-a17f-9fd955ee7494}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Base">
-      <UniqueIdentifier>{b1d46b8d-552d-42fe-842c-9906d01005b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Util">
       <UniqueIdentifier>{8fa54e67-96ac-47c0-af37-cb7dd210b3ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Commander">
-      <UniqueIdentifier>{2ccab58f-e94c-48ff-8cdb-c1b14424d85c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Commander\State">
-      <UniqueIdentifier>{2100a1bd-2af9-4e83-8bc8-adc83b31f5a7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Util\Debugger">
       <UniqueIdentifier>{b6a10414-e7d5-4f33-ab7a-d275fd45d232}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Util\Debugger\imgui">
       <UniqueIdentifier>{27996c24-bb01-411e-976a-21eb05651bfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Stage">
-      <UniqueIdentifier>{05f1fb05-49ad-450a-92ef-8b65949dea33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\DefenseTarget">
-      <UniqueIdentifier>{67e5a89d-e6dc-4d7d-bdb2-111829d70d78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Unit">
-      <UniqueIdentifier>{8e381dc4-bd49-47f2-be5b-71906a1fefe6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Object\Unit\State">
-      <UniqueIdentifier>{a5850ac6-01a4-46c3-bb00-40b7a84e09ee}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Visitor">
       <UniqueIdentifier>{24d60809-1f51-4b03-b638-2bb7439100da}</UniqueIdentifier>
@@ -71,17 +41,47 @@
     <Filter Include="Game\Main\Scene">
       <UniqueIdentifier>{9f8fe074-f208-4de2-a7cb-835219178334}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\AI">
+      <UniqueIdentifier>{3d7a585b-a015-4846-8724-7015167e5836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{88705e66-604a-402d-92ec-42ef8e360e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Player">
+      <UniqueIdentifier>{97d9aec9-d61c-430d-9d9d-c6a04b8d701e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Player\State">
+      <UniqueIdentifier>{269f41d4-93d7-45b0-a17f-9fd955ee7494}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Game\Object\Player\Command">
       <UniqueIdentifier>{02ce1ba8-23de-48cf-b65f-efb91faaeace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Base">
+      <UniqueIdentifier>{b1d46b8d-552d-42fe-842c-9906d01005b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Commander">
+      <UniqueIdentifier>{2ccab58f-e94c-48ff-8cdb-c1b14424d85c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Commander\State">
+      <UniqueIdentifier>{2100a1bd-2af9-4e83-8bc8-adc83b31f5a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Stage">
+      <UniqueIdentifier>{05f1fb05-49ad-450a-92ef-8b65949dea33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\DefenseTarget">
+      <UniqueIdentifier>{67e5a89d-e6dc-4d7d-bdb2-111829d70d78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Unit">
+      <UniqueIdentifier>{8e381dc4-bd49-47f2-be5b-71906a1fefe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object\Unit\State">
+      <UniqueIdentifier>{a5850ac6-01a4-46c3-bb00-40b7a84e09ee}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\UnitSummoner">
       <UniqueIdentifier>{0ffdb5bd-a903-487a-95dd-3d4221af6d7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Object\UnitSummoner\SummonerState">
       <UniqueIdentifier>{af86cee4-88b5-4a36-97bd-4648420f2b59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\AI">
-      <UniqueIdentifier>{3d7a585b-a015-4846-8724-7015167e5836}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +281,12 @@
     <ClInclude Include="Classes\Object\Unit\State\UnitRRTState.h">
       <Filter>Game\Object\Unit\State</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Object\Stage\StandardStage.h">
+      <Filter>Game\Object\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Unit\State\UnitState.h">
+      <Filter>Game\Object\Unit\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\WinMain.cpp" />
@@ -355,12 +361,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Util\SL_CameraState.cpp">
       <Filter>Game\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp">
-      <Filter>NewShunLib\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp">
-      <Filter>NewShunLib\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Object\DefenseTarget\DefenseTarget.cpp">
       <Filter>Game\Object\DefenseTarget</Filter>
@@ -445,6 +445,15 @@
     </ClCompile>
     <ClCompile Include="Classes\AI\RRT.cpp">
       <Filter>Game\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Stage\StandardStage.cpp">
+      <Filter>Game\Object\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Physics\Collision\SL_Collision.cpp">
+      <Filter>NewShunLib\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Physics\Collision\SL_Rejection.cpp">
+      <Filter>NewShunLib\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

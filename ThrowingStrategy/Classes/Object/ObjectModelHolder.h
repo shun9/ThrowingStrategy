@@ -32,11 +32,11 @@ private:
 	std::unique_ptr<Model> m_plarerBlue;
 	std::unique_ptr<Model> m_ghostRed;
 	std::unique_ptr<Model> m_ghostBlue;
-	std::unique_ptr<Model> m_box;
 	std::unique_ptr<Model> m_hedoraRed;
 	std::unique_ptr<Model> m_hedoraBlue;
 	std::unique_ptr<Model> m_tubeRed;
 	std::unique_ptr<Model> m_tubeBlue;
+	std::unique_ptr<Model> m_box;
 
 public:
 	//ƒ‚ƒfƒ‹‚ÌŽæ“¾

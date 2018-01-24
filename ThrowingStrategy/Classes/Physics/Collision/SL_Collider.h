@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :SL_Collider.h
 //* @brief :当たり判定オブジェクトのクラス
-//* @date  :2017/11/16
+//* @date  :2018/01/23
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -19,15 +19,11 @@ namespace ShunLib
 	class ICollider :public VisitorNode
 	{
 	public:
-		using ChildList = std::vector<ICollider*>;
 		using HitObjectList = std::vector<ObjectBase*>;
+
 	protected:
 		//当たり判定を持つオブジェクト
 		ObjectBase* m_parent;
-
-		//子の当たり判定
-		//親の当たり判定後に子の当たり判定を行う
-		ChildList m_childrenCollider;
 
 		//当たり判定形状
 		IShape* m_shape;
@@ -37,6 +33,9 @@ namespace ShunLib
 
 		//当たっているオブジェクトのリスト
 		HitObjectList m_hitList;
+
+		//所属レイヤー
+		int m_layer;
 
 		//親の情報を渡すかどうか
 		bool m_shouldPassParentInfo;
@@ -53,7 +52,7 @@ namespace ShunLib
 		//デバッグ描画するかどうか
 		bool m_isDebugDraw;
 	public:
-		ICollider();
+		ICollider(int layer);
 		virtual ~ICollider();
 
 		virtual void Update();
@@ -71,28 +70,21 @@ namespace ShunLib
 		//リストの初期化
 		void ResetList() {
 			m_hitList.clear();
-			m_hitList.shrink_to_fit();
-			for (auto& v:m_childrenCollider){
-				v->ResetList();
-			}
 		}
 
 		//ビジター受け入れ
 		void Accept(ShunLib::Visitor* visitor);
 
-		//子の当たり判定を追加
-		void AddChildCollider(ICollider* child);
-
 		/*--Getter--*/
 		ObjectBase* Parent          () { return m_parent; }
 		ObjectBase* HitParent       ();
-		ChildList& ChildrenCollider () { return m_childrenCollider; }
 		Vec3 Offset                 () { return m_offset; }
 		const HitObjectList& HitList() { return m_hitList; }
-		bool IsEnable();
+		bool IsEnable               ();
 		bool IsStatic               () { return m_isStatic; }
 		bool ShouldRejection        () { return m_shouldRejection; }
-		SHAPE_TYPE Type             () { return m_shape->Type(); }
+		SHAPE_TYPE ShapeType        () { return m_shape->Type(); }
+		int ColliderType            () { return m_layer; }
 
 		/*--Setter--*/
 		void Offset         (const Vec3& offset) { m_offset = offset; }
@@ -113,7 +105,7 @@ namespace ShunLib
 	class SphereCollider : public ICollider
 	{
 	public:
-		SphereCollider() { m_shape  = new Sphere; }
+		SphereCollider(int layer):ICollider(layer) { m_shape  = new Sphere; }
 		~SphereCollider() { SAFE_DELETE(m_shape); }
 
 		void Update()override;
@@ -128,7 +120,7 @@ namespace ShunLib
 	class BoxCollider : public ICollider
 	{
 	public:
-		BoxCollider() { m_shape = new Box; }
+		BoxCollider(int layer) :ICollider(layer) { m_shape = new Box; }
 		~BoxCollider() { SAFE_DELETE(m_shape); }
 
 		void Update()override;

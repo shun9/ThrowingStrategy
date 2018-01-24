@@ -196,6 +196,7 @@
     <ClInclude Include="Classes\Object\Stage\GroundStage.h" />
     <ClInclude Include="Classes\Object\Stage\Stage.h" />
     <ClInclude Include="Classes\Object\Stage\StageObject.h" />
+    <ClInclude Include="Classes\Object\Stage\StandardStage.h" />
     <ClInclude Include="Classes\Object\StateObject.h" />
     <ClInclude Include="Classes\Object\UnitSummoner\State\SummonerSteadyState.h" />
     <ClInclude Include="Classes\Object\UnitSummoner\State\SummonerSummonState.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Classes\Object\Unit\State\UnitMoveState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitRoamState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitRRTState.h" />
+    <ClInclude Include="Classes\Object\Unit\State\UnitState.h" />
     <ClInclude Include="Classes\Object\Unit\State\UnitSteadyState.h" />
     <ClInclude Include="Classes\Object\Unit\Unit.h" />
     <ClInclude Include="Classes\Physics\Collision\SL_Collider.h" />
@@ -260,6 +262,7 @@
     <ClCompile Include="Classes\Object\Stage\GroundStage.cpp" />
     <ClCompile Include="Classes\Object\Stage\Stage.cpp" />
     <ClCompile Include="Classes\Object\Stage\StageObject.cpp" />
+    <ClCompile Include="Classes\Object\Stage\StandardStage.cpp" />
     <ClCompile Include="Classes\Object\UnitSummoner\State\SummonerSteadyState.cpp" />
     <ClCompile Include="Classes\Object\UnitSummoner\State\SummonerSummonState.cpp" />
     <ClCompile Include="Classes\Object\UnitSummoner\UnitSummoner.cpp" />
@@ -272,8 +275,8 @@
     <ClCompile Include="Classes\Object\Unit\State\UnitSteadyState.cpp" />
     <ClCompile Include="Classes\Object\Unit\Unit.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_Collider.cpp" />
-    <ClCompile Include="Classes\Physics\Collision\SL_ColliderCollision.cpp" />
-    <ClCompile Include="Classes\Physics\Collision\SL_ColliderRejection.cpp" />
+    <ClCompile Include="Classes\Physics\Collision\SL_Collision.cpp" />
+    <ClCompile Include="Classes\Physics\Collision\SL_Rejection.cpp" />
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp" />
     <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp" />
     <ClCompile Include="Classes\UI\UI.cpp" />

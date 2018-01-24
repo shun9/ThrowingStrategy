@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :ObjectModelHolder.cpp
 //* @brief :ÉÇÉfÉãÇÇ‹Ç∆ÇﬂÇƒä«óùÇ∑ÇÈÉNÉâÉX
-//* @date  :2017/12/13
+//* @date  :2018/01/23
 //* @author:S.Katou
 //************************************************/
 #include "ObjectModelHolder.h"
@@ -30,15 +30,15 @@ ShunLib::Model* ObjectModelHolder::GetModel(ObjectBase* obj)
 
 ObjectModelHolder::ObjectModelHolder()
 {
-	m_plarerBlue = std::make_unique<ShunLib::Model>(L"CModel\\Player.cmo");
-	m_plarerRed  = std::make_unique<ShunLib::Model>(L"CModel\\PlayerB.cmo");
-	m_ghostBlue  = std::make_unique<ShunLib::Model>(L"CModel\\Ghost.cmo");
-	m_ghostRed   = std::make_unique<ShunLib::Model>(L"CModel\\Ghost2.cmo");
-	m_box        = std::make_unique<ShunLib::Model>(L"CModel\\Box.cmo");
-	m_hedoraRed  = std::make_unique<ShunLib::Model>(L"CModel\\Hedora.cmo");
-	m_hedoraBlue = std::make_unique<ShunLib::Model>(L"CModel\\Hedora2.cmo");
-	m_tubeBlue   = std::make_unique<ShunLib::Model>(L"CModel\\Tube.cmo");
-	m_tubeRed    = std::make_unique<ShunLib::Model>(L"CModel\\Tube2.cmo");
+	m_plarerBlue = std::make_unique<Model>(L"CModel\\Player.cmo");
+	m_plarerRed  = std::make_unique<Model>(L"CModel\\PlayerB.cmo");
+	m_ghostBlue  = std::make_unique<Model>(L"CModel\\Ghost.cmo");
+	m_ghostRed   = std::make_unique<Model>(L"CModel\\Ghost2.cmo");
+	m_box        = std::make_unique<Model>(L"CModel\\Box.cmo");
+	m_hedoraRed  = std::make_unique<Model>(L"CModel\\Hedora.cmo");
+	m_hedoraBlue = std::make_unique<Model>(L"CModel\\Hedora2.cmo");
+	m_tubeBlue   = std::make_unique<Model>(L"CModel\\Tube.cmo");
+	m_tubeRed    = std::make_unique<Model>(L"CModel\\Tube2.cmo");
 }
 
 /// <summary>

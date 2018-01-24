@@ -7,6 +7,7 @@
 #include "DefenseTarget.h"
 #include "../../Util/Debugger/DebuggerUI.h"
 #include "../../UI/HPGauge/HPGauge.h"
+#include "../../Physics/Collision/SL_CollisionManager.h"
 
 /// <summary>
 /// コンストラクタ
@@ -17,8 +18,9 @@ DefenseTarget::DefenseTarget():
 	m_transform.Scale(DEFENSE_TARGET_CONSTANT::MODEL_SCALE);
 
 	//当たり判定の設定
-	m_collider = new ShunLib::BoxCollider;
+	m_collider = new ShunLib::BoxCollider(ShunLib::COLLIDER_LAYER::STATIC);
 	m_collider->Parent(this);
+	m_collider->ShouldPassInfo(true);
 	m_collider->Offset(DEFENSE_TARGET_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Size(DEFENSE_TARGET_CONSTANT::COLLIDER_SIZE / DEFENSE_TARGET_CONSTANT::MODEL_SCALE);
 	m_collider->IsStatic(true);

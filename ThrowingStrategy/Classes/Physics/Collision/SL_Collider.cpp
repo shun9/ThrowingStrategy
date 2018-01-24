@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Collider.cpp
 //* @brief :当たり判定オブジェクトのクラス
-//* @date  :2018/01/09
+//* @date  :2018/01/17
 //* @author:S.Katou
 //************************************************/
 #include "SL_Collider.h"
@@ -13,7 +13,8 @@ using namespace ShunLib;
 
 //基底コンストラクタ
 //当たり判定を管理するクラスに登録
-ICollider::ICollider() :
+ICollider::ICollider(int layer) :
+	m_layer(layer),
 	m_parent(nullptr),
 	m_shape(nullptr),
 	m_shouldPassParentInfo(true),
@@ -22,7 +23,7 @@ ICollider::ICollider() :
 	m_shouldRejection(true),
 	m_isDebugDraw(true)
 {
-	CollisionManager::GetInstance()->AddCollider(this);
+	CollisionManager::GetInstance()->AddCollider(layer,this);
 }
 
 //基底コンストラクタ
@@ -49,10 +50,6 @@ void ICollider::DebugRender()
 		if (m_isDebugDraw) {
 			m_shape->Render();
 		}
-
-		for (auto& v : m_childrenCollider) {
-			v->DebugRender();
-		}
 	}
 }
 
@@ -65,15 +62,6 @@ void ICollider::Accept(Visitor * visitor)
 	for (auto& v : m_hitList) {
 		visitor->Visit(v);
 	}
-}
-
-/// <summary>
-/// 子の当たり判定を追加
-/// </summary>
-void ICollider::AddChildCollider(ICollider * child)
-{
-	m_childrenCollider.push_back(child);
-	CollisionManager::GetInstance()->RemoveCollider(child);
 }
 
 /// <summary>
@@ -111,11 +99,6 @@ void SphereCollider::Update()
 	if (m_parent != nullptr){
 		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
 	}
-
-	//子の更新
-	for (auto& v:m_childrenCollider){
-		v->Update();
-	}
 }
 
 //箱状の当たり判定の更新
@@ -128,10 +111,5 @@ void BoxCollider::Update()
 	if (m_parent != nullptr) {
 		Shape()->CenterPoint(m_parent->WorldPos() + this->Offset());
 		Shape()->Scale(m_parent->Transform().Scale());
-	}
-
-	//子の更新
-	for (auto& v : m_childrenCollider) {
-		v->Update();
 	}
 }

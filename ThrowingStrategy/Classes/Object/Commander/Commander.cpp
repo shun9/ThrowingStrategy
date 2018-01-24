@@ -8,6 +8,7 @@
 #include "CommanderMoveState.h"
 
 #include <SL_MacroConstants.h>
+#include "../../Physics/Collision/SL_CollisionManager.h"
 
 /// <summary>
 /// コンストラクタ
@@ -16,8 +17,10 @@ Commander::Commander() :
 	StateObject(this, OBJECT_LIST::COMMANDER),
 	m_capacity(1)
 {
+	using namespace ShunLib;
+
 	//当たり判定の設定 基本的にプレイヤーと同じ
-	m_collider = new ShunLib::SphereCollider();
+	m_collider = new SphereCollider(COLLIDER_LAYER::RIGID);
 	m_collider->Parent(this);
 	m_collider->Offset(ObjectConstantNumber::PLAYER_CONSTANT::COLLIDER_OFFSET);
 

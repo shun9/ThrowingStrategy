@@ -12,6 +12,7 @@
 #include "../../Util/Visitor/Visitor.h"
 
 #include "../../Game/Scene/SL_SceneManager.h"
+#include "../../Physics/Collision/SL_CollisionManager.h"
 
 /// <summary>
 /// コンストラクタ
@@ -19,8 +20,10 @@
 Player::Player()
 	:StateObject(this,OBJECT_LIST::PLAYER)
 {
+	using namespace ShunLib;
+
 	//当たり判定の設定
-	m_collider = new ShunLib::SphereCollider();
+	m_collider = new SphereCollider(COLLIDER_LAYER::RIGID);
 	m_collider->Parent(this);
 	m_collider->Offset(PLAYER_CONSTANT::COLLIDER_OFFSET);
 

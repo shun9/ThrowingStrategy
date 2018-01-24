@@ -21,7 +21,7 @@ ObjectParamHolder::ObjectParamHolder()
 
 	//ƒvƒŒƒCƒ„[
 	data.maxHP = 1000;
-	data.power = 20.0f;
+	data.power = 30.0f;
 	data.spd = 10.0f;
 	m_dataList[ObjectConstantNumber::PLAYER] = data;
 

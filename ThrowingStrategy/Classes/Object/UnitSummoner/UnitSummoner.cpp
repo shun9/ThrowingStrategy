@@ -12,6 +12,7 @@
 #include "../ObjectFactory.h"
 #include "../Unit/Unit.h"
 #include "../../UI/HPGauge/HPGauge.h"
+#include "../../Physics/Collision/SL_CollisionManager.h"
 
 using namespace ShunLib;
 
@@ -22,7 +23,7 @@ UnitSummoner::UnitSummoner():
 	this->UnitType(UNIT_LIST::NORMAL);
 
 	//“–‚½‚è”»’èÝ’è
-	m_collider = new BoxCollider;
+	m_collider = new BoxCollider(COLLIDER_LAYER::STATIC);
 	m_collider->Parent(this);
 	m_collider->Offset(SUMMONER_CONSTANT::COLLIDER_OFFSET);
 	m_collider->Shape()->Size(SUMMONER_CONSTANT::COLLIDER_SIZE);
