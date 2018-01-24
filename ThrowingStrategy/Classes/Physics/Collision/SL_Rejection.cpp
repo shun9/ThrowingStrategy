@@ -15,8 +15,12 @@ using namespace ShunLib;
 /// </summary>
 void CollisionManager::Rejection(SphereCollider* A, SphereCollider* B)
 {
-	//動かない者同士なら何もしない
-	if (A->IsStatic() && B->IsStatic()) {
+	//動かないオブジェクトかどうか
+	bool aIsStatic = A->ColliderType() == COLLIDER_LAYER::STATIC;
+	bool bIsStatic = B->ColliderType() == COLLIDER_LAYER::STATIC;
+
+	//両方とも動かなければ何もしない
+	if (aIsStatic && bIsStatic) {
 		return;
 	}
 
@@ -41,8 +45,12 @@ void CollisionManager::Rejection(SphereCollider* A, SphereCollider* B)
 /// </summary>
 void CollisionManager::Rejection(BoxCollider * A, BoxCollider * B, const Vec3& offset)
 {
-	//動かない者同士なら何もしない
-	if (A->IsStatic() && B->IsStatic()) {
+	//動かないオブジェクトかどうか
+	bool aIsStatic = A->ColliderType() == COLLIDER_LAYER::STATIC;
+	bool bIsStatic = B->ColliderType() == COLLIDER_LAYER::STATIC;
+
+	//両方とも動かなければ何もしない
+	if (aIsStatic && bIsStatic) {
 		return;
 	}
 
@@ -55,12 +63,12 @@ void CollisionManager::Rejection(BoxCollider * A, BoxCollider * B, const Vec3& o
 	//Xが最小の場合
 	if (offset.m_x < offset.m_y && offset.m_x < offset.m_z){
 		//Aが動かない
-		if (A->IsStatic()) {
+		if (aIsStatic) {
 			bPos.m_x += offset.m_x;
 			objB->Transform().Pos(bPos);
 		}
 		//Bが動かない
-		else if (B->IsStatic()) {
+		else if (bIsStatic) {
 			aPos.m_x -= offset.m_x;
 			objA->Transform().Pos(aPos);
 		}
@@ -76,12 +84,12 @@ void CollisionManager::Rejection(BoxCollider * A, BoxCollider * B, const Vec3& o
 	//Yが最小の場合
 	else if (offset.m_y < offset.m_z){
 		//Aが動かない
-		if (A->IsStatic()) {
+		if (aIsStatic) {
 			bPos.m_y += offset.m_y;
 			objB->Transform().Pos(bPos);
 		}
 		//Bが動かない
-		else if (B->IsStatic()) {
+		else if (bIsStatic) {
 			aPos.m_y -= offset.m_y;
 			objA->Transform().Pos(aPos);
 		}
@@ -96,12 +104,12 @@ void CollisionManager::Rejection(BoxCollider * A, BoxCollider * B, const Vec3& o
 	//Zが最小の場合
 	else{
 		//Aが動かない
-		if (A->IsStatic()) {
+		if (aIsStatic) {
 			bPos.m_z += offset.m_z;
 			objB->Transform().Pos(bPos);
 		}
 		//Bが動かない
-		else if (B->IsStatic()) {
+		else if (bIsStatic) {
 			aPos.m_z -= offset.m_z;
 			objA->Transform().Pos(aPos);
 		}
@@ -121,8 +129,12 @@ void CollisionManager::Rejection(BoxCollider * A, BoxCollider * B, const Vec3& o
 /// </summary>
 void CollisionManager::Rejection(SphereCollider * A, BoxCollider * B, const Vec3& closestPoint)
 {
-	//動かない者同士なら何もしない
-	if (A->IsStatic() && B->IsStatic()) {
+	//動かないオブジェクトかどうか
+	bool aIsStatic = A->ColliderType() == COLLIDER_LAYER::STATIC;
+	bool bIsStatic = B->ColliderType() == COLLIDER_LAYER::STATIC;
+
+	//両方とも動かなければ何もしない
+	if (aIsStatic && bIsStatic) {
 		return;
 	}
 
@@ -149,12 +161,12 @@ void CollisionManager::Rejection(SphereCollider * A, BoxCollider * B, const Vec3
 	vec *= dist;
 
 	//Aが動かない
-	if (A->IsStatic()){
+	if (aIsStatic){
 		bPos += vec;
 		objB->Transform().Pos(bPos);
 	}
 	//Bが動かない
-	else if (B->IsStatic()){
+	else if (bIsStatic){
 		aPos -= vec;
 		objA->Transform().Pos(aPos);
 	}

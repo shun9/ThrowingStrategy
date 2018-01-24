@@ -5,10 +5,10 @@
 using namespace ShunLib;
 
 //“–‚½‚è”»’è
-bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
+bool CollisionManager::Collision(ICollider* A, ICollider* B)
 {
-	SHAPE_TYPE aType = A->Type();
-	SHAPE_TYPE bType = B->Type();
+	SHAPE_TYPE aType = A->ShapeType();
+	SHAPE_TYPE bType = B->ShapeType();
 
 	bool hit = false;
 
@@ -18,13 +18,13 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 		//‹…‚Æ‹…
 		if (aType == SHAPE_TYPE::SPHERE)
 		{
-			hit = SphereCollision(A, B, rejection);
+			hit = SphereCollision(A, B);
 		}
 
 		//” ‚Æ” 
 		if (aType == SHAPE_TYPE::BOX)
 		{
-			hit = BoxCollision(A, B, rejection);
+			hit = BoxCollision(A, B);
 		}
 	}
 
@@ -34,7 +34,7 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 		//‹…‚Æ” 
 		if (bType == SHAPE_TYPE::BOX)
 		{
-			hit = SphereAndBoxCollision(A, B, rejection);
+			hit = SphereAndBoxCollision(A, B);
 		}
 	}
 
@@ -44,25 +44,14 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 		//” ‚Æ‹…
 		if (bType == SHAPE_TYPE::SPHERE)
 		{
-			hit = SphereAndBoxCollision(B, A, rejection);
+			hit = SphereAndBoxCollision(B, A);
 		}
 	}
 
-	//“–‚½‚Á‚Ä‚¢‚½‚çƒqƒbƒgƒŠƒXƒg‚É’Ç‰Á Žq‚Ì“–‚½‚è”»’è‚ðs‚¤
+	//“–‚½‚Á‚Ä‚¢‚½‚çƒqƒbƒgƒŠƒXƒg‚É’Ç‰Á
 	if (hit){
 		if (B->HitParent() != nullptr)A->AddHitList(B->HitParent());
 		if (A->HitParent() != nullptr)B->AddHitList(A->HitParent());
-
-		//Žq‚Ì“–‚½‚è”»’è
-		//¦Œ»óŽq“¯Žm‚Ì“–‚½‚è”»’è‚ð2‰ñŽæ‚Á‚Ä‚¢‚é
-		//¦C³•K—v‚ ‚è
-		for (auto& var : A->ChildrenCollider()) {
-			Collision(var, B, (var->ShouldRejection() && B->ShouldRejection()));
-		}
-
-		for (auto& var : B->ChildrenCollider()) {
-			Collision(A, var, (var->ShouldRejection() && A->ShouldRejection()));
-		}
 	}
 
 	return hit;
@@ -70,7 +59,7 @@ bool CollisionManager::Collision(ICollider* A, ICollider* B, bool rejection)
 
 /*--“–‚½‚è”»’è—p--*/
 //‹…‚Æ‹…
-bool CollisionManager::SphereCollision(ICollider* A, ICollider* B, bool rejection)
+bool CollisionManager::SphereCollision(ICollider* A, ICollider* B)
 {
 	SphereCollider* a = dynamic_cast<SphereCollider*>(A);
 	SphereCollider* b = dynamic_cast<SphereCollider*>(B);
@@ -89,7 +78,7 @@ bool CollisionManager::SphereCollision(ICollider* A, ICollider* B, bool rejectio
 	}
 
 	//”rËˆ—
-	if (rejection){
+	if (a->ColliderType() != COLLIDER_LAYER::TRIGGER && b->ColliderType() != COLLIDER_LAYER::TRIGGER){
 		CollisionManager::Rejection(a,b);
 	}
 
@@ -97,7 +86,7 @@ bool CollisionManager::SphereCollision(ICollider* A, ICollider* B, bool rejectio
 }
 
 //‹…‚Æ” 
-bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box, bool rejection)
+bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box)
 {
 	SphereCollider* s = dynamic_cast<SphereCollider*>(sphere);
 	BoxCollider* b = dynamic_cast<BoxCollider*>(box);
@@ -118,7 +107,7 @@ bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box, 
 	}
 
 	//”rËˆ—
-	if (rejection) {
+	if (s->ColliderType() != COLLIDER_LAYER::TRIGGER && b->ColliderType() != COLLIDER_LAYER::TRIGGER) {
 		CollisionManager::Rejection(s,b, closestPoint.CenterPoint());
 	}
 
@@ -126,7 +115,7 @@ bool CollisionManager::SphereAndBoxCollision(ICollider* sphere, ICollider* box, 
 }
 
 //” ‚Æ” 
-bool CollisionManager::BoxCollision(ICollider* A, ICollider* B, bool rejection)
+bool CollisionManager::BoxCollision(ICollider* A, ICollider* B)
 {
 	Box* a = dynamic_cast<BoxCollider*>(A)->Shape();
 	Box* b = dynamic_cast<BoxCollider*>(B)->Shape();
@@ -153,7 +142,7 @@ bool CollisionManager::BoxCollision(ICollider* A, ICollider* B, bool rejection)
 	}
 
 	//”rËˆ—
-	if (rejection) {
+	if (A->ColliderType() != COLLIDER_LAYER::TRIGGER && B->ColliderType() != COLLIDER_LAYER::TRIGGER) {
 		//CollisionManager::Rejection(dynamic_cast<BoxCollider*>(A), dynamic_cast<BoxCollider*>(B), offset);
 	}
 
