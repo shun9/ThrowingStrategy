@@ -9,12 +9,14 @@
 #include <GeometricPrimitive.h>
 #include <SL_Singleton.h>
 #include <SL_Math.h>
+#include <SL_Colors.h>
 
 class BasicShapeRenderer : public ShunLib::Singleton<BasicShapeRenderer>
 {
 	friend ShunLib::Singleton<BasicShapeRenderer>;
 private:
 	using Matrix = ShunLib::Matrix;
+	using Color = ShunLib::Vec4;
 	using Vec3 = ShunLib::Vec3;
 
 private:
@@ -23,9 +25,9 @@ private:
 	std::unique_ptr<DirectX::GeometricPrimitive> m_teapot;
 
 public:
-	void DrawCube(const Matrix& world, const Matrix& view, const Matrix& proj);
-	void DrawSphere(const Matrix& world, const Matrix& view, const Matrix& proj);
-	void DrawTeapot(const Matrix& world, const Matrix& view, const Matrix& proj);
+	void DrawCube(const Matrix& world, const Matrix& view, const Matrix& proj,const Color& color = ShunLib::Colors::WHITE);
+	void DrawSphere(const Matrix& world, const Matrix& view, const Matrix& proj, const Color& color = ShunLib::Colors::WHITE);
+	void DrawTeapot(const Matrix& world, const Matrix& view, const Matrix& proj, const Color& color = ShunLib::Colors::WHITE);
 private:
 	BasicShapeRenderer() {}
 	~BasicShapeRenderer() {}
