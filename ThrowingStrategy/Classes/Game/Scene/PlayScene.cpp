@@ -8,6 +8,7 @@
 
 #include <SL_Matrix.h>
 #include <SL_MacroConstants.h>
+#include <SL_ObjectHolder.h>
 #include "../../Main/SL_Window.h"
 #include "../../Util/SL_Camera.h"
 
@@ -15,7 +16,6 @@
 #include "../../Object/ObjectBase.h"
 #include "../../Object/ObjectFactory.h"
 #include "../../Object/ObjectConstantNumber.h"
-#include <SL_ObjectHolder.h>
 #include "../../Util/Debugger/DebuggerUI.h"
 
 PlayScene::PlayScene()
@@ -24,20 +24,14 @@ PlayScene::PlayScene()
 
 	//カメラ設定
 	auto camera = ShunLib::MainCamera::GetInstance();
-
-	ViewData vData;
-	vData.pos = ShunLib::Vec3(0.0f, 10.0f, 15.0f);
-	vData.target = ShunLib::Vec3::Zero;
-
 	ProjData pData;
 	pData.aspect = static_cast<float>(window->Width() / window->Height());
-	camera->View(vData);
 	camera->Proj(pData);
 
 	//オブジェクト生成
 	auto factory = ObjectFactory::GetInstance();
 
-	auto stage = factory->CreateStage(ObjectConstantNumber::STAGE_LIST::GROUND);
+	auto stage = factory->CreateStage(ObjectConstantNumber::STAGE_LIST::STANDARD);
 	this->AddChild(stage);
 }
 

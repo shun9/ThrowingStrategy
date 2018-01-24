@@ -30,7 +30,7 @@ public:
 	enum STAGE_LIST
 	{
 		GROUND = 0,		//地面のみのステージ
-
+		STANDARD,//ギミックの無いステージ
 		STAGE_LIST_END,//ステージ種類数
 	};
 
