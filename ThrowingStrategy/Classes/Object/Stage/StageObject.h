@@ -13,15 +13,19 @@ class Block : public ObjectBase
 {
 private:
 	ShunLib::BoxCollider* m_collider;
+	ShunLib::Vec4 m_color;
 
 public:
 	Block();
 	~Block();
 
+	//色の設定
+	void SetColor(const ShunLib::Vec4& color) { m_color = color; }
+
 protected:
 	//初期化 更新 描画 終了
 	void Initialize()override {};
 	void Update    ()override {};
+	void Render    ()override;
 	void Finalize  ()override {};
-
 };
