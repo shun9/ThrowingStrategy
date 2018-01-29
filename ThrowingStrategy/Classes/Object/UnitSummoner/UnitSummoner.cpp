@@ -49,7 +49,23 @@ void UnitSummoner::Initialize()
 	//初期状態設定
 	this->ChangeState(new SummonerSteadyState);
 
+	//当たり判定を使用する
+	m_collider->IsEnable(true);
+
+	//基底の初期化
 	StateObject::Initialize();
+}
+
+/// <summary>
+/// 終了処理
+/// </summary>
+void UnitSummoner::Finalize()
+{
+	//基底の終了
+	StateObject::Finalize();
+
+	//当たり判定を使用しない
+	m_collider->IsEnable(false);
 }
 
 /// <summary>

@@ -37,6 +37,7 @@ public:
 
 	//‰Šú‰»
 	void Initialize()override;
+	void Finalize()override;
 
 	//ƒ†ƒjƒbƒg‚ğ¢Š«
 	Unit* Summon();

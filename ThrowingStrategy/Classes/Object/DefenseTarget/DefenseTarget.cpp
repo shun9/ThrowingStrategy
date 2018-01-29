@@ -45,6 +45,10 @@ DefenseTarget::~DefenseTarget()
 /// </summary>
 void DefenseTarget::Initialize()
 {
+	//当たり判定を使用する
+	m_collider->IsEnable(true);
+
+	//基底の初期化
 	StateObject::Initialize();
 }
 
@@ -53,7 +57,11 @@ void DefenseTarget::Initialize()
 /// </summary>
 void DefenseTarget::Finalize()
 {
+	//基底の終了
 	StateObject::Finalize();
+
+	//当たり判定を使用しない
+	m_collider->IsEnable(false);
 }
 
 /// <summary>

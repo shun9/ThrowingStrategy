@@ -34,7 +34,7 @@ private:
 
 public:
 	Unit();
-	~Unit()override {}
+	~Unit()override;
 
 	//‰Šú‰»@I—¹
 	void Initialize()override;

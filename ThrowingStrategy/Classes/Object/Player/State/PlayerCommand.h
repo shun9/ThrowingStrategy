@@ -43,11 +43,32 @@ public:
 	void Execute(Player* obj);
 };
 
+/// <summary>
+/// ユニットを投げる
+/// </summary>
 class PlayerThrowCommand :public ShunLib::Command<Player>
 {
+private:
+	float m_power;
+
 public:
-	PlayerThrowCommand() {}
+	PlayerThrowCommand():m_power(0.0f){}
 	~PlayerThrowCommand() {}
 
 	void Execute(Player* obj);
+
+	void SetPower(float power) { m_power = power; }
+};
+
+/// <summary>
+/// ユニットを拾う
+/// </summary>
+class PlayerChangeMoveStateCommand :public ShunLib::Command<Player>
+{
+public:
+	PlayerChangeMoveStateCommand() {}
+	~PlayerChangeMoveStateCommand() {}
+
+	void Execute(Player* obj);
+
 };

@@ -5,6 +5,7 @@
 //* @author:S.Katou
 //************************************************/
 #include "PlayerMoveState.h"
+
 #include "../Player.h"
 #include "../../../Main/SL_MyStepTimer.h"
 #include "PlayerCommand.h"
@@ -12,7 +13,6 @@
 
 #include "../../../Util/Debugger/DebuggerUI.h"
 #include "../../../Util/Visitor/Visitor.h"
-#include <SL_ObjectHolder.h>
 
 void PlayerMoveState::Enter(Player* player)
 {
@@ -20,7 +20,7 @@ void PlayerMoveState::Enter(Player* player)
 
 	m_keyTriggerInput.SetCommand(KEY_LIST::Z, new PlayerPickUpCommand);
 	m_keyTriggerInput.SetCommand(KEY_LIST::X, new PlayerPutCommand);
-	m_keyTriggerInput.SetCommand(KEY_LIST::C, new PlayerThrowCommand);
+	m_keyTriggerInput.SetCommand(KEY_LIST::C, new PlayerChangeMoveStateCommand);
 
 	m_keyInput.SetCommand(KEY_LIST::UP, new PlayerMoveUpKeyCommand);
 	m_keyInput.SetCommand(KEY_LIST::DOWN, new PlayerMoveDownKeyCommand);

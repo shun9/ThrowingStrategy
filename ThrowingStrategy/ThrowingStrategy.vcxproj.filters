@@ -287,6 +287,18 @@
     <ClInclude Include="Classes\Object\Unit\State\UnitState.h">
       <Filter>Game\Object\Unit\State</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\TitleScene.h">
+      <Filter>Game\Main\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\State\PlayerChargeState.h">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Object\Player\State\PlayerState.h">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\PowerGauge\PowerGauge.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\WinMain.cpp" />
@@ -454,6 +466,15 @@
     </ClCompile>
     <ClCompile Include="Classes\Physics\Collision\SL_Rejection.cpp">
       <Filter>NewShunLib\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\Scene\TitleScene.cpp">
+      <Filter>Game\Main\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Object\Player\State\PlayerChargeState.cpp">
+      <Filter>Game\Object\Player\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\PowerGauge\PowerGauge.cpp">
+      <Filter>Game\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

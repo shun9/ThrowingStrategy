@@ -33,6 +33,18 @@ Block::~Block()
 }
 
 /// <summary>
+/// 箱の初期化
+/// </summary>
+void Block::Initialize()
+{
+	//当たり判定を使用する
+	m_collider->IsEnable(true);
+
+	//基底クラスの初期化
+	ObjectBase::Initialize();
+}
+
+/// <summary>
 /// 箱の描画
 /// </summary>
 void Block::Render()
@@ -45,3 +57,13 @@ void Block::Render()
 
 	renderer->DrawCube(m_transform.WorldMat(), camera->ViewMat(), camera->ProjMat(), m_color);
 }
+
+/// <summary>
+/// 終了処理
+/// </summary>
+void Block::Finalize()
+{
+	//当たり判定を使用する
+	m_collider->IsEnable(false);
+}
+

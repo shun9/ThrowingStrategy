@@ -45,23 +45,34 @@ Unit::Unit():
 	m_hpGauge->Offset(UNIT_CONSTANT::HP_GAUGE_OFFSET);
 }
 
+Unit::~Unit()
+{
+	SAFE_DELETE(m_collider);
+	SAFE_DELETE(m_attackRange);
+	SAFE_DELETE(m_chaseRange);
+	SAFE_DELETE(m_hpGauge);
+}
+
 void Unit::Initialize()
 {
 	//初期状態設定
 	this->ChangeState(new UnitRoamState);
 
+	//当たり判定を使用する
+	EnableCollider();
+
+	//基底の初期化
 	StateObject::Initialize();
 }
 
 
 void Unit::Finalize()
 {
+	//基底の終了
 	StateObject::Finalize();
 
-	SAFE_DELETE(m_collider);
-	SAFE_DELETE(m_attackRange);
-	SAFE_DELETE(m_chaseRange);
-	SAFE_DELETE(m_hpGauge);
+	//当たり判定を使用しない
+	DisableCollider();
 }
 
 /// <summary>

@@ -19,9 +19,10 @@ public:
 private:
 	//本体の当たり判定
 	ShunLib::SphereCollider* m_collider;
-	
+
 	//HPゲージ
 	HPGauge* m_hpGauge;
+
 public:
 	Player();
 	~Player();
@@ -33,7 +34,7 @@ public:
 	//ユニットを整列する
 	void AlignUnits();
 
-	
+
 	//持っているユニットの数
 	int HavingUnitNum();
 

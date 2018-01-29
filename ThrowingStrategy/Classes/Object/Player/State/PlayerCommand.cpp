@@ -5,11 +5,12 @@
 //* @author:S.Katou
 //************************************************/
 #include "PlayerCommand.h"
-#include "../Player.h"
-
 #include <cmath>
+
 #include <SL_Conversion.h>
 #include <SL_ObjectHolder.h>
+#include "PlayerState.h"
+#include "../Player.h"
 #include "../../Unit/Unit.h"
 #include "../../ObjectStruct.h"
 #include "../../../Util/Visitor/Visitor.h"
@@ -105,11 +106,22 @@ void PlayerThrowCommand::Execute(Player* player)
 		//“Š‚°‚é
 		FlyingData data;
 		data.start = child->WorldPos();
-		data.end = player->WorldPos() + (Vec3(-sin(rad), 0.0f, cos(rad)).Normalize() *player->Data().Power());
+		data.end = player->WorldPos() + (Vec3(-sin(rad), 0.0f, cos(rad)).Normalize()*m_power);
 		data.power = player->Data().Power();
 		data.type = ObjectConstantNumber::THROW_TYPE::LINE;
 		child->ToBeThrow(data);
 
 		player->AlignUnits();
+
+		m_power = 0.0f;
+		player->ChangeState(new PlayerMoveState);
 	}
+}
+
+/// <summary>
+/// ƒvƒŒƒCƒ„[‚ğ—Í‚ğ‚½‚ß‚éó‘Ô‚ÉØ‚è‘Ö‚¦‚é
+/// </summary>
+void PlayerChangeMoveStateCommand::Execute(Player * obj)
+{
+	obj->ChangeState(new PlayerChargeState);
 }

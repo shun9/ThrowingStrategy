@@ -53,6 +53,9 @@ void Player::Initialize()
 	//初期状態を設定
 	ChangeState(new PlayerMoveState);
 
+	//当たり判定を使用する
+	m_collider->IsEnable(true);
+
 	//基底クラスの初期化
 	StateObject::Initialize();
 }
@@ -62,7 +65,11 @@ void Player::Initialize()
 /// </summary>
 void Player::Finalize()
 {
+	//基底の終了
 	StateObject::Finalize();
+
+	//当たり判定を使用しない
+	m_collider->IsEnable(false);
 }
 
 
