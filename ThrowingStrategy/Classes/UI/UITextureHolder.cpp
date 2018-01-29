@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :UITextureHolder.cpp
 //* @brief :UIŠÖ˜A‚Ì‰æ‘œ‚ğ‚Ü‚Æ‚ß‚Ä•Û‚·‚éƒNƒ‰ƒX
-//* @date  :2017/12/13
+//* @date  :2018/01/29
 //* @author:S.Katou
 //************************************************/
 #include "UITextureHolder.h"
@@ -11,8 +11,10 @@
 /// </summary>
 UITextureHolder::UITextureHolder()
 {
-	m_redGauge = std::make_unique<Texture>(L"Resources\\Images\\GaugeRed.png");
-	m_greenGauge = std::make_unique<Texture>(L"Resources\\Images\\GaugeGreen.png");
+	m_textureList.resize(TEXTURE_LIST_END);
+	m_textureList[RED_GAUGE]    = std::make_unique<Texture>(L"Resources\\Images\\GaugeRed.png");
+	m_textureList[GREEN_GAUGE]  = std::make_unique<Texture>(L"Resources\\Images\\GaugeGreen.png");
+	m_textureList[ORANGE_GAUGE] = std::make_unique<Texture>(L"Resources\\Images\\GaugeOrange.png");
 }
 
 /// <summary>

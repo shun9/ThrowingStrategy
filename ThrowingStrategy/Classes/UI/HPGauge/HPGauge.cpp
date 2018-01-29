@@ -58,10 +58,10 @@ void HPGauge::Render()
 		auto texHolder = UITextureHolder::GetInstance();
 
 		//Ô‚ÌƒQ[ƒW‚ð•`‰æ
-		texHolder->RedGauge()->Draw(CalcRedMat(), camera->ViewMat(), camera->ProjMat());
+		texHolder->GetTexture(TEXTURE_LIST::RED_GAUGE)->Draw(CalcRedMat(), camera->ViewMat(), camera->ProjMat());
 
 		//—Î‚ÌƒQ[ƒW‚ð•`‰æ
-		texHolder->GreenGauge()->Draw(CalcGreenMat(), camera->ViewMat(), camera->ProjMat());
+		texHolder->GetTexture(TEXTURE_LIST::GREEN_GAUGE)->Draw(CalcGreenMat(), camera->ViewMat(), camera->ProjMat());
 	}
 }
 
