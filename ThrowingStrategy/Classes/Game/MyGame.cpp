@@ -10,7 +10,6 @@
 #include <SL_Texture.h>
 #include <SL_KeyManager.h>
 
-
 #include "../Main/SL_Graphics.h"
 #include "../Main/SL_MyStepTimer.h"
 #include "../Physics/Collision/SL_CollisionManager.h"
@@ -18,6 +17,7 @@
 #include "../UI/UIManager.h"
 #include "Scene\SL_SceneManager.h"
 #include "Scene\PlayScene.h"
+#include "Scene\TitleScene.h"
 #include "../Util/Debugger/DebuggerUI.h"
 
 using namespace ShunLib;
@@ -48,8 +48,9 @@ void MyGame::Initialize()
 
 	//ƒV[ƒ“ŠÖ˜A
 	auto scene = SceneManager::GetInstance();
+	scene->AddScene(SCENE::TITLE, new TitleScene);
 	scene->AddScene(SCENE::PLAY, new PlayScene);
-	scene->ChangeScene(SCENE::PLAY);
+	scene->ChangeScene(SCENE::TITLE);
 }
 
 /// <summary>

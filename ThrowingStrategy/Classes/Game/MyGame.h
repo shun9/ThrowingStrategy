@@ -15,7 +15,10 @@ class MyGame :public ShunLib::Application
 {
 public:
 	enum SCENE{
+		TITLE,
 		PLAY,
+
+		SCENE_END,
 	};
 
 public:

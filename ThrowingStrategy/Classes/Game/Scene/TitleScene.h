@@ -1,17 +1,17 @@
 //************************************************/
-//* @file  :PlayScene.h
-//* @brief :プレイシーン
-//* @date  :2017/10/26
+//* @file  :TitleScene.h
+//* @brief :タイトルシーン
+//* @date  :2018/01/24
 //* @author:S.Katou
 //************************************************/
 #pragma once
 #include "SL_IScene.h"
 
-class PlayScene:public ShunLib::IScene
+class TitleScene :public ShunLib::IScene
 {
 public:
-	PlayScene();
-	~PlayScene();
+	TitleScene();
+	~TitleScene();
 
 	//初期化　更新　描画　終了
 	virtual void Initialize();

@@ -5,18 +5,14 @@
 //* @author:S.Katou
 //************************************************/
 #include "PlayScene.h"
-
-#include <SL_Matrix.h>
-#include <SL_MacroConstants.h>
-#include <SL_ObjectHolder.h>
+#include <SL_KeyManager.h>
+#include "SL_SceneManager.h"
+#include "../MyGame.h"
 #include "../../Main/SL_Window.h"
 #include "../../Util/SL_Camera.h"
-
-//オブジェクト関連
-#include "../../Object/ObjectBase.h"
+#include "../../Object/Stage/Stage.h"
 #include "../../Object/ObjectFactory.h"
 #include "../../Object/ObjectConstantNumber.h"
-#include "../../Util/Debugger/DebuggerUI.h"
 
 PlayScene::PlayScene()
 {
@@ -27,12 +23,6 @@ PlayScene::PlayScene()
 	ProjData pData;
 	pData.aspect = static_cast<float>(window->Width() / window->Height());
 	camera->Proj(pData);
-
-	//オブジェクト生成
-	auto factory = ObjectFactory::GetInstance();
-
-	auto stage = factory->CreateStage(ObjectConstantNumber::STAGE_LIST::STANDARD);
-	this->AddChild(stage);
 }
 
 PlayScene::~PlayScene()
@@ -45,6 +35,11 @@ PlayScene::~PlayScene()
 /// </summary>
 void PlayScene::Initialize()
 {
+	//オブジェクト生成
+	auto factory = ObjectFactory::GetInstance();
+
+	auto stage = factory->CreateStage(ObjectConstantNumber::STAGE_LIST::STANDARD);
+	this->AddChild(stage);
 }
 
 /// <summary>
@@ -52,8 +47,15 @@ void PlayScene::Initialize()
 /// </summary>
 void PlayScene::Update()
 {
+	//カメラ更新
 	auto camera = ShunLib::MainCamera::GetInstance();
 	camera->Update();
+
+	//Enterキーで仮リセット処理
+	auto key = ShunLib::KeyManager::GetInstance();
+	if (key->IsTracker(ShunLib::KeyManager::KEY_CODE::ENTER)) {
+		ShunLib::SceneManager::GetInstance()->ChangeScene(MyGame::SCENE::TITLE);
+	}
 }
 
 /// <summary>
@@ -68,4 +70,10 @@ void PlayScene::Render()
 /// </summary>
 void PlayScene::Finalize()
 {
+	//ステージを消す
+	//ステージは常に1つにする
+	for (auto& child:m_children){
+		SAFE_DELETE(child);
+	}
+	m_children.clear();
 }
