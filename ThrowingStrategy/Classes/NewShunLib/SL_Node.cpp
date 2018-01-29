@@ -45,6 +45,11 @@ Node::~Node()
 /// </summary>
 void Node::BaseInitialize()
 {
+	//使用していない状態ならフラグを戻す
+	if (!m_isEnable) {
+		ClearDirty();
+	}
+
 	//処理前ならば派生クラスの処理を行う
 	if (!m_isDirty[DIRTY_FLAG::INITIALIZE_FLAG]){
 		//初期化処理
@@ -52,6 +57,9 @@ void Node::BaseInitialize()
 
 		//フラグを立てる
 		m_isDirty[DIRTY_FLAG::INITIALIZE_FLAG] = true;
+
+		//使用している
+		m_isEnable = true;
 
 		//子の初期化を行う
 		for (int i = 0; i < (int)m_children.size(); i++){
@@ -134,6 +142,9 @@ void Node::BaseFinalize()
 
 		//フラグを立てる
 		m_isDirty[DIRTY_FLAG::FINALIZE_FLAG] = true;
+
+		//使用していない状態にする
+		m_isEnable = false;
 
 		//子の終了を行う
 		for (int i = 0; i < (int)m_children.size(); i++){
