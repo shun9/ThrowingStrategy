@@ -99,21 +99,17 @@ void PlayerThrowCommand::Execute(Player* player)
 		assert(list.size() == 1);
 
 		child->SetParent(list[0]);
-
 		//プレイヤーの向いている方向に力を加える
 		float rad = ToRadian(player->Transform().Rotation().m_y);
 
 		//投げる
 		FlyingData data;
-		data.start = child->WorldPos();
-		data.end = player->WorldPos() + (Vec3(-sin(rad), 0.0f, cos(rad)).Normalize()*m_power);
-		data.power = player->Data().Power();
-		data.type = ObjectConstantNumber::THROW_TYPE::LINE;
-		child->ToBeThrow(data);
+		m_flyData.start = child->WorldPos();
+		m_flyData.type = ObjectConstantNumber::THROW_TYPE::LINE;
+		child->ToBeThrow(m_flyData);
 
 		player->AlignUnits();
 
-		m_power = 0.0f;
 		player->ChangeState(new PlayerMoveState);
 	}
 }
@@ -123,5 +119,9 @@ void PlayerThrowCommand::Execute(Player* player)
 /// </summary>
 void PlayerChangeMoveStateCommand::Execute(Player * obj)
 {
-	obj->ChangeState(new PlayerChargeState);
+	//ユニットを持っていたら切り替える
+	if (obj->HavingUnitNum() > 0)
+	{
+		obj->ChangeState(new PlayerChargeState);
+	}
 }

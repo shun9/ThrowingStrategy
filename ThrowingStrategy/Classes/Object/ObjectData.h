@@ -18,7 +18,8 @@ public:
 protected:
 	int m_hp;		           //現在HP
 	bool m_useGravity;         //重力の影響を受けるかどうか
-	bool m_shouldLimitVelocity;//速度に制限を駆けるかどうか
+	bool m_shouldLimitVelocity;//速度に制限をかけるかどうか
+	bool m_shouldChangeDir;    //向いている方向を変えるかどうか
 	TEAM m_team;               //チーム分け
 	OBJECT_LIST m_type;        //このオブジェクトの種類
 
@@ -34,6 +35,7 @@ public:
 		m_hp = MaxHP();
 		m_useGravity = true;
 		m_shouldLimitVelocity = true;
+		m_shouldChangeDir = true;
 	};
 
 	//ダメージを受ける
@@ -51,6 +53,7 @@ public:
 	OBJECT_LIST	Type   () { return m_type                 ; }
 	bool UseGravity    () { return m_useGravity; }
 	bool ShouldLimitVel() { return m_shouldLimitVelocity; }
+	bool ShouldChangeDir() { return m_shouldChangeDir; }
 
 	//Setter
 	void HP   (int hp              ) { m_hp = hp    ; }
@@ -58,4 +61,5 @@ public:
 	void Type (OBJECT_LIST type    ) { m_type = type; }
 	void UseGravity(bool use       ) { m_useGravity = use; }
 	void ShouldLimitVel(bool should) { m_shouldLimitVelocity = should; }
+	void ShouldChangeDir(bool should) { m_shouldChangeDir = should; }
 };

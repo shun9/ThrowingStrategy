@@ -233,9 +233,6 @@
     <ClInclude Include="Classes\UI\HPGauge\HPGauge.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\UI\UITextureHolder.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\NewShunLib\SL_Node.h">
       <Filter>NewShunLib</Filter>
     </ClInclude>
@@ -297,6 +294,15 @@
       <Filter>Game\Object\Player\State</Filter>
     </ClInclude>
     <ClInclude Include="Classes\UI\PowerGauge\PowerGauge.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\ThrowCursor\ThrowCursor.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\UIResourceHolder.h">
+      <Filter>Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\UIConstantNumber.h">
       <Filter>Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -410,9 +416,6 @@
     <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\UI\UITextureHolder.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\UI\UIManager.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
@@ -476,6 +479,15 @@
     <ClCompile Include="Classes\UI\PowerGauge\PowerGauge.cpp">
       <Filter>Game\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\UI\UIResourceHolder.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\ThrowCursor\ThrowCursor.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UIConstantNumber.cpp">
+      <Filter>Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -516,6 +528,9 @@
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Resources\ModelData\Hedora2.FBX">
+      <Filter>Assets\Model</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Resources\ModelData\ThrowPoint.FBX">
       <Filter>Assets\Model</Filter>
     </MeshContentTask>
   </ItemGroup>

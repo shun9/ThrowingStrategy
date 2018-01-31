@@ -61,11 +61,12 @@ public:
 	class PLAYER_CONSTANT
 	{
 	public:
-		static const float COLLIDER_SIZE;			//本体の当たり判定のサイズ
-		static const ShunLib::Vec3 COLLIDER_OFFSET;	//当たり判定の中心位置
-		static const ShunLib::Vec3 HP_GAUGE_OFFSET;	//HPゲージの中心位置
+		static const float COLLIDER_SIZE;			    //本体の当たり判定のサイズ
+		static const ShunLib::Vec3 COLLIDER_OFFSET;	    //当たり判定の中心位置
+		static const ShunLib::Vec3 HP_GAUGE_OFFSET;	    //HPゲージの中心位置
+		static const ShunLib::Vec3 POWER_GAUGE_OFFSET;	//パワーゲージの中心位置
 
-		/// <summary>
+		                                                /// <summary>
 		/// 持っているオブジェクトの中心位置
 		/// </summary>
 		/// <param name="num">何番目のアイテムか</param>

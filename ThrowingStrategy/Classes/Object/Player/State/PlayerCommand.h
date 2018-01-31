@@ -6,6 +6,7 @@
 //************************************************/
 #pragma once
 #include <SL_Command.h>
+#include "../../ObjectStruct.h"
 
 class Player;
 class PlayerMoveCommand :public ShunLib::Command<Player>
@@ -49,15 +50,17 @@ public:
 class PlayerThrowCommand :public ShunLib::Command<Player>
 {
 private:
-	float m_power;
+	//飛ぶときに必要なデータ
+	FlyingData m_flyData;
 
 public:
-	PlayerThrowCommand():m_power(0.0f){}
+	PlayerThrowCommand(){}
 	~PlayerThrowCommand() {}
 
 	void Execute(Player* obj);
 
-	void SetPower(float power) { m_power = power; }
+	void SetEndPoint(const ShunLib::Vec3& pos) { m_flyData.end = pos; }
+	void SetPower(float power) { m_flyData.power = power; }
 };
 
 /// <summary>

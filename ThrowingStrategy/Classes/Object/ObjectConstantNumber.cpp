@@ -18,9 +18,10 @@ const ObjectConstantNumber::OBJECT_LIST ObjectConstantNumber::STATE_OBJECT[5] = 
 };
 
 //プレイヤー関連
-const float ObjectConstantNumber::PLAYER_CONSTANT::COLLIDER_SIZE   = 1.0f;
-const Vec3  ObjectConstantNumber::PLAYER_CONSTANT::COLLIDER_OFFSET = { 0.0f,1.0f,0.0f };
-const Vec3  ObjectConstantNumber::PLAYER_CONSTANT::HP_GAUGE_OFFSET = { 0.0f,0.0f,4.0f };
+const float ObjectConstantNumber::PLAYER_CONSTANT::COLLIDER_SIZE      = 1.0f;
+const Vec3  ObjectConstantNumber::PLAYER_CONSTANT::COLLIDER_OFFSET    = { 0.0f,1.0f,0.0f };
+const Vec3  ObjectConstantNumber::PLAYER_CONSTANT::HP_GAUGE_OFFSET    = { 0.0f,0.0f,4.0f };
+const Vec3  ObjectConstantNumber::PLAYER_CONSTANT::POWER_GAUGE_OFFSET = { 0.0f,0.0f,8.0f };
 
 //ユニット関連
 const Vec3  ObjectConstantNumber::UNIT_CONSTANT::COLLIDER_OFFSET      = { 0.0f, 0.6f, 0.0f };

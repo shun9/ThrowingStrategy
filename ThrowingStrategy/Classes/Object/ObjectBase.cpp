@@ -51,7 +51,7 @@ void ObjectBase::Move()
 	//Œü‚¢‚Ä‚¢‚é•ûŒü‚ðŒvŽZ‚·‚é
 	//ˆÚ“®’†‚Ì‚ÝŒvŽZ
 	//‚x‚Ì‚ÝŒvŽZ@Œ©ã‚°‚½‚èŒ©‰º‚°‚½‚è‚·‚é‚±‚Æ‚Í‚È‚¢
-	if (m_transform.Velocity().Length() > 1.0f)
+	if (m_transform.Velocity().Length() > 1.0f && m_data.ShouldChangeDir())
 	{
 		Vec3 rot = m_transform.Rotation();
 

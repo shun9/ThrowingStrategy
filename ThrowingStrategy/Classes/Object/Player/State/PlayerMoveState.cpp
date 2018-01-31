@@ -14,6 +14,9 @@
 #include "../../../Util/Debugger/DebuggerUI.h"
 #include "../../../Util/Visitor/Visitor.h"
 
+/// <summary>
+/// èâä˙âª
+/// </summary>
 void PlayerMoveState::Enter(Player* player)
 {
 	m_padInput.SetCommand(BUTTON_LIST::X, new PlayerPickUpCommand);
@@ -28,7 +31,9 @@ void PlayerMoveState::Enter(Player* player)
 	m_keyInput.SetCommand(KEY_LIST::RIGHT, new PlayerMoveRightKeyCommand);
 }
 
-
+/// <summary>
+/// é¿çs
+/// </summary>
 void PlayerMoveState::Execute(Player* player)
 {
 	auto timer = ShunLib::MyStepTimer::GetInstance();
@@ -55,7 +60,9 @@ void PlayerMoveState::Execute(Player* player)
 	player->Move();
 }
 
-
+/// <summary>
+/// èIóπ
+/// </summary>
 void PlayerMoveState::Exit(Player* player)
 {
 

@@ -40,11 +40,11 @@ public:
 	/*--Setter--*/
 	void Offset(const Vec3& off) { m_offset = off; }
 	void Parent(ObjectBase* par) { m_parent = par; }
+	void Power(float power)      { m_power = power; }
 
 private:
 	//s—ñ‚ÌŒvZ
-	Matrix CalcRedMat();
-	Matrix CalcGreenMat();
+	Matrix CalcMat();
 
 	//‰ñ“]‚ğŒvZ
 	void CalcRot();

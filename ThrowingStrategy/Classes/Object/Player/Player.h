@@ -10,6 +10,7 @@
 
 class Unit;
 class HPGauge;
+class PowerGauge;
 
 class Player : public StateObject<Player>
 {
@@ -23,6 +24,8 @@ private:
 	//HPゲージ
 	HPGauge* m_hpGauge;
 
+	//パワーゲージ
+	PowerGauge* m_powerGauge;
 public:
 	Player();
 	~Player();
@@ -43,4 +46,5 @@ public:
 
 	/*--Getter--*/
 	ShunLib::SphereCollider* Collider() { return m_collider; }
+	PowerGauge* GetPowerGauge() { return m_powerGauge; }
 };

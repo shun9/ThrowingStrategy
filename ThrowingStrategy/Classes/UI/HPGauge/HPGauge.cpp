@@ -1,14 +1,15 @@
 //************************************************/
 //* @file  :HPGauge.cpp
 //* @brief :HPÉQÅ[ÉW
-//* @date  :2017/12/13
+//* @date  :2018/01/31
 //* @author:S.Katou
 //************************************************/
 #include "HPGauge.h"
 
 #include <SL_MacroConstants.h>
 #include <SL_Conversion.h>
-#include "../UITextureHolder.h"
+#include "../UIConstantNumber.h"
+#include "../UIResourceHolder.h"
 #include "../../Util/SL_Camera.h"
 
 /// <summary>
@@ -18,7 +19,7 @@ HPGauge::HPGauge() :
 	m_parent(nullptr),
 	m_offset(Vec3::UnitZ)
 {
-	Scale(Vec3(3.5f,1.0f,0.5f));
+	Scale(UIConstantNumber::HP_GAUGE_CONSTANT::SCALE);
 }
 
 /// <summary>
@@ -55,13 +56,13 @@ void HPGauge::Render()
 	if (m_isEnable)
 	{
 		auto camera = ShunLib::MainCamera::GetInstance();
-		auto texHolder = UITextureHolder::GetInstance();
+		auto texHolder = UIResourceHolder::GetInstance();
 
 		//ê‘ÇÃÉQÅ[ÉWÇï`âÊ
-		texHolder->GetTexture(TEXTURE_LIST::RED_GAUGE)->Draw(CalcRedMat(), camera->ViewMat(), camera->ProjMat());
+		texHolder->GetTexture(UI_TEXTURE_LIST::RED_GAUGE)->Draw(CalcRedMat(), camera->ViewMat(), camera->ProjMat());
 
 		//óŒÇÃÉQÅ[ÉWÇï`âÊ
-		texHolder->GetTexture(TEXTURE_LIST::GREEN_GAUGE)->Draw(CalcGreenMat(), camera->ViewMat(), camera->ProjMat());
+		texHolder->GetTexture(UI_TEXTURE_LIST::GREEN_GAUGE)->Draw(CalcGreenMat(), camera->ViewMat(), camera->ProjMat());
 	}
 }
 
@@ -70,6 +71,7 @@ void HPGauge::Render()
 /// </summary>
 ShunLib::Matrix HPGauge::CalcRedMat()
 {
+	auto camera = ShunLib::MainCamera::GetInstance();
 	Matrix w;
 	//ägëÂ
 	w *= Matrix::CreateScale(Scale());
@@ -126,7 +128,7 @@ void HPGauge::CalcRot()
 {
 	//auto camera = ShunLib::MainCamera::GetInstance();
 	//Vec3 rot;
-	//
+
 	////êeÇ©ÇÁÇÃÇ∏ÇÍ
 	////Ç±ÇÃÉxÉNÉgÉãÇê≥ñ Ç…Ç∑ÇÈ
 	//Vec3 o = Offset();

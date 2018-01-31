@@ -8,6 +8,7 @@
 #include <SL_CommandInput.h>
 #include <SL_State.h>
 #include <SL_KeyManager.h>
+#include "../../../UI/ThrowCursor/ThrowCursor.h"
 #include "../../../Util/SL_GamePadManager.h"
 
 class Player;
@@ -20,13 +21,18 @@ private:
 
 private:
 	//キーが押されている
+	ShunLib::CommandInput<KEY_LIST, Player>m_keyInput;
+
 	//キーを離したら始動
 	ShunLib::CommandInput<BUTTON_LIST, Player>m_padRelease;
 	ShunLib::CommandInput<KEY_LIST, Player>m_keyRelease;
 
+
 	//チャージしたパワー
 	float m_power;
 
+	//予測着弾地点のマーク
+	ThrowCursor m_throwCursor;
 public:
 	PlayerChargeState() {}
 	~PlayerChargeState() {}

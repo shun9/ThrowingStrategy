@@ -7,10 +7,11 @@
 #include "Player.h"
 
 #include <SL_MacroConstants.h>
-#include "State\PlayerMoveState.h"
+#include "State\PlayerState.h"
 #include "../../UI/HPGauge/HPGauge.h"
+#include "../../UI/PowerGauge/PowerGauge.h"
+#include "../../UI/ThrowCursor/ThrowCursor.h"
 #include "../../Util/Visitor/Visitor.h"
-
 #include "../../Game/Scene/SL_SceneManager.h"
 #include "../../Physics/Collision/SL_CollisionManager.h"
 
@@ -34,7 +35,13 @@ Player::Player()
 	m_hpGauge = new HPGauge;
 	m_hpGauge->Parent(this);
 	m_hpGauge->Offset(PLAYER_CONSTANT::HP_GAUGE_OFFSET);
+
+	//パワーゲージの設定
+	m_powerGauge = new PowerGauge;
+	m_powerGauge->Parent(this);
+	m_powerGauge->Offset(PLAYER_CONSTANT::HP_GAUGE_OFFSET);
 }
+
 
 /// <summary>
 /// デストラクタ
@@ -43,6 +50,7 @@ Player::~Player()
 {
 	SAFE_DELETE(m_collider);
 	SAFE_DELETE(m_hpGauge);
+	SAFE_DELETE(m_powerGauge);
 }
 
 /// <summary>

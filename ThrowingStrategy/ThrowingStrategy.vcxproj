@@ -218,9 +218,11 @@
     <ClInclude Include="Classes\Physics\PhysicsConstantNumber.h" />
     <ClInclude Include="Classes\UI\HPGauge\HPGauge.h" />
     <ClInclude Include="Classes\UI\PowerGauge\PowerGauge.h" />
+    <ClInclude Include="Classes\UI\ThrowCursor\ThrowCursor.h" />
     <ClInclude Include="Classes\UI\UI.h" />
+    <ClInclude Include="Classes\UI\UIConstantNumber.h" />
     <ClInclude Include="Classes\UI\UIManager.h" />
-    <ClInclude Include="Classes\UI\UITextureHolder.h" />
+    <ClInclude Include="Classes\UI\UIResourceHolder.h" />
     <ClInclude Include="Classes\Util\BasicShapeModelRenderer.h" />
     <ClInclude Include="Classes\Util\SL_CameraState.h" />
     <ClInclude Include="Classes\Util\Debugger\DebuggerUI.h" />
@@ -286,9 +288,11 @@
     <ClCompile Include="Classes\Physics\Collision\SL_CollisionManager.cpp" />
     <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp" />
     <ClCompile Include="Classes\UI\PowerGauge\PowerGauge.cpp" />
+    <ClCompile Include="Classes\UI\ThrowCursor\ThrowCursor.cpp" />
     <ClCompile Include="Classes\UI\UI.cpp" />
+    <ClCompile Include="Classes\UI\UIConstantNumber.cpp" />
     <ClCompile Include="Classes\UI\UIManager.cpp" />
-    <ClCompile Include="Classes\UI\UITextureHolder.cpp" />
+    <ClCompile Include="Classes\UI\UIResourceHolder.cpp" />
     <ClCompile Include="Classes\Util\BasicShapeModelRenderer.cpp" />
     <ClCompile Include="Classes\Util\Debugger\imgui\imgui.cpp" />
     <ClCompile Include="Classes\Util\Debugger\imgui\imgui_demo.cpp" />
@@ -317,6 +321,7 @@
       <FileType>Document</FileType>
     </MeshContentTask>
     <MeshContentTask Include="Resources\ModelData\PlayerB.FBX" />
+    <MeshContentTask Include="Resources\ModelData\ThrowPoint.FBX" />
     <MeshContentTask Include="Resources\ModelData\Tube.FBX" />
     <MeshContentTask Include="Resources\ModelData\Tube2.FBX" />
   </ItemGroup>
