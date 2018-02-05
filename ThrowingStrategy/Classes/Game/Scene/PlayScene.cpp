@@ -14,17 +14,25 @@
 #include "../../Object/ObjectFactory.h"
 #include "../../Object/ObjectConstantNumber.h"
 
+using namespace ShunLib;
+
+/// <summary>
+/// コンストラクタ
+/// </summary>
 PlayScene::PlayScene()
 {
-	auto window = ShunLib::Window::GetInstance();
+	auto window = Window::GetInstance();
 
 	//カメラ設定
-	auto camera = ShunLib::MainCamera::GetInstance();
+	auto camera = MainCamera::GetInstance();
 	ProjData pData;
 	pData.aspect = static_cast<float>(window->Width() / window->Height());
 	camera->Proj(pData);
 }
 
+/// <summary>
+/// デストラクタ
+/// </summary>
 PlayScene::~PlayScene()
 {
 
@@ -48,13 +56,13 @@ void PlayScene::Initialize()
 void PlayScene::Update()
 {
 	//カメラ更新
-	auto camera = ShunLib::MainCamera::GetInstance();
+	auto camera = MainCamera::GetInstance();
 	camera->Update();
 
 	//Enterキーで仮リセット処理
-	auto key = ShunLib::KeyManager::GetInstance();
-	if (key->IsTracker(ShunLib::KeyManager::KEY_CODE::ENTER)) {
-		ShunLib::SceneManager::GetInstance()->ChangeScene(MyGame::SCENE::TITLE);
+	auto key = KeyManager::GetInstance();
+	if (key->IsTracker(KeyManager::KEY_CODE::ENTER)) {
+		SceneManager::GetInstance()->ChangeScene(MyGame::SCENE::TITLE);
 	}
 }
 

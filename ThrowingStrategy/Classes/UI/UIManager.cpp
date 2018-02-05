@@ -11,9 +11,12 @@
 /// </summary>
 void UIManager::Update()
 {
+	//使用している状態ならば更新
 	for (auto& v: m_uiList)
 	{
-		v->Update();
+		if (v->IsEnable()) {
+			v->Update();
+		}
 	}
 }
 
@@ -22,9 +25,10 @@ void UIManager::Update()
 /// </summary>
 void UIManager::Render()
 {
-	for (auto& v : m_uiList)
-	{
-		v->Render();
+	//使用している状態ならば描画
+	for (auto& v : m_uiList){
+		if (v->IsEnable()){
+			v->Render();
+		}
 	}
-
 }

@@ -38,7 +38,7 @@ public:
 
 		Debug RenderText();
 		Debug ImGui::End();
-		
+
 		Debug ImGui::Render();
 
 		Debug m_drawingStack.clear();

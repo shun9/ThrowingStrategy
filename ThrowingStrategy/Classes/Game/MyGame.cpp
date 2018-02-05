@@ -15,6 +15,7 @@
 #include "../Physics/Collision/SL_CollisionManager.h"
 #include "../Util/SL_GamePadManager.h"
 #include "../UI/UIManager.h"
+#include "../UI/UIConstantNumber.h"
 #include "Scene\SL_SceneManager.h"
 #include "Scene\PlayScene.h"
 #include "Scene\TitleScene.h"

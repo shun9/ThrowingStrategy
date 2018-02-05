@@ -83,6 +83,15 @@
     <Filter Include="Game\Object\UnitSummoner\SummonerState">
       <UniqueIdentifier>{af86cee4-88b5-4a36-97bd-4648420f2b59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\UI\PlayScene">
+      <UniqueIdentifier>{1916a6ec-7da4-4e7d-bcca-035b45da5768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\Base">
+      <UniqueIdentifier>{da0cbabd-4c35-4163-b62d-bb91bb1b964f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\UI\TitleScene">
+      <UniqueIdentifier>{142b9a27-b213-4434-b4d4-cc5ffd326ef7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StepTimer.h" />
@@ -224,15 +233,6 @@
     <ClInclude Include="Classes\Object\Stage\GroundStage.h">
       <Filter>Game\Object\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\UI\UIManager.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\UI\UI.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\UI\HPGauge\HPGauge.h">
-      <Filter>Game\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\NewShunLib\SL_Node.h">
       <Filter>NewShunLib</Filter>
     </ClInclude>
@@ -293,17 +293,29 @@
     <ClInclude Include="Classes\Object\Player\State\PlayerState.h">
       <Filter>Game\Object\Player\State</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\UI\HPGauge\HPGauge.h">
+      <Filter>Game\UI\PlayScene</Filter>
+    </ClInclude>
     <ClInclude Include="Classes\UI\PowerGauge\PowerGauge.h">
-      <Filter>Game\UI</Filter>
+      <Filter>Game\UI\PlayScene</Filter>
     </ClInclude>
     <ClInclude Include="Classes\UI\ThrowCursor\ThrowCursor.h">
-      <Filter>Game\UI</Filter>
+      <Filter>Game\UI\PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\UI\UIResourceHolder.h">
-      <Filter>Game\UI</Filter>
+    <ClInclude Include="Classes\UI\UI.h">
+      <Filter>Game\UI\Base</Filter>
     </ClInclude>
     <ClInclude Include="Classes\UI\UIConstantNumber.h">
-      <Filter>Game\UI</Filter>
+      <Filter>Game\UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\UIManager.h">
+      <Filter>Game\UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\UIResourceHolder.h">
+      <Filter>Game\UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\UI\OptionBoard.h">
+      <Filter>Game\UI\TitleScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -413,15 +425,6 @@
     <ClCompile Include="Classes\Object\Stage\GroundStage.cpp">
       <Filter>Game\Object\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\UI\UIManager.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\UI\UI.cpp">
-      <Filter>Game\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\NewShunLib\SL_Node.cpp">
       <Filter>NewShunLib</Filter>
     </ClCompile>
@@ -476,17 +479,29 @@
     <ClCompile Include="Classes\Object\Player\State\PlayerChargeState.cpp">
       <Filter>Game\Object\Player\State</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\UI\PowerGauge\PowerGauge.cpp">
-      <Filter>Game\UI</Filter>
+    <ClCompile Include="Classes\UI\HPGauge\HPGauge.cpp">
+      <Filter>Game\UI\PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\UI\UIResourceHolder.cpp">
-      <Filter>Game\UI</Filter>
+    <ClCompile Include="Classes\UI\PowerGauge\PowerGauge.cpp">
+      <Filter>Game\UI\PlayScene</Filter>
     </ClCompile>
     <ClCompile Include="Classes\UI\ThrowCursor\ThrowCursor.cpp">
-      <Filter>Game\UI</Filter>
+      <Filter>Game\UI\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UI.cpp">
+      <Filter>Game\UI\Base</Filter>
     </ClCompile>
     <ClCompile Include="Classes\UI\UIConstantNumber.cpp">
-      <Filter>Game\UI</Filter>
+      <Filter>Game\UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UIManager.cpp">
+      <Filter>Game\UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\UIResourceHolder.cpp">
+      <Filter>Game\UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\UI\OptionBoard.cpp">
+      <Filter>Game\UI\TitleScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

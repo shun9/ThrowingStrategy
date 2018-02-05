@@ -13,11 +13,21 @@
 
 //UIのテクスチャの種類一覧
 enum UI_TEXTURE_LIST {
+	OPTION_BOARD,
+	OPTION_CURSOR,
 	RED_GAUGE,
 	GREEN_GAUGE,
 	ORANGE_GAUGE,
 
 	UI_TEXTURE_LIST_END
+};
+
+//UIの文字画像の種類一覧
+enum UI_STRING_LIST {
+	UI_STRING_NONE = -1,
+	STRING_START,//はじめる
+	STRING_END,  //おわる
+	UI_STRING_LIST_END
 };
 
 //UIのモデルの種類一覧
@@ -34,12 +44,19 @@ public:
 	using Model = ShunLib::Model;
 
 private:
+	//UI画像
 	std::vector<std::unique_ptr<Texture>>m_textureList;
+
+	//文字画像
+	std::vector<std::unique_ptr<Texture>>m_strTexture;
+
+	//UIモデル
 	std::vector<std::unique_ptr<Model>>m_modelList;
 
 public:
 	/*--Getter--*/
 	Texture* GetTexture(UI_TEXTURE_LIST tex) { return m_textureList[tex].get(); }
+	Texture* GetStrTexture(UI_STRING_LIST tex) { return m_strTexture[tex].get(); }
 	Model* GetModel(UI_MODEL_LIST mod) { return m_modelList[mod].get(); }
 
 private:

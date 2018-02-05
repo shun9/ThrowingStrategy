@@ -6,9 +6,22 @@
 //************************************************/
 #pragma once
 #include "SL_IScene.h"
+#include "../../UI/OptionBoard.h"
 
 class TitleScene :public ShunLib::IScene
 {
+public:
+	//タイトル画面での選択肢
+	enum TITLE_OPTION {
+		TITLE_START = 0,
+		TITLE_END,
+		TITLE_OPTION_END
+	};
+
+private:
+	//選択肢
+	OptionBoard m_optionBoard;
+
 public:
 	TitleScene();
 	~TitleScene();
