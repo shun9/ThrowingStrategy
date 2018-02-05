@@ -24,6 +24,11 @@ UIResourceHolder::UIResourceHolder()
 	m_strTexture[STRING_START] = std::make_unique<Texture>(L"Resources\\Images\\StartString.png");
 	m_strTexture[STRING_END] = std::make_unique<Texture>(L"Resources\\Images\\EndString.png");
 
+	//シーンテクスチャ読み込み
+	m_sceneTextureList.resize(SCENE_TEXTURE_LIST_END);
+	m_sceneTextureList[BLACK_BALL] = std::make_unique<Texture>(L"Resources\\Images\\BlackBall.png");
+	m_sceneTextureList[TITLE_BACK] = std::make_unique<Texture>(L"Resources\\Images\\TitleBack.png");
+
 	//モデル読み込み
 	m_modelList.resize(UI_MODEL_LIST_END);
 	m_modelList[THROW_CURSOR] = std::make_unique<Model>(L"CModel\\ThrowPoint.cmo");

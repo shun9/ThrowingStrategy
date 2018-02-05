@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Classes\AI\RRT.h" />
+    <ClInclude Include="Classes\Game\Scene\FadeExecutor.h" />
     <ClInclude Include="Classes\Game\Scene\PlayScene.h" />
     <ClInclude Include="Classes\Game\Scene\SL_IScene.h" />
     <ClInclude Include="Classes\Game\Scene\SL_SceneManager.h" />
@@ -242,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\AI\RRT.cpp" />
+    <ClCompile Include="Classes\Game\Scene\FadeExecutor.cpp" />
     <ClCompile Include="Classes\Game\Scene\PlayScene.cpp" />
     <ClCompile Include="Classes\Game\Scene\SL_SceneManager.cpp" />
     <ClCompile Include="Classes\Game\Scene\TitleScene.cpp" />

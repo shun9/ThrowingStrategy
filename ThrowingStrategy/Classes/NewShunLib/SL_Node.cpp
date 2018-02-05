@@ -88,9 +88,6 @@ void Node::BaseUpdate()
 		//フラグを立てる
 		m_isDirty[DIRTY_FLAG::UPDATE_FLAG] = true;
 
-		//描画可能にする
-		EnableRender();
-
 		//子の更新を行う
 		for (int i = 0; i < (int)m_children.size(); i++){
 			m_children[i]->BaseUpdate();
@@ -117,9 +114,6 @@ void Node::BaseRender()
 
 		//フラグを立てる
 		m_isDirty[DIRTY_FLAG::RENDER_FLAG] = true;
-
-		//更新可能にする
-		EnableUpdate();
 
 		//子の描画を行う
 		for (int i = 0; i < (int)m_children.size(); i++){
@@ -245,5 +239,29 @@ void Node::ClearDirty()
 	//ダーティーフラグを下ろす
 	for (int i = 0; i < DIRTY_FLAG::DIRTY_FLAG_END; i++) {
 		m_isDirty[i] = false;
+	}
+}
+
+/// <summary>
+/// 更新可能にする
+/// </summary>
+void Node::BaseActiveUpdate()
+{
+	EnableUpdate();
+
+	for (int i = 0; i < (int)m_children.size(); i++){
+		m_children[i]->BaseActiveUpdate();
+	}
+}
+
+/// <summary>
+/// 描画可能にする
+/// </summary>
+void Node::BaseActiveRender()
+{
+	EnableRender();
+
+	for (int i = 0; i < (int)m_children.size(); i++) {
+		m_children[i]->BaseActiveRender();
 	}
 }

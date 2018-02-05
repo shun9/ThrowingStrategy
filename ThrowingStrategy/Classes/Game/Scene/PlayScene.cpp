@@ -55,10 +55,6 @@ void PlayScene::Initialize()
 /// </summary>
 void PlayScene::Update()
 {
-	//カメラ更新
-	auto camera = MainCamera::GetInstance();
-	camera->Update();
-
 	//Enterキーで仮リセット処理
 	auto key = KeyManager::GetInstance();
 	if (key->IsTracker(KeyManager::KEY_CODE::ENTER)) {

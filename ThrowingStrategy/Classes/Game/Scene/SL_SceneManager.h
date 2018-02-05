@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <SL_Singleton.h>
 #include "SL_IScene.h"
+#include "FadeExecutor.h"
 #include "../../../StepTimer.h"
 
 namespace ShunLib
@@ -16,7 +17,6 @@ namespace ShunLib
 	class SceneManager:public Singleton<SceneManager>
 	{
 		friend Singleton<SceneManager>;
-
 	private:
 		//シーン一覧
 		std::unordered_map<int, IScene*>m_sceneList;
@@ -24,10 +24,21 @@ namespace ShunLib
 		//現在のシーン
 		int m_currentScene;
 
+		//次のシーン
+		int m_newScene;
+
+		//フェード実行用
+		FadeExecutor m_fade;
+
+		//フェード中かどうか
+		bool m_isDuringFade;
 	public:
 		//現在のシーンの更新　描画
 		void Update();
 		void Render();
+
+		//フェードの描画
+		void FadeRender();
 
 		//シーンの追加
 		void AddScene(int key, IScene* scene);
@@ -46,5 +57,8 @@ namespace ShunLib
 	private:
 		SceneManager();
 		~SceneManager();
+
+		//フェード中の更新　描画
+		void FadeUpdate();
 	};
 }

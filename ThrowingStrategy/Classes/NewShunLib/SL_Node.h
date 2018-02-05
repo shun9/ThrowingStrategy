@@ -66,8 +66,8 @@ namespace ShunLib
 		void ClearDirty();
 
 		//更新　描画を可能な状態にする
-		void EnableUpdate() { m_isDirty[DIRTY_FLAG::UPDATE_FLAG] = false; }
-		void EnableRender() { m_isDirty[DIRTY_FLAG::RENDER_FLAG] = false; }
+		void BaseActiveUpdate();
+		void BaseActiveRender();
 
 		/*--Getter--*/
 		Node* Parent() { return m_parent; }
@@ -81,5 +81,9 @@ namespace ShunLib
 		virtual void Update    () = 0;
 		virtual void Render    () = 0;
 		virtual void Finalize  () = 0;
+
+		//更新　描画を可能な状態にする
+		void EnableUpdate() { m_isDirty[DIRTY_FLAG::UPDATE_FLAG] = false; }
+		void EnableRender() { m_isDirty[DIRTY_FLAG::RENDER_FLAG] = false; }
 	};
 }

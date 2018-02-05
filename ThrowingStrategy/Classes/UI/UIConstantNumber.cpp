@@ -19,3 +19,8 @@ const float  UIConstantNumber::OPTION_BOARD_CONSTANT::TEXTURE_HEIGHT = 256.0f;
 const float  UIConstantNumber::OPTION_BOARD_CONSTANT::STRING_TEXTURE_HEIGHT = 32.0f;
 const float  UIConstantNumber::OPTION_BOARD_CONSTANT::CURSOR_SIZE = 32.0f;
 const float  UIConstantNumber::OPTION_BOARD_CONSTANT::FLAME_SIZE = 16.0f;
+
+//フェード用黒玉
+const Vec2  UIConstantNumber::FADE_BLACK::ANCHOR = Vec2(128.0f, 128.0f);
+const float  UIConstantNumber::FADE_BLACK::SCALE_MAX = 10.0f;
+const float  UIConstantNumber::FADE_BLACK::SCALE_MIN = 0.8f;

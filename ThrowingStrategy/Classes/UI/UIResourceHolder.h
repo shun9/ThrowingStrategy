@@ -11,13 +11,21 @@
 #include <SL_Texture.h>
 #include <SL_Model.h>
 
+//シーン固有の画像(背景など)一覧
+enum SCENE_TEXTURE_LIST {
+	BLACK_BALL,//黒い球
+	TITLE_BACK,//タイトルの背景
+	SCENE_TEXTURE_LIST_END
+};
+
 //UIのテクスチャの種類一覧
 enum UI_TEXTURE_LIST {
-	OPTION_BOARD,
-	OPTION_CURSOR,
-	RED_GAUGE,
-	GREEN_GAUGE,
-	ORANGE_GAUGE,
+
+	OPTION_BOARD, //選択肢ボードの枠
+	OPTION_CURSOR,//選択肢のカーソル
+	RED_GAUGE,    //赤色ゲージ
+	GREEN_GAUGE,  //緑色ゲージ
+	ORANGE_GAUGE, //オレンジ色ゲージ
 
 	UI_TEXTURE_LIST_END
 };
@@ -32,7 +40,7 @@ enum UI_STRING_LIST {
 
 //UIのモデルの種類一覧
 enum UI_MODEL_LIST {
-	THROW_CURSOR,
+	THROW_CURSOR,//投擲の目標地点
 	UI_MODEL_LIST_END
 };
 
@@ -44,11 +52,15 @@ public:
 	using Model = ShunLib::Model;
 
 private:
+
 	//UI画像
 	std::vector<std::unique_ptr<Texture>>m_textureList;
 
 	//文字画像
 	std::vector<std::unique_ptr<Texture>>m_strTexture;
+
+	//シーン画像
+	std::vector<std::unique_ptr<Texture>>m_sceneTextureList;
 
 	//UIモデル
 	std::vector<std::unique_ptr<Model>>m_modelList;
@@ -57,6 +69,7 @@ public:
 	/*--Getter--*/
 	Texture* GetTexture(UI_TEXTURE_LIST tex) { return m_textureList[tex].get(); }
 	Texture* GetStrTexture(UI_STRING_LIST tex) { return m_strTexture[tex].get(); }
+	Texture* GetSceneTexture(SCENE_TEXTURE_LIST tex) { return m_sceneTextureList[tex].get(); }
 	Model* GetModel(UI_MODEL_LIST mod) { return m_modelList[mod].get(); }
 
 private:

@@ -5,7 +5,10 @@
 //* @author:S.Katou
 //************************************************/
 #include "SL_SceneManager.h"
+#include <SL_KeyManager.h>
 #include <SL_MacroConstants.h>
+#include "../../UI/UIManager.h"
+#include "../../Util/SL_GamePadManager.h"
 
 using namespace ShunLib;
 
@@ -15,9 +18,22 @@ using namespace ShunLib;
 /// <param name="timer">タイマー</param>
 void SceneManager::Update()
 {
-	//シーンがある場合更新
-	if (IsExistsScene(m_currentScene))
-	{
+	//フェード中はシーンの更新はしない
+	if (m_isDuringFade){
+		//フェード中の更新
+		FadeUpdate();
+		return;
+	}
+
+	if (IsExistsScene(m_currentScene)){
+		//キー更新
+		KeyManager::GetInstance()->Update();
+
+		//ゲームパッド更新
+		GamePadManager::GetInstance()->Update();
+
+		//シーンがある場合更新
+		m_sceneList[m_currentScene]->BaseActiveUpdate();
 		m_sceneList[m_currentScene]->BaseUpdate();
 	}
 }
@@ -29,7 +45,17 @@ void SceneManager::Render()
 {	//シーンがある場合更新
 	if (IsExistsScene(m_currentScene))
 	{
+		m_sceneList[m_currentScene]->BaseActiveRender();
 		m_sceneList[m_currentScene]->BaseRender();
+	}
+}
+
+//フェードの描画
+void SceneManager::FadeRender()
+{
+	//フェード中の描画
+	if (m_isDuringFade) {
+		m_fade.Render();
 	}
 }
 
@@ -60,13 +86,14 @@ void SceneManager::ChangeScene(int key)
 		m_sceneList[m_currentScene]->BaseFinalize();
 	}
 
-	//現在のシーンを変更
-	m_currentScene = key;
+	//フェードする
+	m_isDuringFade = true;
 
-	//新規のシーンを初期化
-	if (IsExistsScene(key)) {
-		m_sceneList[m_currentScene]->BaseInitialize();
-	}
+	//フェードをリセット
+	m_fade.Reset();
+
+	//新しいシーンを更新
+	m_newScene = key;
 }
 
 /// <summary>
@@ -126,15 +153,40 @@ IScene* SceneManager::CurrentScene()
 /// <summary>
 /// コンストラクタ
 /// </summary>
-ShunLib::SceneManager::SceneManager() :
-	m_currentScene(-1)
+SceneManager::SceneManager() :
+	m_currentScene(-1),
+	m_newScene(-1),
+	m_isDuringFade(false)
 {
 }
 
 /// <summary>
 /// デストラクタ
 /// </summary>
-ShunLib::SceneManager::~SceneManager()
+SceneManager::~SceneManager()
 {
 	DeleteAllScene();
+}
+
+/// <summary>
+/// フェード中の更新
+/// </summary>
+void SceneManager::FadeUpdate()
+{
+	//フェードの更新
+	m_fade.Update();
+
+	//フェードアウトが終わったタイミングでシーン切り替え
+	if (m_fade.IsEndedFadeOut() && m_currentScene != m_newScene) {
+		//新規のシーンを初期化
+		if (IsExistsScene(m_newScene)) {
+			m_currentScene = m_newScene;
+			m_sceneList[m_currentScene]->BaseInitialize();
+		}
+	}
+
+	//フェードが終了
+	if (m_fade.IsEnded()){
+		m_isDuringFade = false;
+	}
 }

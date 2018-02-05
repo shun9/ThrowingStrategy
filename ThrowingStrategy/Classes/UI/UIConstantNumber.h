@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :UIConstantNumber.h
 //* @brief :UI関連の定数
-//* @date  :2018/01/31
+//* @date  :2018/02/05
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -9,6 +9,7 @@
 
 class UIConstantNumber {
 public:
+	using Vec2 = ShunLib::Vec2;
 	using Vec3 = ShunLib::Vec3;
 
 	//テキストのレイヤー一覧
@@ -45,4 +46,13 @@ public:
 		//外枠の幅
 		static const float FLAME_SIZE;
 	};
+
+	//フェード時の黒玉
+	class FADE_BLACK {
+	public:
+		static const Vec2 ANCHOR;
+		static const float SCALE_MAX;
+		static const float SCALE_MIN;
+	};
+
 };

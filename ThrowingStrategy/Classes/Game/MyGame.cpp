@@ -8,18 +8,17 @@
 
 #include <SL_Model.h>
 #include <SL_Texture.h>
-#include <SL_KeyManager.h>
 
-#include "../Main/SL_Graphics.h"
-#include "../Main/SL_MyStepTimer.h"
-#include "../Physics/Collision/SL_CollisionManager.h"
-#include "../Util/SL_GamePadManager.h"
-#include "../UI/UIManager.h"
-#include "../UI/UIConstantNumber.h"
 #include "Scene\SL_SceneManager.h"
 #include "Scene\PlayScene.h"
 #include "Scene\TitleScene.h"
+#include "../Main/SL_Graphics.h"
+#include "../Main/SL_MyStepTimer.h"
+#include "../Physics/Collision/SL_CollisionManager.h"
+#include "../UI/UIManager.h"
+#include "../UI/UIConstantNumber.h"
 #include "../Util/Debugger/DebuggerUI.h"
+#include "../Util/SL_Camera.h"
 
 using namespace ShunLib;
 
@@ -59,22 +58,20 @@ void MyGame::Initialize()
 /// </summary>
 void MyGame::Update()
 {
-	auto scene = SceneManager::GetInstance();
-	auto timer = MyStepTimer::GetInstance();
-
-	//キー更新
-	KeyManager::GetInstance()->Update();
-
-	//ゲームパッド更新
-	GamePadManager::GetInstance()->Update();
-
-	//UI更新
-	UIManager::GetInstance()->Update();
+	//カメラ更新
+	auto camera = MainCamera::GetInstance();
+	camera->Update();
 
 	//シーン更新
+	auto timer = MyStepTimer::GetInstance();
 	timer->Tick([&]()
 	{
-		scene->Update();
+		SceneManager::GetInstance()->Update();
+
+		//UI更新
+		UIManager::GetInstance()->Update();
+
+		//当たり判定の更新
 		CollisionManager::GetInstance()->Update();
 	});
 }
@@ -90,6 +87,9 @@ void MyGame::Render()
 
 	//UI描画
 	UIManager::GetInstance()->Render();
+
+	//フェードの描画
+	scene->FadeRender();
 
 	//デバッグ用UI描画
 	DebuggerUI::GetInstance()->Render();

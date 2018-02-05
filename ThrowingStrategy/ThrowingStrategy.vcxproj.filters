@@ -317,6 +317,9 @@
     <ClInclude Include="Classes\UI\OptionBoard.h">
       <Filter>Game\UI\TitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Game\Scene\FadeExecutor.h">
+      <Filter>Game\Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Main\WinMain.cpp" />
@@ -502,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="Classes\UI\OptionBoard.cpp">
       <Filter>Game\UI\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Game\Scene\FadeExecutor.cpp">
+      <Filter>Game\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
