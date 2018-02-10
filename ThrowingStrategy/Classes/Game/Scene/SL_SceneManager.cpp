@@ -84,16 +84,20 @@ void SceneManager::ChangeScene(int key)
 	//現在のシーンを終了
 	if (IsExistsScene(m_currentScene)){
 		m_sceneList[m_currentScene]->BaseFinalize();
+
+		//フェードする
+		m_isDuringFade = true;
+
+		//フェードをリセット
+		m_fade.Reset();
+
+		//新しいシーンを更新
+		m_newScene = key;
 	}
-
-	//フェードする
-	m_isDuringFade = true;
-
-	//フェードをリセット
-	m_fade.Reset();
-
-	//新しいシーンを更新
-	m_newScene = key;
+	else{
+		m_currentScene = key;
+		m_sceneList[m_currentScene]->BaseInitialize();
+	}
 }
 
 /// <summary>

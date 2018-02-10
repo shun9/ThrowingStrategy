@@ -26,6 +26,14 @@ using namespace ShunLib;
 /// コンストラクタ
 /// </summary>
 MyGame::MyGame(){
+	auto window = ShunLib::Window::GetInstance();
+
+	//カメラ設定
+	auto camera = MainCamera::GetInstance();
+	ProjData pData;
+	pData.aspect = static_cast<float>(window->Width() / window->Height());
+	camera->Proj(pData);
+
 	auto holder = ObjectHolder::GetInstance();
 
 	//オブジェクトリストの全体のサイズを調整

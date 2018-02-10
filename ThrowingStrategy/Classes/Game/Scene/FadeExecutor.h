@@ -6,24 +6,29 @@
 //************************************************/
 #pragma once
 #include <SL_Math.h>
+#include "../../UI/UIConstantNumber.h"
 
 class FadeExecutor
 {
 public:
 	using Vec2 = ShunLib::Vec2;
+	using CONSTANT = UIConstantNumber::FADE_BLACK;
 
 private:
 	//経過時間
-	float m_timeCnt;
+	int m_frameCnt;
 
 	//終了する時間
-	float m_endTime;
+	int m_endFlame;
 
 	//進行の割合
 	float m_progressRatio;
 
 	//フェード用画像の中心位置
 	Vec2 m_pos;
+
+	//フェード用画像の移動用
+	Vec2 m_vel;
 
 	//フェード用画像の拡大率
 	float m_scale;
@@ -35,7 +40,7 @@ private:
 	bool m_isEnded;
 
 public:
-	FadeExecutor():m_timeCnt(0.0f),m_endTime(5.0f) {
+	FadeExecutor():m_frameCnt(0), m_endFlame(6000) {
 		Reset();
 	}
 	~FadeExecutor() {}

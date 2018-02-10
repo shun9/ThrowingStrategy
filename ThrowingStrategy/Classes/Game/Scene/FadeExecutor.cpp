@@ -7,7 +7,8 @@
 #include "FadeExecutor.h"
 #include "../../Main/SL_MyStepTimer.h"
 #include "../../UI/UIResourceHolder.h"
-#include "../../UI/UIConstantNumber.h"
+
+using namespace ShunLib;
 
 /// <summary>
 /// 更新
@@ -15,7 +16,7 @@
 void FadeExecutor::Update()
 {
 	//経過割合を計算
-	m_progressRatio = m_timeCnt / m_endTime;
+	m_progressRatio = static_cast<float>(m_frameCnt) / m_endFlame;
 
 	//全体時間の半分でフェードアウト
 	if (m_progressRatio <= 0.5f) {
@@ -23,7 +24,11 @@ void FadeExecutor::Update()
 	}
 	//残りの半分でフェードイン
 	else if (m_progressRatio <= 1.0f) {
-		m_isEndedFadeOut = true;
+		//フェードアウトが終わった直後
+		if (!m_isEndedFadeOut) {
+			m_isEndedFadeOut = true;
+			m_vel.m_y *= -1;
+		}
 		FadeIn();
 	}
 	else {
@@ -31,7 +36,7 @@ void FadeExecutor::Update()
 	}
 
 	//時間をカウント
-	m_timeCnt += ShunLib::MyStepTimer::GetInstance()->GetElapsedSeconds();
+	m_frameCnt++;
 }
 
 /// <summary>
@@ -49,9 +54,10 @@ void FadeExecutor::Render()
 /// </summary>
 void FadeExecutor::Reset()
 {
-	m_timeCnt = 0.0f;
-	m_pos = Vec2(300.0f,200.0f);
-	m_scale = UIConstantNumber::FADE_BLACK::SCALE_MIN;
+	m_frameCnt = 0;
+	m_pos = CONSTANT::START_POS;
+	m_vel = CONSTANT::START_SPEED;
+	m_scale = CONSTANT::SCALE_MIN;
 	m_isEndedFadeOut = false;
 	m_isEnded = false;
 }
@@ -62,16 +68,21 @@ void FadeExecutor::Reset()
 void FadeExecutor::FadeOut()
 {
 	//フェードアウトの進行割合
-	float ratio = m_timeCnt / (m_endTime / 2.0f);
+	float ratio = static_cast<float>(m_frameCnt) / (m_endFlame / 2);
 
-	//拡大率 最大　最小
-	const float max = UIConstantNumber::FADE_BLACK::SCALE_MAX;
-	const float min = UIConstantNumber::FADE_BLACK::SCALE_MIN;
+	//移動
+	if (ratio < 0.4f){
+		m_pos = m_pos + m_vel;
+		m_vel.m_y += CONSTANT::GRAVITY;
+	}
+
+	//拡大率用割合
+	float scaleRatio = Max((ratio - 0.5f) * 2.0f,0.0f);
 
 	//拡大率設定
-	float scale = max - min;
-	scale *= ratio;
-	m_scale = scale + min;
+	float scale = CONSTANT::SCALE_MAX - CONSTANT::SCALE_MIN;
+	scale *= scaleRatio;
+	m_scale = scale + CONSTANT::SCALE_MIN;
 }
 
 /// <summary>
@@ -80,14 +91,19 @@ void FadeExecutor::FadeOut()
 void FadeExecutor::FadeIn()
 {
 	//フェードアウトの進行割合
-	float ratio = m_timeCnt / (m_endTime / 2.0f) - 1.0f;
+	float ratio = static_cast<float>(m_frameCnt) / (m_endFlame / 2) - 1.0f;
 
-	//拡大率 最大　最小
-	const float max = UIConstantNumber::FADE_BLACK::SCALE_MAX;
-	const float min = UIConstantNumber::FADE_BLACK::SCALE_MIN;
+	//移動
+	if (ratio >= 0.6f) {
+		m_pos = m_pos + m_vel;
+		m_vel.m_y += CONSTANT::GRAVITY;
+	}
+
+	//拡大率用割合
+	float scaleRatio = Min(ratio / 0.5f,1.0f);
 
 	//拡大率設定
-	float scale = max - min;
-	scale -= (scale * ratio);
-	m_scale = scale;
+	float scale = CONSTANT::SCALE_MAX - CONSTANT::SCALE_MIN;
+	scale -= (scale * scaleRatio);
+	m_scale = scale + CONSTANT::SCALE_MIN;
 }

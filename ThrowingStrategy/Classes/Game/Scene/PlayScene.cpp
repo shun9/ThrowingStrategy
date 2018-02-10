@@ -19,15 +19,7 @@ using namespace ShunLib;
 /// <summary>
 /// コンストラクタ
 /// </summary>
-PlayScene::PlayScene()
-{
-	auto window = Window::GetInstance();
-
-	//カメラ設定
-	auto camera = MainCamera::GetInstance();
-	ProjData pData;
-	pData.aspect = static_cast<float>(window->Width() / window->Height());
-	camera->Proj(pData);
+PlayScene::PlayScene(){
 }
 
 /// <summary>

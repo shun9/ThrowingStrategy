@@ -22,5 +22,8 @@ const float  UIConstantNumber::OPTION_BOARD_CONSTANT::FLAME_SIZE = 16.0f;
 
 //フェード用黒玉
 const Vec2  UIConstantNumber::FADE_BLACK::ANCHOR = Vec2(128.0f, 128.0f);
+const Vec2  UIConstantNumber::FADE_BLACK::START_POS = Vec2(-1000.0f, 400.0f);
+const Vec2  UIConstantNumber::FADE_BLACK::START_SPEED = Vec2(1.2f, -1.0f);
 const float  UIConstantNumber::FADE_BLACK::SCALE_MAX = 10.0f;
 const float  UIConstantNumber::FADE_BLACK::SCALE_MIN = 0.8f;
+const float  UIConstantNumber::FADE_BLACK::GRAVITY = 0.0015f;

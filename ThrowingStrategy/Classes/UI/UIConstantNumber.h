@@ -51,8 +51,11 @@ public:
 	class FADE_BLACK {
 	public:
 		static const Vec2 ANCHOR;
+		static const Vec2 START_POS;
+		static const Vec2 START_SPEED;
 		static const float SCALE_MAX;
 		static const float SCALE_MIN;
+		static const float GRAVITY;
 	};
 
 };
